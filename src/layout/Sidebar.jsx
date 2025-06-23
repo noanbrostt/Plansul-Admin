@@ -1,50 +1,49 @@
-import { Box, VStack, Link, Text, useColorModeValue } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FiChevronLeft, FiChevronRight, FiHome, FiUsers, FiBarChart2 } from 'react-icons/fi';
 
 const navItems = [
-  { label: 'Home', to: '/' },
-  { label: 'Usuários', to: '/users' },
-  { label: 'Relatórios', to: '/reports' },
+  { label: 'Home', to: '/', icon: <FiHome /> },
+  { label: 'Usuários', to: '/users', icon: <FiUsers /> },
+  { label: 'Relatórios', to: '/reports', icon: <FiBarChart2 /> },
 ];
 
 export default function Sidebar() {
-  const bg = useColorModeValue('gray.100', 'gray.800');
-  const text = useColorModeValue('gray.800', 'white');
-  const hover = useColorModeValue('gray.200', 'gray.700');
-  const active = useColorModeValue('teal.500', 'teal.300');
+  const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
 
   return (
-    <Box
-      w="220px"
-      bg={bg}
-      color={text}
-      h="100vh"
-      p={4}
-      position="sticky"
-      top={0}
-      borderRight="1px solid"
-      borderColor={useColorModeValue('gray.200', 'gray.700')}
+    <aside
+      className={`bg-base-200 p-4 min-h-screen flex flex-col transition-all duration-300 ${
+        collapsed ? 'w-20' : 'w-64'
+      }`}
     >
-      <Text fontSize="xl" mb={6} fontWeight="bold">
-        Painel Admin
-      </Text>
+      {/* Botão de colapsar/expandir */}
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="btn btn-sm btn-ghost"
+        >
+          {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
+        </button>
+      </div>
 
-      <VStack spacing={4} align="stretch">
+      {/* Lista de navegação */}
+      <ul className="menu space-y-2">
         {navItems.map((item) => (
-          <Link
-            as={NavLink}
-            key={item.to}
-            to={item.to}
-            px={3}
-            py={2}
-            rounded="md"
-            _hover={{ bg: hover }}
-            _activeLink={{ bg: active, color: 'white' }}
-          >
-            {item.label}
-          </Link>
+          <li key={item.to}>
+            <Link
+              to={item.to}
+              className={`flex items-center gap-3 p-2 rounded-lg hover:bg-base-300 ${
+                location.pathname === item.to ? 'bg-primary text-primary-content' : ''
+              }`}
+            >
+              <span className="text-lg">{item.icon}</span>
+              {!collapsed && <span>{item.label}</span>}
+            </Link>
+          </li>
         ))}
-      </VStack>
-    </Box>
+      </ul>
+    </aside>
   );
 }

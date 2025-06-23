@@ -1,21 +1,17 @@
-import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
-import Sidebar from './Sidebar';
-import Topbar from './Topbar';
 import { Outlet } from 'react-router-dom';
+import Topbar from './Topbar';
+import Sidebar from './Sidebar';
 
 export default function DashboardLayout() {
-
-  const bg = useColorModeValue('gray.50', 'gray.900');
-
   return (
-    <Flex h="100vh" flexDirection="row">
+    <div className="flex h-screen">
       <Sidebar />
-      <Box flex="1" bg={bg}>
+      <div className="flex flex-col flex-1">
         <Topbar />
-        <Box p={6}>
-          <Outlet /> {/* ← aqui entram as rotas como HomePage */}
-        </Box>
-      </Box>
-    </Flex>
+        <main className="p-6 overflow-y-auto">
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
 }
