@@ -35,7 +35,7 @@ export default function Topbar() {
             checked={theme === 'dark'}
           />
 
-          {/* ícone de sol (claro) */}
+          {/*- ícone de sol (claro) */}
           <svg
             className="swap-on fill-current w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export default function Topbar() {
             <path d="M5 12a7 7 0 1114 0 7 7 0 01-14 0zm7-9v2M7.05 4.05l1.414 1.414M3 12h2m1.636 5.95l1.414-1.414M12 21v-2m4.95-1.05l-1.414-1.414M21 12h-2M16.95 7.05l-1.414 1.414" />
           </svg>
 
-          {/* ícone de lua (escuro) */}
+          {/*- ícone de lua (escuro) */}
           <svg
             className="swap-off fill-current w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
