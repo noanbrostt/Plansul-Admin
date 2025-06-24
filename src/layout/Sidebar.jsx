@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  FiChevronLeft, 
-  FiChevronRight, 
   FiHome, 
   FiUsers, 
   FiBarChart2, 
@@ -29,35 +27,18 @@ const navItems = [
   },
 ];
 
-export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const [openDropdown, setOpenDropdown] = useState(null); 
+export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle}) {
+  const [hovering, setHovering] = useState(false);
   const location = useLocation();
-
-  const handleDropdownToggle = (label) => {
-    //- se o dropdown clicado já estiver aberto, fecha. Senão, abre.
-    setOpenDropdown(openDropdown === label ? null : label);
-  };
 
   return (
     <aside
       className={`bg-base-200 p-4 min-h-screen flex flex-col transition-all duration-300 ${
-        collapsed ? 'w-20' : 'w-64'
+        collapsed && !hovering ? 'w-20' : 'w-64'
       }`}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
     >
-      {/*- botão de colapsar/expandir */}
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={() => {
-            setCollapsed(!collapsed);
-            if (!collapsed) setOpenDropdown(null); //- fecha dropdowns ao colapsar
-          }}
-          className="btn btn-sm btn-ghost"
-        >
-          {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
-        </button>
-      </div>
 
       {/*- lista de navegação */}
       <ul className="menu space-y-2 w-full">
@@ -66,23 +47,23 @@ export default function Sidebar() {
           if (item.subItems) {
             const isParentActive = item.subItems.some(sub => location.pathname === sub.to);
             return (
-              <li key={item.label}>
+              <li key={item.label} className={(!collapsed || hovering) ? '' : 'w-fit'}>
                 <div
                   onClick={() => handleDropdownToggle(item.label)}
                   className={`flex items-center justify-between p-2 rounded-lg hover:bg-base-300 cursor-pointer w-full ${isParentActive ? 'bg-base-300' : ''}`}
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-lg">{item.icon}</span>
-                    {!collapsed && <span>{item.label}</span>}
+                    <span>{(!collapsed || hovering) && item.label}</span>
                   </div>
-                  {!collapsed && (
+                  {(!collapsed || hovering) && (
                     <span className={`transition-transform duration-300 ${openDropdown === item.label ? 'rotate-180' : ''}`}>
                       <FiChevronDown />
                     </span>
                   )}
                 </div>
                 {/* renderiza o sub-menu se o dropdown estiver aberto e a sidebar expandida */}
-                {openDropdown === item.label && !collapsed && (
+                {openDropdown === item.label && (!collapsed || hovering) && (
                   <ul className="pl-6 pt-2 space-y-1">
                     {item.subItems.map((subItem) => (
                       <li key={subItem.to}>
@@ -105,7 +86,7 @@ export default function Sidebar() {
           
           //- renderiza um link simples
           return (
-            <li key={item.to}>
+            <li key={item.to} className={(!collapsed || hovering) ? '' : 'w-fit'}>
               <Link
                 to={item.to}
                 className={`flex items-center gap-3 p-2 rounded-lg hover:bg-base-300 w-full ${
@@ -113,7 +94,7 @@ export default function Sidebar() {
                 }`}
               >
                 <span className="text-lg">{item.icon}</span>
-                {!collapsed && <span>{item.label}</span>}
+                {(!collapsed || hovering) && <span>{item.label}</span>}
               </Link>
             </li>
           );
