@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logoLonga from '../assets/layout/Topbar/logo_longa.png';
+import logoCurta from '../assets/layout/Topbar/logo_curta.png';
 import { 
   FiHome, 
   FiUsers, 
@@ -40,8 +42,33 @@ export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle}
       onMouseLeave={() => setHovering(false)}
     >
 
+      {/* Sidebar Header - para a logo */}
+      <div className="pb-2 h-12 flex items-center justify-start border-b border-gray-200 dark:border-gray-700">
+        {/* Logo Longa - visível quando expandido */}
+        <img
+          src={logoLonga}
+          alt="Logo Longa"
+          className={`
+            ml-[34px] mb-[6px] scale-140 max-w-full max-h-full object-contain transition-all duration-300 ease-in-out relative delay-50
+            ${(!collapsed || hovering) ? 'opacity-100' : 'opacity-0 ml-0 mb-0 w-0' }
+          `}
+        />
+        {/* Logo Curta - visível quando colapsado */}
+        <img
+          src={logoCurta}
+          alt="Logo Curta"
+          className={`
+            mb-[6px] -ml-2 max-w-full max-h-full object-contain absolute transition-all duration-300 ease-in-out delay-50
+            ${(!collapsed || hovering) ? 'opacity-0 scale-50 left-5 top-0' : 'opacity-100 w-[60px]' }
+          `}
+        />
+      </div>
+
       {/*- lista de navegação */}
       <ul className="menu space-y-2 w-full">
+        <h2 className={`mb-2 text-xs uppercase flex leading-[20px] text-gray-400 w-full ${(!collapsed || hovering) ? 'justify-start' : 'ml-[13px]'}`}>
+          {(!collapsed || hovering) ? 'Menu' : '...'}
+        </h2>
         {navItems.map((item) => {
           //- verifica se o item é um dropdown
           if (item.subItems) {
