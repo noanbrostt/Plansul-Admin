@@ -29,10 +29,13 @@ const navItems = [
   },
 ];
 
-export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle}) {
+export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle, currentTheme}) {
   const [hovering, setHovering] = useState(false);
   const location = useLocation();
 
+  const filtroAzulEscuro = '[filter:invert(74%)_sepia(10%)_saturate(4436%)_hue-rotate(180deg)_brightness(98%)_contrast(85%)]';
+  const filtroAzulClaro = '[filter:brightness(35%)_saturate(100%)_invert(27%)_sepia(9%)_saturate(4404%)_hue-rotate(177deg)_brightness(90%)_contrast(86%)]';
+  
   return (
     <aside
       className={`bg-base-200 p-4 min-h-screen flex flex-col transition-all duration-300 ${
@@ -49,6 +52,7 @@ export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle}
           src={logoLonga}
           alt="Logo Longa"
           className={`
+            ${currentTheme === 'myLightTheme' ? filtroAzulEscuro : filtroAzulClaro}
             ml-[34px] mb-[6px] scale-140 max-w-full max-h-full object-contain transition-all duration-300 ease-in-out relative delay-50
             ${(!collapsed || hovering) ? 'opacity-100' : 'opacity-0 ml-0 mb-0 w-0' }
           `}
@@ -58,6 +62,7 @@ export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle}
           src={logoCurta}
           alt="Logo Curta"
           className={`
+            ${currentTheme === 'myLightTheme' ? filtroAzulEscuro : filtroAzulClaro}
             mb-[6px] -ml-2 max-w-full max-h-full object-contain absolute transition-all duration-300 ease-in-out delay-50
             ${(!collapsed || hovering) ? 'opacity-0 scale-50 left-5 top-0' : 'opacity-100 w-[60px]' }
           `}

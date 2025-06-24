@@ -69,6 +69,7 @@ export default function DashboardLayout() {
         collapsed={collapsed}
         openDropdown={openDropdown}
         handleDropdownToggle={handleDropdownToggle}
+        currentTheme={theme}
       />
       <div className="flex flex-col flex-1">
         <Topbar
