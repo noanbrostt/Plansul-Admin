@@ -7,7 +7,10 @@ import {
   FiUser,
   FiLogIn,
 } from "react-icons/fi";
+import { RiInputField } from "react-icons/ri";
+import { CgPlayButtonR } from "react-icons/cg";
 import { MdScreenshotMonitor } from "react-icons/md";
+import { IoCubeOutline } from "react-icons/io5";
 
 // Importe dos componentes e do Context Provider
 import SidebarHeader from "./components/Sidebar/SidebarHeader";
@@ -49,24 +52,20 @@ export default function Sidebar({
           <SidebarSectionTitle title="Menu" />
           <SidebarLink label="Home" to="/" icon={<FiHome />} />
           <SidebarLink label="Usuários" to="/users" icon={<FiUsers />} />
-          <SidebarDropdown
-            label="Configurações"
-            icon={<FiSettings />}
-            subItems={[
-              { label: "Perfil", to: "/settings/profile", icon: <FiUser /> },
-              {
-                label: "Faturamento",
-                to: "/",
-                icon: <FiCreditCard />,
-              },
-            ]}
-          />
 
           <SidebarSectionTitle title="Devs" />
           <SidebarDropdown
             label="Telas"
             icon={<MdScreenshotMonitor />}
             subItems={[{ label: "Login", to: "/", icon: <FiLogIn /> }]}
+          />
+          <SidebarDropdown
+            label="Elementos UI"
+            icon={<IoCubeOutline />}
+            subItems={[
+              { label: "Botões", to: "/buttons", icon: <CgPlayButtonR /> },
+              { label: "Inputs", to: "/inputs", icon: <RiInputField /> }
+            ]}
           />
 
         </ul>

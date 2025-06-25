@@ -3,7 +3,10 @@ import DashboardLayout from '@/layout/DashboardLayout';
 
 import HomePage from '@/modules/home/HomePage';
 import UsersPage from '@/modules/users/UsersPage';
-// import ReportsPage from '@/modules/reports/ReportsPage';
+
+// Elementos UI
+import ButtonsPage from '../modules/elementos ui/ButtonsPage';
+import InputsPage from '../modules/elementos ui/InputsPage';
 
 export default function AppRoutes() {
   return (
@@ -11,7 +14,8 @@ export default function AppRoutes() {
       <Route element={<DashboardLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
-        {/* <Route path="/reports" element={<ReportsPage />} /> */}
+        <Route path="/buttons" element={<ButtonsPage />} />
+        <Route path="/inputs" element={<InputsPage />} />
       </Route>
     </Routes>
   );

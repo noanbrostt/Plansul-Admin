@@ -14,7 +14,7 @@
   /* Cores de Branding */
   --color-primary: #294D7F; /* Azul principal */
   --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
-  --color-secondary: #203A60; /* Um azul ligeiramente mais escuro (complementar) */
+  --color-secondary: #4974b1; /* Um azul ligeiramente mais escuro (complementar) */
   --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
   --color-accent: #DF8A2A; /* Laranja de acento/contraste */
   --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja (para legibilidade) */
@@ -53,9 +53,9 @@
   --color-base-content: #CCCCCC; /* Texto principal (cinza claro) */
 
   /*Cores de Branding (ajustadas para tema escuro) */
-  --color-primary: #294D7F; /* Azul principal */
+  --color-primary: #376fbe; /* Azul principal */
   --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
-  --color-secondary: #3B6EAE; /* Um azul ligeiramente mais claro (complementar no tema escuro) */
+  --color-secondary: #355889; /* Um azul ligeiramente mais claro (complementar no tema escuro) */
   --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
   --color-accent: #DF8A2A; /* Laranja de acento/contraste */
   --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja */
