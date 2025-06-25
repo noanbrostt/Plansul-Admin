@@ -11,12 +11,12 @@
   --color-base-300: #E0E0E0; /* Bordas/divisórias (um cinza claro) */
   --color-base-content: #333333; /* Texto principal (quase preto) */
 
-  /* Suas Cores de Branding */
-  --color-primary: #294D7F; /* Seu azul principal */
+  /* Cores de Branding */
+  --color-primary: #294D7F; /* Azul principal */
   --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
   --color-secondary: #203A60; /* Um azul ligeiramente mais escuro (complementar) */
   --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
-  --color-accent: #DF8A2A; /* Seu laranja de acento/contraste */
+  --color-accent: #DF8A2A; /* Laranja de acento/contraste */
   --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja (para legibilidade) */
   --color-neutral: #666666; /* Para elementos neutros como cards, barras */
   --color-neutral-content: #FFFFFF; /* Texto branco sobre o neutro */
@@ -31,7 +31,7 @@
   --color-error: #F87272;
   --color-error-content: #FFFFFF;
 
-  /* Suas Medidas (mantidas) */
+  /* Medidas */
   --radius-selector: 0.5rem;
   --radius-field: 0.5rem;
   --radius-box: 0.5rem;
@@ -52,12 +52,12 @@
   --color-base-300: #424242; /* Bordas/divisórias (um cinza mais escuro) */
   --color-base-content: #CCCCCC; /* Texto principal (cinza claro) */
 
-  /* Suas Cores de Branding (mantidas ou ajustadas para tema escuro) */
-  --color-primary: #294D7F; /* Seu azul principal (mantido) */
+  /*Cores de Branding (ajustadas para tema escuro) */
+  --color-primary: #294D7F; /* Azul principal */
   --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
   --color-secondary: #3B6EAE; /* Um azul ligeiramente mais claro (complementar no tema escuro) */
   --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
-  --color-accent: #DF8A2A; /* Seu laranja de acento/contraste (mantido) */
+  --color-accent: #DF8A2A; /* Laranja de acento/contraste */
   --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja */
   --color-neutral: #4D4D4D; /* Para elementos neutros no tema escuro */
   --color-neutral-content: #FFFFFF; /* Texto branco sobre o neutro */
@@ -72,7 +72,7 @@
   --color-error: #F87171;
   --color-error-content: #FFFFFF;
 
-  /* Suas Medidas (mantidas) */
+  /* Medidas */
   --radius-selector: 0.5rem;
   --radius-field: 0.5rem;
   --radius-box: 0.5rem;
@@ -81,4 +81,11 @@
   --border: 1px;
   --depth: 1;
   --noise: 1;
+}
+
+html,
+body,
+aside,
+.navbar {
+  transition: background-color 0.15s, color 0.15s;
 }

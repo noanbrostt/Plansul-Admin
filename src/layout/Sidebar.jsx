@@ -38,9 +38,11 @@ export default function Sidebar({ collapsed, openDropdown, handleDropdownToggle,
   
   return (
     <aside
-      className={`bg-base-200 p-4 min-h-screen flex flex-col transition-all duration-300 ${
-        collapsed && !hovering ? 'w-20' : 'w-64'
-      }`}
+      className={`
+        bg-base-200 p-4 min-h-screen flex flex-col 
+        transition-[width,opacity,transform] duration-300 ease-in-out 
+        ${collapsed && !hovering ? 'w-20' : 'w-64'}
+        `}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
