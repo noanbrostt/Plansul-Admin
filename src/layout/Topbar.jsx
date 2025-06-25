@@ -19,9 +19,9 @@ export default function Topbar({ collapsed, onToggleSidebar, currentTheme, onTog
               onToggleSidebar()
               if (!collapsed) setOpenDropdown(null); // Fecha dropdowns ao colapsar
             }}
-            className="btn btn-sm btn-ghost"
+            className="btn btn-sm btn-ghost py-5.5"
           >
-            {collapsed ? <FiMenu size={22} /> : <FiAlignLeft size={22} />}
+            {collapsed ? <FiMenu size={24} /> : <FiAlignLeft size={24} />}
           </button>
         </div>
         

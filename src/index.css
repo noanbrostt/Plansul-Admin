@@ -82,10 +82,3 @@
   --depth: 1;
   --noise: 1;
 }
-
-html,
-body,
-aside,
-.navbar {
-  transition: background-color 0.15s, color 0.15s;
-}
