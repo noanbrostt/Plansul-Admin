@@ -1,2 +1,88 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "myLightTheme";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+
+  /* Cores Base (Preto/Branco com tons de cinza) */
+  --color-base-100: #FFFFFF; /* Fundo principal branco puro */
+  --color-base-200: #F5F5F5; /* Fundo secundário (um cinza muito claro) */
+  --color-base-300: #E0E0E0; /* Bordas/divisórias (um cinza claro) */
+  --color-base-content: #333333; /* Texto principal (quase preto) */
+
+  /* Cores de Branding */
+  --color-primary: #294D7F; /* Azul principal */
+  --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
+  --color-secondary: #4974b1; /* Um azul ligeiramente mais escuro (complementar) */
+  --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
+  --color-accent: #DF8A2A; /* Laranja de acento/contraste */
+  --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja (para legibilidade) */
+  --color-neutral: #666666; /* Para elementos neutros como cards, barras */
+  --color-neutral-content: #FFFFFF; /* Texto branco sobre o neutro */
+
+  /* Cores de Status */
+  --color-info: #3ABFF8;
+  --color-info-content: #FFFFFF;
+  --color-success: #36D399;
+  --color-success-content: #FFFFFF;
+  --color-warning: #FBBD23;
+  --color-warning-content: #FFFFFF;
+  --color-error: #F87272;
+  --color-error-content: #FFFFFF;
+
+  /* Medidas */
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 1;
+}
+
+@plugin "daisyui/theme" {
+  name: "myDarkTheme";
+  default: true;
+  prefersdark: false;
+  color-scheme: "dark";
+  
+  /* Cores Base (Preto/Branco com tons de cinza) */
+  --color-base-100: #1A1A1A; /* Fundo principal preto quase puro */
+  --color-base-200: #2E2E2E; /* Fundo secundário (um cinza escuro) */
+  --color-base-300: #424242; /* Bordas/divisórias (um cinza mais escuro) */
+  --color-base-content: #CCCCCC; /* Texto principal (cinza claro) */
+
+  /*Cores de Branding (ajustadas para tema escuro) */
+  --color-primary: #376fbe; /* Azul principal */
+  --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
+  --color-secondary: #355889; /* Um azul ligeiramente mais claro (complementar no tema escuro) */
+  --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
+  --color-accent: #DF8A2A; /* Laranja de acento/contraste */
+  --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja */
+  --color-neutral: #4D4D4D; /* Para elementos neutros no tema escuro */
+  --color-neutral-content: #FFFFFF; /* Texto branco sobre o neutro */
+
+  /* Cores de Status */
+  --color-info: #60A5FA;
+  --color-info-content: #FFFFFF;
+  --color-success: #4ADE80;
+  --color-success-content: #FFFFFF;
+  --color-warning: #FBCF23;
+  --color-warning-content: #FFFFFF;
+  --color-error: #F87171;
+  --color-error-content: #FFFFFF;
+
+  /* Medidas */
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 1;
+}

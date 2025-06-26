@@ -1,12 +1,63 @@
-# React + Vite
+# 🧩 Projeto Base React + Vite + DaisyUI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é uma base inicial para aplicações React com foco em portais administrativos, dashboards e sistemas web escaláveis. Ele foi pensado para oferecer uma estrutura sólida, padronizada e fácil de manter, com foco na organização por módulos e layout reaproveitável.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/) — build tool leve e rápido
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/) — componentes prontos e responsivos
+- [React Router DOM](https://reactrouter.com/en/main) — rotas SPA
+- [Docker + Nginx] 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📁 Estrutura de Pastas
+
+```bash
+src/
+├── layout/            # Layouts reaproveitáveis (Sidebar, Topbar, etc.)
+│   ├── DashboardLayout.jsx
+│   ├── Sidebar.jsx
+│   └── Topbar.jsx
+├── modules/           # Módulos separados por área
+│   └── home/
+│       └── HomePage.jsx
+├── router/            # Arquivos de rotas (opcional, se separar depois)
+├── services/          # Lógica de API e serviços externos (opcional)
+├── components/        # Componentes reutilizáveis (botões, inputs, etc.)
+├── utils/             # Funções auxiliares, helpers
+├── constants/         # Constantes globais e enums
+├── App.jsx            # Definição das rotas principais
+├── main.jsx           # Ponto de entrada da aplicação
+└── index.css          # Estilos globais com Tailwind
+```
+💡 Todas as pastas principais possuem um arquivo _info.md com explicação do propósito e uso da pasta
+
+## 🎨 Tema & Dark Mode
+O projeto já vem com suporte a tema claro e escuro. A troca de tema é automática com base na preferência do usuário ou pode ser feita manualmente através do botão na Topbar.
+
+
+## 📦 Instalação
+⚠️ Requer Node.js v22.14.0 e npm v10.8.2 (ou versões compatíveis)
+
+1. Clone o repositório
+
+2. Instale as dependências:
+```npm install```
+
+3. Rode o projeto em modo de desenvolvimento:
+```npm run dev```
+
+## 🏗️ Build para produção
+
+```
+npm run build
+```
+Os arquivos gerados ficarão em dist/, prontos para serem servidos por um servidor como o Nginx.
+
+## ✍️ Autor
+Desenvolvido por Gerake e Noan, como base reutilizável para portais internos e painéis administrativos.
