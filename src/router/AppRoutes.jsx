@@ -7,6 +7,7 @@ import UsersPage from '@/modules/users/UsersPage';
 // Elementos UI
 import ButtonsPage from '../modules/elementos ui/ButtonsPage';
 import InputsPage from '../modules/elementos ui/InputsPage';
+import BadgesPage from '../modules/elementos ui/BadgesPage';
 
 export default function AppRoutes() {
   return (
@@ -14,7 +15,9 @@ export default function AppRoutes() {
       <Route element={<DashboardLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
+        {/* Elementos UI */}
         <Route path="/buttons" element={<ButtonsPage />} />
+        <Route path="/badges" element={<BadgesPage />} />
         <Route path="/inputs" element={<InputsPage />} />
       </Route>
     </Routes>

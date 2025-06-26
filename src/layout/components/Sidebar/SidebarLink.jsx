@@ -8,15 +8,15 @@ export default function SidebarLink({ label, to, icon }) {
   const isActive = location.pathname === to;
 
   return (
-    <li className={!collapsed || hovering ? "" : "w-fit"}>
+    <li className={`overflow-hidden ${(!collapsed || hovering) ? '' : 'w-fit'}`}>
       <Link
         to={to} // Usar 'to' diretamente
-        className={`flex items-center gap-3 p-2 rounded-lg hover:bg-base-300 w-full 
+        className={`h-[37px] flex items-center gap-3 p-2 rounded-lg hover:bg-base-300 w-full 
           ${isActive ? "bg-primary text-primary-content" : ""}
         `}
       >
         <span className="text-lg">{icon}</span>
-        {(!collapsed || hovering) && <span>{label}</span>}{" "}
+        {(!collapsed || hovering) && <span className="truncate max-w-[140px]">{label}</span>}{" "}
       </Link>
     </li>
   );

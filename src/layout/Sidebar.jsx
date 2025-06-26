@@ -11,6 +11,7 @@ import { RiInputField } from "react-icons/ri";
 import { CgPlayButtonR } from "react-icons/cg";
 import { MdScreenshotMonitor } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
+import { LuBadgeCheck } from "react-icons/lu";
 
 // Importe dos componentes e do Context Provider
 import SidebarHeader from "./components/Sidebar/SidebarHeader";
@@ -64,7 +65,8 @@ export default function Sidebar({
             icon={<IoCubeOutline />}
             subItems={[
               { label: "Botões", to: "/buttons", icon: <CgPlayButtonR /> },
-              { label: "Inputs", to: "/inputs", icon: <RiInputField /> }
+              { label: "Etiquetas", to: "/badges", icon: <LuBadgeCheck /> },
+              { label: "Inputs", to: "/inputs", icon: <RiInputField /> },
             ]}
           />
 

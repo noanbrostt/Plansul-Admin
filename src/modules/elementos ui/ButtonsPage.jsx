@@ -1,6 +1,5 @@
-// src/pages/ButtonsPage.tsx
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from './components/Button'; // Importe seu novo componente Button
 
 import { 
@@ -27,7 +26,7 @@ export default function ButtonsPage() {
   };
 
   return (
-    <div className="p-6 bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen">
       {/* Breadcrumbs / Título da Página */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-base-content">Buttons</h1>

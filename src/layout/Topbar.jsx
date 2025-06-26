@@ -35,7 +35,7 @@ export default function Topbar({ collapsed, onToggleSidebar, currentTheme, onTog
             className="theme-controller"
             onChange={onToggleTheme}
             //- o estado 'checked' é determinado pelo tema atual
-            checked={currentTheme === 'myDarkTheme'}
+            checked={currentTheme === 'dark'}
           />
 
           <FiSun className="swap-on fill-current text-2xl" />

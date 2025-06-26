@@ -1,9 +1,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-:root:has(input.theme-controller[value="myLightTheme"]:checked),
-[data-theme="myLightTheme"] {
-  color-scheme: light;
+@plugin "daisyui/theme" {
+  name: "myLightTheme";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
 
   /* Cores Base (Preto/Branco com tons de cinza) */
   --color-base-100: #FFFFFF; /* Fundo principal branco puro */
@@ -42,10 +44,12 @@
   --noise: 1;
 }
 
-:root:has(input.theme-controller[value="myDarkTheme"]:checked),
-[data-theme="myDarkTheme"] {
-  color-scheme: dark;
-
+@plugin "daisyui/theme" {
+  name: "myDarkTheme";
+  default: true;
+  prefersdark: false;
+  color-scheme: "dark";
+  
   /* Cores Base (Preto/Branco com tons de cinza) */
   --color-base-100: #1A1A1A; /* Fundo principal preto quase puro */
   --color-base-200: #2E2E2E; /* Fundo secundário (um cinza escuro) */
