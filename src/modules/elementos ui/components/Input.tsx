@@ -3,7 +3,15 @@ import React from "react";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   // Cores da borda (e foco) baseadas nas variantes DaisyUI
   variant?:
-    "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral" | "ghost";
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "info"
+    | "success"
+    | "warning"
+    | "error"
+    | "neutral"
+    | "ghost";
   bordered?: boolean;
   inputSize?: "lg" | "md" | "sm" | "xs";
   icon?: React.ReactElement<{ className?: string }>;
@@ -12,6 +20,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   optionalBadgeText?: string;
   wrapperClassName?: string;
   inputClassName?: string;
+
+  fieldset?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -21,9 +31,10 @@ const Input: React.FC<InputProps> = ({
   icon,
   iconPosition = "left",
   optionalBadge = false,
-  optionalBadgeText = "Opcional", // Texto padrão do badge
+  optionalBadgeText = "Opcional",
   wrapperClassName = "",
   inputClassName = "", // Nova prop para classes diretas do input
+  fieldset = "",
   ...rest
 }) => {
   // Classes básicas do DaisyUI para input e borda
@@ -33,55 +44,52 @@ const Input: React.FC<InputProps> = ({
     ${variant ? `input-${variant}` : ""}
     ${bordered ? "input-bordered" : ""}
   `;
-
   const finalInputClasses = `${baseInputClasses} ${inputClassName}`.trim();
 
   // Se houver um ícone OU um badge opcional, usaremos a estrutura de label/flex
-  if (icon || optionalBadge) {
-    const iconElement = icon
-      ? React.cloneElement(icon, {
-          // Agora o TypeScript sabe que 'icon.props' tem 'className'
-          className: `
-            ${icon.props.className || ""} 
-            inline-block w-5 h-5 
-            ${rest.children ? (iconPosition === "left" ? "mr-2" : "ml-2") : ""}
-            text-gray-400
-          `,
-        })
-      : null;
+  const iconElement = icon
+    ? React.cloneElement(icon, {
+        // Agora o TypeScript sabe que 'icon.props' tem 'className'
+        className: `
+          ${icon.props.className || ""} 
+          inline-block w-5 h-5 
+          text-gray-400
+        `,
+      })
+    : null;
 
-    return (
-      <>
-        <label className={finalInputClasses}>
-          {icon && iconPosition === "left" && iconElement}
+  let labelInput = (
+    <label className={finalInputClasses}>
+      {icon && iconPosition === "left" && iconElement}
 
-          {/* O `children` pode ser usado para o "Path" no seu exemplo */}
-          {rest.children && (
-            <span className="text-base-content">{rest.children}</span>
-          )}
+      <input
+        type={rest.type || "text"}
+        className={`${inputClassName}`}
+        {...rest}
+      />
 
-          <input
-            type={rest.type || "text"}
-            className={`grow bg-transparent focus:outline-none ${inputClassName}`}
-            {...rest}
-            children={null} // Garante que `children` não seja renderizado dentro do input tag
-          />
+      {icon && iconPosition === "right" && iconElement}
+      {optionalBadge && (
+        <span className="badge badge-neutral badge-xs">
+          {optionalBadgeText}
+        </span>
+      )}
+    </label>
+  );
 
-          {icon && iconPosition === "right" && iconElement}
-          {optionalBadge && (
-            <span className="badge badge-neutral badge-xs">
-              {optionalBadgeText}
-            </span>
-          )}
-        </label>
-      </>
+
+  if (fieldset) {
+    labelInput = (
+      <fieldset className="fieldset">
+        <legend className="fieldset-legend">{fieldset}</legend>
+        {labelInput}
+      </fieldset>
     );
   }
 
-  // Input simples (sem ícone ou badge opcional)
-  return (
-    <input type={rest.type || "text"} className={finalInputClasses} {...rest} />
-  );
+
+
+  return labelInput;
 };
 
 export default Input;

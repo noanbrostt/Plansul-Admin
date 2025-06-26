@@ -58,6 +58,14 @@ export default function InputsPage() {
         </div>
       </div>
 
+      {/* --- Seção de Inputs com Fieldset --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">Inputs com Fieldset</h2>
+        <div className="flex flex-wrap items-end gap-4">
+          <Input placeholder="Text (Padrão)" fieldset='Qual a senha do seu cartão?' inputClassName="w-64" />
+        </div>
+      </div>
+
       {/* --- Seção de Inputs com Ícones --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">Inputs com Ícones</h2>
@@ -161,9 +169,7 @@ export default function InputsPage() {
             readOnly
             value="Este campo é apenas para visualização."
             inputClassName="max-w-md"
-          >
-            Observações
-          </Input>
+          />
         </div>
       </div>
 
@@ -173,7 +179,7 @@ export default function InputsPage() {
         <div className="flex flex-wrap items-end gap-4">
           <Input type="number" placeholder="Número" icon={<FiHash />} variant="accent" inputClassName="w-32" />
           <Input type="date" icon={<FiCalendar />} variant="success" inputClassName="w-48" />
-          <Input type="color" defaultValue="#4a90e2" className="h-10 w-24" /> 
+          <Input type="color" defaultValue="#4a90e2" /> 
           <Input type="url" placeholder="Sua URL" icon={<FiGlobe />} variant="info" inputClassName="w-64" />
           <Input type="email" placeholder="email@exemplo.com" icon={<FiMail />} variant="warning" inputClassName="w-64" />
           <Input type="password" placeholder="Sua Senha" icon={<FiLock />} variant="error" inputClassName="w-64" />
