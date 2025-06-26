@@ -205,10 +205,10 @@ export default function InputsPage() {
 
           <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
           <div className="flex flex-wrap items-center gap-4">
-            <Checkbox label="Extra Pequeno (xs)" size="xs" />
-            <Checkbox label="Pequeno (sm)" size="sm" />
-            <Checkbox label="Médio (md)" size="md" /> {/* Padrão */}
-            <Checkbox label="Grande (lg)" size="lg" />
+            <Checkbox label="Extra Pequeno (xs)" daisyui_size="xs" />
+            <Checkbox label="Pequeno (sm)" daisyui_size="sm" />
+            <Checkbox label="Médio (md)" daisyui_size="md" /> {/* Padrão */}
+            <Checkbox label="Grande (lg)" daisyui_size="lg" />
           </div>
 
           <p className="font-medium text-base-content/80 mt-4">Estados:</p>

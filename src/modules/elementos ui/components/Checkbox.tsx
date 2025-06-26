@@ -4,13 +4,13 @@ import React from 'react';
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'; // Adicionado 'neutral'
-  size?: 'lg' | 'md' | 'sm' | 'xs';
+  daisyui_size?: 'lg' | 'md' | 'sm' | 'xs';
   label?: React.ReactNode; 
 }
-// BUG - Pesquisar pq classes "checkbox-xs" ou "checkbox-primary" não existem
+// BUG - pesquisar porque a classe "checkbox-xs" ou outras de tamanhos não existem
 const Checkbox: React.FC<CheckboxProps> = ({
   variant,
-  size = 'md',
+  daisyui_size = 'md',
   label,
   className = '', 
   ...rest 
@@ -20,19 +20,19 @@ const Checkbox: React.FC<CheckboxProps> = ({
   // `accent-color` é uma propriedade CSS que afeta nativamente o checkbox.
 
   const baseClasses = `checkbox`;
-  const sizeClass = size ? `checkbox-${size}` : '';
+  const sizeClass = daisyui_size ? `checkbox-${daisyui_size}` : '';
   
   let colorClasses = '';
   // Mapeamento de variantes para classes de cor de borda e accent (para cor do tick/fundo)
   switch (variant) {
-    case 'primary': colorClasses = 'border-primary accent-primary'; break;
-    case 'secondary': colorClasses = 'border-secondary accent-secondary'; break;
-    case 'accent': colorClasses = 'border-accent accent-accent'; break;
-    case 'info': colorClasses = 'border-info accent-info'; break;
-    case 'success': colorClasses = 'border-success accent-success'; break;
-    case 'warning': colorClasses = 'border-warning accent-warning'; break;
-    case 'error': colorClasses = 'border-error accent-error'; break;
-    case 'neutral': colorClasses = 'border-neutral accent-neutral'; break;
+    case 'primary': colorClasses = 'border-primary accent-primary checkbox-primary'; break;
+    case 'secondary': colorClasses = 'border-secondary accent-secondary checkbox-secondary'; break;
+    case 'accent': colorClasses = 'border-accent accent-accent checkbox-accent'; break;
+    case 'info': colorClasses = 'border-info accent-info checkbox-info'; break;
+    case 'success': colorClasses = 'border-success accent-success checkbox-success'; break;
+    case 'warning': colorClasses = 'border-warning accent-warning checkbox-warning'; break;
+    case 'error': colorClasses = 'border-error accent-error checkbox-error'; break;
+    case 'neutral': colorClasses = 'border-neutral accent-neutral checkbox-neutral'; break;
     default: colorClasses = 'border-base-content/20 accent-primary'; // Padrão ou base para o accent
   }
 
