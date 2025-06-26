@@ -1,14 +1,8 @@
-// src/pages/BadgesPage.tsx
-
-import React from 'react';
 import Badge from './components/Badge'; 
 
 import { 
-  FiPlus, 
-  FiCheckCircle, 
-  FiAlertTriangle, 
-  FiInfo, 
-  FiXCircle,
+  FiPlus,
+  FiAlertTriangle,
   FiAward 
 } from "react-icons/fi"; 
 
@@ -20,7 +14,7 @@ export default function BadgesPage() {
         <h1 className="text-3xl font-bold text-base-content">Badges</h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul>
-            <li><a>Home</a></li>
+            <li>Home</li>
             <li>Elements</li>
             <li>Badges</li>
           </ul>
@@ -116,11 +110,11 @@ export default function BadgesPage() {
         <h2 className="text-xl font-semibold text-base-content mb-4">Outras Variações (Tamanhos)</h2>
         <div className="flex flex-wrap items-center gap-4">
           <Badge variant="primary" size="lg">Large Badge</Badge>
-          <Badge variant="success" size="md">Medium Badge</Badge>
-          <Badge variant="info" size="sm">Small Badge</Badge>
-          <Badge variant="error" size="xs">Extra Small Badge</Badge>
-          <Badge outline variant="warning" size="lg" icon={<FiAlertTriangle />}>Large Outline</Badge>
-          <Badge variant="neutral" icon={<FiAward />}>New</Badge>
+          <Badge variant="primary" size="md">Medium Badge</Badge>
+          <Badge variant="primary" size="sm">Small Badge</Badge>
+          <Badge variant="primary" size="xs">Extra Small Badge</Badge>
+          <Badge outline variant="primary" size="lg" icon={<FiAlertTriangle />}>Large Outline</Badge>
+          <Badge variant="primary" icon={<FiAward />}>New</Badge>
         </div>
       </div>
 

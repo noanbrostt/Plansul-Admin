@@ -108,7 +108,7 @@ const Badge: React.FC<BadgeProps> = ({
       className: `
         ${icon.props.className || ''} 
         inline-block w-4 h-4 
-        ${children ? (iconPosition === 'left' ? 'mr-1' : 'ml-1') : ''}
+        ${children ? (iconPosition === 'left' ? '-mr-1' : '-ml-1') : ''}
       `
     }) : null;
 

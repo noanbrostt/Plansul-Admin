@@ -1,6 +1,4 @@
-// src/pages/InputsPage.tsx
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Input from './components/Input'; 
 import Checkbox from './components/Checkbox'; 
 import Radio from './components/Radio';         
@@ -9,12 +7,10 @@ import Textarea from './components/Textarea';
 
 import { 
   FiMail, 
-  FiUser, 
   FiLock, 
   FiSearch, 
   FiPhone,
   FiCalendar,
-  FiDollarSign,
   FiHash,
   FiGlobe,
   FiAlertCircle,
@@ -39,7 +35,7 @@ export default function InputsPage() {
         <h1 className="text-3xl font-bold text-base-content">Inputs</h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul>
-            <li><a>Home</a></li>
+            <li>Home</li>
             <li>Elements</li>
             <li>Inputs</li>
           </ul>
@@ -50,14 +46,14 @@ export default function InputsPage() {
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">Inputs Padrão e Cores de Borda</h2>
         <div className="flex flex-wrap items-end gap-4">
-          <Input placeholder="Nome Completo (Padrão)" inputClassName="w-64" /> 
+          <Input placeholder="Text (Padrão)" inputClassName="w-64" autoFocus /> 
           <Input variant="primary" placeholder="Email (Borda Primary)" type="email" inputClassName="w-64" />
-          <Input variant="secondary" placeholder="Telefone (Borda Secondary)" type="tel" inputClassName="w-64" />
+          <Input variant="secondary" placeholder="Tel (Borda Secondary)" type="tel" inputClassName="w-64" />
           <Input variant="accent" placeholder="URL (Borda Accent)" type="url" inputClassName="w-64" />
-          <Input variant="info" placeholder="Info Input (Borda Info)" inputClassName="w-64" />
-          <Input variant="success" placeholder="Sucesso! (Borda Success)" inputClassName="w-64" />
-          <Input variant="warning" placeholder="Atenção! (Borda Warning)" inputClassName="w-64" />
-          <Input variant="error" placeholder="Erro! (Borda Error)" icon={<FiAlertCircle />} inputClassName="w-64" />
+          <Input variant="info" placeholder="Borda Info" inputClassName="w-64" />
+          <Input variant="success" placeholder="Borda Success" inputClassName="w-64" />
+          <Input variant="warning" placeholder="Borda Warning" inputClassName="w-64" />
+          <Input variant="error" placeholder="Borda Error" icon={<FiAlertCircle />} inputClassName="w-64" />
           <Input variant="ghost" placeholder="Ghost Input (sem borda)" bordered={false} inputClassName="w-64" /> 
         </div>
       </div>
@@ -126,10 +122,10 @@ export default function InputsPage() {
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">Tamanhos de Inputs</h2>
         <div className="flex flex-col gap-4">
-          <Input size="lg" placeholder="Input Grande (lg)" />
-          <Input size="md" placeholder="Input Médio (md)" /> 
-          <Input size="sm" placeholder="Input Pequeno (sm)" />
-          <Input size="xs" placeholder="Input Extra Pequeno (xs)" />
+          <Input inputSize="lg" placeholder="Input Grande (lg)" />
+          <Input inputSize="md" placeholder="Input Médio (md)" /> 
+          <Input inputSize="sm" placeholder="Input Pequeno (sm)" />
+          <Input inputSize="xs" placeholder="Input Extra Pequeno (xs)" />
         </div>
       </div>
 
