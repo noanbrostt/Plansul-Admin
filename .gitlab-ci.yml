@@ -1,4 +1,4 @@
-image: docker:latest
+
 
 
 variables:
@@ -8,14 +8,13 @@ variables:
   DOCKER_BUILDKIT: "1"
   IMAGE_TAG: "$CI_COMMIT_SHORT_SHA"
 
-# ---------------- Defaults (sem variables!) ------------------
-default:
-  image: docker:24
-  services:
-    - name: docker:24-dind
-      command:
-        - "--tls=false"
-        - "--insecure-registry=172.32.1.71:5050"
+
+image: docker:24
+services:
+  - name: docker:24-dind
+    command:
+      - "--tls=false"
+      - "--insecure-registry=172.32.1.71:5050"
 
 
 
