@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   // Cores da borda (e foco) baseadas nas variantes DaisyUI
   variant?:
-    | "primary"
+    "primary"
     | "secondary"
     | "accent"
     | "info"
@@ -18,10 +19,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   iconPosition?: "left" | "right";
   optionalBadge?: boolean;
   optionalBadgeText?: string;
-  wrapperClassName?: string;
   inputClassName?: string;
-
+  type?: string;
   fieldset?: string;
+  fildsetFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
+  validMessage?: string;
+  validReqs?: object;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -32,11 +35,38 @@ const Input: React.FC<InputProps> = ({
   iconPosition = "left",
   optionalBadge = false,
   optionalBadgeText = "Opcional",
-  wrapperClassName = "",
   inputClassName = "", // Nova prop para classes diretas do input
+  type,
   fieldset = "",
+  fildsetFontSize = "base",
+  validMessage = "",
+  validReqs,
   ...rest
 }) => {
+  
+  // Inicio da logica para input password mostrar a senha
+  const [showPassword, setShowPassword] = useState(false);
+  const isPasswordField = type === 'password';
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const currentInputType = isPasswordField && showPassword ? 'text' : type || 'text';
+
+  // Escolha o ícone do olho com base no estado de visibilidade
+  const PasswordToggleButton = isPasswordField && (
+    <button
+      type="button" // Importante: tipo 'button' para não submeter o formulário
+      onClick={togglePasswordVisibility}
+      className="btn btn-ghost btn-circle btn-sm -mr-2 text-base-content/60 hover:text-base-content"
+      // Classes do Tailwind para posicionamento e estilo
+    >
+      {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+    </button>
+  );
+  // Final da logica para input password mostrar a senha
+
+
   // Classes básicas do DaisyUI para input e borda
   const baseInputClasses = `
     input
@@ -59,35 +89,60 @@ const Input: React.FC<InputProps> = ({
     : null;
 
   let labelInput = (
-    <label className={finalInputClasses}>
-      {icon && iconPosition === "left" && iconElement}
+    // Imprime caso..
+    <>
+      <label className={`
+        ${finalInputClasses}
+        ${validMessage && 'validator'}
+        `}
+      >
+        {/* .. tenha ícone na esquerda */}
+        {icon && iconPosition === "left" && iconElement}
 
-      <input
-        type={rest.type || "text"}
-        className={`${inputClassName}`}
-        {...rest}
-      />
+        <input
+          type={currentInputType}
+          className={`${inputClassName}`}
+          {...rest}
+          {...validReqs} // .. tenha validador
+        />
 
-      {icon && iconPosition === "right" && iconElement}
-      {optionalBadge && (
-        <span className="badge badge-neutral badge-xs">
-          {optionalBadgeText}
-        </span>
+        {/* .. seja input de senha */}
+        {isPasswordField && PasswordToggleButton}
+
+        {/* .. tenha ícone na direita */}
+        {icon && iconPosition === "right" && iconElement}
+
+        {/* .. tenha tag opcional */}
+        {optionalBadge && (
+          <span className="badge badge-neutral badge-xs">
+            {optionalBadgeText}
+          </span>
+        )}
+      </label>
+
+      {/* .. tenha validador */}
+      {validMessage && (
+        <p className="validator-hint ml-1">
+          {validMessage}
+        </p>
       )}
-    </label>
+    </>
   );
 
+  if (validMessage) {
+    labelInput = (
+      <span>{labelInput}</span>
+    );
+  }
 
   if (fieldset) {
     labelInput = (
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">{fieldset}</legend>
+        <legend className={`fieldset-legend ml-1 ${fildsetFontSize && 'text-'+fildsetFontSize}`}>{fieldset}</legend>
         {labelInput}
       </fieldset>
     );
   }
-
-
 
   return labelInput;
 };

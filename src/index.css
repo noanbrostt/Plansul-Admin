@@ -69,11 +69,11 @@
   /* Cores de Status */
   --color-info: #60A5FA;
   --color-info-content: #FFFFFF;
-  --color-success: #4ADE80;
+  --color-success: #009135;
   --color-success-content: #FFFFFF;
-  --color-warning: #FBCF23;
+  --color-warning: #a28618;
   --color-warning-content: #FFFFFF;
-  --color-error: #F87171;
+  --color-error: #a90000;
   --color-error-content: #FFFFFF;
 
   /* Medidas */
@@ -86,3 +86,34 @@
   --depth: 1;
   --noise: 1;
 }
+
+
+
+/* 
+  Colocando classes que deveriam existir no 
+  Tailwind mas não estão sendo importadas 
+*/
+
+/* Cria a classe "text-base" para font-size: 16px; */
+:root {
+  --text-base: 1rem; /* 16px (padrão Tailwind) */
+  --text-base--line-height: calc(1.5 / 1); /* 1.5 é o line-height padrão */
+}
+.text-base {
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+}
+/*  */
+
+/* Faz com que o validador não ocupe espaço enquanto estiver oculto */
+.validator {
+    &:user-invalid, &:has(:user-invalid), &[aria-invalid]:not([aria-invalid="false"]) {
+        &~.validator-hint {
+            height: unset;
+        }
+    }
+}
+.validator-hint {
+    height: 0px;
+}
+/*  */
