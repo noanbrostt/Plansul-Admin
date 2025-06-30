@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "./components/Input";
 import Checkbox from "./components/Checkbox";
-import Radio from "./components/Radio";
+import RadioGroup from "./components/Radio";
 import Select from "./components/Select";
 import Textarea from "./components/Textarea";
 
@@ -117,11 +117,11 @@ export default function InputsPage() {
             Tamanhos dos Inputs em si:
           </p>
           <div className="flex gap-4">
-            <Input inputSize="xl" placeholder="Input Extra Grande (xl)" />
-            <Input inputSize="lg" placeholder="Input Grande (lg)" />
-            <Input placeholder="Input Médio (md - Padrão)" />
-            <Input inputSize="sm" placeholder="Input Pequeno (sm)" />
             <Input inputSize="xs" placeholder="Input Extra Pequeno (xs)" />
+            <Input inputSize="sm" placeholder="Input Pequeno (sm)" />
+            <Input placeholder="Input Médio (md - Padrão)" />
+            <Input inputSize="lg" placeholder="Input Grande (lg)" />
+            <Input inputSize="xl" placeholder="Input Extra Grande (xl)" />
           </div>
         </div>
       </div>
@@ -432,7 +432,7 @@ export default function InputsPage() {
         <h2 className="text-xl font-semibold text-base-content mb-4">
           Checkboxes Padrão
         </h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <p className="font-medium text-base-content/80">Cores:</p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -454,7 +454,7 @@ export default function InputsPage() {
             <Checkbox defaultChecked label="SM" checkboxSize="sm" />
             <Checkbox defaultChecked label="MD (Padrão)" />
             <Checkbox defaultChecked label="LG" checkboxSize="lg" />
-            <Checkbox defaultChecked label="LG" checkboxSize="xl" />
+            <Checkbox defaultChecked label="XL" checkboxSize="xl" />
           </div>
         </div>
       </div>
@@ -462,17 +462,17 @@ export default function InputsPage() {
       {/* --- Seção de Checkbox com Fieldset --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Checkbox com Label e/ou Fieldset
+          Checkbox com Variações de Label e Fieldset
         </h2>
         <div className="flex flex-col gap-4">
           <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
 
           <div className="flex flex-wrap items-center gap-8">
-            <Checkbox fieldset="Fieldset" label="xl" fildsetFontSize="xl" />
-            <Checkbox fieldset="Fieldset" label="lg" fildsetFontSize="lg" />
-            <Checkbox fieldset="Fieldset" label="base" fildsetFontSize="base" />
-            <Checkbox fieldset="Fieldset" label="sm" fildsetFontSize="sm" />
             <Checkbox fieldset="Fieldset" label="xs" fildsetFontSize="xs" />
+            <Checkbox fieldset="Fieldset" label="sm" fildsetFontSize="sm" />
+            <Checkbox fieldset="Fieldset" label="base" fildsetFontSize="base" />
+            <Checkbox fieldset="Fieldset" label="lg" fildsetFontSize="lg" />
+            <Checkbox fieldset="Fieldset" label="xl" fildsetFontSize="xl" />
           </div>
 
           <p className="font-medium text-base-content/80 mt-4">
@@ -480,11 +480,11 @@ export default function InputsPage() {
           </p>
 
           <div className="flex items-center gap-8">
-            <Checkbox fieldset="Fieldset" label="xl" labelFontSize="xl" />
-            <Checkbox fieldset="Fieldset" label="lg" labelFontSize="lg" />
-            <Checkbox fieldset="Fieldset" label="base" labelFontSize="base" />
-            <Checkbox fieldset="Fieldset" label="sm" labelFontSize="sm" />
             <Checkbox fieldset="Fieldset" label="xs" labelFontSize="xs" />
+            <Checkbox fieldset="Fieldset" label="sm" labelFontSize="sm" />
+            <Checkbox fieldset="Fieldset" label="base" labelFontSize="base" />
+            <Checkbox fieldset="Fieldset" label="lg" labelFontSize="lg" />
+            <Checkbox fieldset="Fieldset" label="xl" labelFontSize="xl" />
           </div>
 
           <p className="font-medium text-base-content/80 mt-4">Variações:</p>
@@ -496,9 +496,7 @@ export default function InputsPage() {
               defaultChecked
             />
             <Checkbox fieldset="Aceito os termos" defaultChecked />
-            <Checkbox
-              label="Eu aceito"
-            />
+            <Checkbox label="Eu aceito" />
             <Checkbox
               fieldset="Aceito os termos"
               fildsetFontSize="xl"
@@ -554,27 +552,15 @@ export default function InputsPage() {
         <h2 className="text-xl font-semibold text-base-content mb-4">
           Toggles com Label e/ou Fieldset
         </h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
 
           <div className="flex flex-wrap items-center gap-8">
             <Checkbox
               toggle
               fieldset="Fieldset"
-              label="xl"
-              fildsetFontSize="xl"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="lg"
-              fildsetFontSize="lg"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="base"
-              fildsetFontSize="base"
+              label="xs"
+              fildsetFontSize="xs"
             />
             <Checkbox
               toggle
@@ -585,8 +571,20 @@ export default function InputsPage() {
             <Checkbox
               toggle
               fieldset="Fieldset"
-              label="xs"
-              fildsetFontSize="xs"
+              label="base"
+              fildsetFontSize="base"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="lg"
+              fildsetFontSize="lg"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="xl"
+              fildsetFontSize="xl"
             />
           </div>
 
@@ -637,10 +635,7 @@ export default function InputsPage() {
               defaultChecked
             />
             <Checkbox toggle fieldset="Aceito os termos" defaultChecked />
-            <Checkbox
-              toggle
-              label="Eu aceito"
-            />
+            <Checkbox toggle label="Eu aceito" />
             <Checkbox
               toggle
               fieldset="Aceito os termos"
@@ -669,116 +664,317 @@ export default function InputsPage() {
         </div>
       </div>
 
+      {/* --- Seção de Radios --- */}
       <div className="flex justify-between items-center mb-6 mt-12">
-        <h1 className="text-3xl font-bold text-base-content">Radio Buttons</h1>
+        <h1 className="text-3xl font-bold text-base-content">Radio Groups</h1>
       </div>
 
-      {/* --- Seção de Radios --- */}
+      {/* Grupo com Diferentes Tamanhos */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Radio Buttons
+          Radios Padrão
         </h2>
-        <div className="flex flex-col gap-4">
-          <p className="font-medium text-base-content/80">Cores:</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Radio
-              label="Opção A (Padrão)"
-              name="genderGroup1"
-              value="A"
-              checked={gender === "A"}
-              onChange={(e) => setGender(e.target.value)}
-            />
-            <Radio
-              label="Opção B (Primary)"
-              name="genderGroup1"
-              value="B"
-              checked={gender === "B"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="primary"
-            />
-            <Radio
-              label="Opção C (Secondary)"
-              name="genderGroup1"
-              value="C"
-              checked={gender === "C"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="secondary"
-            />
-            <Radio
-              label="Opção D (Accent)"
-              name="genderGroup1"
-              value="D"
-              checked={gender === "D"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="accent"
-            />
-            <Radio
-              label="Opção E (Info)"
-              name="genderGroup1"
-              value="E"
-              checked={gender === "E"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="info"
-            />
-            <Radio
-              label="Opção F (Success)"
-              name="genderGroup1"
-              value="F"
-              checked={gender === "F"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="success"
-            />
-            <Radio
-              label="Opção G (Warning)"
-              name="genderGroup1"
-              value="G"
-              checked={gender === "G"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="warning"
-            />
-            <Radio
-              label="Opção H (Error)"
-              name="genderGroup1"
-              value="H"
-              checked={gender === "H"}
-              onChange={(e) => setGender(e.target.value)}
-              variant="error"
-            />
-          </div>
+
+        <p className="font-medium text-base-content/80">Cores:</p>
+
+        <div className="flex flex-col gap-2">
+          <RadioGroup
+            name="cores"
+            orientation="horizontal"
+            options={[
+              { value: "cor1", label: "padrão", checked: true },
+              { value: "cor2", label: "primary", variant: "primary" },
+              { value: "cor3", label: "secondary", variant: "secondary" },
+              { value: "cor4", label: "accent", variant: "accent" },
+              { value: "cor5", label: "info", variant: "info" },
+              { value: "cor6", label: "success", variant: "success" },
+              { value: "cor7", label: "warning", variant: "warning" },
+              { value: "cor8", label: "error", variant: "error" },
+              { value: "cor9", label: "neutral", variant: "neutral" },
+            ]}
+          />
 
           <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Radio
-              label="Extra Pequeno (xs)"
-              name="sizeGroup"
-              value="xs"
-              size="xs"
+
+          <div className="flex gap-14">
+            <RadioGroup
+              fieldset="Radio XS"
+              name="sizes-xs"
+              radioSize="xs"
+              options={[
+                { value: "xs1", label: "Opção 1", checked: true },
+                { value: "xs2", label: "Opção 2" },
+              ]}
             />
-            <Radio label="Pequeno (sm)" name="sizeGroup" value="sm" size="sm" />
-            <Radio label="Médio (md)" name="sizeGroup" value="md" size="md" />
-            <Radio label="Grande (lg)" name="sizeGroup" value="lg" size="lg" />
+            <RadioGroup
+              fieldset="Radio SM"
+              name="sizes-sm"
+              radioSize="sm"
+              options={[
+                { value: "sm1", label: "Opção 1", checked: true },
+                { value: "sm2", label: "Opção 2" },
+              ]}
+            />
+            <RadioGroup
+              fieldset="Radio MD"
+              name="sizes-md"
+              radioSize="md"
+              options={[
+                { value: "md1", label: "Opção 1", checked: true },
+                { value: "md2", label: "Opção 2" },
+              ]}
+            />
+            <RadioGroup
+              fieldset="Radio LG"
+              name="sizes-lg"
+              radioSize="lg"
+              options={[
+                { value: "lg1", label: "Opção 1", checked: true },
+                { value: "lg2", label: "Opção 2" },
+              ]}
+            />
+            <RadioGroup
+              fieldset="Radio XL"
+              name="sizes-xl"
+              radioSize="xl"
+              options={[
+                { value: "xl1", label: "Opção 1", checked: true },
+                { value: "xl2", label: "Opção 2" },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Grupo Vertical Simples */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Orientações
+        </h2>
+
+        <p className="font-medium text-base-content/80">Horizontal:</p>
+
+        <RadioGroup
+          fieldset="Status do Pedido"
+          name="order-status"
+          orientation="horizontal"
+          options={[
+            {
+              value: "pending",
+              label: "Pendente",
+              variant: "warning",
+              checked: true,
+            },
+            {
+              value: "processing",
+              label: "Processando",
+              variant: "info",
+            },
+            {
+              value: "shipped",
+              label: "Enviado",
+              variant: "success",
+            },
+            {
+              value: "delivered",
+              label: "Entregue",
+              variant: "primary",
+            },
+          ]}
+        />
+
+        <p className="font-medium text-base-content/80 mt-4">Vertical:</p>
+
+        <div className="flex flex-col gap-2">
+          <RadioGroup
+            fieldset="Escolha seu plano"
+            name="plans"
+            options={[
+              { value: "free", label: "Plano Gratuito", checked: true },
+              { value: "basic", label: "Plano Básico" },
+              { value: "pro", label: "Plano Profissional" },
+              {
+                value: "enterprise",
+                label: "Plano Enterprise",
+                disabled: true,
+              },
+            ]}
+            fieldsetFontSize="lg"
+          />
+        </div>
+      </div>
+
+      {/* --- Seção de Radio Groups com Variações de Label e Fieldset --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Radio Groups com Variações de Label e Fieldset
+        </h2>
+
+        <div className="flex flex-col gap-2">
+          <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
+
+          <div className="flex flex-wrap items-start gap-8 mb-4">
+            <RadioGroup
+              fieldset="Fieldset xs"
+              name="fieldset-xs"
+              fieldsetFontSize="xs"
+              options={[
+                { value: "opt1", label: "Opção 1", checked: true },
+                { value: "opt2", label: "Opção 2" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset sm"
+              name="fieldset-sm"
+              fieldsetFontSize="sm"
+              options={[
+                { value: "opt1", label: "Opção 1", checked: true },
+                { value: "opt2", label: "Opção 2" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset base"
+              name="fieldset-base"
+              fieldsetFontSize="base"
+              options={[
+                { value: "opt1", label: "Opção 1", checked: true },
+                { value: "opt2", label: "Opção 2" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset lg"
+              name="fieldset-lg"
+              fieldsetFontSize="lg"
+              options={[
+                { value: "opt1", label: "Opção 1", checked: true },
+                { value: "opt2", label: "Opção 2" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset xl"
+              name="fieldset-xl"
+              fieldsetFontSize="xl"
+              options={[
+                { value: "opt1", label: "Opção 1", checked: true },
+                { value: "opt2", label: "Opção 2" },
+              ]}
+            />
           </div>
 
-          <p className="font-medium text-base-content/80 mt-4">Estados:</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Radio
-              label="Desabilitado"
-              name="disabledGroup"
-              value="disabled"
-              disabled
+          <p className="font-medium text-base-content/80 mt-4">
+            Tamanhos Label:
+          </p>
+
+          <div className="flex flex-wrap items-start gap-8 mb-4">
+            <RadioGroup
+              fieldset="Fieldset"
+              name="label-xs"
+              labelFontSize="xs"
+              options={[
+                { value: "opt1", label: "Label xs", checked: true },
+                { value: "opt2", label: "Label xs" },
+              ]}
             />
-            <Radio
-              label="Desabilitado e Marcado"
-              name="disabledGroup"
-              value="disabledChecked"
-              disabled
-              checked
+
+            <RadioGroup
+              fieldset="Fieldset"
+              name="label-sm"
+              labelFontSize="sm"
+              options={[
+                { value: "opt1", label: "Label sm", checked: true },
+                { value: "opt2", label: "Label sm" },
+              ]}
             />
-            <Radio
-              label="Padrão Checked"
-              name="defaultCheckedGroup"
-              value="default"
-              defaultChecked
+
+            <RadioGroup
+              fieldset="Fieldset"
+              name="label-base"
+              labelFontSize="base"
+              options={[
+                { value: "opt1", label: "Label base", checked: true },
+                { value: "opt2", label: "Label base" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset"
+              name="label-lg"
+              labelFontSize="lg"
+              options={[
+                { value: "opt1", label: "Label lg", checked: true },
+                { value: "opt2", label: "Label lg" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset"
+              name="label-xl"
+              labelFontSize="xl"
+              options={[
+                { value: "opt1", label: "Label xl", checked: true },
+                { value: "opt2", label: "Label xl" },
+              ]}
+            />
+          </div>
+
+          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
+
+          <div className="flex flex-wrap items-start gap-8">
+            <RadioGroup
+              fieldset="Centralizado"
+              name="centered"
+              fieldsetCentered
+              options={[
+                { value: "opt1", label: "Opção centralizada 1", checked: true },
+                { value: "opt2", label: "Opção centralizada 2" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Apenas Fieldset"
+              name="fieldset-only"
+              fieldsetCentered
+              options={[
+                { value: "opt1", label: "", checked: true },
+                { value: "opt2", label: "" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset e Labels"
+              name="combined"
+              fieldsetFontSize="lg"
+              labelFontSize="sm"
+              options={[
+                { value: "opt1", label: "Label pequena", checked: true },
+                { value: "opt2", label: "Label pequena" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset grande e Labels grandes"
+              name="large-all"
+              fieldsetFontSize="xl"
+              labelFontSize="xl"
+              options={[
+                { value: "opt1", label: "Label XL", checked: true },
+                { value: "opt2", label: "Label XL" },
+              ]}
+            />
+
+            <RadioGroup
+              fieldset="Fieldset pequeno e Labels pequenas"
+              name="small-all"
+              fieldsetFontSize="xs"
+              labelFontSize="xs"
+              options={[
+                { value: "opt1", label: "Label xs", checked: true },
+                { value: "opt2", label: "Label xs" },
+              ]}
             />
           </div>
         </div>
