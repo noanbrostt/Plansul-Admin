@@ -1,68 +1,110 @@
-// src/components/ui/Checkbox/Checkbox.tsx
-
-import React from 'react';
+import React from "react";
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'; // Adicionado 'neutral'
-  daisyui_size?: 'lg' | 'md' | 'sm' | 'xs';
-  label?: React.ReactNode; 
+  label?: React.ReactNode;
+  labelFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
+  fieldset?: string;
+  fildsetFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
+  fieldsetCentered?: boolean;
+  checkboxSize?: "xl" | "lg" | "md" | "sm" | "xs";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "info"
+    | "success"
+    | "warning"
+    | "error"
+    | "neutral";
+  toggle?: boolean;
+  iconsToggle?: boolean;
 }
-// BUG - pesquisar porque a classe "checkbox-xs" ou outras de tamanhos não existem
+
 const Checkbox: React.FC<CheckboxProps> = ({
-  variant,
-  daisyui_size = 'md',
   label,
-  className = '', 
-  ...rest 
+  labelFontSize = "base",
+  fieldset,
+  fildsetFontSize = "base",
+  fieldsetCentered = false,
+  checkboxSize = "md",
+  variant,
+  toggle = false,
+  iconsToggle = false,
+  className = "",
+  ...rest
 }) => {
-  // Para checkboxes, DaisyUI usa `checkbox-{color}` para a cor de fundo quando marcado
-  // e `border-{color}` ou `accent-{color}` para a borda/cor do tick (ícone de check).
-  // `accent-color` é uma propriedade CSS que afeta nativamente o checkbox.
+  const typeClass = toggle ? "toggle" : "checkbox";
+  const sizeClass = checkboxSize ? `${typeClass}-${checkboxSize}` : "";
+  const variantClass = variant ? `${typeClass}-${variant}` : "";
+  const inputClasses =
+    `${!iconsToggle && typeClass} ${sizeClass} ${variantClass} ${className}`.trim();
 
-  const baseClasses = `checkbox`;
-  const sizeClass = daisyui_size ? `checkbox-${daisyui_size}` : '';
-  
-  let colorClasses = '';
-  // Mapeamento de variantes para classes de cor de borda e accent (para cor do tick/fundo)
-  switch (variant) {
-    case 'primary': colorClasses = 'border-primary accent-primary checkbox-primary'; break;
-    case 'secondary': colorClasses = 'border-secondary accent-secondary checkbox-secondary'; break;
-    case 'accent': colorClasses = 'border-accent accent-accent checkbox-accent'; break;
-    case 'info': colorClasses = 'border-info accent-info checkbox-info'; break;
-    case 'success': colorClasses = 'border-success accent-success checkbox-success'; break;
-    case 'warning': colorClasses = 'border-warning accent-warning checkbox-warning'; break;
-    case 'error': colorClasses = 'border-error accent-error checkbox-error'; break;
-    case 'neutral': colorClasses = 'border-neutral accent-neutral checkbox-neutral'; break;
-    default: colorClasses = 'border-base-content/20 accent-primary'; // Padrão ou base para o accent
-  }
+  const input = <input type="checkbox" className={inputClasses} {...rest} />;
 
-  const finalClassName = [
-    baseClasses,
-    sizeClass,
-    colorClasses, // Aplicando as classes de cor de borda e accent
-    className
-  ].filter(Boolean).join(' ');
-
-  if (label) {
-    return (
-      <label className="label cursor-pointer justify-start gap-2">
-        <input 
-          type="checkbox" 
-          className={finalClassName} 
-          {...rest} 
-        />
-        <span className="label-text text-base-content">{label}</span>
+  const withIcons =
+    toggle && iconsToggle ? (
+      <label className="toggle text-base-content">
+        {input}
+        <svg
+          aria-label="enabled"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="4"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path d="M20 6 9 17l-5-5"></path>
+          </g>
+        </svg>
+        <svg
+          aria-label="disabled"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
       </label>
+    ) : (
+      input
+    );
+
+  const inputWithLabel = label ? (
+    <label className="label gap-2">
+      {withIcons}
+      <span className={`${labelFontSize && "text-" + labelFontSize}`}>
+        {label}
+      </span>
+    </label>
+  ) : (
+    withIcons
+  );
+
+  if (fieldset) {
+    return (
+      <fieldset className={`fieldset ${fieldsetCentered && 'justify-items-center'}`}>
+        <legend
+          className={`fieldset-legend ${
+            fildsetFontSize && "text-" + fildsetFontSize
+          }`}
+        >
+          {fieldset}
+        </legend>
+        {inputWithLabel}
+      </fieldset>
     );
   }
 
-  return (
-    <input 
-      type="checkbox" 
-      className={finalClassName} 
-      {...rest} 
-    />
-  );
+  return inputWithLabel;
 };
 
 export default Checkbox;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Input from "./components/Input";
 import Checkbox from "./components/Checkbox";
 import Radio from "./components/Radio";
@@ -10,7 +10,6 @@ import {
   FiLock,
   FiSearch,
   FiPhone,
-  FiCalendar,
   FiHash,
   FiGlobe,
   FiAlertCircle,
@@ -23,16 +22,11 @@ export default function InputsPage() {
   const [searchValue, setSearchValue] = useState("");
   const [phoneValue, setPhoneValue] = useState("");
   const [pathValue, setPathValue] = useState("");
-  const [newsletter, setNewsletter] = useState(false);
   const [gender, setGender] = useState("");
   const [country, setCountry] = useState("");
   const [message, setMessage] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cpfNumber, setCpfNumber] = useState("");
-
-  useEffect(() => {
-    console.log(phoneNumber);
-  }, [phoneNumber]);
 
   return (
     <div className="bg-base-100 min-h-screen">
@@ -123,8 +117,9 @@ export default function InputsPage() {
             Tamanhos dos Inputs em si:
           </p>
           <div className="flex gap-4">
+            <Input inputSize="xl" placeholder="Input Extra Grande (xl)" />
             <Input inputSize="lg" placeholder="Input Grande (lg)" />
-            <Input inputSize="md" placeholder="Input Médio (md)" />
+            <Input placeholder="Input Médio (md - Padrão)" />
             <Input inputSize="sm" placeholder="Input Pequeno (sm)" />
             <Input inputSize="xs" placeholder="Input Extra Pequeno (xs)" />
           </div>
@@ -428,51 +423,254 @@ export default function InputsPage() {
         </div>
       </div>
 
-      {/* --- SEÇÕES COMPLETAS COM MAIS EXEMPLOS --- */}
+      <div className="flex justify-between items-center mb-6 mt-12">
+        <h1 className="text-3xl font-bold text-base-content">Checkboxes</h1>
+      </div>
 
-      {/* --- Seção de Checkboxes --- */}
+      {/* --- Seção de Checkboxes Padrão com Cores --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Checkboxes
+          Checkboxes Padrão
         </h2>
         <div className="flex flex-col gap-4">
           <p className="font-medium text-base-content/80">Cores:</p>
+
           <div className="flex flex-wrap items-center gap-4">
-            <Checkbox
-              label="Assinar Newsletter (Padrão)"
-              checked={newsletter}
-              onChange={(e) => setNewsletter(e.target.checked)}
-            />
-            <Checkbox label="Aceito Termos (Primary)" variant="primary" />
-            <Checkbox label="Lembrar-me (Secondary)" variant="secondary" />
-            <Checkbox label="Confirmar Compra (Accent)" variant="accent" />
-            <Checkbox label="Informações (Info)" variant="info" />
-            <Checkbox label="Sucesso (Success)" variant="success" />
-            <Checkbox label="Aviso (Warning)" variant="warning" />
-            <Checkbox label="Erro (Error)" variant="error" />
-            <Checkbox label="Neutral" variant="neutral" />
+            <Checkbox defaultChecked label="Default" />
+            <Checkbox defaultChecked label="Primary" variant="primary" />
+            <Checkbox defaultChecked label="Secondary" variant="secondary" />
+            <Checkbox defaultChecked label="Accent" variant="accent" />
+            <Checkbox defaultChecked label="Info" variant="info" />
+            <Checkbox defaultChecked label="Success" variant="success" />
+            <Checkbox defaultChecked label="Warning" variant="warning" />
+            <Checkbox defaultChecked label="Error" variant="error" />
+            <Checkbox defaultChecked label="Neutral" variant="neutral" />
           </div>
 
           <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Checkbox label="Extra Pequeno (xs)" daisyui_size="xs" />
-            <Checkbox label="Pequeno (sm)" daisyui_size="sm" />
-            <Checkbox label="Médio (md)" daisyui_size="md" /> {/* Padrão */}
-            <Checkbox label="Grande (lg)" daisyui_size="lg" />
+
+          <div className="flex items-center gap-4">
+            <Checkbox defaultChecked label="XS" checkboxSize="xs" />
+            <Checkbox defaultChecked label="SM" checkboxSize="sm" />
+            <Checkbox defaultChecked label="MD (Padrão)" />
+            <Checkbox defaultChecked label="LG" checkboxSize="lg" />
+            <Checkbox defaultChecked label="LG" checkboxSize="xl" />
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Checkbox com Fieldset --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Checkbox com Label e/ou Fieldset
+        </h2>
+        <div className="flex flex-col gap-4">
+          <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
+
+          <div className="flex flex-wrap items-center gap-8">
+            <Checkbox fieldset="Fieldset" label="xl" fildsetFontSize="xl" />
+            <Checkbox fieldset="Fieldset" label="lg" fildsetFontSize="lg" />
+            <Checkbox fieldset="Fieldset" label="base" fildsetFontSize="base" />
+            <Checkbox fieldset="Fieldset" label="sm" fildsetFontSize="sm" />
+            <Checkbox fieldset="Fieldset" label="xs" fildsetFontSize="xs" />
           </div>
 
-          <p className="font-medium text-base-content/80 mt-4">Estados:</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Checkbox label="Desabilitado" disabled />
-            <Checkbox label="Desabilitado e Marcado" disabled checked />
-            <Checkbox label="Com Checked Padrão" defaultChecked />
+          <p className="font-medium text-base-content/80 mt-4">
+            Tamanhos Label:
+          </p>
+
+          <div className="flex items-center gap-8">
+            <Checkbox fieldset="Fieldset" label="xl" labelFontSize="xl" />
+            <Checkbox fieldset="Fieldset" label="lg" labelFontSize="lg" />
+            <Checkbox fieldset="Fieldset" label="base" labelFontSize="base" />
+            <Checkbox fieldset="Fieldset" label="sm" labelFontSize="sm" />
+            <Checkbox fieldset="Fieldset" label="xs" labelFontSize="xs" />
+          </div>
+
+          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
+
+          <div className="flex items-center gap-8">
             <Checkbox
-              label="Controlado (newsletter)"
-              checked={newsletter}
-              onChange={(e) => setNewsletter(e.target.checked)}
+              fieldset="Aceito os termos"
+              fieldsetCentered
+              defaultChecked
+            />
+            <Checkbox fieldset="Aceito os termos" defaultChecked />
+            <Checkbox
+              label="Eu aceito"
+            />
+            <Checkbox
+              fieldset="Aceito os termos"
+              fildsetFontSize="xl"
+              label="Eu aceito"
+              labelFontSize="xl"
+            />
+            <Checkbox
+              fieldset="Aceito os termos"
+              fildsetFontSize="xs"
+              label="Eu aceito"
+              labelFontSize="xs"
             />
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-6 mt-12">
+        <h1 className="text-3xl font-bold text-base-content">Toggles</h1>
+      </div>
+
+      {/* --- Seção de Toggles com Cores --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Toggles Padrão
+        </h2>
+
+        <div className="flex flex-col gap-4">
+          <p className="font-medium text-base-content/80">Cores:</p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <Checkbox toggle defaultChecked label="Default" />
+            <Checkbox toggle defaultChecked label="Primary" variant="primary" />
+            <Checkbox toggle defaultChecked label="Accent" variant="accent" />
+            <Checkbox toggle defaultChecked label="Success" variant="success" />
+            <Checkbox toggle defaultChecked label="Error" variant="error" />
+            <Checkbox toggle defaultChecked label="Neutral" variant="neutral" />
+          </div>
+
+          <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
+
+          <div className="flex items-center gap-4">
+            <Checkbox toggle defaultChecked label="XS" checkboxSize="xs" />
+            <Checkbox toggle defaultChecked label="SM" checkboxSize="sm" />
+            <Checkbox toggle defaultChecked label="MD" checkboxSize="md" />
+            <Checkbox toggle defaultChecked label="LG" checkboxSize="lg" />
+            <Checkbox toggle defaultChecked label="XL" checkboxSize="xl" />
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Checkbox com Fieldset --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Toggles com Label e/ou Fieldset
+        </h2>
+        <div className="flex flex-col gap-4">
+          <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
+
+          <div className="flex flex-wrap items-center gap-8">
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="xl"
+              fildsetFontSize="xl"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="lg"
+              fildsetFontSize="lg"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="base"
+              fildsetFontSize="base"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="sm"
+              fildsetFontSize="sm"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="xs"
+              fildsetFontSize="xs"
+            />
+          </div>
+
+          <p className="font-medium text-base-content/80 mt-4">
+            Tamanhos Label:
+          </p>
+
+          <div className="flex items-center gap-8">
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="xl"
+              labelFontSize="xl"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="lg"
+              labelFontSize="lg"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="base"
+              labelFontSize="base"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="sm"
+              labelFontSize="sm"
+            />
+            <Checkbox
+              toggle
+              fieldset="Fieldset"
+              label="xs"
+              labelFontSize="xs"
+            />
+          </div>
+
+          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
+
+          <div className="flex items-center gap-8">
+            <Checkbox
+              toggle
+              fieldset="Aceito os termos"
+              fieldsetCentered
+              defaultChecked
+            />
+            <Checkbox toggle fieldset="Aceito os termos" defaultChecked />
+            <Checkbox
+              toggle
+              label="Eu aceito"
+            />
+            <Checkbox
+              toggle
+              fieldset="Aceito os termos"
+              fildsetFontSize="xl"
+              label="Eu aceito"
+              labelFontSize="xl"
+            />
+            <Checkbox
+              toggle
+              fieldset="Aceito os termos"
+              fildsetFontSize="xs"
+              label="Eu aceito"
+              labelFontSize="xs"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Toggle com Ícones Internos --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Toggle com Ícones
+        </h2>
+        <div className="flex flex-wrap items-center gap-4">
+          <Checkbox toggle iconsToggle />
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-6 mt-12">
+        <h1 className="text-3xl font-bold text-base-content">Radio Buttons</h1>
       </div>
 
       {/* --- Seção de Radios --- */}
@@ -584,6 +782,10 @@ export default function InputsPage() {
             />
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-6 mt-12">
+        <h1 className="text-3xl font-bold text-base-content">Selects</h1>
       </div>
 
       {/* --- Seção de Selects --- */}
@@ -720,6 +922,10 @@ export default function InputsPage() {
             </Select>
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-6 mt-12">
+        <h1 className="text-3xl font-bold text-base-content">Textareas</h1>
       </div>
 
       {/* --- Seção de Textareas --- */}

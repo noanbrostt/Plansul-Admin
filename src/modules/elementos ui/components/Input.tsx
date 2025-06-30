@@ -14,7 +14,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     | "neutral"
     | "ghost";
   bordered?: boolean;
-  inputSize?: "lg" | "md" | "sm" | "xs";
+  inputSize?: "xl" | "lg" | "md" | "sm" | "xs";
   icon?: React.ReactElement<{ className?: string }>;
   iconPosition?: "left" | "right";
   optionalBadge?: boolean;
