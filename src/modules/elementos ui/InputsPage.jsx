@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Input from "./components/Input";
 import Checkbox from "./components/Checkbox";
 import Radio from "./components/Radio";
@@ -27,6 +27,12 @@ export default function InputsPage() {
   const [gender, setGender] = useState("");
   const [country, setCountry] = useState("");
   const [message, setMessage] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [cpfNumber, setCpfNumber] = useState("");
+
+  useEffect(() => {
+    console.log(phoneNumber);
+  }, [phoneNumber]);
 
   return (
     <div className="bg-base-100 min-h-screen">
@@ -111,11 +117,7 @@ export default function InputsPage() {
             <Input placeholder="w-64" inputClassName="w-64" />
             <Input placeholder="Padrão (w-80)" />
             <Input placeholder="w-96" inputClassName="w-96" />
-            <Input
-              placeholder="w-full (default)"
-              inputClassName="w-full"
-              wrapperClassName="w-80"
-            />
+            <Input placeholder="w-full (default)" inputClassName="w-full" />
           </div>
           <p className="font-medium text-base-content/80 mt-4">
             Tamanhos dos Inputs em si:
@@ -135,9 +137,6 @@ export default function InputsPage() {
           Inputs com Fieldset
         </h2>
         <div className="flex flex-col gap-4">
-          <p className="font-medium text-base-content/80">
-            Tamanho da Fonte do Fieldset:
-          </p>
           <div className="flex flex-wrap items-end gap-4">
             <Input
               placeholder="Extra Pequeno (xs)"
@@ -170,36 +169,51 @@ export default function InputsPage() {
               inputClassName="w-64"
             />
           </div>
-          <p className="font-medium text-base-content/80 mt-4">
-            Tamanho do input:
-          </p>
-          <div className="flex flex-wrap items-end gap-4">
-            <Input
-              placeholder="w-32"
-              fieldset="Nome Completo"
-              inputClassName="w-32"
-            />
-            <Input
-              placeholder="w-48"
-              fieldset="Nome Completo"
-              inputClassName="w-48"
-            />
-            <Input
-              placeholder="w-64"
-              fieldset="Nome Completo"
-              inputClassName="w-64"
-            />
-            <Input
-              placeholder="w-80"
-              fieldset="Nome Completo"
-              inputClassName="w-80"
-            />
-            <Input
-              placeholder="w-96"
-              fieldset="Nome Completo"
-              inputClassName="w-96"
-            />
-          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Inputs com Máscara --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Inputs com Máscara
+        </h2>
+        <div className="flex flex-wrap items-baseline gap-4">
+          <Input
+            fieldset="Telefone"
+            placeholder="(00) 00000-0000"
+            inputClassName="w-64"
+            mask="(00) 00000-0000"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+          <Input
+            fieldset="CPF"
+            placeholder="000.000.000-00"
+            inputClassName="w-64"
+            mask="000.000.000-00"
+            value={cpfNumber}
+            onChange={(e) => setCpfNumber(e.target.value)}
+          />
+          <Input
+            fieldset="Máscara + Validação"
+            type="text"
+            placeholder="Digite seu telefone"
+            inputClassName="w-64"
+            mask="(00) 00000-0000"
+            validMessage={<>Precisa ter 11 números</>}
+            validReqs={{
+              pattern: "[0-9]*",
+              minLength: "15",
+              maxLength: "15",
+            }}
+            required // Faz com que o input fique errado enquanto vazio
+          />
+          <Input
+            placeholder="Digite sua matrícula"
+            mask="P000000"
+            inputClassName="w-64"
+            required // Faz com que o input fique errado enquanto vazio
+          />
         </div>
       </div>
 
@@ -253,9 +267,9 @@ export default function InputsPage() {
             inputClassName="w-64"
             validMessage={<>Precisa ter 11 dígitos</>}
             validReqs={{
-              pattern : "[0-9]*",
-              minlength : "11",
-              maxlength : "11",
+              pattern: "[0-9]*",
+              minLength: "11",
+              maxLength: "11",
             }}
             required // Faz com que o input fique errado enquanto vazio
           />
@@ -266,7 +280,8 @@ export default function InputsPage() {
             icon={<FiGlobe />}
             validMessage={<>Precisa ser uma URL válida</>}
             validReqs={{
-              pattern : "^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
+              pattern:
+                "^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9-].*[a-zA-Z0-9])?.)+[a-zA-Z].*$",
             }}
             required // Faz com que o input fique errado enquanto vazio
           />
@@ -286,7 +301,17 @@ export default function InputsPage() {
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
             variant="primary"
-            inputClassName="w-72"
+            inputClassName="w-64"
+          />
+          <Input
+            type="email"
+            placeholder="Seu Email"
+            icon={<FiMail />}
+            iconPosition="right"
+            value={emailValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+            variant="primary"
+            inputClassName="w-64"
           />
           <Input
             type="password"
@@ -295,7 +320,7 @@ export default function InputsPage() {
             value={passwordValue}
             onChange={(e) => setPasswordValue(e.target.value)}
             variant="secondary"
-            inputClassName="w-72"
+            inputClassName="w-64"
           />
           <Input
             type="search"
@@ -305,7 +330,7 @@ export default function InputsPage() {
             onChange={(e) => setSearchValue(e.target.value)}
             variant="ghost"
             bordered={false}
-            inputClassName="w-80"
+            inputClassName="w-64"
           />
           <Input
             type="tel"
@@ -332,12 +357,6 @@ export default function InputsPage() {
             readOnly
             value="Texto pré-definido"
           />
-          <Input
-            variant="primary"
-            placeholder="Desabilitado com Borda Primary"
-            disabled
-          />
-          <Input variant="error" placeholder="Erro Desabilitado" disabled />
         </div>
       </div>
 

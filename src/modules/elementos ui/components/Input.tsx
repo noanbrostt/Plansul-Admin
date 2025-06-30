@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
+import React, { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { IMaskInput } from "react-imask";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  // Cores da borda (e foco) baseadas nas variantes DaisyUI
   variant?:
-    "primary"
+    | "primary"
     | "secondary"
     | "accent"
     | "info"
@@ -25,9 +25,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   fildsetFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
   validMessage?: string;
   validReqs?: object;
+  mask?: string;
 }
 
 const Input: React.FC<InputProps> = ({
+  value,
   variant,
   bordered = true,
   inputSize = "md",
@@ -35,23 +37,24 @@ const Input: React.FC<InputProps> = ({
   iconPosition = "left",
   optionalBadge = false,
   optionalBadgeText = "Opcional",
-  inputClassName = "", // Nova prop para classes diretas do input
+  inputClassName = "",
   type,
   fieldset = "",
   fildsetFontSize = "base",
   validMessage = "",
   validReqs,
+  mask = "",
   ...rest
 }) => {
-  
-  // Inicio da logica para input password mostrar a senha
+  // Início da lógica para input password mostrar a senha
   const [showPassword, setShowPassword] = useState(false);
-  const isPasswordField = type === 'password';
+  const isPasswordField = type === "password";
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const currentInputType = isPasswordField && showPassword ? 'text' : type || 'text';
+  const currentInputType =
+    isPasswordField && showPassword ? "text" : type || "text";
 
   // Escolha o ícone do olho com base no estado de visibilidade
   const PasswordToggleButton = isPasswordField && (
@@ -64,10 +67,8 @@ const Input: React.FC<InputProps> = ({
       {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
     </button>
   );
-  // Final da logica para input password mostrar a senha
+  // Final da lógica para input password mostrar a senha
 
-
-  // Classes básicas do DaisyUI para input e borda
   const baseInputClasses = `
     input
     input-${inputSize} 
@@ -76,10 +77,8 @@ const Input: React.FC<InputProps> = ({
   `;
   const finalInputClasses = `${baseInputClasses} ${inputClassName}`.trim();
 
-  // Se houver um ícone OU um badge opcional, usaremos a estrutura de label/flex
   const iconElement = icon
     ? React.cloneElement(icon, {
-        // Agora o TypeScript sabe que 'icon.props' tem 'className'
         className: `
           ${icon.props.className || ""} 
           inline-block w-5 h-5 
@@ -88,23 +87,52 @@ const Input: React.FC<InputProps> = ({
       })
     : null;
 
+  // Início da lógica para a máscara
+  const [inputValue, setInputValue] = useState<string>(String(value ?? ""));
+
+  const renderInputComponent = () => {
+    if (mask) {
+      return (
+        <IMaskInput
+          mask={mask}
+          className={`${inputClassName}`}
+          value={inputValue}
+          onAccept={(value: any) => {
+            setInputValue(value);
+            rest.onChange?.({ target: { value } } as any);
+          }}
+          overwrite
+          {...rest}
+          {...validReqs}
+        />
+      );
+    } else {
+      return (
+        <input
+          type={currentInputType}
+          className={`${inputClassName}`}
+          value={value}
+          {...rest}
+          {...validReqs}
+        />
+      );
+    }
+  };
+  // Final da lógica para a máscara
+
   let labelInput = (
     // Imprime caso..
     <>
-      <label className={`
+      <label
+        className={`
         ${finalInputClasses}
-        ${validMessage && 'validator'}
+        ${validMessage && "validator"}
         `}
       >
         {/* .. tenha ícone na esquerda */}
         {icon && iconPosition === "left" && iconElement}
 
-        <input
-          type={currentInputType}
-          className={`${inputClassName}`}
-          {...rest}
-          {...validReqs} // .. tenha validador
-        />
+        {renderInputComponent()}
 
         {/* .. seja input de senha */}
         {isPasswordField && PasswordToggleButton}
@@ -121,24 +149,26 @@ const Input: React.FC<InputProps> = ({
       </label>
 
       {/* .. tenha validador */}
-      {validMessage && (
-        <p className="validator-hint ml-1">
-          {validMessage}
-        </p>
-      )}
+      {validMessage && <p className="validator-hint ml-1">{validMessage}</p>}
     </>
   );
 
+  // Se tiver validador, envolve num span
   if (validMessage) {
-    labelInput = (
-      <span>{labelInput}</span>
-    );
+    labelInput = <span>{labelInput}</span>;
   }
 
+  // Se tiver fieldset, envolve num fieldset
   if (fieldset) {
     labelInput = (
       <fieldset className="fieldset">
-        <legend className={`fieldset-legend ml-1 ${fildsetFontSize && 'text-'+fildsetFontSize}`}>{fieldset}</legend>
+        <legend
+          className={`fieldset-legend ml-1 ${
+            fildsetFontSize && "text-" + fildsetFontSize
+          }`}
+        >
+          {fieldset}
+        </legend>
         {labelInput}
       </fieldset>
     );
