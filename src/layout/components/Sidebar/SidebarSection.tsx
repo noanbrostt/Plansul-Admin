@@ -1,4 +1,5 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode, Children, isValidElement } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FiChevronDown } from 'react-icons/fi';
 import { useSidebarContext } from './SidebarContext';
 
@@ -8,13 +9,66 @@ interface SidebarSectionProps {
   children: ReactNode;
 }
 
+// Função recursiva para verificar se algum item está ativo
+const hasActiveChild = (children: ReactNode, currentPath: string): boolean => {
+  let isActive = false;
+  
+  Children.forEach(children, (child) => {
+    if (isActive) return;
+    
+    if (isValidElement(child)) {
+      // Verifica SidebarLink
+      if (child.props.to) {
+        // Caso especial para a raiz ("/")
+        if (child.props.to === "/") {
+          if (currentPath === "/") {
+            isActive = true;
+            return;
+          }
+        } 
+        // Para outras rotas
+        else if (currentPath.startsWith(child.props.to)) {
+          isActive = true;
+          return;
+        }
+      }
+      
+      // Verifica SidebarDropdown
+      if (child.props.subItems) {
+        const hasActiveSubItem = child.props.subItems.some(
+          (subItem: any) => {
+            // Caso especial para a raiz
+            if (subItem.to === "/") {
+              return currentPath === "/";
+            }
+            // Para outras rotas
+            return currentPath.startsWith(subItem.to);
+          }
+        );
+        if (hasActiveSubItem) {
+          isActive = true;
+          return;
+        }
+      }
+      
+      // Verifica filhos recursivamente
+      if (child.props.children) {
+        isActive = hasActiveChild(child.props.children, currentPath);
+        if (isActive) return;
+      }
+    }
+  });
+  
+  return isActive;
+};
+
 const SidebarSection: React.FC<SidebarSectionProps> = ({ 
   title, 
   sectionKey,
   children 
 }) => {
-  // Obtenha o estado do contexto do sidebar
   const { collapsed, hovering } = useSidebarContext();
+  const location = useLocation();
   
   // Estado para controlar a expansão da seção
   const [isExpanded, setIsExpanded] = useState(() => {
@@ -24,6 +78,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
     }
     return true;
   });
+
+  // Verificar se algum filho está ativo
+  const isParentActive = hasActiveChild(children, location.pathname);
 
   // Salvar estado no localStorage
   useEffect(() => {
@@ -41,7 +98,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
     <>
       <li className={`mt-0 mb-0 ${collapsed && !hovering && 'content-center'}`}>
         <div 
-          className={`flex items-center justify-between cursor-pointer px-2 py-3 my-1 hover:bg-base-300 rounded-lg transition-colors`}
+          className={`flex items-center justify-between cursor-pointer px-2 py-3 my-1 hover:bg-base-300 rounded-lg transition-colors
+            ${isParentActive ? 'bg-base-300' : ''}
+          `}
           onClick={toggleSection}
         >
           <span className="text-xs font-semibold uppercase text-gray-500 tracking-wider">

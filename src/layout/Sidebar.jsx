@@ -62,25 +62,19 @@ export default function Sidebar({
         >
           {/* Seção Menu */}
           {permissions.menu && (
-            <>
               <SidebarSection title="Menu" sectionKey="menu">
-                <>
                   <SidebarLink label="Home" to="/" icon={<FiHome />} />
                   <SidebarLink
                     label="Usuários"
                     to="/users"
                     icon={<FiUsers />}
                   />
-                </>
               </SidebarSection>
-            </>
           )}
 
           {/* Seção Devs */}
           {permissions.devs && (
-            <>
               <SidebarSection title="Devs" sectionKey="devs">
-                <>
                   {/* <SidebarDropdown
                     label="Telas"
                     icon={<MdScreenshotMonitor />}
@@ -107,9 +101,7 @@ export default function Sidebar({
                       },
                     ]}
                   />
-                </>
               </SidebarSection>
-            </>
           )}
         </SimpleBar>
       </aside>
