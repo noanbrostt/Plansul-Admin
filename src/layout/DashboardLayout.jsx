@@ -75,7 +75,11 @@ export default function DashboardLayout() {
         handleDropdownToggle={handleDropdownToggle}
         currentTheme={theme}
       />
-      <div className="flex flex-col flex-1">
+
+      {/* Container principal ajustado */}
+      <div className="flex flex-col flex-1 min-w-0">
+        {" "}
+        {/* Adicione min-w-0 para evitar overflow */}
         <Topbar
           onToggleSidebar={toggleSidebar}
           collapsed={collapsed}
@@ -83,14 +87,19 @@ export default function DashboardLayout() {
           onToggleTheme={toggleTheme}
           currentTheme={theme}
         />
+        {/* Container do SimpleBar ajustado */}
+        <div className="flex-1 min-h-0">
+          {" "}
+          {/* Container flexível */}
           <SimpleBar
-            style={{ maxHeight: "calc(100vh - 64px)" }}
+            className="h-full" // Ocupa 100% da altura do container pai
             forceVisible="y"
           >
-        <main className="p-6">
-            <Outlet />
-        </main>
+            <main className="p-6">
+              <Outlet />
+            </main>
           </SimpleBar>
+        </div>
       </div>
     </div>
   );

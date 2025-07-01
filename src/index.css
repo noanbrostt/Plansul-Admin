@@ -90,9 +90,10 @@
 /* Desloca o scrollbar do SimpleBar para a direita */
 .simplebar-scrollbar::before {
   background-color: var(--color-primary);
+  transform: scaleX(1.3);
 }
-aside .simplebar-track.simplebar-vertical {
-    right: -13px;
+aside .simplebar-scrollbar::before {
+  transform: scaleX(1);
 }
 /*  */
 

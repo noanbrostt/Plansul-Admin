@@ -9,7 +9,7 @@ export default function SidebarHeader({ currentTheme }) { // Remova collapsed, h
   const filtroAzulClaro = '[filter:brightness(35%)_saturate(100%)_invert(27%)_sepia(9%)_saturate(4404%)_hue-rotate(177deg)_brightness(90%)_contrast(86%)]';
 
   return (
-    <div className="pb-2 h-12 flex items-center justify-start border-b border-gray-200 dark:border-gray-700">
+    <div className="m-4 mb-0 pb-2 h-12 flex items-center justify-start border-b border-gray-200 dark:border-gray-700">
       <img
         src={logoLonga}
         alt="Logo Longa"
