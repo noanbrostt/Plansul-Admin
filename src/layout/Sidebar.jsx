@@ -17,7 +17,7 @@ import "simplebar-react/dist/simplebar.min.css";
 
 // Importe dos componentes e do Context Provider
 import SidebarHeader from "./components/Sidebar/SidebarHeader";
-import SidebarSectionTitle from "./components/Sidebar/SidebarSectionTitle";
+import SidebarSection from "./components/Sidebar/SidebarSection";
 import SidebarLink from "./components/Sidebar/SidebarLink";
 import SidebarDropdown from "./components/Sidebar/SidebarDropdown";
 import { SidebarProvider } from "./components/Sidebar/SidebarContext";
@@ -58,12 +58,12 @@ export default function Sidebar({
           style={{ maxHeight: "calc(100vh - 64px)" }}
           className="menu -ml-0.5 p-3 pl-3.5 w-full"
           forceVisible="y"
-          autoHide={false}
+          // autoHide={false}
         >
           {/* Seção Menu */}
           {permissions.menu && (
             <>
-              <SidebarSectionTitle title="Menu" sectionKey="menu">
+              <SidebarSection title="Menu" sectionKey="menu">
                 <>
                   <SidebarLink label="Home" to="/" icon={<FiHome />} />
                   <SidebarLink
@@ -72,20 +72,20 @@ export default function Sidebar({
                     icon={<FiUsers />}
                   />
                 </>
-              </SidebarSectionTitle>
+              </SidebarSection>
             </>
           )}
 
           {/* Seção Devs */}
           {permissions.devs && (
             <>
-              <SidebarSectionTitle title="Devs" sectionKey="devs">
+              <SidebarSection title="Devs" sectionKey="devs">
                 <>
-                  <SidebarDropdown
+                  {/* <SidebarDropdown
                     label="Telas"
                     icon={<MdScreenshotMonitor />}
                     subItems={[{ label: "Login", to: "/", icon: <FiLogIn /> }]}
-                  />
+                  /> */}
                   <SidebarDropdown
                     label="Elementos UI"
                     icon={<IoCubeOutline />}
@@ -108,7 +108,7 @@ export default function Sidebar({
                     ]}
                   />
                 </>
-              </SidebarSectionTitle>
+              </SidebarSection>
             </>
           )}
         </SimpleBar>

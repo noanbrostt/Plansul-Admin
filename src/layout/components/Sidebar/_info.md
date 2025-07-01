@@ -8,14 +8,14 @@ Sidebar.jsx # O componente principal da Sidebar (container)
 Sidebar/
 ├── SidebarContext.jsx # Contexto React para compartilhar o estado da Sidebar (collapsed, hovering, etc..)
 ├── SidebarHeader.jsx # Componente para o cabeçalho (logo)
-├── SidebarSectionTitle.jsx # Componente para os títulos de seção (ex: "Menu", "Devs")
+├── SidebarSection.jsx # Componente para a seção (ex: "Menu", "Devs")
 ├── SidebarLink.jsx # Componente para um item de navegação simples
 └── SidebarDropdown.jsx # Componente para um item de navegação com sub-menus
 
 ## Componentes Individuais
 
-{/_ 1. Exemplo de SidebarSectionTitle _/}
-<SidebarSectionTitle title="MÓDULOS" />
+{/_ 1. Exemplo de SidebarSection _/}
+<SidebarSection title="MÓDULOS" />
 
 - **Props:** `title` (string)
 - **Função:** Exibe um título de seção.

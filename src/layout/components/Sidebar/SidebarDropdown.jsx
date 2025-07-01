@@ -35,7 +35,7 @@ export default function SidebarDropdown({ label, icon, subItems }) {
               <Link
                 to={subItem.to}
                 className={`flex items-center gap-3 p-2 rounded-lg hover:bg-base-300 w-full 
-                  ${location.pathname === subItem.to ? 'bg-primary text-primary-content' : ''}
+                  ${location.pathname === subItem.to ? 'bg-primary hover:bg-secondary text-primary-content' : ''}
                 `}
               >
                 <span className="text-lg">{subItem.icon}</span>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi';
 import { useSidebarContext } from './SidebarContext';
 
-interface SidebarSectionTitleProps {
+interface SidebarSectionProps {
   title: string;
   sectionKey: string;
   children: ReactNode;
 }
 
-const SidebarSectionTitle: React.FC<SidebarSectionTitleProps> = ({ 
+const SidebarSection: React.FC<SidebarSectionProps> = ({ 
   title, 
   sectionKey,
   children 
@@ -41,7 +41,7 @@ const SidebarSectionTitle: React.FC<SidebarSectionTitleProps> = ({
     <>
       <li className={`mt-0 mb-0 ${collapsed && !hovering && 'content-center'}`}>
         <div 
-          className={`flex items-center justify-between cursor-pointer px-2 py-3 hover:bg-base-300 rounded-lg transition-colors`}
+          className={`flex items-center justify-between cursor-pointer px-2 py-3 my-1 hover:bg-base-300 rounded-lg transition-colors`}
           onClick={toggleSection}
         >
           <span className="text-xs font-semibold uppercase text-gray-500 tracking-wider">
@@ -49,14 +49,14 @@ const SidebarSectionTitle: React.FC<SidebarSectionTitleProps> = ({
           </span>
 
           {(!collapsed || hovering) && (
-            isExpanded ? 
-              <FiChevronDown className="text-gray-500" /> : 
-              <FiChevronRight className="text-gray-500" />
+            <span className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+              <FiChevronDown />
+            </span>
           )}
         </div>
       </li>
       {isExpanded && (
-        <div className="flex flex-col gap-1 pl-2 [&>:last-child]:mb-4">
+        <div className="flex flex-col gap-1 pl-[9.5px] [&>:last-child]:mb-4">
           {children}
         </div>
       )}
@@ -64,4 +64,4 @@ const SidebarSectionTitle: React.FC<SidebarSectionTitleProps> = ({
   );
 };
 
-export default SidebarSectionTitle;
+export default SidebarSection;

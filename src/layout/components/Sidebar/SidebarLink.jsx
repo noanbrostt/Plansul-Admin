@@ -12,7 +12,7 @@ export default function SidebarLink({ label, to, icon }) {
       <Link
         to={to} // Usar 'to' diretamente
         className={`h-[37px] flex items-center gap-3 p-2 rounded-lg hover:bg-base-300 w-full 
-          ${isActive ? "bg-primary text-primary-content" : ""}
+          ${isActive ? "bg-primary hover:bg-secondary text-primary-content" : ""}
         `}
       >
         <span className="text-lg">{icon}</span>
