@@ -87,12 +87,14 @@
   --noise: 1;
 }
 
-
-
-/* 
-  Colocando classes que deveriam existir no 
-  Tailwind mas não estão sendo importadas 
-*/
+/* Desloca o scrollbar do SimpleBar para a direita */
+.simplebar-scrollbar::before {
+  background-color: var(--color-primary);
+}
+aside .simplebar-track.simplebar-vertical {
+    right: -13px;
+}
+/*  */
 
 /* Cria a classe "text-base" para font-size: 16px; */
 :root {

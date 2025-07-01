@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import Topbar from './Topbar';
-import Sidebar from './Sidebar';
+import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
+import Topbar from "./Topbar";
+import Sidebar from "./Sidebar";
 
-const SIDEBAR_COLLAPSED_KEY = 'sidebarCollapsed'; // Chave para o localStorage
-const THEME_KEY = 'currentTheme'; // Chave para o tema no localStorage
+const SIDEBAR_COLLAPSED_KEY = "sidebarCollapsed"; // Chave para o localStorage
+const THEME_KEY = "currentTheme"; // Chave para o tema no localStorage
 
 export default function DashboardLayout() {
   // 1. Inicialize o estado 'collapsed' lendo do localStorage
@@ -13,7 +15,7 @@ export default function DashboardLayout() {
     try {
       const storedCollapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY);
       // localStorage armazena strings. Converte 'true'/'false' para booleanos.
-      return storedCollapsed === 'true';
+      return storedCollapsed === "true";
     } catch (error) {
       console.error("Erro ao ler do localStorage:", error);
       return false; // Fallback para false em caso de erro
@@ -23,21 +25,23 @@ export default function DashboardLayout() {
   const [theme, setTheme] = useState(() => {
     try {
       // Use 'myLightTheme' ou 'myDarkTheme' como padrão
-      return localStorage.getItem(THEME_KEY) || 'myDarkTheme';
+      return localStorage.getItem(THEME_KEY) || "myDarkTheme";
     } catch (error) {
       console.error("Erro ao ler tema do localStorage:", error);
-      return 'myDarkTheme';
+      return "myDarkTheme";
     }
   });
 
   // Função para alternar o tema
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'myLightTheme' ? 'myDarkTheme' : 'myLightTheme'));
+    setTheme((prevTheme) =>
+      prevTheme === "myLightTheme" ? "myDarkTheme" : "myLightTheme"
+    );
   };
 
   // Efeito para aplicar o tema ao elemento HTML e salvar no localStorage
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
     try {
       localStorage.setItem(THEME_KEY, theme);
     } catch (error) {
@@ -55,9 +59,9 @@ export default function DashboardLayout() {
   }, [collapsed]); // Este efeito roda toda vez que 'collapsed' muda
 
   const toggleSidebar = () => {
-    setCollapsed(prevCollapsed => !prevCollapsed); // Use o callback para garantir o valor mais recente
+    setCollapsed((prevCollapsed) => !prevCollapsed); // Use o callback para garantir o valor mais recente
   };
-  
+
   const handleDropdownToggle = (label) => {
     // Se o dropdown clicado já estiver aberto, fecha. Senão, abre.
     setOpenDropdown(openDropdown === label ? null : label);
@@ -77,11 +81,16 @@ export default function DashboardLayout() {
           collapsed={collapsed}
           setOpenDropdown={setOpenDropdown}
           onToggleTheme={toggleTheme}
-          currentTheme={theme}  
+          currentTheme={theme}
         />
-        <main className="p-6 overflow-y-auto">
-          <Outlet />
+          <SimpleBar
+            style={{ maxHeight: "calc(100vh - 64px)" }}
+            forceVisible="y"
+          >
+        <main className="p-6">
+            <Outlet />
         </main>
+          </SimpleBar>
       </div>
     </div>
   );
