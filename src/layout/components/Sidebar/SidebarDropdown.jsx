@@ -14,7 +14,7 @@ export default function SidebarDropdown({ label, icon, subItems }) {
       <div
         onClick={() => handleDropdownToggle(label)}
         className={`h-[37px] flex items-center justify-between p-2 rounded-lg hover:bg-base-300 cursor-pointer w-full 
-          ${isParentActive ? 'bg-base-300' : ''}
+          ${(isParentActive && !isOpen) || (isParentActive && collapsed && !hovering) ? 'bg-primary hover:bg-secondary text-primary-content' : ''}
           ${(!collapsed || hovering) ? '' : ' -mr-[11px]'}
         `}
       >
@@ -28,8 +28,10 @@ export default function SidebarDropdown({ label, icon, subItems }) {
           </span>
         )}
       </div>
-      {isOpen && (!collapsed || hovering) && (
-        <ul className="pl-4 pt-2 space-y-1">
+      {(!collapsed || hovering) && (
+        <ul className={`pl-4 pt-2 gap-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-[1000px]" : "max-h-0"
+        }`}>
           {subItems.map((subItem) => (
             <li key={subItem.to}>
               <Link
