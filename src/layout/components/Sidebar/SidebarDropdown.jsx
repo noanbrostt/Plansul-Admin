@@ -29,7 +29,7 @@ export default function SidebarDropdown({ label, icon, subItems }) {
         )}
       </div>
       {(!collapsed || hovering) && (
-        <ul className={`pl-4 pt-2 gap-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${
+        <ul className={`pl-4 pt-2 gap-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out [&>:last-child]:mb-4 ${
           isOpen ? "max-h-[1000px]" : "max-h-0"
         }`}>
           {subItems.map((subItem) => (

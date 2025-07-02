@@ -149,7 +149,7 @@ const Input: React.FC<InputProps> = ({
       </label>
 
       {/* .. tenha validador */}
-      {validMessage && <p className="validator-hint ml-1">{validMessage}</p>}
+      {validMessage && <p className="validator-hint ml-1 mt-0.5">{validMessage}</p>}
     </>
   );
 

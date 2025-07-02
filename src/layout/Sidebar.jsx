@@ -75,11 +75,11 @@ export default function Sidebar({
           {/* Seção Devs */}
           {permissions.devs && (
               <SidebarSection title="Devs" sectionKey="devs">
-                  {/* <SidebarDropdown
+                  <SidebarDropdown
                     label="Telas"
                     icon={<MdScreenshotMonitor />}
-                    subItems={[{ label: "Login", to: "/", icon: <FiLogIn /> }]}
-                  /> */}
+                    subItems={[{ label: "Login", to: "/login", icon: <FiLogIn /> }]}
+                  />
                   <SidebarDropdown
                     label="Elementos UI"
                     icon={<IoCubeOutline />}
