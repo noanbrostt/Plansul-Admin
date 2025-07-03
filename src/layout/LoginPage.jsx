@@ -11,12 +11,6 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/store/userSlice";
 
 export default function LoginPage() {
-  const API_KEY = import.meta.env.VITE_LOGIN_API_KEY;
-  console.log("API_KEY: " + API_KEY);
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL;
-  console.log("API_BASE_URL: " + API_BASE_URL);
-
   const [screenSide, setScreenSide] = useState("Login");
   const [form, setForm] = useState({
     matricula: "",
