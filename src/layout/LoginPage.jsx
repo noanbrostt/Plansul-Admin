@@ -51,7 +51,7 @@ export default function LoginPage() {
 
     if (matricula.trim().length !== 6) errors.push("Preencha a matrícula.");
 
-    if (screenSide === "Cadastro" && cpf.trim().length !== 14)
+    if (screenSide === "Resetar Senha" && cpf.trim().length !== 14)
       errors.push("Preencha o CPF.");
 
     if (senha.trim().length === 0) errors.push("Preencha a senha.");
@@ -72,8 +72,14 @@ export default function LoginPage() {
         screenSide === "Login"
           ? await login(form.matricula, form.senha)
           : await cadastro(form.matricula, form.cpf, form.senha);
+
+      // Somente para testes
+      let usuarioo = res.data.usuario;
+      usuarioo = { ...usuarioo, permissoes: ["menu", "dev"] };
+      dispatch(setUser(usuarioo));
+      // 
       
-      dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
+      // dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
 
       navigate("/", { state: { success: true } }); // redireciona e sinaliza sucesso
     } catch (err) {
@@ -82,7 +88,7 @@ export default function LoginPage() {
   };
 
   const toggleScreenSide = () => {
-    const next = screenSide === "Login" ? "Cadastro" : "Login";
+    const next = screenSide === "Login" ? "Resetar Senha" : "Login";
     setAnimationStep(next);
 
     // Delay de 300ms pra esconder a mudança do form
@@ -91,8 +97,8 @@ export default function LoginPage() {
     }, 300);
   };
 
-  const isCadastro = screenSide === "Cadastro";
-  const isCadastroAnim = animationStep === "Cadastro";
+  const isCadastro = screenSide === "Resetar Senha";
+  const isCadastroAnim = animationStep === "Resetar Senha";
 
   return (
     <div className="relative min-h-screen font-sans">
@@ -163,7 +169,7 @@ export default function LoginPage() {
 
             <Input
               id="senha"
-              fieldset={isCadastro ? "Nova Senha" : "Senha"}
+              fieldset={isCadastro ? "Resetar Senha" : "Senha"}
               type="password"
               placeholder="******"
               icon={<FiLock />}
@@ -187,7 +193,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={toggleScreenSide}
               >
-                {isCadastro ? "Fazer login" : "Nova senha"}
+                {isCadastro ? "Fazer login" : "Resetar senha"}
               </Button>
             </div>
           </div>
