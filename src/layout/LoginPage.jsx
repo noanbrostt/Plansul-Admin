@@ -11,6 +11,10 @@ import { useDispatch } from "react-redux";
 import { setUser } from "@/store/userSlice";
 
 export default function LoginPage() {
+
+  const API_KEY = import.meta.env.VITE_LOGIN_API_KEY;
+  console.log('API_KEY: '+API_KEY);
+
   const [screenSide, setScreenSide] = useState("Login");
   const [form, setForm] = useState({
     matricula: "",
@@ -77,7 +81,6 @@ export default function LoginPage() {
               form.senha
             );
 
-      console.log(res);
       dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
 
       if (screenSide !== "Login") {
