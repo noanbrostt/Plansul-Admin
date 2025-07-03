@@ -1,29 +1,55 @@
-import { Routes, Route } from 'react-router-dom';
-import DashboardLayout from '@/layout/DashboardLayout';
-import LoginPage from '@/layout/LoginPage';
+import { Routes, Route } from "react-router-dom";
+import DashboardLayout from "@/layout/DashboardLayout";
+import LoginPage from "@/layout/LoginPage";
 
-import HomePage from '@/modules/home/HomePage';
-import UsersPage from '@/modules/users/UsersPage';
+import HomePage from "@/modules/home/HomePage";
+import UsersPage from "@/modules/users/UsersPage";
+import ButtonsPage from "@/modules/elementos ui/ButtonsPage";
+import InputsPage from "@/modules/elementos ui/InputsPage";
+import BadgesPage from "@/modules/elementos ui/BadgesPage";
 
-// Elementos UI
-import ButtonsPage from '@/modules/elementos ui/ButtonsPage';
-import InputsPage from '@/modules/elementos ui/InputsPage';
-import BadgesPage from '@/modules/elementos ui/BadgesPage';
+import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute";
+import PermissionRoute from "./PermissionRoute";
 
 export default function AppRoutes() {
+
+  const withPermission = (element, requiredPermissao) => (
+    <PermissionRoute requiredPermissao={requiredPermissao}>
+      {element}
+    </PermissionRoute>
+  );
+
   return (
     <Routes>
-      <Route element={<DashboardLayout />}>
+      {/* Se não estiver logado, manda pra login */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/" element={<HomePage />} />
+
+
         <Route path="/users" element={<UsersPage />} />
-        {/* Elementos UI */}
-        <Route path="/buttons" element={<ButtonsPage />} />
-        <Route path="/badges" element={<BadgesPage />} />
-        <Route path="/inputs" element={<InputsPage />} />
+
+        {/* Devs */}
+        <Route path="/devs/ui/buttons" element={withPermission(<ButtonsPage />, "dev")} />
+        <Route path="/devs/ui/badges" element={withPermission(<BadgesPage />, "dev")} />
+        <Route path="/devs/ui/inputs" element={withPermission(<InputsPage />, "dev")} />
       </Route>
-
-
-      <Route path="/login" element={<LoginPage />} />
+      
+      {/* Se já estiver logado, manda pra home */}
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        }
+      />
     </Routes>
   );
 }

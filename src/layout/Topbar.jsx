@@ -1,5 +1,9 @@
+
 import { FiAlignLeft, FiMenu, FiSun, FiMoon } from "react-icons/fi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUser } from "@/store/userSlice";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Topbar({
   collapsed,
@@ -8,6 +12,14 @@ export default function Topbar({
   onToggleTheme,
   setOpenDropdown,
 }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    dispatch(clearUser());
+    navigate("/login");
+  };
+
   const user = useSelector((state) => state.user.data);
 
   const formatInitials = (nome) => {
@@ -61,15 +73,16 @@ export default function Topbar({
         </label>
 
         {/* Info Usuário */}
-        <div className="dropdown dropdown-end tooltip tooltip-left" data-tip={nomeFormatado}>
+        <div
+          className="dropdown dropdown-end tooltip tooltip-left"
+          data-tip={nomeFormatado}
+        >
           <div
             tabIndex={0}
             role="button"
             className="btn btn-ghost btn-circle avatar w-full"
           >
-            <div
-              className="w-12 h-12 rounded-full flex content-center bg-base-content text-base-100"
-            >
+            <div className="w-12 h-12 rounded-full flex content-center bg-base-content text-base-100">
               <span className="text-sm font-semibold">{initials}</span>
             </div>
           </div>
@@ -81,17 +94,16 @@ export default function Topbar({
               <a className="text-base pointer-events-none">{nomeFormatado}</a>
             </li>
             <li>
-              <a className="text-xs pointer-events-none">
-                {userMatricula}
-              </a>
+              <a className="text-xs pointer-events-none">{userMatricula}</a>
             </li>
             <li>
-              <a className="text-sm pointer-events-none">
-                Administrador
-              </a>
+              <a className="text-sm pointer-events-none">Administrador</a>
             </li>
             <li>
-              <a className="text-error hover:text-error flex items-center gap-1">
+              <a
+                className="text-error hover:text-error flex items-center gap-1"
+                onClick={logout}
+              >
                 Logout
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

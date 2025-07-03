@@ -2,9 +2,6 @@ import { useState, useMemo } from "react";
 import {
   FiHome,
   FiUsers,
-  FiSettings,
-  FiCreditCard,
-  FiUser,
   FiLogIn,
 } from "react-icons/fi";
 import { RiInputField } from "react-icons/ri";
@@ -21,6 +18,8 @@ import SidebarSection from "./components/Sidebar/SidebarSection";
 import SidebarLink from "./components/Sidebar/SidebarLink";
 import SidebarDropdown from "./components/Sidebar/SidebarDropdown";
 import { SidebarProvider } from "./components/Sidebar/SidebarContext";
+import { useSelector } from "react-redux";
+
 
 export default function Sidebar({
   collapsed,
@@ -29,14 +28,9 @@ export default function Sidebar({
   currentTheme,
 }) {
   const [hovering, setHovering] = useState(false);
-
-  const permissions = useMemo(() => {
-    return {
-      menu: true,
-      devs: true,
-    };
-  }, []); // Array vazio = só calcula uma vez na montagem
-
+  
+  const user = useSelector((state) => state.user.data);
+  
   return (
     <SidebarProvider
       collapsed={collapsed}
@@ -61,7 +55,7 @@ export default function Sidebar({
           // autoHide={false}
         >
           {/* Seção Menu */}
-          {permissions.menu && (
+          {user.permissoes?.includes("menu") && (
               <SidebarSection title="Menu" sectionKey="menu">
                   <SidebarLink label="Home" to="/" icon={<FiHome />} />
                   <SidebarLink
@@ -73,7 +67,7 @@ export default function Sidebar({
           )}
 
           {/* Seção Devs */}
-          {permissions.devs && (
+          {user.permissoes?.includes("dev") && (
               <SidebarSection title="Devs" sectionKey="devs">
                   <SidebarDropdown
                     label="Telas"
@@ -86,17 +80,17 @@ export default function Sidebar({
                     subItems={[
                       {
                         label: "Botões",
-                        to: "/buttons",
+                        to: "/devs/ui/buttons",
                         icon: <CgPlayButtonR />,
                       },
                       {
                         label: "Etiquetas",
-                        to: "/badges",
+                        to: "/devs/ui/badges",
                         icon: <LuBadgeCheck />,
                       },
                       {
                         label: "Inputs",
-                        to: "/inputs",
+                        to: "/devs/ui/inputs",
                         icon: <RiInputField />,
                       },
                     ]}

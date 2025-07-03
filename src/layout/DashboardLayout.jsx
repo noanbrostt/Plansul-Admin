@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
+import { showSuccessAlert } from "@/components/alerts";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 
@@ -10,6 +11,15 @@ const SIDEBAR_COLLAPSED_KEY = "sidebarCollapsed";
 const THEME_KEY = "currentTheme";
 
 export default function DashboardLayout() {
+
+  useEffect(() => {
+    const senhaResetada = sessionStorage.getItem("senhaResetada");
+    if (senhaResetada) {
+      showSuccessAlert("Senha resetada com sucesso!");
+      sessionStorage.removeItem("senhaResetada");
+    }
+  }, []);
+
   const [collapsed, setCollapsed] = useState(() => {
     try {
       const storedCollapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY);

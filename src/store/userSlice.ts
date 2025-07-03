@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface User {
   nome: string;
   matricula: string;
-  // adicione mais campos conforme sua API
+  permissoes: Array<"menu" | "dev">;
 }
 
 interface UserState {

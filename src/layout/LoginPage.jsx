@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { login, cadastro } from "@/services/authService";
+import { login, reset } from "@/services/authService";
 import { showErrorAlert } from "@/components/alerts";
 import Input from "@/modules/elementos ui/components/Input";
 import Button from "@/modules/elementos ui/components/Button";
@@ -71,17 +71,25 @@ export default function LoginPage() {
       const res =
         screenSide === "Login"
           ? await login(form.matricula, form.senha)
-          : await cadastro(form.matricula, form.cpf, form.senha);
+          : await reset(
+              form.matricula,
+              form.cpf.replace(/\D/g, ""),
+              form.senha
+            );
 
       // Somente para testes
       let usuarioo = res.data.usuario;
       usuarioo = { ...usuarioo, permissoes: ["menu", "dev"] };
       dispatch(setUser(usuarioo));
-      // 
-      
+      //
+
       // dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
 
-      navigate("/", { state: { success: true } }); // redireciona e sinaliza sucesso
+      if (screenSide !== "Login") {
+        sessionStorage.setItem("senhaResetada", "1");
+      }
+      navigate("/");
+      
     } catch (err) {
       showErrorAlert(err.response?.data?.message || "Erro ao enviar os dados");
     }
@@ -97,8 +105,8 @@ export default function LoginPage() {
     }, 300);
   };
 
-  const isCadastro = screenSide === "Resetar Senha";
-  const isCadastroAnim = animationStep === "Resetar Senha";
+  const isReset = screenSide === "Resetar Senha";
+  const isResetAnim = animationStep === "Resetar Senha";
 
   return (
     <div className="relative min-h-screen font-sans">
@@ -107,7 +115,7 @@ export default function LoginPage() {
         <div
           id="lado-esquerdo"
           className={`w-1/2 flex items-center justify-center bg-primary transition-all duration-1000 relative ${
-            isCadastroAnim ? "left-1/2" : "left-0"
+            isResetAnim ? "left-1/2" : "left-0"
           } z-20`}
         >
           <img
@@ -121,7 +129,7 @@ export default function LoginPage() {
         <div
           id="lado-direito"
           className={`w-1/2 flex items-center justify-center bg-base-200 h-full transition-all duration-1000 relative ${
-            isCadastroAnim ? "right-1/2" : "right-0"
+            isResetAnim ? "right-1/2" : "right-0"
           } 
           ${zIndex ? "z-25" : "z-10"}
           ${rightInicial ? "right-1/2" : ""}`}
@@ -148,7 +156,7 @@ export default function LoginPage() {
               required
             />
 
-            {isCadastro && (
+            {isReset && (
               <Input
                 id="cpf"
                 fieldset="CPF"
@@ -169,7 +177,7 @@ export default function LoginPage() {
 
             <Input
               id="senha"
-              fieldset={isCadastro ? "Resetar Senha" : "Senha"}
+              fieldset={isReset ? "Resetar Senha" : "Senha"}
               type="password"
               placeholder="******"
               icon={<FiLock />}
@@ -180,12 +188,12 @@ export default function LoginPage() {
             />
 
             <Button type="button" onClick={validateForm} className="w-64 mt-8">
-              {isCadastro ? "Cadastrar" : "Login"}
+              {isReset ? "Cadastrar" : "Login"}
             </Button>
 
             <div className="flex mt-4">
               <small className="flex items-center text-sm">
-                {isCadastro ? "Já tem senha?" : "Não tem senha?"}
+                {isReset ? "Já tem senha?" : "Não tem senha?"}
               </small>
               <Button
                 variant="link"
@@ -193,7 +201,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={toggleScreenSide}
               >
-                {isCadastro ? "Fazer login" : "Resetar senha"}
+                {isReset ? "Fazer login" : "Resetar senha"}
               </Button>
             </div>
           </div>
