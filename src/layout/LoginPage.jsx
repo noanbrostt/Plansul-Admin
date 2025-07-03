@@ -77,19 +77,14 @@ export default function LoginPage() {
               form.senha
             );
 
-      // Somente para testes
-      let usuarioo = res.data.usuario;
-      usuarioo = { ...usuarioo, permissoes: ["menu", "dev"] };
-      dispatch(setUser(usuarioo));
-      //
-
-      // dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
+      console.log(res);
+      dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
 
       if (screenSide !== "Login") {
         sessionStorage.setItem("senhaResetada", "1");
       }
+
       navigate("/");
-      
     } catch (err) {
       showErrorAlert(err.response?.data?.message || "Erro ao enviar os dados");
     }

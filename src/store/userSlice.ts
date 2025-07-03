@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface User {
   nome: string;
   matricula: string;
-  permissoes: Array<"menu" | "dev">;
+  permissoes: Array<string>;
 }
 
 interface UserState {

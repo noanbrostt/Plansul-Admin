@@ -36,9 +36,9 @@ export default function AppRoutes() {
         <Route path="/users" element={<UsersPage />} />
 
         {/* Devs */}
-        <Route path="/devs/ui/buttons" element={withPermission(<ButtonsPage />, "dev")} />
-        <Route path="/devs/ui/badges" element={withPermission(<BadgesPage />, "dev")} />
-        <Route path="/devs/ui/inputs" element={withPermission(<InputsPage />, "dev")} />
+        <Route path="/devs/ui/buttons" element={withPermission(<ButtonsPage />, "DEV_Teste_User")} />
+        <Route path="/devs/ui/badges" element={withPermission(<BadgesPage />, "DEV_Teste_User")} />
+        <Route path="/devs/ui/inputs" element={withPermission(<InputsPage />, "DEV_Teste_User")} />
       </Route>
       
       {/* Se já estiver logado, manda pra home */}

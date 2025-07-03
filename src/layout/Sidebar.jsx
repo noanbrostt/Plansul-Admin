@@ -67,7 +67,7 @@ export default function Sidebar({
           )}
 
           {/* Seção Devs */}
-          {user.permissoes?.includes("dev") && (
+          {user.permissoes?.includes("DEV_Teste_User") && (
               <SidebarSection title="Devs" sectionKey="devs">
                   <SidebarDropdown
                     label="Telas"
