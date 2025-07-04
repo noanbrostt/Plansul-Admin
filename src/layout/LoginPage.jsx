@@ -12,6 +12,7 @@ import { setUser } from "@/store/userSlice";
 
 export default function LoginPage() {
   const [screenSide, setScreenSide] = useState("Login");
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     matricula: "",
     cpf: "",
@@ -52,6 +53,8 @@ export default function LoginPage() {
   };
 
   const validateForm = () => {
+    setIsLoading(true);
+
     const { matricula, cpf, senha } = form;
     const errors = [];
 
@@ -63,6 +66,7 @@ export default function LoginPage() {
     if (senha.trim().length === 0) errors.push("Preencha a senha.");
 
     if (errors.length > 0) {
+      setIsLoading(false);
       return showErrorAlert(errors.join("<br/>"));
     }
 
@@ -93,6 +97,7 @@ export default function LoginPage() {
     } catch (err) {
       showErrorAlert(err.response?.data?.message || "Erro ao enviar os dados");
     }
+    setIsLoading(false);
   };
 
   const toggleScreenSide = () => {
@@ -109,9 +114,9 @@ export default function LoginPage() {
   const handleKeyDown = (e, field) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      
+
       const isReset = screenSide === "Criar/Resetar Senha";
-      
+
       switch (field) {
         case "matricula":
           // Se estiver na tela de reset e CPF existir, vá para CPF
@@ -122,21 +127,21 @@ export default function LoginPage() {
             senhaRef.current.focus();
           }
           break;
-          
+
         case "cpf":
           // Do CPF vá para senha
           if (senhaRef.current) {
             senhaRef.current.focus();
           }
           break;
-          
+
         case "senha":
           // Na senha, submeta o formulário
           if (submitButtonRef.current) {
             submitButtonRef.current.click();
           }
           break;
-          
+
         default:
           break;
       }
@@ -228,11 +233,13 @@ export default function LoginPage() {
               required
             />
 
-            <Button 
-              type="button" 
-              onClick={validateForm} 
-              className="w-64 mt-8"
+            <Button
+              type="button"
+              onClick={validateForm}
+              className={`${isLoading ? "w-9" : "w-64"} mt-8`}
               ref={submitButtonRef}
+              variant={isLoading ? "ghost" : "primary"}
+              loading={isLoading}
             >
               {isReset ? "Cadastrar" : "Login"}
             </Button>
