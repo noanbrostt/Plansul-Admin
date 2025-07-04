@@ -14,7 +14,7 @@ export default function PermissionRoute({ children, requiredPermissao }: Props) 
 
   const possuiPermissao = user.permissoes?.includes(requiredPermissao);
 
-  if (!possuiPermissao) return <Navigate to="/" replace />; // ou uma página 403
+  if (!possuiPermissao) return <Navigate to="/negado" replace />; // ou uma página 403
 
   return children;
 }

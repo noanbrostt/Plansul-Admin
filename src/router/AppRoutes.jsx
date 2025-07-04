@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "@/layout/DashboardLayout";
 import LoginPage from "@/layout/LoginPage";
 import NotFoundPage from "../layout/NotFoundPage";
+import ForbiddenPage from "../layout/ForbiddenPage";
 
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
@@ -50,6 +51,7 @@ export default function AppRoutes() {
         }
       />
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/negado" element={<ForbiddenPage />} />
     </Routes>
   );
 }
