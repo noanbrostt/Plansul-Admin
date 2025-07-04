@@ -5,16 +5,18 @@ import { CgPlayButtonR } from "react-icons/cg";
 import { MdScreenshotMonitor } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
 import { LuBadgeCheck } from "react-icons/lu";
+import { MdScreenSearchDesktop } from "react-icons/md";
+import { SiAdblock } from "react-icons/si";
+
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
+import { SidebarProvider } from "./components/Sidebar/SidebarContext";
+import { useSelector } from "react-redux";
 
-// Importe dos componentes e do Context Provider
 import SidebarHeader from "./components/Sidebar/SidebarHeader";
 import SidebarSection from "./components/Sidebar/SidebarSection";
 import SidebarLink from "./components/Sidebar/SidebarLink";
 import SidebarDropdown from "./components/Sidebar/SidebarDropdown";
-import { SidebarProvider } from "./components/Sidebar/SidebarContext";
-import { useSelector } from "react-redux";
 
 export default function Sidebar({
   collapsed,
@@ -61,7 +63,11 @@ export default function Sidebar({
               <SidebarDropdown
                 label="Telas"
                 icon={<MdScreenshotMonitor />}
-                subItems={[{ label: "Login", to: "/login", icon: <FiLogIn /> }]}
+                subItems={[
+                  { label: "Login", to: "/login", icon: <FiLogIn /> },
+                  { label: "Not Found", to: "*", icon: <MdScreenSearchDesktop /> },
+                  { label: "Forbidden", to: "/negado", icon: <SiAdblock /> },
+                ]}
               />
               <SidebarDropdown
                 label="Elementos UI"

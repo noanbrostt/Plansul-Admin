@@ -7,7 +7,10 @@ interface Props {
   requiredPermissao: string;
 }
 
-export default function PermissionRoute({ children, requiredPermissao }: Props) {
+export default function PermissionRoute({
+  children,
+  requiredPermissao,
+}: Props) {
   const user = useSelector((state: RootState) => state.user.data);
 
   if (!user) return <Navigate to="/login" replace />;

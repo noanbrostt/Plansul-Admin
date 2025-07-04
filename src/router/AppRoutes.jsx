@@ -15,7 +15,6 @@ import PublicRoute from "./PublicRoute";
 import PermissionRoute from "./PermissionRoute";
 
 export default function AppRoutes() {
-
   const withPermission = (element, requiredPermissao) => (
     <PermissionRoute requiredPermissao={requiredPermissao}>
       {element}
@@ -36,11 +35,20 @@ export default function AppRoutes() {
         <Route path="/users" element={<UsersPage />} />
 
         {/* Devs */}
-        <Route path="/devs/ui/botoes" element={withPermission(<ButtonsPage />, "DEV_Teste_User")} />
-        <Route path="/devs/ui/etiquetas" element={withPermission(<BadgesPage />, "DEV_Teste_User")} />
-        <Route path="/devs/ui/inputs" element={withPermission(<InputsPage />, "DEV_Teste_User")} />
+        <Route
+          path="/devs/ui/botoes"
+          element={withPermission(<ButtonsPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/ui/etiquetas"
+          element={withPermission(<BadgesPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/ui/inputs"
+          element={withPermission(<InputsPage />, "DEV_Teste_User")}
+        />
       </Route>
-      
+
       {/* Se já estiver logado, manda pra home */}
       <Route
         path="/login"

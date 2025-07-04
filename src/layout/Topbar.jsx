@@ -1,9 +1,7 @@
-
 import { FiAlignLeft, FiMenu, FiSun, FiMoon } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "@/store/userSlice";
 import { useNavigate } from "react-router-dom";
-
 
 export default function Topbar({
   collapsed,
@@ -72,10 +70,7 @@ export default function Topbar({
         </label>
 
         {/* Info Usuário */}
-        <div
-          className="dropdown dropdown-end tooltip tooltip-left"
-          data-tip={nomeFormatado}
-        >
+        <div className="dropdown dropdown-end tooltip">
           <div
             tabIndex={0}
             role="button"
