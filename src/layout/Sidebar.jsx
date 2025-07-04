@@ -1,9 +1,5 @@
-import { useState, useMemo } from "react";
-import {
-  FiHome,
-  FiUsers,
-  FiLogIn,
-} from "react-icons/fi";
+import { useState } from "react";
+import { FiHome, FiUsers, FiLogIn } from "react-icons/fi";
 import { RiInputField } from "react-icons/ri";
 import { CgPlayButtonR } from "react-icons/cg";
 import { MdScreenshotMonitor } from "react-icons/md";
@@ -20,7 +16,6 @@ import SidebarDropdown from "./components/Sidebar/SidebarDropdown";
 import { SidebarProvider } from "./components/Sidebar/SidebarContext";
 import { useSelector } from "react-redux";
 
-
 export default function Sidebar({
   collapsed,
   openDropdown,
@@ -28,9 +23,9 @@ export default function Sidebar({
   currentTheme,
 }) {
   const [hovering, setHovering] = useState(false);
-  
+
   const user = useSelector((state) => state.user.data);
-  
+
   return (
     <SidebarProvider
       collapsed={collapsed}
@@ -55,47 +50,41 @@ export default function Sidebar({
           // autoHide={false}
         >
           {/* Seção Menu */}
-          {user.permissoes?.includes("menu") && (
-              <SidebarSection title="Menu" sectionKey="menu">
-                  <SidebarLink label="Home" to="/" icon={<FiHome />} />
-                  <SidebarLink
-                    label="Usuários"
-                    to="/users"
-                    icon={<FiUsers />}
-                  />
-              </SidebarSection>
-          )}
+          <SidebarSection title="Menu" sectionKey="menu">
+            <SidebarLink label="Home" to="/" icon={<FiHome />} />
+            <SidebarLink label="Usuários" to="/users" icon={<FiUsers />} />
+          </SidebarSection>
 
           {/* Seção Devs */}
           {user.permissoes?.includes("DEV_Teste_User") && (
-              <SidebarSection title="Devs" sectionKey="devs">
-                  <SidebarDropdown
-                    label="Telas"
-                    icon={<MdScreenshotMonitor />}
-                    subItems={[{ label: "Login", to: "/login", icon: <FiLogIn /> }]}
-                  />
-                  <SidebarDropdown
-                    label="Elementos UI"
-                    icon={<IoCubeOutline />}
-                    subItems={[
-                      {
-                        label: "Botões",
-                        to: "/devs/ui/buttons",
-                        icon: <CgPlayButtonR />,
-                      },
-                      {
-                        label: "Etiquetas",
-                        to: "/devs/ui/badges",
-                        icon: <LuBadgeCheck />,
-                      },
-                      {
-                        label: "Inputs",
-                        to: "/devs/ui/inputs",
-                        icon: <RiInputField />,
-                      },
-                    ]}
-                  />
-              </SidebarSection>
+            <SidebarSection title="Devs" sectionKey="devs">
+              <SidebarDropdown
+                label="Telas"
+                icon={<MdScreenshotMonitor />}
+                subItems={[{ label: "Login", to: "/login", icon: <FiLogIn /> }]}
+              />
+              <SidebarDropdown
+                label="Elementos UI"
+                icon={<IoCubeOutline />}
+                subItems={[
+                  {
+                    label: "Botões",
+                    to: "/devs/ui/botoes",
+                    icon: <CgPlayButtonR />,
+                  },
+                  {
+                    label: "Etiquetas",
+                    to: "/devs/ui/etiquetas",
+                    icon: <LuBadgeCheck />,
+                  },
+                  {
+                    label: "Inputs",
+                    to: "/devs/ui/inputs",
+                    icon: <RiInputField />,
+                  },
+                ]}
+              />
+            </SidebarSection>
           )}
         </SimpleBar>
       </aside>

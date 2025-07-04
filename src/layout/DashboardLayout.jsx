@@ -89,7 +89,6 @@ export default function DashboardLayout() {
         <Topbar
           onToggleSidebar={toggleSidebar}
           collapsed={collapsed}
-          setOpenDropdown={setOpenDropdown}
           onToggleTheme={toggleTheme}
           currentTheme={theme}
           user={user}

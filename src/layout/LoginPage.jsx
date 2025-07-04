@@ -51,7 +51,7 @@ export default function LoginPage() {
 
     if (matricula.trim().length !== 6) errors.push("Preencha a matrícula.");
 
-    if (screenSide === "Resetar Senha" && cpf.trim().length !== 14)
+    if (screenSide === "Criar/Resetar Senha" && cpf.trim().length !== 14)
       errors.push("Preencha o CPF.");
 
     if (senha.trim().length === 0) errors.push("Preencha a senha.");
@@ -90,7 +90,7 @@ export default function LoginPage() {
   };
 
   const toggleScreenSide = () => {
-    const next = screenSide === "Login" ? "Resetar Senha" : "Login";
+    const next = screenSide === "Login" ? "Criar/Resetar Senha" : "Login";
     setAnimationStep(next);
 
     // Delay de 300ms pra esconder a mudança do form
@@ -99,8 +99,8 @@ export default function LoginPage() {
     }, 300);
   };
 
-  const isReset = screenSide === "Resetar Senha";
-  const isResetAnim = animationStep === "Resetar Senha";
+  const isReset = screenSide === "Criar/Resetar Senha";
+  const isResetAnim = animationStep === "Criar/Resetar Senha";
 
   return (
     <div className="relative min-h-screen font-sans">
@@ -171,7 +171,7 @@ export default function LoginPage() {
 
             <Input
               id="senha"
-              fieldset={isReset ? "Resetar Senha" : "Senha"}
+              fieldset={isReset ? "Criar/Resetar Senha" : "Senha"}
               type="password"
               placeholder="******"
               icon={<FiLock />}
@@ -195,7 +195,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={toggleScreenSide}
               >
-                {isReset ? "Fazer login" : "Resetar senha"}
+                {isReset ? "Fazer login" : "Criar/Resetar Senha"}
               </Button>
             </div>
           </div>

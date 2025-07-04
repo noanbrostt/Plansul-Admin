@@ -21,10 +21,6 @@ export default function InputsPage() {
   const [passwordValue, setPasswordValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [phoneValue, setPhoneValue] = useState("");
-  const [pathValue, setPathValue] = useState("");
-  const [gender, setGender] = useState("");
-  const [country, setCountry] = useState("");
-  const [message, setMessage] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cpfNumber, setCpfNumber] = useState("");
 
@@ -35,8 +31,8 @@ export default function InputsPage() {
         <h1 className="text-3xl font-bold text-base-content">Inputs</h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul>
-            <li>Home</li>
-            <li>Elements</li>
+            <li>Devs</li>
+            <li>Elementos UI</li>
             <li>Inputs</li>
           </ul>
         </div>
@@ -362,12 +358,9 @@ export default function InputsPage() {
         </h2>
         <div className="flex flex-wrap items-end gap-4">
           <Input
-            icon={<FiMapPin />}
             optionalBadge
             optionalBadgeText="Opcional"
-            placeholder="src/app/"
-            value={pathValue}
-            onChange={(e) => setPathValue(e.target.value)}
+            placeholder="Adicionar apelido?"
             inputClassName="w-80"
           />
 

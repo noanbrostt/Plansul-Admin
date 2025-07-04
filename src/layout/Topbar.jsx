@@ -10,7 +10,6 @@ export default function Topbar({
   onToggleSidebar,
   currentTheme,
   onToggleTheme,
-  setOpenDropdown,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,7 +50,7 @@ export default function Topbar({
           <button
             onClick={() => {
               onToggleSidebar();
-              if (!collapsed) setOpenDropdown(null); // Fecha dropdowns ao colapsar
+              if (!collapsed); // Fecha dropdowns ao colapsar
             }}
             className="btn btn-sm btn-ghost py-5.5"
           >
@@ -95,9 +94,6 @@ export default function Topbar({
             </li>
             <li>
               <a className="text-xs pointer-events-none">{userMatricula}</a>
-            </li>
-            <li>
-              <a className="text-sm pointer-events-none">Administrador</a>
             </li>
             <li>
               <a

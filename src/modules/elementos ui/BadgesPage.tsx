@@ -14,9 +14,9 @@ export default function BadgesPage() {
         <h1 className="text-3xl font-bold text-base-content">Badges</h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul>
-            <li>Home</li>
-            <li>Elements</li>
-            <li>Badges</li>
+            <li>Devs</li>
+            <li>Elementos UI</li>
+            <li>Etiquetas</li>
           </ul>
         </div>
       </div>

@@ -31,13 +31,11 @@ export default function AppRoutes() {
         }
       >
         <Route path="/" element={<HomePage />} />
-
-
         <Route path="/users" element={<UsersPage />} />
 
         {/* Devs */}
-        <Route path="/devs/ui/buttons" element={withPermission(<ButtonsPage />, "DEV_Teste_User")} />
-        <Route path="/devs/ui/badges" element={withPermission(<BadgesPage />, "DEV_Teste_User")} />
+        <Route path="/devs/ui/botoes" element={withPermission(<ButtonsPage />, "DEV_Teste_User")} />
+        <Route path="/devs/ui/etiquetas" element={withPermission(<BadgesPage />, "DEV_Teste_User")} />
         <Route path="/devs/ui/inputs" element={withPermission(<InputsPage />, "DEV_Teste_User")} />
       </Route>
       
