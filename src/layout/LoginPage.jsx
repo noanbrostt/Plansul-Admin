@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { login, reset } from "@/services/authService";
 import { showErrorAlert } from "@/components/alerts";
 import Input from "@/modules/elementos ui/components/Input";
@@ -17,6 +17,12 @@ export default function LoginPage() {
     cpf: "",
     senha: "",
   });
+
+  // Refs para os campos de input
+  const matriculaRef = useRef(null);
+  const cpfRef = useRef(null);
+  const senhaRef = useRef(null);
+  const submitButtonRef = useRef(null);
 
   const [animationStep, setAnimationStep] = useState(screenSide);
   const [zIndex, setZIndex] = useState(true); // controla z-25
@@ -99,6 +105,44 @@ export default function LoginPage() {
     }, 300);
   };
 
+  // Função para navegação por teclado
+  const handleKeyDown = (e, field) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      
+      const isReset = screenSide === "Criar/Resetar Senha";
+      
+      switch (field) {
+        case "matricula":
+          // Se estiver na tela de reset e CPF existir, vá para CPF
+          if (isReset && cpfRef.current) {
+            cpfRef.current.focus();
+          } else if (senhaRef.current) {
+            // Caso contrário, vá para senha
+            senhaRef.current.focus();
+          }
+          break;
+          
+        case "cpf":
+          // Do CPF vá para senha
+          if (senhaRef.current) {
+            senhaRef.current.focus();
+          }
+          break;
+          
+        case "senha":
+          // Na senha, submeta o formulário
+          if (submitButtonRef.current) {
+            submitButtonRef.current.click();
+          }
+          break;
+          
+        default:
+          break;
+      }
+    }
+  };
+
   const isReset = screenSide === "Criar/Resetar Senha";
   const isResetAnim = animationStep === "Criar/Resetar Senha";
 
@@ -134,7 +178,6 @@ export default function LoginPage() {
             </h1>
 
             <Input
-              id="matricula"
               fieldset="Matrícula"
               placeholder="000000"
               mask="000000"
@@ -147,12 +190,13 @@ export default function LoginPage() {
               inputClassName="w-64"
               value={form.matricula}
               onChange={(e) => handleInputChange("matricula", e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e, "matricula")}
+              ref={matriculaRef}
               required
             />
 
             {isReset && (
               <Input
-                id="cpf"
                 fieldset="CPF"
                 placeholder="000.000.000-00"
                 mask="000.000.000-00"
@@ -165,12 +209,13 @@ export default function LoginPage() {
                 inputClassName="w-64"
                 value={form.cpf}
                 onChange={(e) => handleInputChange("cpf", e.target.value)}
+                onKeyDown={(e) => handleKeyDown(e, "cpf")}
+                inputRef={cpfRef}
                 required
               />
             )}
 
             <Input
-              id="senha"
               fieldset={isReset ? "Criar/Resetar Senha" : "Senha"}
               type="password"
               placeholder="******"
@@ -178,10 +223,17 @@ export default function LoginPage() {
               inputClassName="w-64"
               value={form.senha}
               onChange={(e) => handleInputChange("senha", e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e, "senha")}
+              ref={senhaRef}
               required
             />
 
-            <Button type="button" onClick={validateForm} className="w-64 mt-8">
+            <Button 
+              type="button" 
+              onClick={validateForm} 
+              className="w-64 mt-8"
+              ref={submitButtonRef}
+            >
               {isReset ? "Cadastrar" : "Login"}
             </Button>
 
