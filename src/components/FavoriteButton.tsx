@@ -42,8 +42,8 @@ export default function FavoriteButton({ tela }: FavoriteButtonProps) {
   return (
     <button
       onClick={toggleFavorito}
-      className="w-10 h-10 text-warning justify-items-center transition-all hover:brightness-90 cursor-pointer"
-      title={isFavorito ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+      className="w-6 h-10 ml-2 text-warning justify-items-center transition-all hover:brightness-90 cursor-pointer tooltip tooltip-right"
+      data-tip={isFavorito ? "Remover dos favoritos" : "Adicionar aos favoritos"}
     >
       {isFavorito ? <AiFillStar size={20} /> : <FiStar size={20} />}
     </button>
