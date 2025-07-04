@@ -178,7 +178,7 @@ export default function LoginPage() {
           ${rightInicial ? "right-1/2" : ""}`}
         >
           <div className="w-full flex flex-col items-center">
-            <h1 className="text-primary font-medium text-center text-5xl mb-10">
+            <h1 className="text-primary font-medium text-center text-5xl mb-8">
               {screenSide}
             </h1>
 
@@ -244,8 +244,8 @@ export default function LoginPage() {
               {isReset ? "Cadastrar" : "Login"}
             </Button>
 
-            <div className="flex mt-4">
-              <small className="flex items-center text-sm">
+            <div className="flex mt-0">
+              <small className="flex items-center text-xs">
                 {isReset ? "Já tem senha?" : "Não tem senha?"}
               </small>
               <Button
