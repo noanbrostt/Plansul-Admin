@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "@/layout/DashboardLayout";
 import LoginPage from "@/layout/LoginPage";
+import NotFoundPage from "../layout/NotFoundPage";
 
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
@@ -48,6 +49,7 @@ export default function AppRoutes() {
           </PublicRoute>
         }
       />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
