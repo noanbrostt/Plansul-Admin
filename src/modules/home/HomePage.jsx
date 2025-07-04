@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Badge from "@/modules/ui/components/Badge";
 
 export default function HomePage() {
   const user = useSelector((state) => state.user.data);
@@ -33,9 +34,9 @@ export default function HomePage() {
             <h2 className="card-title">Permissões</h2>
             <div className="flex flex-wrap gap-2">
               {user?.permissoes?.map((p) => (
-                <span key={p} className="badge badge-outline">
+                <Badge key={p} outline>
                   {p}
-                </span>
+                </Badge>
               )) || (
                 <span className="text-sm text-base-content/50">
                   Sem permissões registradas

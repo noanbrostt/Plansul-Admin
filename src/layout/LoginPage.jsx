@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { login, reset } from "@/services/authService";
 import { showErrorAlert } from "@/components/alerts";
-import Input from "@/modules/elementos ui/components/Input";
-import Button from "@/modules/elementos ui/components/Button";
+import Input from "@/modules/ui/components/Input";
+import Button from "@/modules/ui/components/Button";
 import { FiLock } from "react-icons/fi";
 import logoLonga from "../assets/layout/Topbar/logo_longa.png";
 
@@ -198,6 +198,7 @@ export default function LoginPage() {
               onKeyDown={(e) => handleKeyDown(e, "matricula")}
               ref={matriculaRef}
               required
+              autoFocus
             />
 
             {isReset && (

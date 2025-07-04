@@ -1,4 +1,4 @@
-import Badge from "./components/Badge";
+import Badge from "@/modules/ui/components/Badge";
 import FavoriteButton from "@/components/FavoriteButton";
 
 import { FiPlus, FiAlertTriangle, FiAward } from "react-icons/fi";

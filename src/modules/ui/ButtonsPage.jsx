@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
-import Button from "@/modules/elementos ui/components/Button";
+import Button from "@/modules/ui/components/Button";
 
 import {
   MdSettings,

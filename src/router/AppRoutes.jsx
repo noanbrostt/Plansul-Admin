@@ -4,9 +4,9 @@ import LoginPage from "@/layout/LoginPage";
 
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
-import ButtonsPage from "@/modules/elementos ui/ButtonsPage";
-import InputsPage from "@/modules/elementos ui/InputsPage";
-import BadgesPage from "@/modules/elementos ui/BadgesPage";
+import ButtonsPage from "@/modules/ui/ButtonsPage";
+import InputsPage from "@/modules/ui/InputsPage";
+import BadgesPage from "@/modules/ui/BadgesPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";

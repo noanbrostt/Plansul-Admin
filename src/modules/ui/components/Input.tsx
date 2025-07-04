@@ -26,6 +26,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   validMessage?: string;
   validReqs?: object;
   mask?: string;
+  autofocus?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -44,6 +45,7 @@ const Input: React.FC<InputProps> = ({
   validMessage = "",
   validReqs,
   mask = "",
+  autofocus = false,
   ...rest
 }) => {
   // Início da lógica para input password mostrar a senha
