@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Button from "./components/Button"; // Importe seu novo componente Button
+import FavoriteButton from "@/components/FavoriteButton";
+import Button from "@/modules/elementos ui/components/Button";
 
 import {
   MdSettings,
@@ -7,7 +8,7 @@ import {
   MdCheck,
   MdStar,
   MdInfo,
-  MdArrowForward, // Para o link com ícone
+  MdArrowForward,
 } from "react-icons/md";
 
 export default function ButtonsPage() {
@@ -28,12 +29,14 @@ export default function ButtonsPage() {
     <div className="bg-base-100 min-h-screen">
       {/* Breadcrumbs / Título da Página */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-base-content">Buttons</h1>
+        <h1 className="flex text-3xl font-bold text-base-content">
+          Botões <FavoriteButton tela={{ nome: "Botões", url: "devs/ui/botoes" }} />
+        </h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul className="pointer-events-none">
-            <li>Home</li>
-            <li>Elements</li>
-            <li>Buttons</li>
+            <li>Devs</li>
+            <li>Elementos UI</li>
+            <li>Botões</li>
           </ul>
         </div>
       </div>
@@ -203,11 +206,19 @@ export default function ButtonsPage() {
           </p>
         </h2>
         <div className="flex flex-wrap items-center gap-4">
-          <Button loading={isLoadingPrimary} onClick={handleLoadingPrimary}>
+          {/* 
+            Os botões com Loading ficavam invisíveis no tema claro, durante o Loading.
+            Para resolver isso é necessário essa condicionar para ficar como "ghost" durante a animação girando
+          */}
+          <Button
+            variant={isLoadingPrimary ? "ghost" : "primary"}
+            loading={isLoadingPrimary}
+            onClick={handleLoadingPrimary}
+          >
             Carregando Primary
           </Button>
           <Button
-            variant="secondary"
+            variant={isLoadingSecondary ? "ghost" : "secondary"}
             loading={isLoadingSecondary}
             onClick={handleLoadingSecondary}
           >
@@ -216,8 +227,7 @@ export default function ButtonsPage() {
           <Button variant="ghost" loading>
             Ghost Loading
           </Button>
-          <Button variant="success" loading circle />{" "}
-          {/* Botão circular de loading */}
+          <Button variant="ghost" loading circle />
         </div>
       </div>
     </div>

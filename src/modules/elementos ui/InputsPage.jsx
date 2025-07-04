@@ -1,4 +1,6 @@
 import { useState } from "react";
+import FavoriteButton from "@/components/FavoriteButton";
+
 import Input from "./components/Input";
 import Checkbox from "./components/Checkbox";
 import RadioGroup from "./components/Radio";
@@ -28,7 +30,10 @@ export default function InputsPage() {
     <div className="bg-base-100 min-h-screen">
       {/* Breadcrumbs / Título da Página */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-base-content">Inputs</h1>
+        <h1 className="flex text-3xl font-bold text-base-content">
+          Inputs
+          <FavoriteButton tela={{ nome: "Inputs", url: "devs/ui/inputs" }} />
+        </h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul>
             <li>Devs</li>
@@ -972,8 +977,6 @@ export default function InputsPage() {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }
