@@ -18,6 +18,8 @@ import {
   FiEye,
   FiArrowUp,
   FiArrowDown,
+  FiChevronLeft,
+  FiChevronRight,
   FiChevronsLeft,
   FiChevronsRight,
   FiDownload, // Novo ícone para exportação
@@ -345,7 +347,7 @@ export default function Table<T>({
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              Anterior
+              <FiChevronLeft className="text-lg" />
             </button>
             <button className="join-item btn">
               Página {table.getState().pagination.pageIndex + 1} de{" "}
@@ -356,7 +358,7 @@ export default function Table<T>({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              Próxima
+              <FiChevronRight className="text-lg" />
             </button>
             <button
               className="join-item btn"
