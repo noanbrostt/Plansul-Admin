@@ -4,9 +4,10 @@ import { RiInputField } from "react-icons/ri";
 import { CgPlayButtonR } from "react-icons/cg";
 import { MdScreenshotMonitor } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
-import { LuBadgeCheck } from "react-icons/lu";
+import { RxBadge } from "react-icons/rx";
 import { MdScreenSearchDesktop } from "react-icons/md";
 import { SiAdblock } from "react-icons/si";
+import { FaTable } from "react-icons/fa";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -81,12 +82,17 @@ export default function Sidebar({
                   {
                     label: "Etiquetas",
                     to: "/devs/ui/etiquetas",
-                    icon: <LuBadgeCheck />,
+                    icon: <RxBadge />,
                   },
                   {
                     label: "Inputs",
                     to: "/devs/ui/inputs",
                     icon: <RiInputField />,
+                  },
+                  {
+                    label: "Tabelas",
+                    to: "/devs/ui/tabelas",
+                    icon: <FaTable />,
                   },
                 ]}
               />
