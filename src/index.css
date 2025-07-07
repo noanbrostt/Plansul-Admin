@@ -120,3 +120,12 @@ aside .simplebar-scrollbar::before {
     height: 0px;
 }
 /*  */
+
+/* Tabela zebrada */
+[data-theme="myLightTheme"] .table-zebra tbody tr:nth-child(even) {
+  background-color: var(--color-base-300);
+}
+[data-theme="myDarkTheme"] .table-zebra tbody tr:nth-child(even) {
+  background-color: var(--color-base-100);
+}
+/*  */

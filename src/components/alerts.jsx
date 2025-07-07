@@ -40,6 +40,7 @@ export const showErrorAlert = (title, text = '') => {
 // Ou uma função mais genérica que aceita opções personalizadas
 export const showAlert = (options) => {
   Swal.fire({
+    toast: true,
     position: 'top-end',
     showConfirmButton: false,
     timer: 3000,

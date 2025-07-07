@@ -9,6 +9,7 @@ import UsersPage from "@/modules/users/UsersPage";
 import ButtonsPage from "@/modules/ui/ButtonsPage";
 import InputsPage from "@/modules/ui/InputsPage";
 import BadgesPage from "@/modules/ui/BadgesPage";
+import TablesPage from "@/modules/ui/TablesPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -46,6 +47,10 @@ export default function AppRoutes() {
         <Route
           path="/devs/ui/inputs"
           element={withPermission(<InputsPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/ui/tabelas"
+          element={withPermission(<TablesPage />, "DEV_Teste_User")}
         />
       </Route>
 
