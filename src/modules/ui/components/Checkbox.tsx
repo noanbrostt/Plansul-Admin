@@ -2,9 +2,10 @@ import React from "react";
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
-  labelFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
+  leftLabel?: string;
   fieldset?: string;
-  fildsetFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
+  fieldsetClassName?: string;
+  legendClassName?: string;
   fieldsetCentered?: boolean;
   checkboxSize?: "xl" | "lg" | "md" | "sm" | "xs";
   variant?:
@@ -22,9 +23,10 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Checkbox: React.FC<CheckboxProps> = ({
   label,
-  labelFontSize = "base",
+  leftLabel,
   fieldset,
-  fildsetFontSize = "base",
+  fieldsetClassName,
+  legendClassName,
   fieldsetCentered = false,
   checkboxSize = "md",
   variant,
@@ -78,12 +80,23 @@ const Checkbox: React.FC<CheckboxProps> = ({
       input
     );
 
-  const inputWithLabel = label ? (
-    <label className="label gap-2">
+  const inputWithLabel = label || leftLabel ? (
+    <label className={`label gap-2 ${fieldsetCentered && 'justify-center'}`}>
+
+      {leftLabel && (
+      <span className={`${"text-" + checkboxSize}`}>
+        {leftLabel}
+      </span>
+      )}
+
       {withIcons}
-      <span className={`${labelFontSize && "text-" + labelFontSize}`}>
+
+      {label && (
+      <span className={`${"text-" + checkboxSize}`}>
         {label}
       </span>
+      )}
+
     </label>
   ) : (
     withIcons
@@ -91,11 +104,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   if (fieldset) {
     return (
-      <fieldset className={`fieldset ${fieldsetCentered && 'justify-items-center'}`}>
+      <fieldset className={`fieldset ${fieldsetClassName} ${fieldsetCentered && 'text-center'}`}>
         <legend
-          className={`fieldset-legend ${
-            fildsetFontSize && "text-" + fildsetFontSize
-          }`}
+          className={`fieldset-legend ${legendClassName} ${"text-" + checkboxSize}`}
         >
           {fieldset}
         </legend>
