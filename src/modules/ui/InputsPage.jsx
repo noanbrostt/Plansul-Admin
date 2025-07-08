@@ -1,11 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 
 import Input from "./components/Input";
 import Checkbox from "./components/Checkbox";
 import RadioGroup from "./components/Radio";
 import Select from "./components/Select";
-import MultiSelect from "./components/MultiSelect";
 import Textarea from "./components/Textarea";
 
 import {
@@ -31,16 +30,19 @@ export default function InputsPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cpfNumber, setCpfNumber] = useState("");
 
-  const [selectedColor, setSelectedColor] = useState('cor1');
-  const [selectedSizeXs, setSelectedSizeXs] = useState('xs1');
-  const [selectedSizeSm, setSelectedSizeSm] = useState('sm1');
-  const [selectedSizeMd, setSelectedSizeMd] = useState('md1');
-  const [selectedSizeLg, setSelectedSizeLg] = useState('lg1');
-  const [selectedSizeXl, setSelectedSizeXl] = useState('xl1');
-  const [selectedCenteredOption, setSelectedCenteredOption] = useState('opt1');
-  const [selectedFieldsetOnlyOption, setSelectedFieldsetOnlyOption] = useState('opt1');
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState('pending');
-  const [selectedPlan, setSelectedPlan] = useState('free');
+  const [selectedColor, setSelectedColor] = useState("cor1");
+  const [selectedSizeXs, setSelectedSizeXs] = useState("xs1");
+  const [selectedSizeSm, setSelectedSizeSm] = useState("sm1");
+  const [selectedSizeMd, setSelectedSizeMd] = useState("md1");
+  const [selectedSizeLg, setSelectedSizeLg] = useState("lg1");
+  const [selectedSizeXl, setSelectedSizeXl] = useState("xl1");
+  const [selectedCenteredOption, setSelectedCenteredOption] = useState("opt1");
+  const [selectedFieldsetOnlyOption, setSelectedFieldsetOnlyOption] =
+    useState("opt1");
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("pending");
+  const [selectedPlan, setSelectedPlan] = useState("free");
+
+  const [selectedFruits, setSelectedFruits] = useState([]);
 
   const handleCheckboxChange = (event) => {
     const newValue = event.target.checked;
@@ -58,20 +60,27 @@ export default function InputsPage() {
     console.log("Termo selecionado: ", newValue);
   };
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
   const options = [
-    { value: "op1", label: "Opção 1" },
-    { value: "op2", label: "Opção 2" },
-    { value: "op3", label: "Opção 3" },
-  ];
-
-  const multipleOptions = [
-    { value: "m1", label: "Item 1" },
-    { value: "m2", label: "Item 2" },
-    { value: "m3", label: "Item 3" },
-    { value: "m4", label: "Item 4" },
-    { value: "m5", label: "Item 5" },
+    { value: "apple", label: "Maçã" },
+    { value: "banana", label: "Banana" },
+    { value: "orange", label: "Laranja" },
+    { value: "strawberry", label: "Morango" },
+    { value: "grape", label: "Uva" },
+    { value: "pineapple", label: "Abacaxi" },
+    { value: "watermelon", label: "Melancia" },
+    { value: "kiwi", label: "Kiwi" },
+    { value: "mango", label: "Manga" },
+    { value: "pear", label: "Pêra" },
+    { value: "peach", label: "Pêssego" },
+    { value: "cherry", label: "Cereja" },
+    { value: "blueberry", label: "Mirtilo" },
+    { value: "raspberry", label: "Framboesa" },
+    { value: "blackberry", label: "Amora" },
+    { value: "lemon", label: "Limão" },
+    { value: "lime", label: "Lima" },
+    { value: "coconut", label: "Coco" },
+    { value: "avocado", label: "Abacate" },
+    { value: "papaya", label: "Mamão" },
   ];
 
   return (
@@ -446,244 +455,27 @@ export default function InputsPage() {
         <h1 className="text-3xl font-bold text-base-content">Selects</h1>
       </div>
 
-      {/* --- Seção de Selects Padrão com Cores --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Selects Padrão
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p className="font-medium text-base-content/80 mb-2">Cores:</p>
-            <div className="space-y-4">
-              <Select options={options} fieldset="Default" />
-              <Select options={options} fieldset="Primary" variant="primary" />
-              <Select
-                options={options}
-                fieldset="Secondary"
-                variant="secondary"
-              />
-              <Select options={options} fieldset="Accent" variant="accent" />
-              <Select options={options} fieldset="Info" variant="info" />
-              <Select options={options} fieldset="Success" variant="success" />
-              <Select options={options} fieldset="Warning" variant="warning" />
-              <Select options={options} fieldset="Error" variant="error" />
-            </div>
-          </div>
-
-          <div>
-            <p className="font-medium text-base-content/80 mb-2">Tamanhos:</p>
-            <div className="space-y-4">
-              <Select options={options} fieldset="XS" size="xs" />
-              <Select options={options} fieldset="SM" size="sm" />
-              <Select options={options} fieldset="MD (Padrão)" size="md" />
-              <Select options={options} fieldset="LG" size="lg" />
-            </div>
-
-            <p className="font-medium text-base-content/80 mt-6 mb-2">
-              Estados:
-            </p>
-            <div className="space-y-4">
-              <Select
-                options={options}
-                fieldset="Com Erro"
-                error="Campo obrigatório"
-              />
-              <Select
-                options={options}
-                fieldset="Com Sucesso"
-                success="Seleção válida"
-              />
-              <Select
-                options={options}
-                fieldset="Com Informação"
-                info="Selecione uma opção"
-              />
-              <Select options={options} fieldset="Desabilitado" disabled />
-            </div>
-          </div>
-        </div>
+<div>
+      <Select
+        options={options}
+        multiple
+        showSelectAll
+        showDesselectAll
+        placeholder="Selecione frutas"
+        value={selectedFruits} // IMPORTANTE: valor controlado
+        onChange={(newValue) => setSelectedFruits(newValue)}
+      />
+      
+      <div className="mt-4">
+        <h3>Frutas selecionadas:</h3>
+        <ul>
+          {selectedFruits.map(fruit => (
+            <li key={fruit.value}>{fruit.label}</li>
+          ))}
+        </ul>
       </div>
-
-      {/* --- Seção de Multiple Select --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Multiple Select (Dropdown com Checkboxes)
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p className="font-medium text-base-content/80 mb-2">Tamanhos:</p>
-            <div className="space-y-4">
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="XS"
-                size="xs"
-              />
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="SM"
-                size="sm"
-              />
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="MD"
-                size="md"
-              />
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="LG"
-                size="lg"
-              />
-            </div>
-          </div>
-
-          <div>
-            <p className="font-medium text-base-content/80 mb-2">Cores:</p>
-            <div className="space-y-4">
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="Primary"
-                variant="primary"
-              />
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="Success"
-                variant="success"
-              />
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="Warning"
-                variant="warning"
-              />
-              <MultiSelect
-                options={multipleOptions}
-                selected={selectedOptions}
-                onChange={setSelectedOptions}
-                fieldset="Error"
-                variant="error"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <p className="font-medium text-base-content/80 mb-2">Estados:</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <MultiSelect
-              options={multipleOptions}
-              selected={selectedOptions}
-              onChange={setSelectedOptions}
-              fieldset="Com Erro"
-              error="Selecione pelo menos uma opção"
-            />
-            <MultiSelect
-              options={multipleOptions}
-              selected={selectedOptions}
-              onChange={setSelectedOptions}
-              fieldset="Com Sucesso"
-              success="Opções válidas"
-            />
-            <MultiSelect
-              options={multipleOptions}
-              selected={selectedOptions}
-              onChange={setSelectedOptions}
-              fieldset="Com Informação"
-              info="Escolha múltiplas opções"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* --- Seção de Selects sem Borda --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Selects sem Borda
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p className="font-medium text-base-content/80 mb-2">
-              Select Simples:
-            </p>
-            <div className="space-y-4">
-              <Select options={options} fieldset="Ghost" variant="ghost" />
-              <Select options={options} fieldset="Primary" variant="primary" />
-              <Select
-                options={options}
-                fieldset="Secondary"
-                variant="secondary"
-              />
-              <Select options={options} fieldset="Accent" variant="accent" />
-            </div>
-          </div>
-
-          <div>
-            <p className="font-medium text-base-content/80 mb-2">
-              Multiple Select:
-            </p>
-            <MultiSelect
-              options={multipleOptions}
-              selected={selectedOptions}
-              onChange={setSelectedOptions}
-              fieldset="Ghost Multiple"
-              variant="ghost"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
-          Demonstração de Uso
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <Select
-              options={options}
-              fieldset="Selecione uma opção"
-              variant="primary"
-              info="Escolha uma das opções"
-            />
-
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`<Select\n  options={options}\n  label="Selecione uma opção"\n  variant="primary"\n  info="Escolha uma das opções"\n/>`}
-              </pre>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <MultiSelect
-              options={multipleOptions}
-              selected={selectedOptions}
-              onChange={setSelectedOptions}
-              fieldset="Selecione múltiplas opções"
-              variant="success"
-              placeholder="Escolha os itens..."
-            />
-
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [selected, setSelected] = useState([]);\n\n<MultiSelect\n  options={options}\n  selected={selected}\n  onChange={setSelected}\n  label="Selecione múltiplas opções"\n  variant="success"\n  placeholder="Escolha os itens..."\n/>`}
-              </pre>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    </div>
+    
       <div className="flex justify-between items-center mb-6 mt-12">
         <h1 className="text-3xl font-bold text-base-content">Checkboxes</h1>
       </div>
@@ -866,7 +658,7 @@ export default function InputsPage() {
         <h1 className="text-3xl font-bold text-base-content">Radio Groups</h1>
       </div>
 
-{/* Grupo com Diferentes Tamanhos */}
+      {/* Grupo com Diferentes Tamanhos */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
           Radios Padrão
@@ -1041,14 +833,13 @@ export default function InputsPage() {
           />
         </div>
       </div>
-      
+
       {/* --- Seção de Demonstração --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-6">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
           <div className="space-y-4 justify-items-center">
             <RadioGroup
               fieldset="Aceita os Termos?"
@@ -1089,7 +880,6 @@ export default function InputsPage() {
               </pre>
             </div>
           </div>
-
         </div>
       </div>
     </div>

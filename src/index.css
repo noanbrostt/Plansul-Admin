@@ -130,3 +130,11 @@ aside .simplebar-scrollbar::before {
   background-color: var(--color-base-100);
 }
 /*  */
+
+/* .react-select__menu {
+  background-color: var(--color-base-100) !important;
+
+  & list-items-inside {
+    cursor: pointer;
+  }
+} */
