@@ -1,3 +1,4 @@
+// RadioGroup.tsx
 import React from "react";
 
 interface RadioOption {
@@ -13,7 +14,6 @@ interface RadioOption {
     | "warning"
     | "error"
     | "neutral";
-  checked?: boolean;
 }
 
 interface RadioGroupProps {
@@ -21,12 +21,11 @@ interface RadioGroupProps {
   name: string;
   options: RadioOption[];
   fieldsetCentered?: boolean;
-  fieldsetFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
   radioSize?: "xl" | "lg" | "md" | "sm" | "xs";
-  labelFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
   className?: string;
   orientation?: "horizontal" | "vertical";
   onValueChange?: (value: string) => void;
+  value?: string;
 }
 
 const RadioGroup: React.FC<RadioGroupProps> = ({
@@ -34,12 +33,11 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   name,
   options,
   fieldsetCentered = false,
-  fieldsetFontSize = "base",
   radioSize = "md",
-  labelFontSize = "base",
   className = "",
   orientation = "vertical",
   onValueChange,
+  value,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onValueChange) {
@@ -52,7 +50,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
       className={`fieldset w-fit ${fieldsetCentered ? "justify-items-center text-center" : ""} ${className}`}
     >
       <legend
-        className={`fieldset-legend ${fieldsetFontSize && "text-" + fieldsetFontSize}`}
+        className={`fieldset-legend text-${radioSize}`}
       >
         {fieldset}
       </legend>
@@ -74,14 +72,14 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
               type="radio"
               name={name}
               value={option.value}
-              defaultChecked={option.checked}
+              checked={value === option.value}
               disabled={option.disabled}
               onChange={handleChange}
               className={`radio ${radioSize ? `radio-${radioSize}` : ""} ${
                 option.variant ? `radio-${option.variant}` : ""
               }`}
             />
-            <span className={`${labelFontSize && "text-" + labelFontSize}`}>
+            <span className={`text-${radioSize}`}>
               {option.label}
             </span>
           </label>

@@ -19,12 +19,44 @@ import {
 } from "react-icons/fi";
 
 export default function InputsPage() {
+  const [inputValue, setInputValue] = useState("");
+  const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+  const [selectedNivel, setSelectedNivel] = useState("");
+  const [selectedTermo, setSelectedTermo] = useState("s");
+
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cpfNumber, setCpfNumber] = useState("");
+
+  const [selectedColor, setSelectedColor] = useState('cor1');
+  const [selectedSizeXs, setSelectedSizeXs] = useState('xs1');
+  const [selectedSizeSm, setSelectedSizeSm] = useState('sm1');
+  const [selectedSizeMd, setSelectedSizeMd] = useState('md1');
+  const [selectedSizeLg, setSelectedSizeLg] = useState('lg1');
+  const [selectedSizeXl, setSelectedSizeXl] = useState('xl1');
+  const [selectedCenteredOption, setSelectedCenteredOption] = useState('opt1');
+  const [selectedFieldsetOnlyOption, setSelectedFieldsetOnlyOption] = useState('opt1');
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState('pending');
+  const [selectedPlan, setSelectedPlan] = useState('free');
+
+  const handleCheckboxChange = (event) => {
+    const newValue = event.target.checked;
+    setIsAnonymousOffer(newValue);
+    console.log("isAnonymousOffer -> " + newValue);
+  };
+
+  const handleNivelChange = (newValue) => {
+    setSelectedNivel(newValue);
+    console.log("Nível selecionado: ", newValue);
+  };
+
+  const handleTermoChange = (newValue) => {
+    setSelectedTermo(newValue);
+    console.log("Termo selecionado: ", newValue);
+  };
 
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -283,7 +315,6 @@ export default function InputsPage() {
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             variant="ghost"
-            bordered={false}
           />
           <Input
             type="tel"
@@ -361,21 +392,26 @@ export default function InputsPage() {
 
       {/* --- Seção de Demonstração --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+        <h2 className="text-xl font-semibold text-base-content mb-6">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <Input fieldset="Input Padrão" placeholder="Digite.." />
+          <div className="space-y-4 justify-items-center">
+            <Input
+              fieldset="Input Padrão"
+              placeholder="Digite.."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
 
             <div className="p-4 bg-base-300 rounded-lg">
               <pre className="text-sm">
-                {`<Input\n  fieldset="Input Padrão"\n  placeholder="Digite.."\n/>`}
+                {`const [inputValue, setInputValue] = useState("");\n\n<Input\n  fieldset="Input Padrão"\n  placeholder="Digite.."\n  value={inputValue}\n  onChange={(e) => setInputValue(e.target.value)}\n/>`}
               </pre>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 justify-items-center">
             <Input
               type="password"
               fieldset="Digite sua senha"
@@ -393,11 +429,13 @@ export default function InputsPage() {
                 pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",
               }}
               required
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
 
             <div className="p-4 bg-base-300 rounded-lg">
               <pre className="text-sm">
-                {`import { FiLock } from "react-icons/fi";\n\n<Input\n  type="password"\n  fieldset="Digite sua senha"\n  placeholder="*****"\n  variant="primary"\n  icon={<FiLock />}\n  validMessage={\n    <>\n    Precisa ter ao menos 8 caractéres, incluindo:\n    <br />\n    Número, letra maiúscula e letra minúscula\n    </>\n  }\n  validReqs={{\n    pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",\n  }}\n  required\n/>`}
+                {`import { FiLock } from "react-icons/fi";\n\nconst [inputValue, setInputValue] = useState("");\n\n<Input\n  type="password"\n  fieldset="Digite sua senha"\n  placeholder="*****"\n  variant="primary"\n  icon={<FiLock />}\n  validMessage={\n    <>\n    Precisa ter ao menos 8 caractéres, incluindo:\n    <br />\n    Número, letra maiúscula e letra minúscula\n    </>\n  }\n  validReqs={{\n    pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",\n  }}\n  required\n  value={inputValue}\n  onChange={(e) => setInputValue(e.target.value)}\n/>`}
               </pre>
             </div>
           </div>
@@ -580,30 +618,14 @@ export default function InputsPage() {
               Select Simples:
             </p>
             <div className="space-y-4">
-              <Select
-                options={options}
-                fieldset="Ghost"
-                variant="ghost"
-                bordered={false}
-              />
-              <Select
-                options={options}
-                fieldset="Primary"
-                variant="primary"
-                bordered={false}
-              />
+              <Select options={options} fieldset="Ghost" variant="ghost" />
+              <Select options={options} fieldset="Primary" variant="primary" />
               <Select
                 options={options}
                 fieldset="Secondary"
                 variant="secondary"
-                bordered={false}
               />
-              <Select
-                options={options}
-                fieldset="Accent"
-                variant="accent"
-                bordered={false}
-              />
+              <Select options={options} fieldset="Accent" variant="accent" />
             </div>
           </div>
 
@@ -617,7 +639,6 @@ export default function InputsPage() {
               onChange={setSelectedOptions}
               fieldset="Ghost Multiple"
               variant="ghost"
-              bordered={false}
             />
           </div>
         </div>
@@ -625,7 +646,7 @@ export default function InputsPage() {
 
       {/* --- Seção de Demonstração --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+        <h2 className="text-xl font-semibold text-base-content mb-6">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -702,54 +723,14 @@ export default function InputsPage() {
       {/* --- Seção de Checkbox com Fieldset --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Checkbox com Variações de Label e Fieldset
+          Checkbox com Label e Fieldset
         </h2>
-        <div className="flex flex-col gap-4">
-          <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
-
-          <div className="flex flex-wrap items-center gap-8">
-            <Checkbox fieldset="Fieldset" label="xs" fildsetFontSize="xs" />
-            <Checkbox fieldset="Fieldset" label="sm" fildsetFontSize="sm" />
-            <Checkbox fieldset="Fieldset" label="base" fildsetFontSize="base" />
-            <Checkbox fieldset="Fieldset" label="lg" fildsetFontSize="lg" />
-            <Checkbox fieldset="Fieldset" label="xl" fildsetFontSize="xl" />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">
-            Tamanhos Label:
-          </p>
-
-          <div className="flex items-center gap-8">
-            <Checkbox fieldset="Fieldset" label="xs" labelFontSize="xs" />
-            <Checkbox fieldset="Fieldset" label="sm" labelFontSize="sm" />
-            <Checkbox fieldset="Fieldset" label="base" labelFontSize="base" />
-            <Checkbox fieldset="Fieldset" label="lg" labelFontSize="lg" />
-            <Checkbox fieldset="Fieldset" label="xl" labelFontSize="xl" />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
-
-          <div className="flex items-center gap-8">
-            <Checkbox
-              fieldset="Aceito os termos"
-              fieldsetCentered
-              defaultChecked
-            />
-            <Checkbox fieldset="Aceito os termos" defaultChecked />
-            <Checkbox label="Eu aceito" />
-            <Checkbox
-              fieldset="Aceito os termos"
-              fildsetFontSize="xl"
-              label="Eu aceito"
-              labelFontSize="xl"
-            />
-            <Checkbox
-              fieldset="Aceito os termos"
-              fildsetFontSize="xs"
-              label="Eu aceito"
-              labelFontSize="xs"
-            />
-          </div>
+        <div className="flex flex-wrap items-center gap-8">
+          <Checkbox fieldset="Fieldset" label="xs" checkboxSize="xs" />
+          <Checkbox fieldset="Fieldset" label="sm" checkboxSize="sm" />
+          <Checkbox fieldset="Fieldset" label="base" />
+          <Checkbox fieldset="Fieldset" label="lg" checkboxSize="lg" />
+          <Checkbox fieldset="Fieldset" label="xl" checkboxSize="xl" />
         </div>
       </div>
 
@@ -790,107 +771,43 @@ export default function InputsPage() {
       {/* --- Seção de Checkbox com Fieldset --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Toggles com Label e/ou Fieldset
+          Toggles com Label e Fieldset
         </h2>
-        <div className="flex flex-col gap-2">
-          <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
 
-          <div className="flex flex-wrap items-center gap-8">
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="xs"
-              fildsetFontSize="xs"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="sm"
-              fildsetFontSize="sm"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="base"
-              fildsetFontSize="base"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="lg"
-              fildsetFontSize="lg"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="xl"
-              fildsetFontSize="xl"
-            />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">
-            Tamanhos Label:
-          </p>
-
-          <div className="flex items-center gap-8">
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="xl"
-              labelFontSize="xl"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="lg"
-              labelFontSize="lg"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="base"
-              labelFontSize="base"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="sm"
-              labelFontSize="sm"
-            />
-            <Checkbox
-              toggle
-              fieldset="Fieldset"
-              label="xs"
-              labelFontSize="xs"
-            />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
-
-          <div className="flex items-center gap-8">
-            <Checkbox
-              toggle
-              fieldset="Aceito os termos"
-              fieldsetCentered
-              defaultChecked
-            />
-            <Checkbox toggle fieldset="Aceito os termos" defaultChecked />
-            <Checkbox toggle label="Eu aceito" />
-            <Checkbox
-              toggle
-              fieldset="Aceito os termos"
-              fildsetFontSize="xl"
-              label="Eu aceito"
-              labelFontSize="xl"
-            />
-            <Checkbox
-              toggle
-              fieldset="Aceito os termos"
-              fildsetFontSize="xs"
-              label="Eu aceito"
-              labelFontSize="xs"
-            />
-          </div>
+        <div className="flex flex-wrap items-center gap-8">
+          <Checkbox
+            toggle
+            fieldset="xs"
+            leftLabel="leftLabel"
+            checkboxSize="xs"
+          />
+          <Checkbox toggle fieldset="sm" label="label" checkboxSize="sm" />
+          <Checkbox
+            toggle
+            fieldsetCentered
+            legendClassName="ml-3"
+            fieldset="md"
+            label="label"
+            leftLabel="leftLabel"
+          />
+          <Checkbox
+            toggle
+            fieldsetCentered
+            legendClassName="ml-3"
+            fieldset="lg"
+            label="label"
+            leftLabel="leftLabel"
+            checkboxSize="lg"
+          />
+          <Checkbox
+            toggle
+            fieldsetCentered
+            legendClassName="ml-3"
+            fieldset="xl"
+            label="label"
+            leftLabel="leftLabel"
+            checkboxSize="xl"
+          />
         </div>
       </div>
 
@@ -904,12 +821,52 @@ export default function InputsPage() {
         </div>
       </div>
 
+      {/* --- Seção de Demonstração --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-6">
+          Demonstração de Uso
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4 justify-items-center mt-11">
+            <Checkbox
+              label="Oferta Anônima?"
+              checked={isAnonymousOffer}
+              onChange={handleCheckboxChange}
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);\n\nconst handleCheckboxChange = (event) => {\n  setIsAnonymousOffer(event.target.checked);\n};\n\n<Checkbox\n  label="Oferta Anônima?"\n  checked={isAnonymousOffer}\n  onChange={handleCheckboxChange}\n/>`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="space-y-4 justify-items-center">
+            <Checkbox
+              toggle
+              fieldset="Oferta Anônima?"
+              label="Sim"
+              leftLabel="Não"
+              fieldsetCentered
+              checked={isAnonymousOffer}
+              onChange={handleCheckboxChange}
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);\n\nconst handleCheckboxChange = (event) => {\n  setIsAnonymousOffer(event.target.checked);\n};\n\n<Checkbox\n  toggle\n  fieldset="Oferta Anônima?"\n  label="Sim"\n  leftLabel="Não"\n  fieldsetCentered\n  checked={isAnonymousOffer}\n  onChange={handleCheckboxChange}\n/>`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* --- Seção de Radios --- */}
       <div className="flex justify-between items-center mb-6 mt-12">
         <h1 className="text-3xl font-bold text-base-content">Radio Groups</h1>
       </div>
 
-      {/* Grupo com Diferentes Tamanhos */}
+{/* Grupo com Diferentes Tamanhos */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
           Radios Padrão
@@ -922,7 +879,7 @@ export default function InputsPage() {
             name="cores"
             orientation="horizontal"
             options={[
-              { value: "cor1", label: "padrão", checked: true },
+              { value: "cor1", label: "padrão" },
               { value: "cor2", label: "primary", variant: "primary" },
               { value: "cor3", label: "secondary", variant: "secondary" },
               { value: "cor4", label: "accent", variant: "accent" },
@@ -932,6 +889,8 @@ export default function InputsPage() {
               { value: "cor8", label: "error", variant: "error" },
               { value: "cor9", label: "neutral", variant: "neutral" },
             ]}
+            value={selectedColor}
+            onValueChange={setSelectedColor}
           />
 
           <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
@@ -942,45 +901,82 @@ export default function InputsPage() {
               name="sizes-xs"
               radioSize="xs"
               options={[
-                { value: "xs1", label: "Opção 1", checked: true },
+                { value: "xs1", label: "Opção 1" },
                 { value: "xs2", label: "Opção 2" },
               ]}
+              value={selectedSizeXs}
+              onValueChange={setSelectedSizeXs}
             />
             <RadioGroup
               fieldset="Radio SM"
               name="sizes-sm"
               radioSize="sm"
               options={[
-                { value: "sm1", label: "Opção 1", checked: true },
+                { value: "sm1", label: "Opção 1" },
                 { value: "sm2", label: "Opção 2" },
               ]}
+              value={selectedSizeSm}
+              onValueChange={setSelectedSizeSm}
             />
             <RadioGroup
               fieldset="Radio MD"
               name="sizes-md"
-              radioSize="md"
               options={[
-                { value: "md1", label: "Opção 1", checked: true },
+                { value: "md1", label: "Opção 1" },
                 { value: "md2", label: "Opção 2" },
               ]}
+              value={selectedSizeMd}
+              onValueChange={setSelectedSizeMd}
             />
             <RadioGroup
               fieldset="Radio LG"
               name="sizes-lg"
               radioSize="lg"
               options={[
-                { value: "lg1", label: "Opção 1", checked: true },
+                { value: "lg1", label: "Opção 1" },
                 { value: "lg2", label: "Opção 2" },
               ]}
+              value={selectedSizeLg}
+              onValueChange={setSelectedSizeLg}
             />
             <RadioGroup
               fieldset="Radio XL"
               name="sizes-xl"
               radioSize="xl"
               options={[
-                { value: "xl1", label: "Opção 1", checked: true },
+                { value: "xl1", label: "Opção 1" },
                 { value: "xl2", label: "Opção 2" },
               ]}
+              value={selectedSizeXl}
+              onValueChange={setSelectedSizeXl}
+            />
+          </div>
+
+          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
+
+          <div className="flex flex-wrap items-start gap-8">
+            <RadioGroup
+              fieldset="Centralizado"
+              name="centered"
+              fieldsetCentered
+              options={[
+                { value: "opt1", label: "Opção centralizada 1" },
+                { value: "opt2", label: "Opção centralizada 2" },
+              ]}
+              value={selectedCenteredOption}
+              onValueChange={setSelectedCenteredOption}
+            />
+
+            <RadioGroup
+              fieldset="Apenas Fieldset"
+              name="fieldset-only"
+              fieldsetCentered
+              options={[
+                { value: "opt1", label: "" },
+                { value: "opt2", label: "" },
+              ]}
+              value={selectedFieldsetOnlyOption}
+              onValueChange={setSelectedFieldsetOnlyOption}
             />
           </div>
         </div>
@@ -1003,7 +999,6 @@ export default function InputsPage() {
               value: "pending",
               label: "Pendente",
               variant: "warning",
-              checked: true,
             },
             {
               value: "processing",
@@ -1021,6 +1016,8 @@ export default function InputsPage() {
               variant: "primary",
             },
           ]}
+          value={selectedOrderStatus}
+          onValueChange={setSelectedOrderStatus}
         />
 
         <p className="font-medium text-base-content/80 mt-4">Vertical:</p>
@@ -1030,7 +1027,7 @@ export default function InputsPage() {
             fieldset="Escolha seu plano"
             name="plans"
             options={[
-              { value: "free", label: "Plano Gratuito", checked: true },
+              { value: "free", label: "Plano Gratuito" },
               { value: "basic", label: "Plano Básico" },
               { value: "pro", label: "Plano Profissional" },
               {
@@ -1039,184 +1036,60 @@ export default function InputsPage() {
                 disabled: true,
               },
             ]}
-            fieldsetFontSize="lg"
+            value={selectedPlan}
+            onValueChange={setSelectedPlan}
           />
         </div>
       </div>
-
-      {/* --- Seção de Radio Groups com Variações de Label e Fieldset --- */}
+      
+      {/* --- Seção de Demonstração --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Radio Groups com Variações de Label e Fieldset
+        <h2 className="text-xl font-semibold text-base-content mb-6">
+          Demonstração de Uso
         </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <div className="flex flex-col gap-2">
-          <p className="font-medium text-base-content/80">Tamanhos Fieldset:</p>
-
-          <div className="flex flex-wrap items-start gap-8 mb-4">
+          <div className="space-y-4 justify-items-center">
             <RadioGroup
-              fieldset="Fieldset xs"
-              name="fieldset-xs"
-              fieldsetFontSize="xs"
+              fieldset="Aceita os Termos?"
+              name="termos"
               options={[
-                { value: "opt1", label: "Opção 1", checked: true },
-                { value: "opt2", label: "Opção 2" },
+                { value: "s", label: "Sim" },
+                { value: "n", label: "Não" },
               ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset sm"
-              name="fieldset-sm"
-              fieldsetFontSize="sm"
-              options={[
-                { value: "opt1", label: "Opção 1", checked: true },
-                { value: "opt2", label: "Opção 2" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset base"
-              name="fieldset-base"
-              fieldsetFontSize="base"
-              options={[
-                { value: "opt1", label: "Opção 1", checked: true },
-                { value: "opt2", label: "Opção 2" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset lg"
-              name="fieldset-lg"
-              fieldsetFontSize="lg"
-              options={[
-                { value: "opt1", label: "Opção 1", checked: true },
-                { value: "opt2", label: "Opção 2" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset xl"
-              name="fieldset-xl"
-              fieldsetFontSize="xl"
-              options={[
-                { value: "opt1", label: "Opção 1", checked: true },
-                { value: "opt2", label: "Opção 2" },
-              ]}
-            />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">
-            Tamanhos Label:
-          </p>
-
-          <div className="flex flex-wrap items-start gap-8 mb-4">
-            <RadioGroup
-              fieldset="Fieldset"
-              name="label-xs"
-              labelFontSize="xs"
-              options={[
-                { value: "opt1", label: "Label xs", checked: true },
-                { value: "opt2", label: "Label xs" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset"
-              name="label-sm"
-              labelFontSize="sm"
-              options={[
-                { value: "opt1", label: "Label sm", checked: true },
-                { value: "opt2", label: "Label sm" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset"
-              name="label-base"
-              labelFontSize="base"
-              options={[
-                { value: "opt1", label: "Label base", checked: true },
-                { value: "opt2", label: "Label base" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset"
-              name="label-lg"
-              labelFontSize="lg"
-              options={[
-                { value: "opt1", label: "Label lg", checked: true },
-                { value: "opt2", label: "Label lg" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset"
-              name="label-xl"
-              labelFontSize="xl"
-              options={[
-                { value: "opt1", label: "Label xl", checked: true },
-                { value: "opt2", label: "Label xl" },
-              ]}
-            />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">Variações:</p>
-
-          <div className="flex flex-wrap items-start gap-8">
-            <RadioGroup
-              fieldset="Centralizado"
-              name="centered"
               fieldsetCentered
-              options={[
-                { value: "opt1", label: "Opção centralizada 1", checked: true },
-                { value: "opt2", label: "Opção centralizada 2" },
-              ]}
+              className="mb-12"
+              value={selectedTermo}
+              onValueChange={handleTermoChange}
             />
 
-            <RadioGroup
-              fieldset="Apenas Fieldset"
-              name="fieldset-only"
-              fieldsetCentered
-              options={[
-                { value: "opt1", label: "", checked: true },
-                { value: "opt2", label: "" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset e Labels"
-              name="combined"
-              fieldsetFontSize="lg"
-              labelFontSize="sm"
-              options={[
-                { value: "opt1", label: "Label pequena", checked: true },
-                { value: "opt2", label: "Label pequena" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset grande e Labels grandes"
-              name="large-all"
-              fieldsetFontSize="xl"
-              labelFontSize="xl"
-              options={[
-                { value: "opt1", label: "Label XL", checked: true },
-                { value: "opt2", label: "Label XL" },
-              ]}
-            />
-
-            <RadioGroup
-              fieldset="Fieldset pequeno e Labels pequenas"
-              name="small-all"
-              fieldsetFontSize="xs"
-              labelFontSize="xs"
-              options={[
-                { value: "opt1", label: "Label xs", checked: true },
-                { value: "opt2", label: "Label xs" },
-              ]}
-            />
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`const [selectedTermo, setSelectedTermo] = useState("s");\n\nconst handleTermoChange = (newValue) => {\n  setSelectedTermo(newValue);\n};\n\n<RadioGroup\n  fieldset="Aceita os Termos?"\n  name="termos"\n  options={[\n    { value: "s", label: "Sim" },\n    { value: "n", label: "Não" },\n  ]}\n  fieldsetCentered\n  className="mb-12"\n  value={selectedTermo}\n  onValueChange={handleTermoChange}\n/>`}
+              </pre>
+            </div>
           </div>
+
+          <div className="space-y-4 justify-items-center">
+            <RadioGroup
+              fieldset="Qual seu nível?"
+              name="nivel"
+              options={[
+                { value: "nv1", label: "Júnior" },
+                { value: "nv2", label: "Pleno" },
+                { value: "nv3", label: "Sênior" },
+              ]}
+              value={selectedNivel}
+              onValueChange={handleNivelChange}
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`const [selectedNivel, setSelectedNivel] = useState('');\n\nconst handleNivelChange = (newValue) => {\n  setSelectedNivel(newValue);\n};\n\n<RadioGroup\n  fieldset="Qual seu nível?"\n  name="nivel"\n  options={[\n    { value: "nv1", label: "Júnior" },\n    { value: "nv2", label: "Pleno" },\n    { value: "nv3", label: "Sênior" },\n  ]}\n  value={selectedNivel}\n  onValueChange={handleNivelChange}\n/>`}
+              </pre>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
