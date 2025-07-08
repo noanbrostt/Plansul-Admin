@@ -5,6 +5,7 @@ import Input from "./components/Input";
 import Checkbox from "./components/Checkbox";
 import RadioGroup from "./components/Radio";
 import Select from "./components/Select";
+import MultiSelect from "./components/MultiSelect";
 import Textarea from "./components/Textarea";
 
 import {
@@ -15,7 +16,6 @@ import {
   FiHash,
   FiGlobe,
   FiAlertCircle,
-  FiMapPin,
 } from "react-icons/fi";
 
 export default function InputsPage() {
@@ -25,6 +25,22 @@ export default function InputsPage() {
   const [phoneValue, setPhoneValue] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cpfNumber, setCpfNumber] = useState("");
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const options = [
+    { value: "op1", label: "Opção 1" },
+    { value: "op2", label: "Opção 2" },
+    { value: "op3", label: "Opção 3" },
+  ];
+
+  const multipleOptions = [
+    { value: "m1", label: "Item 1" },
+    { value: "m2", label: "Item 2" },
+    { value: "m3", label: "Item 3" },
+    { value: "m4", label: "Item 4" },
+    { value: "m5", label: "Item 5" },
+  ];
 
   return (
     <div className="bg-base-100 min-h-screen">
@@ -52,77 +68,40 @@ export default function InputsPage() {
           <p className="font-medium text-base-content/80">Cores da Borda:</p>
 
           <div className="flex flex-wrap items-end gap-4">
-            <Input
-              placeholder="Text (Padrão)"
-              inputClassName="w-64"
-              autoFocus
-            />
-            <Input
-              variant="primary"
-              placeholder="Email (Borda Primary)"
-              type="email"
-              inputClassName="w-64"
-            />
-            <Input
-              variant="secondary"
-              placeholder="Tel (Borda Secondary)"
-              type="tel"
-              inputClassName="w-64"
-            />
-            <Input
-              variant="accent"
-              placeholder="URL (Borda Accent)"
-              type="url"
-              inputClassName="w-64"
-            />
-            <Input
-              variant="info"
-              placeholder="Borda Info"
-              inputClassName="w-64"
-            />
-            <Input
-              variant="success"
-              placeholder="Borda Success"
-              inputClassName="w-64"
-            />
-            <Input
-              variant="warning"
-              placeholder="Borda Warning"
-              inputClassName="w-64"
-            />
+            <Input placeholder="Padrão" autoFocus />
+            <Input variant="primary" placeholder="Primary" />
+            <Input variant="secondary" placeholder="Secondary" />
+            <Input variant="accent" placeholder="Accent" />
+            <Input variant="info" placeholder="Info" />
+            <Input variant="success" placeholder="Success" />
+            <Input variant="warning" placeholder="Warning" />
             <Input
               variant="error"
-              placeholder="Borda Error"
+              placeholder="Error"
               icon={<FiAlertCircle />}
-              inputClassName="w-64"
             />
-            <Input
-              variant="ghost"
-              placeholder="Ghost Input (sem borda)"
-              bordered={false}
-              inputClassName="w-64"
-            />
+            <Input variant="ghost" placeholder="Ghost Input" />
           </div>
           <p className="font-medium text-base-content/80 mt-4">
             Larguras de Inputs:
           </p>
           <div className="flex flex-wrap items-end gap-4">
-            <Input placeholder="w-32" inputClassName="w-32" />
-            <Input placeholder="w-48" inputClassName="w-48" />
-            <Input placeholder="w-64" inputClassName="w-64" />
-            <Input placeholder="Padrão (w-80)" />
-            <Input placeholder="w-96" inputClassName="w-96" />
-            <Input placeholder="w-full (default)" inputClassName="w-full" />
+            <Input placeholder="w-32" largura="w-32" />
+            <Input placeholder="w-48" largura="w-48" />
+            <Input placeholder="Padrão (w-64)" />
+            <Input placeholder="w-80" largura="w-80" />
+            <Input placeholder="w-96" largura="w-96" />
+            <Input placeholder="w-full" largura="w-full" />
           </div>
           <p className="font-medium text-base-content/80 mt-4">
             Tamanhos dos Inputs em si:
           </p>
           <div className="flex gap-4">
-            <Input inputSize="xs" placeholder="Input Extra Pequeno (xs)" />
-            <Input inputSize="sm" placeholder="Input Pequeno (sm)" />
-            <Input placeholder="Input Médio (md - Padrão)" />
-            <Input inputSize="lg" placeholder="Input Grande (lg)" />
-            <Input inputSize="xl" placeholder="Input Extra Grande (xl)" />
+            <Input inputSize="xs" placeholder="Extra Pequeno (xs)" />
+            <Input inputSize="sm" placeholder="Pequeno (sm)" />
+            <Input placeholder="Padrão (Médio - md)" />
+            <Input inputSize="lg" placeholder="Grande (lg)" />
+            <Input inputSize="xl" placeholder="Extra Grande (xl)" />
           </div>
         </div>
       </div>
@@ -135,34 +114,25 @@ export default function InputsPage() {
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-end gap-4">
             <Input
+              fieldset="Nome Completo"
               placeholder="Extra Pequeno (xs)"
-              fieldset="Nome Completo"
-              fildsetFontSize="xs"
-              inputClassName="w-64"
+              inputSize="xs"
             />
             <Input
+              fieldset="Nome Completo"
               placeholder="Pequeno (sm)"
-              fieldset="Nome Completo"
-              fildsetFontSize="sm"
-              inputClassName="w-64"
+              inputSize="sm"
             />
+            <Input fieldset="Nome Completo" placeholder="Padrão (md)" />
             <Input
-              placeholder="Padrão (base)"
               fieldset="Nome Completo"
-              fildsetFontSize="base"
-              inputClassName="w-64"
-            />
-            <Input
               placeholder="Grande (lg)"
-              fieldset="Nome Completo"
-              fildsetFontSize="lg"
-              inputClassName="w-64"
+              inputSize="lg"
             />
             <Input
-              placeholder="Extra Grande (xl)"
               fieldset="Nome Completo"
-              fildsetFontSize="xl"
-              inputClassName="w-64"
+              placeholder="Extra Grande (xl)"
+              inputSize="xl"
             />
           </div>
         </div>
@@ -177,7 +147,6 @@ export default function InputsPage() {
           <Input
             fieldset="Telefone"
             placeholder="(00) 00000-0000"
-            inputClassName="w-64"
             mask="(00) 00000-0000"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
@@ -185,7 +154,6 @@ export default function InputsPage() {
           <Input
             fieldset="CPF"
             placeholder="000.000.000-00"
-            inputClassName="w-64"
             mask="000.000.000-00"
             value={cpfNumber}
             onChange={(e) => setCpfNumber(e.target.value)}
@@ -194,7 +162,6 @@ export default function InputsPage() {
             fieldset="Máscara + Validação"
             type="text"
             placeholder="Digite seu telefone"
-            inputClassName="w-64"
             mask="(00) 00000-0000"
             validMessage={<>Precisa ter 11 números</>}
             validReqs={{
@@ -207,7 +174,6 @@ export default function InputsPage() {
           <Input
             placeholder="Digite sua matrícula"
             mask="P000000"
-            inputClassName="w-64"
             required // Faz com que o input fique errado enquanto vazio
           />
         </div>
@@ -223,7 +189,6 @@ export default function InputsPage() {
             type="password"
             placeholder="Sua Senha"
             icon={<FiLock />}
-            inputClassName="w-64"
             validMessage={
               <>
                 Precisa ter ao menos 8 caractéres, incluindo:
@@ -241,7 +206,6 @@ export default function InputsPage() {
             type="email"
             placeholder="Seu Email"
             icon={<FiMail />}
-            inputClassName="w-64"
             validMessage={<>Email inválido, falta o "@"</>}
             required // Faz com que o input fique errado enquanto vazio
             fieldset="Email de Contato"
@@ -249,7 +213,6 @@ export default function InputsPage() {
           <Input
             type="number"
             placeholder="Digite um número de 1 à 10"
-            inputClassName="w-64"
             validMessage={<>Digite um número de 1 à 10</>}
             validReqs={{
               min: 1,
@@ -260,7 +223,6 @@ export default function InputsPage() {
           <Input
             type="tel"
             placeholder="Digite seu telefone"
-            inputClassName="w-64"
             validMessage={<>Precisa ter 11 dígitos</>}
             validReqs={{
               pattern: "[0-9]*",
@@ -272,7 +234,6 @@ export default function InputsPage() {
           <Input
             type="url"
             placeholder="https://"
-            inputClassName="w-64"
             icon={<FiGlobe />}
             validMessage={<>Precisa ser uma URL válida</>}
             validReqs={{
@@ -297,7 +258,6 @@ export default function InputsPage() {
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
             variant="primary"
-            inputClassName="w-64"
           />
           <Input
             type="email"
@@ -307,7 +267,6 @@ export default function InputsPage() {
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
             variant="primary"
-            inputClassName="w-64"
           />
           <Input
             type="password"
@@ -316,7 +275,6 @@ export default function InputsPage() {
             value={passwordValue}
             onChange={(e) => setPasswordValue(e.target.value)}
             variant="secondary"
-            inputClassName="w-64"
           />
           <Input
             type="search"
@@ -326,7 +284,6 @@ export default function InputsPage() {
             onChange={(e) => setSearchValue(e.target.value)}
             variant="ghost"
             bordered={false}
-            inputClassName="w-64"
           />
           <Input
             type="tel"
@@ -336,22 +293,6 @@ export default function InputsPage() {
             variant="info"
             value={phoneValue}
             onChange={(e) => setPhoneValue(e.target.value)}
-            inputClassName="w-64"
-          />
-        </div>
-      </div>
-
-      {/* --- Seção de Inputs Desabilitados e Somente Leitura --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Inputs Desabilitados / Somente Leitura
-        </h2>
-        <div className="flex flex-wrap items-end gap-4">
-          <Input placeholder="Input Desabilitado" disabled />
-          <Input
-            placeholder="Input Somente Leitura"
-            readOnly
-            value="Texto pré-definido"
           />
         </div>
       </div>
@@ -366,7 +307,7 @@ export default function InputsPage() {
             optionalBadge
             optionalBadgeText="Opcional"
             placeholder="Adicionar apelido?"
-            inputClassName="w-80"
+            largura="w-80"
           />
 
           <Input
@@ -375,7 +316,7 @@ export default function InputsPage() {
             placeholder="Campo de Observação"
             readOnly
             value="Este campo é apenas para visualização."
-            inputClassName="max-w-md"
+            largura="max-w-md"
           />
         </div>
       </div>
@@ -391,33 +332,334 @@ export default function InputsPage() {
             placeholder="Número"
             icon={<FiHash />}
             variant="accent"
-            inputClassName="w-32"
+            largura="w-32"
           />
-          <Input type="date" inputClassName="w-36" />
-          <Input type="time" inputClassName="w-22" />
-          <Input type="datetime-local" inputClassName="w-46.5" />
-          <Input type="color" defaultValue="#4a90e2" inputClassName="w-17" />
+          <Input type="date" largura="w-36" />
+          <Input type="time" largura="w-22" />
+          <Input type="datetime-local" largura="w-46.5" />
+          <Input type="color" defaultValue="#4a90e2" largura="w-17" />
           <Input
             type="url"
             placeholder="Sua URL"
             icon={<FiGlobe />}
             variant="info"
-            inputClassName="w-64"
           />
           <Input
             type="email"
             placeholder="email@exemplo.com"
             icon={<FiMail />}
             variant="warning"
-            inputClassName="w-64"
           />
           <Input
             type="password"
             placeholder="Sua Senha"
             icon={<FiLock />}
             variant="error"
-            inputClassName="w-64"
           />
+        </div>
+      </div>
+
+      {/* --- Seção de Demonstração --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Demonstração de Uso
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <Input fieldset="Input Padrão" placeholder="Digite.." />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`<Input\n  fieldset="Input Padrão"\n  placeholder="Digite.."\n/>`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <Input
+              type="password"
+              fieldset="Digite sua senha"
+              placeholder="*****"
+              variant="primary"
+              icon={<FiLock />}
+              validMessage={
+                <>
+                  Precisa ter ao menos 8 caractéres, incluindo:
+                  <br />
+                  Número, letra maiúscula e letra minúscula
+                </>
+              }
+              validReqs={{
+                pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",
+              }}
+              required
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`import { FiLock } from "react-icons/fi";\n\n<Input\n  type="password"\n  fieldset="Digite sua senha"\n  placeholder="*****"\n  variant="primary"\n  icon={<FiLock />}\n  validMessage={\n    <>\n    Precisa ter ao menos 8 caractéres, incluindo:\n    <br />\n    Número, letra maiúscula e letra minúscula\n    </>\n  }\n  validReqs={{\n    pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",\n  }}\n  required\n/>`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-6 mt-12">
+        <h1 className="text-3xl font-bold text-base-content">Selects</h1>
+      </div>
+
+      {/* --- Seção de Selects Padrão com Cores --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Selects Padrão
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <p className="font-medium text-base-content/80 mb-2">Cores:</p>
+            <div className="space-y-4">
+              <Select options={options} fieldset="Default" />
+              <Select options={options} fieldset="Primary" variant="primary" />
+              <Select
+                options={options}
+                fieldset="Secondary"
+                variant="secondary"
+              />
+              <Select options={options} fieldset="Accent" variant="accent" />
+              <Select options={options} fieldset="Info" variant="info" />
+              <Select options={options} fieldset="Success" variant="success" />
+              <Select options={options} fieldset="Warning" variant="warning" />
+              <Select options={options} fieldset="Error" variant="error" />
+            </div>
+          </div>
+
+          <div>
+            <p className="font-medium text-base-content/80 mb-2">Tamanhos:</p>
+            <div className="space-y-4">
+              <Select options={options} fieldset="XS" size="xs" />
+              <Select options={options} fieldset="SM" size="sm" />
+              <Select options={options} fieldset="MD (Padrão)" size="md" />
+              <Select options={options} fieldset="LG" size="lg" />
+            </div>
+
+            <p className="font-medium text-base-content/80 mt-6 mb-2">
+              Estados:
+            </p>
+            <div className="space-y-4">
+              <Select
+                options={options}
+                fieldset="Com Erro"
+                error="Campo obrigatório"
+              />
+              <Select
+                options={options}
+                fieldset="Com Sucesso"
+                success="Seleção válida"
+              />
+              <Select
+                options={options}
+                fieldset="Com Informação"
+                info="Selecione uma opção"
+              />
+              <Select options={options} fieldset="Desabilitado" disabled />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Multiple Select --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Multiple Select (Dropdown com Checkboxes)
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <p className="font-medium text-base-content/80 mb-2">Tamanhos:</p>
+            <div className="space-y-4">
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="XS"
+                size="xs"
+              />
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="SM"
+                size="sm"
+              />
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="MD"
+                size="md"
+              />
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="LG"
+                size="lg"
+              />
+            </div>
+          </div>
+
+          <div>
+            <p className="font-medium text-base-content/80 mb-2">Cores:</p>
+            <div className="space-y-4">
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="Primary"
+                variant="primary"
+              />
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="Success"
+                variant="success"
+              />
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="Warning"
+                variant="warning"
+              />
+              <MultiSelect
+                options={multipleOptions}
+                selected={selectedOptions}
+                onChange={setSelectedOptions}
+                fieldset="Error"
+                variant="error"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <p className="font-medium text-base-content/80 mb-2">Estados:</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <MultiSelect
+              options={multipleOptions}
+              selected={selectedOptions}
+              onChange={setSelectedOptions}
+              fieldset="Com Erro"
+              error="Selecione pelo menos uma opção"
+            />
+            <MultiSelect
+              options={multipleOptions}
+              selected={selectedOptions}
+              onChange={setSelectedOptions}
+              fieldset="Com Sucesso"
+              success="Opções válidas"
+            />
+            <MultiSelect
+              options={multipleOptions}
+              selected={selectedOptions}
+              onChange={setSelectedOptions}
+              fieldset="Com Informação"
+              info="Escolha múltiplas opções"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Selects sem Borda --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Selects sem Borda
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <p className="font-medium text-base-content/80 mb-2">
+              Select Simples:
+            </p>
+            <div className="space-y-4">
+              <Select
+                options={options}
+                fieldset="Ghost"
+                variant="ghost"
+                bordered={false}
+              />
+              <Select
+                options={options}
+                fieldset="Primary"
+                variant="primary"
+                bordered={false}
+              />
+              <Select
+                options={options}
+                fieldset="Secondary"
+                variant="secondary"
+                bordered={false}
+              />
+              <Select
+                options={options}
+                fieldset="Accent"
+                variant="accent"
+                bordered={false}
+              />
+            </div>
+          </div>
+
+          <div>
+            <p className="font-medium text-base-content/80 mb-2">
+              Multiple Select:
+            </p>
+            <MultiSelect
+              options={multipleOptions}
+              selected={selectedOptions}
+              onChange={setSelectedOptions}
+              fieldset="Ghost Multiple"
+              variant="ghost"
+              bordered={false}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção de Demonstração --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Demonstração de Uso
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <Select
+              options={options}
+              fieldset="Selecione uma opção"
+              variant="primary"
+              info="Escolha uma das opções"
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`<Select\n  options={options}\n  label="Selecione uma opção"\n  variant="primary"\n  info="Escolha uma das opções"\n/>`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <MultiSelect
+              options={multipleOptions}
+              selected={selectedOptions}
+              onChange={setSelectedOptions}
+              fieldset="Selecione múltiplas opções"
+              variant="success"
+              placeholder="Escolha os itens..."
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm">
+                {`const [selected, setSelected] = useState([]);\n\n<MultiSelect\n  options={options}\n  selected={selected}\n  onChange={setSelected}\n  label="Selecione múltiplas opções"\n  variant="success"\n  placeholder="Escolha os itens..."\n/>`}
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
 

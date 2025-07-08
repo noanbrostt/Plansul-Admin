@@ -13,39 +13,33 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     | "error"
     | "neutral"
     | "ghost";
-  bordered?: boolean;
   inputSize?: "xl" | "lg" | "md" | "sm" | "xs";
+  largura?: string;
   icon?: React.ReactElement<{ className?: string }>;
   iconPosition?: "left" | "right";
   optionalBadge?: boolean;
   optionalBadgeText?: string;
-  inputClassName?: string;
   type?: string;
   fieldset?: string;
-  fildsetFontSize?: "xl" | "lg" | "base" | "sm" | "xs";
   validMessage?: string;
   validReqs?: object;
   mask?: string;
-  autofocus?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
   value,
   variant,
-  bordered = true,
   inputSize = "md",
+  largura = "w-64",
   icon,
   iconPosition = "left",
   optionalBadge = false,
   optionalBadgeText = "Opcional",
-  inputClassName = "",
   type,
   fieldset = "",
-  fildsetFontSize = "base",
   validMessage = "",
   validReqs,
   mask = "",
-  autofocus = false,
   ...rest
 }) => {
   // Início da lógica para input password mostrar a senha
@@ -58,13 +52,11 @@ const Input: React.FC<InputProps> = ({
   const currentInputType =
     isPasswordField && showPassword ? "text" : type || "text";
 
-  // Escolha o ícone do olho com base no estado de visibilidade
   const PasswordToggleButton = isPasswordField && (
     <button
-      type="button" // Importante: tipo 'button' para não submeter o formulário
+      type="button"
       onClick={togglePasswordVisibility}
       className="btn btn-ghost btn-circle btn-sm -mr-2 text-base-content/60 hover:text-base-content"
-      // Classes do Tailwind para posicionamento e estilo
     >
       {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
     </button>
@@ -75,9 +67,8 @@ const Input: React.FC<InputProps> = ({
     input
     input-${inputSize} 
     ${variant ? `input-${variant}` : ""}
-    ${bordered ? "input-bordered" : ""}
   `;
-  const finalInputClasses = `${baseInputClasses} ${inputClassName}`.trim();
+  const finalInputClasses = `${baseInputClasses} ${largura}`.trim();
 
   const iconElement = icon
     ? React.cloneElement(icon, {
@@ -97,7 +88,6 @@ const Input: React.FC<InputProps> = ({
       return (
         <IMaskInput
           mask={mask}
-          className={`${inputClassName}`}
           value={inputValue}
           onAccept={(value: any) => {
             setInputValue(value);
@@ -112,7 +102,6 @@ const Input: React.FC<InputProps> = ({
       return (
         <input
           type={currentInputType}
-          className={`${inputClassName}`}
           value={value}
           {...rest}
           {...validReqs}
@@ -166,7 +155,7 @@ const Input: React.FC<InputProps> = ({
       <fieldset className="fieldset">
         <legend
           className={`fieldset-legend ml-1 ${
-            fildsetFontSize && "text-" + fildsetFontSize
+            inputSize && "text-" + inputSize
           }`}
         >
           {fieldset}
