@@ -115,12 +115,12 @@ export default function InputsPage() {
     xl: null,
   });
 
-  // Para o multiselect com "Selecionar todos"
-  const [multiSelected, setMultiSelected] = useState([]);
-
   // Para a seção de demonstração
   const [nivel, setNivel] = useState(null);
   const [demonMulti, setDemonMulti] = useState([]);
+
+  const [note, setNote] = useState("Texto inicial...");
+  const [comment, setComment] = useState("Msg curta");
 
   return (
     <div className="bg-base-100 min-h-screen">
@@ -1144,6 +1144,121 @@ export default function InputsPage() {
             <div className="p-4 bg-base-300 rounded-lg">
               <pre className="text-sm">
                 {`const [selectedNivel, setSelectedNivel] = useState('');\n\nconst handleNivelChange = (newValue) => {\n  setSelectedNivel(newValue);\n};\n\n<RadioGroup\n  fieldset="Qual seu nível?"\n  name="nivel"\n  options={[\n    { value: "nv1", label: "Júnior" },\n    { value: "nv2", label: "Pleno" },\n    { value: "nv3", label: "Sênior" },\n  ]}\n  value={selectedNivel}\n  onValueChange={handleNivelChange}\n/>`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Textareas por Cores */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Textareas por Cores
+        </h2>
+        <div className="flex flex-wrap gap-4">
+          {[
+            "primary",
+            "secondary",
+            "accent",
+            "info",
+            "success",
+            "warning",
+            "error",
+            "neutral",
+            "ghost",
+          ].map((variant) => (
+            <Textarea
+              key={variant}
+              variant={variant}
+              placeholder={`Textarea ${variant}`}
+              value=""
+              onChange={() => {}}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Textareas por Tamanhos */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Textareas por Tamanhos
+        </h2>
+        <div className="flex flex-wrap gap-4">
+          {["xs", "sm", "md", "lg", "xl"].map((size) => (
+            <Textarea
+              key={size}
+              size={size}
+              placeholder={`Textarea ${size.toUpperCase()}`}
+              value=""
+              onChange={() => {}}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* --- Seção com Valores Iniciais para Textarea --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-6">
+          Demonstração de Uso
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Textarea controlado simples */}
+          <div className="space-y-4 justify-items-center">
+            <Textarea
+              placeholder="Digite sua nota"
+              value={note}
+              onChange={(v) => {
+                setNote(v);
+                console.log("Nota:", v);
+              }}
+            />
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap">
+                {`const [note, setNote] = useState('Texto inicial...')
+
+<Textarea
+  placeholder="Digite sua nota"
+  value={note}
+  onChange={v => {
+    setNote(v)
+    console.log('Nota:', v)
+  }}
+/>`}
+              </pre>
+            </div>
+          </div>
+
+          {/* Textarea com estado de erro */}
+          <div className="space-y-4 justify-items-center">
+            <Textarea
+              placeholder="Sua mensagem"
+              value={comment}
+              onChange={(v) => {
+                setComment(v);
+                console.log("Comentário:", v);
+              }}
+              variant="primary"
+              size="lg"
+              maxLength="20"
+              error={comment.length > 0 && comment.length < 10 ? "Mínimo 10 caracteres" : undefined}
+            />
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap">
+                {`const [comment, setComment] = useState('Msg curta')
+
+<Textarea
+  placeholder="Sua mensagem"
+  value={comment}
+  onChange={v => {
+    setComment(v)
+    console.log('Comentário:', v)
+  }}
+  variant="primary"
+  size="lg"
+  maxLength="20"
+  error={comment.length > 0 && comment.length < 10 ? 'Mínimo 10 caracteres' : undefined}
+/>`}
               </pre>
             </div>
           </div>

@@ -1,65 +1,133 @@
-// src/components/ui/Textarea/Textarea.tsx
+// src/components/Textarea.tsx
+import React, { forwardRef, ChangeEvent, useState, useEffect } from "react";
 
-import React from 'react';
-
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  variant?: 'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'neutral'; // Adicionado 'neutral'
-  bordered?: boolean; 
-  size?: 'lg' | 'md' | 'sm' | 'xs'; 
-  label?: React.ReactNode; 
-  wrapperClassName?: string; 
+export interface TextareaProps {
+  placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  variant?:
+    | "ghost"
+    | "neutral"
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "info"
+    | "success"
+    | "warning"
+    | "error";
+  size?: "xs" | "sm" | "md" | "lg";
+  largura?: string;
+  maxLength?: number;
+  showCounter?: boolean;
+  className?: string;
+  error?: string;
+  success?: string;
+  info?: string;
 }
 
-const Textarea: React.FC<TextareaProps> = ({
-  variant,
-  bordered = true,
-  size = 'md',
-  label,
-  className = '', 
-  wrapperClassName = '', 
-  ...rest
-}) => {
-  const baseClasses = `textarea w-full`; 
-  
-  // Classes para tamanho do DaisyUI
-  const sizeClass = size ? `text-${size}` : '';
-
-  // Classes de borda e foco baseadas na variante
-  let colorClasses = '';
-  if (bordered) {
-    switch (variant) {
-      case 'primary': colorClasses = 'border-primary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50'; break;
-      case 'secondary': colorClasses = 'border-secondary focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/50'; break;
-      case 'accent': colorClasses = 'border-accent focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/50'; break;
-      case 'info': colorClasses = 'border-info focus:outline-none focus:border-info focus:ring-2 focus:ring-info/50'; break;
-      case 'success': colorClasses = 'border-success focus:outline-none focus:border-success focus:ring-2 focus:ring-success/50'; break;
-      case 'warning': colorClasses = 'border-warning focus:outline-none focus:border-warning focus:ring-2 focus:ring-warning/50'; break;
-      case 'error': colorClasses = 'border-error focus:outline-none focus:border-error focus:ring-2 focus:ring-error/50'; break;
-      case 'neutral': colorClasses = 'border-neutral focus:outline-none focus:border-neutral focus:ring-2 focus:ring-neutral/50'; break;
-      case 'ghost': colorClasses = 'border-transparent focus:outline-none focus:border-base-content/20 focus:ring-2 focus:ring-base-content/10'; break; // Ghost pode ter um foco sutil
-      default: colorClasses = 'border-base-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50'; // Borda padrão e foco primary
-    }
-  } else {
-    // Para textareas não-bordered (como ghost), garantimos que não haja borda e o foco funcione
-    colorClasses = 'border-transparent focus:outline-none focus:border-transparent focus:ring-2 focus:ring-primary/20';
-  }
-
-  const finalTextareaClassName = [
-    baseClasses,
-    sizeClass,
-    colorClasses, // Aplicando as classes de borda e foco personalizadas
-    className 
-  ].filter(Boolean).join(' ');
-
-  return (
-    <div className={`form-control ${wrapperClassName}`}> 
-      {label && <label className="label"><span className="label-text text-base-content">{label}</span></label>}
-      <textarea 
-        className={finalTextareaClassName} 
-        {...rest}
-      ></textarea>
-    </div>
-  );
+const variantClasses: Record<string, string> = {
+  ghost: "textarea-ghost",
+  neutral: "textarea-neutral",
+  primary: "textarea-primary",
+  secondary: "textarea-secondary",
+  accent: "textarea-accent",
+  info: "textarea-info",
+  success: "textarea-success",
+  warning: "textarea-warning",
+  error: "textarea-error",
 };
 
+const sizeClasses: Record<string, string> = {
+  xs: "textarea-xs",
+  sm: "textarea-sm",
+  md: "textarea-md",
+  lg: "textarea-lg",
+  xl: "textarea-xl",
+};
+
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (
+    {
+      placeholder = "",
+      value = "",
+      onChange,
+      variant = "neutral",
+      size = "md",
+      largura = "w-64",
+      maxLength,
+      showCounter = true,
+      className = "",
+      error,
+      success,
+      info,
+    },
+    ref
+  ) => {
+    const [count, setCount] = useState(value.length);
+
+    useEffect(() => {
+      setCount(value.length);
+    }, [value]);
+
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const v = e.target.value;
+      if (maxLength != null && v.length > maxLength) return;
+      onChange?.(v);
+      setCount(v.length);
+    };
+
+    return (
+      <div className={`form-control ${largura} ${className}`}>
+        <textarea
+          ref={ref}
+          className={`
+            textarea resize
+            ${sizeClasses[size]}
+            ${variantClasses[variant]}
+            ${
+              error
+                ? "textarea-error"
+                : success
+                ? "textarea-success"
+                : info
+                ? "textarea-info"
+                : ""
+            }
+          `}
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          {...(maxLength != null ? { maxLength } : {})}
+        />
+
+        {(showCounter || error || success || info) && (
+          <div
+            className={`text-sm text-base-content/60 mt-1 text-right flex ${
+              showCounter && (error || success || info) ? "justify-between" : "justify-end"
+            }`}
+          >
+            {(error || success || info) && (
+              <span
+                className={`label-text-alt ml-0.5 ${
+                  error ? "text-error" : success ? "text-success" : "text-info"
+                }`}
+              >
+                {error || success || info}
+              </span>
+            )}
+
+            {showCounter && (
+              <span className="mr-0.5">
+                {count}
+                {maxLength != null ? ` / ${maxLength}` : ""}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+);
+
+Textarea.displayName = "Textarea";
 export default Textarea;
