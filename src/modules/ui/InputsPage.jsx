@@ -83,6 +83,45 @@ export default function InputsPage() {
     { value: "papaya", label: "Mamão" },
   ];
 
+  const [selectedCor, setSelectedCor] = useState({
+    value: "azul",
+    label: "Azul",
+  });
+
+  const [selectedLinguagens, setSelectedLinguagens] = useState([
+    { value: "js", label: "JavaScript" },
+    { value: "ts", label: "TypeScript" },
+  ]);
+
+  // Para selects com variantes (primary, secondary, etc.)
+  const [selectedValues, setSelectedValues] = useState({
+    primary: null,
+    secondary: null,
+    accent: null,
+    info: null,
+    success: null,
+    warning: null,
+    error: null,
+    neutral: null,
+    ghost: null,
+  });
+
+  // Para selects com tamanhos
+  const [selectedSizes, setSelectedSizes] = useState({
+    xs: null,
+    sm: null,
+    md: null,
+    lg: null,
+    xl: null,
+  });
+
+  // Para o multiselect com "Selecionar todos"
+  const [multiSelected, setMultiSelected] = useState([]);
+
+  // Para a seção de demonstração
+  const [nivel, setNivel] = useState(null);
+  const [demonMulti, setDemonMulti] = useState([]);
+
   return (
     <div className="bg-base-100 min-h-screen">
       {/* Breadcrumbs / Título da Página */}
@@ -455,27 +494,255 @@ export default function InputsPage() {
         <h1 className="text-3xl font-bold text-base-content">Selects</h1>
       </div>
 
-<div>
-      <Select
-        options={options}
-        multiple
-        showSelectAll
-        showDesselectAll
-        placeholder="Selecione frutas"
-        value={selectedFruits} // IMPORTANTE: valor controlado
-        onChange={(newValue) => setSelectedFruits(newValue)}
-      />
-      
-      <div className="mt-4">
-        <h3>Frutas selecionadas:</h3>
-        <ul>
-          {selectedFruits.map(fruit => (
-            <li key={fruit.value}>{fruit.label}</li>
+      {/* Grupo com Diferentes Tamanhos e Cores */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Selects Padrão
+        </h2>
+
+        <p className="font-medium text-base-content/80 mb-2">Cores:</p>
+
+        <div className="flex flex-wrap gap-4">
+          {[
+            "primary",
+            "secondary",
+            "accent",
+            "info",
+            "success",
+            "warning",
+            "error",
+            "neutral",
+            "ghost",
+          ].map((variant) => (
+            <Select
+              key={variant}
+              options={[
+                { value: "1", label: "Opção 1" },
+                { value: "2", label: "Opção 2" },
+              ]}
+              placeholder={`Select ${variant}`}
+              variant={variant}
+              value={selectedValues[variant]}
+              onChange={(val) =>
+                setSelectedValues((prev) => ({ ...prev, [variant]: val }))
+              }
+            />
           ))}
-        </ul>
+        </div>
+
+        <p className="font-medium text-base-content/80 mt-6 mb-2">Tamanhos:</p>
+
+        <div className="flex flex-wrap gap-4">
+          {["xs", "sm", "md", "lg", "xl"].map((size) => (
+            <Select
+              key={size}
+              size={size}
+              options={[
+                { value: "1", label: "Pequeno" },
+                { value: "2", label: "Grande" },
+              ]}
+              placeholder={`Select ${size}`}
+              value={selectedSizes[size]}
+              onChange={(val) =>
+                setSelectedSizes((prev) => ({ ...prev, [size]: val }))
+              }
+            />
+          ))}
+        </div>
+
+        <p className="font-medium text-base-content/80 mt-6 mb-2">
+          Multiseleção com Botões:
+        </p>
+
+        <div className="flex flex-wrap gap-4">
+          <Select
+            multiple
+            showSelectAll
+            options={options}
+            placeholder="Selecione frutas"
+            value={selectedFruits}
+            onChange={(newValue) => setSelectedFruits(newValue)}
+          />
+        </div>
       </div>
-    </div>
-    
+
+      {/* --- Seção de Demonstração --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-6">
+          Demonstração de Uso
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4 justify-items-center">
+            <Select
+              options={[
+                { value: "junior", label: "Júnior" },
+                { value: "pleno", label: "Pleno" },
+                { value: "senior", label: "Sênior" },
+              ]}
+              placeholder="Selecione o nível"
+              value={nivel}
+              onChange={setNivel}
+              variant="success"
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap">
+                {`const [nivel, setNivel] = useState(null);\n\n<Select
+  options={[
+    { value: "junior", label: "Júnior" },
+    { value: "pleno", label: "Pleno" },
+    { value: "senior", label: "Sênior" },
+  ]}
+  placeholder="Selecione o nível"
+  value={nivel}
+  onChange={setNivel}
+  variant="success"
+/>`}
+              </pre>
+            </div>
+          </div>
+
+          <div className="space-y-4 justify-items-center">
+            <Select
+              multiple
+              showSelectAll
+              placeholder="Selecione várias opções"
+              variant="primary"
+              size="lg"
+              options={[
+                { value: "m1", label: "Item 1" },
+                { value: "m2", label: "Item 2" },
+                { value: "m3", label: "Item 3" },
+                { value: "m4", label: "Item 4" },
+              ]}
+              value={demonMulti}
+              onChange={setDemonMulti}
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap">
+                {`const [demonMulti, setDemonMulti] = useState([]);\n\n<Select
+  multiple
+  showSelectAll
+  placeholder="Selecione várias opções"
+  variant="primary"
+  size="lg"
+  options={[
+    { value: "m1", label: "Item 1" },
+    { value: "m2", label: "Item 2" },
+    { value: "m3", label: "Item 3" },
+    { value: "m4", label: "Item 4" },
+  ]}
+  value={demonMulti}
+  onChange={setDemonMulti}
+/>`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- Seção com Valores Iniciais --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-6">
+          Select com Valores Iniciais
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Select com valor único */}
+          <div className="space-y-4 justify-items-center">
+            <Select
+              placeholder="Escolha uma cor"
+              options={[
+                { value: "vermelho", label: "Vermelho" },
+                { value: "azul", label: "Azul" },
+                { value: "verde", label: "Verde" },
+              ]}
+              value={selectedCor}
+              onChange={(val) => {
+                setSelectedCor(val);
+                console.log("Selecionado:", val);
+              }}
+              variant="info"
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap">
+                {`const [selectedCor, setSelectedCor] = useState({
+  value: "azul",
+  label: "Azul",
+});
+
+<Select
+  placeholder="Escolha uma cor"
+  options={[
+    { value: "vermelho", label: "Vermelho" },
+    { value: "azul", label: "Azul" },
+    { value: "verde", label: "Verde" },
+  ]}
+  value={selectedCor}
+  onChange={(val) => {
+    setSelectedCor(val);
+    console.log("Selecionado:", val);
+  }}
+  variant="info"
+/>`}
+              </pre>
+            </div>
+          </div>
+
+          {/* Select múltiplo */}
+          <div className="space-y-4 justify-items-center">
+            <Select
+              multiple
+              showSelectAll
+              placeholder="Escolha os idiomas"
+              largura="w-74"
+              options={[
+                { value: "js", label: "JavaScript" },
+                { value: "ts", label: "TypeScript" },
+                { value: "py", label: "Python" },
+                { value: "rb", label: "Ruby" },
+              ]}
+              value={selectedLinguagens}
+              onChange={(val) => {
+                setSelectedLinguagens(val);
+                console.log("Selecionados:", val);
+              }}
+              variant="success"
+            />
+
+            <div className="p-4 bg-base-300 rounded-lg">
+              <pre className="text-sm whitespace-pre-wrap">
+                {`const [selectedLinguagens, setSelectedLinguagens] = useState([
+  { value: "js", label: "JavaScript" },
+  { value: "ts", label: "TypeScript" },
+]);
+
+<Select
+  multiple
+  showSelectAll
+  placeholder="Escolha os idiomas"
+  largura="w-74"
+  options={[
+    { value: "js", label: "JavaScript" },
+    { value: "ts", label: "TypeScript" },
+    { value: "py", label: "Python" },
+    { value: "rb", label: "Ruby" },
+  ]}
+  value={selectedLinguagens}
+  onChange={(val) => {
+    setSelectedLinguagens(val);
+    console.log("Selecionados:", val);
+  }}
+  variant="success"
+/>`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="flex justify-between items-center mb-6 mt-12">
         <h1 className="text-3xl font-bold text-base-content">Checkboxes</h1>
       </div>
