@@ -8,6 +8,7 @@ import { RxBadge } from "react-icons/rx";
 import { MdScreenSearchDesktop } from "react-icons/md";
 import { SiAdblock } from "react-icons/si";
 import { FaTable } from "react-icons/fa";
+import { TbCheckbox } from "react-icons/tb";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -65,8 +66,12 @@ export default function Sidebar({
                 label="Telas"
                 icon={<MdScreenshotMonitor />}
                 subItems={[
-                  { label: "Login", to: "/login", icon: <FiLogIn /> },
-                  { label: "Not Found", to: "*", icon: <MdScreenSearchDesktop /> },
+                  // { label: "Login", to: "/login", icon: <FiLogIn /> },
+                  {
+                    label: "Not Found",
+                    to: "*",
+                    icon: <MdScreenSearchDesktop />,
+                  },
                   { label: "Forbidden", to: "/negado", icon: <SiAdblock /> },
                 ]}
               />
@@ -78,6 +83,11 @@ export default function Sidebar({
                     label: "Botões",
                     to: "/devs/ui/botoes",
                     icon: <CgPlayButtonR />,
+                  },
+                  {
+                    label: "Checkboxes",
+                    to: "/devs/ui/checkboxes",
+                    icon: <TbCheckbox />,
                   },
                   {
                     label: "Etiquetas",

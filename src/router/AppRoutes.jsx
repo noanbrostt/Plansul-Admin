@@ -6,9 +6,10 @@ import ForbiddenPage from "../layout/ForbiddenPage";
 
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
-import ButtonsPage from "@/modules/ui/ButtonsPage";
 import InputsPage from "@/modules/ui/InputsPage";
-import BadgesPage from "@/modules/ui/BadgesPage";
+import BotoesPage from "@/modules/ui/Botao/BotoesPage"
+import CheckboxesPage from "@/modules/ui/Checkbox/CheckboxesPage"
+import EtiquetasPage from "@/modules/ui/Etiqueta/EtiquetasPage";
 import TablesPage from "@/modules/ui/TablesPage";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -38,11 +39,15 @@ export default function AppRoutes() {
         {/* Devs */}
         <Route
           path="/devs/ui/botoes"
-          element={withPermission(<ButtonsPage />, "DEV_Teste_User")}
+          element={withPermission(<BotoesPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/ui/checkboxes"
+          element={withPermission(<CheckboxesPage />, "DEV_Teste_User")}
         />
         <Route
           path="/devs/ui/etiquetas"
-          element={withPermission(<BadgesPage />, "DEV_Teste_User")}
+          element={withPermission(<EtiquetasPage />, "DEV_Teste_User")}
         />
         <Route
           path="/devs/ui/inputs"
@@ -53,6 +58,7 @@ export default function AppRoutes() {
           element={withPermission(<TablesPage />, "DEV_Teste_User")}
         />
       </Route>
+      {/*  */}
 
       {/* Se já estiver logado, manda pra home */}
       <Route
@@ -63,8 +69,12 @@ export default function AppRoutes() {
           </PublicRoute>
         }
       />
+      {/*  */}
+
+      {/* Telas de erro */}
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/negado" element={<ForbiddenPage />} />
+      {/*  */}
     </Routes>
   );
 }
