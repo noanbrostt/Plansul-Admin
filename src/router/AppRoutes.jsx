@@ -11,7 +11,9 @@ import BotoesPage from "@/modules/ui/Botao/BotoesPage"
 import SelectsPage from "@/modules/ui/Select/SelectsPage"
 import CheckboxesPage from "@/modules/ui/Checkbox/CheckboxesPage"
 import EtiquetasPage from "@/modules/ui/Etiqueta/EtiquetasPage";
+import RadiosPage from "@/modules/ui/Radio/RadiosPage";
 import TablesPage from "@/modules/ui/TablesPage";
+import TextareasPage from "@/modules/ui/Textarea/TextareasPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -59,8 +61,16 @@ export default function AppRoutes() {
           element={withPermission(<SelectsPage />, "DEV_Teste_User")}
         />
         <Route
+          path="/devs/ui/radios"
+          element={withPermission(<RadiosPage />, "DEV_Teste_User")}
+        />
+        <Route
           path="/devs/ui/tabelas"
           element={withPermission(<TablesPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/ui/textareas"
+          element={withPermission(<TextareasPage />, "DEV_Teste_User")}
         />
       </Route>
       {/*  */}

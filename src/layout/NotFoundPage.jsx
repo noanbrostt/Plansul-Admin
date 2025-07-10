@@ -12,10 +12,8 @@ import {
 const NotFoundPage = () => {
   return (
     <div
-      className="min-h-screen
-    
-      bg-gradient-to-br from-[#355889] via-[#376fbe] via-[83%] to-[#DF8A2A]    
-
+      className="h-screen
+      bg-gradient-to-br from-[#355889] via-[#376fbe] via-[83%] to-[#DF8A2A]
      flex flex-col items-center justify-center p-4 text-white overflow-hidden"
     >
       {/* Elementos decorativos flutuantes */}

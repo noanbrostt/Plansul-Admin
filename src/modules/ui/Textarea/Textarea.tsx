@@ -1,21 +1,20 @@
-// src/components/Textarea.tsx
-import React, { forwardRef, ChangeEvent, useState, useEffect } from "react";
+import { forwardRef, ChangeEvent, useState, useEffect } from "react";
 
 export interface TextareaProps {
   placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
   variant?:
-    | "ghost"
-    | "neutral"
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "info"
-    | "success"
-    | "warning"
-    | "error";
-  size?: "xs" | "sm" | "md" | "lg";
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "neutral"
+  | "ghost";
+  size?: "xl" | "lg" | "md" | "sm" | "xs";
   largura?: string;
   maxLength?: number;
   showCounter?: boolean;
@@ -25,33 +24,13 @@ export interface TextareaProps {
   info?: string;
 }
 
-const variantClasses: Record<string, string> = {
-  ghost: "textarea-ghost",
-  neutral: "textarea-neutral",
-  primary: "textarea-primary",
-  secondary: "textarea-secondary",
-  accent: "textarea-accent",
-  info: "textarea-info",
-  success: "textarea-success",
-  warning: "textarea-warning",
-  error: "textarea-error",
-};
-
-const sizeClasses: Record<string, string> = {
-  xs: "textarea-xs",
-  sm: "textarea-sm",
-  md: "textarea-md",
-  lg: "textarea-lg",
-  xl: "textarea-xl",
-};
-
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       placeholder = "",
       value = "",
       onChange,
-      variant = "neutral",
+      variant,
       size = "md",
       largura = "w-64",
       maxLength,
@@ -82,8 +61,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           className={`
             textarea resize
-            ${sizeClasses[size]}
-            ${variantClasses[variant]}
+            textarea-${size}
+            textarea-${variant}
             ${
               error
                 ? "textarea-error"

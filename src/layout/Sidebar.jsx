@@ -2,14 +2,14 @@ import { useState } from "react";
 import { FiHome, FiUsers, FiLogIn } from "react-icons/fi";
 import { RiInputField } from "react-icons/ri";
 import { CgPlayButtonR } from "react-icons/cg";
-import { MdScreenshotMonitor } from "react-icons/md";
+import { MdScreenshotMonitor, MdRadioButtonChecked, MdScreenSearchDesktop } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
 import { RxBadge } from "react-icons/rx";
-import { MdScreenSearchDesktop } from "react-icons/md";
 import { SiAdblock } from "react-icons/si";
 import { FaTable } from "react-icons/fa";
 import { TbCheckbox } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
+import { BsTextareaResize } from "react-icons/bs";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -101,6 +101,11 @@ export default function Sidebar({
                     icon: <RiInputField />,
                   },
                   {
+                    label: "Radios",
+                    to: "/devs/ui/radios",
+                    icon: <MdRadioButtonChecked />,
+                  },
+                  {
                     label: "Selects",
                     to: "/devs/ui/selects",
                     icon: <GoMultiSelect />,
@@ -109,6 +114,11 @@ export default function Sidebar({
                     label: "Tabelas",
                     to: "/devs/ui/tabelas",
                     icon: <FaTable />,
+                  },
+                  {
+                    label: "Textareas",
+                    to: "/devs/ui/textareas",
+                    icon: <BsTextareaResize />,
                   },
                 ]}
               />
