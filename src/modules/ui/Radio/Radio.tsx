@@ -1,4 +1,3 @@
-// RadioGroup.tsx
 import React from "react";
 
 interface RadioOption {
@@ -34,7 +33,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   options,
   fieldsetCentered = false,
   radioSize = "md",
-  className = "",
+  className,
   orientation = "vertical",
   onValueChange,
   value,
@@ -47,18 +46,16 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 
   return (
     <fieldset
-      className={`fieldset w-fit ${fieldsetCentered ? "justify-items-center text-center" : ""} ${className}`}
+      className={`fieldset w-fit ${
+        fieldsetCentered ? "justify-items-center text-center" : ""
+      } ${className}`}
     >
-      <legend
-        className={`fieldset-legend text-${radioSize}`}
-      >
+      <legend className={`fieldset-legend text-${radioSize}`}>
         {fieldset}
       </legend>
       <div
         className={`flex ${
-          orientation === "horizontal"
-            ? "flex-wrap gap-4"
-            : "flex-col gap-2"
+          orientation === "horizontal" ? "flex-wrap gap-4" : "flex-col gap-2"
         }`}
       >
         {options.map((option) => (
@@ -79,9 +76,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
                 option.variant ? `radio-${option.variant}` : ""
               }`}
             />
-            <span className={`text-${radioSize}`}>
-              {option.label}
-            </span>
+            <span className={`text-${radioSize}`}>{option.label}</span>
           </label>
         ))}
       </div>
