@@ -28,7 +28,7 @@ import { rankItem } from "@tanstack/match-sorter-utils";
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 
-interface TableProps<T> {
+interface TabelaProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
   pagination?: boolean;
@@ -51,7 +51,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-export default function Table<T>({
+export default function Tabela<T>({
   data,
   columns,
   pagination = true,
@@ -66,7 +66,7 @@ export default function Table<T>({
   initialHiddenColumns = [],
   enableExport = true, // Default true
   exportFileName = 'Tabela', // Nome padrão do arquivo
-}: TableProps<T>) {
+}: TabelaProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(initialSorting);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -349,7 +349,7 @@ export default function Table<T>({
             >
               <FiChevronLeft className="text-lg" />
             </button>
-            <button className="join-item btn">
+            <button className="join-item btn pointer-events-none">
               Página {table.getState().pagination.pageIndex + 1} de{" "}
               {table.getPageCount()}
             </button>

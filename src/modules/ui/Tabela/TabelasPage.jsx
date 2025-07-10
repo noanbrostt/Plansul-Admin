@@ -1,12 +1,11 @@
 // src/pages/devs/ui/TablesPage.jsx
-import Table from "@/modules/ui/components/Table";
+import Tabela from "@/modules/ui/Tabela/Tabela";
 import FavoriteButton from "@/components/FavoriteButton";
 import { FiUser, FiMail, FiPhone, FiDollarSign } from "react-icons/fi";
 import { FaPencilAlt, FaTrashAlt, FaEye } from "react-icons/fa";
 import { showAlert } from "@/components/alerts";
 
-export default function TablesPage() {
-  // Dados de exemplo
+export default function TabelasPage() {
   const users = [
     {
       id: 1,
@@ -389,8 +388,12 @@ export default function TablesPage() {
       admissionDate: "2024-04-01",
     },
   ];
+  console.log("//////////////////");
+  console.log("//////////////////");
+  console.log("const users:");
+  console.log(users);
+  console.log("//////////////////");
 
-  // Colunas para tabela de usuários
   const userColumns = [
     {
       accessorKey: "id",
@@ -459,6 +462,11 @@ export default function TablesPage() {
       ),
     },
   ];
+  console.log("//////////////////");
+  console.log("const userColumns:");
+  console.log(userColumns);
+  console.log("//////////////////");
+  console.log("//////////////////");
 
   return (
     <div className="bg-base-100 min-h-screen">
@@ -486,13 +494,30 @@ export default function TablesPage() {
             exportação excel estão recebendo "false".)
           </p>
         </h2>
-        <Table
+        <Tabela
           data={users.slice(0, 4)}
           columns={userColumns}
           pagination={false}
           globalFilter={false}
           enableExport={false}
         />
+        <p className="font-medium text-base-content/80 mt-4">Código:</p>
+        <div className="space-y-4 justify-items-center">
+          <div className="p-4 bg-base-300 rounded-lg">
+            <pre className="text-sm">
+              {`const users = [...] // Ta lá no console
+const userColumns = [...] // Ta lá no console
+
+<Tabela
+  data={users.slice(0, 4)}
+  columns={userColumns}
+  pagination={false}
+  globalFilter={false}
+  enableExport={false}
+/>`}
+            </pre>
+          </div>
+        </div>
       </div>
 
       {/* --- Seção: Tabela com Ordenação e Paginação --- */}
@@ -505,7 +530,7 @@ export default function TablesPage() {
             nome de arquivo.)
           </p>
         </h2>
-        <Table
+        <Tabela
           data={users} // Dados da tabela
           columns={userColumns} // Configuração das colunas
           globalFilter={true} // Vem "true" por padrão, mas da pra desativar se quiser
@@ -524,6 +549,34 @@ export default function TablesPage() {
           ////////////////////////////////////////////////////////////////////
           className="mt-8 gap-2" // Outras classes tailwind ou não que quiser adicionar
         />
+
+        <p className="font-medium text-base-content/80 mt-4">Código:</p>
+        <div className="space-y-4 justify-items-center">
+          <div className="p-4 bg-base-300 rounded-lg">
+            <pre className="text-sm">
+              {`const users = [...] // Ta lá no console
+const userColumns = [...] // Ta lá no console
+
+<Tabela
+  data={users}
+  columns={userColumns}
+  globalFilter={true}
+  columnFilters
+  columnVisibility
+  storageKey="tabela-exemplo-storageKey"
+  initialHiddenColumns={["id", "email"]}
+  initialSorting={[
+    { id: "name", desc: false },
+    { id: "salary", desc: true },
+  ]}
+  zebra={true}
+  enableExport={true}
+  exportFileName="Exportação da Tabela de Exemplo"
+  className="mt-8 gap-2"
+/>`}
+            </pre>
+          </div>
+        </div>
       </div>
 
       {/* --- Seção: Tabela com Ordenação e Paginação --- */}
@@ -531,7 +584,7 @@ export default function TablesPage() {
         <h2 className="text-xl font-semibold text-base-content mb-4">
           Tabela com Coluna de "Ações"
         </h2>
-        <Table
+        <Tabela
           data={[
             {
               id: 1,
@@ -620,6 +673,54 @@ export default function TablesPage() {
             },
           ]}
         />
+
+        <p className="font-medium text-base-content/80 mt-4">Código:</p>
+        <div className="space-y-4 justify-items-center">
+          <div className="p-4 bg-base-300 rounded-lg">
+            <pre className="text-sm">
+              {`<Tabela
+  data={[...]}
+  columns={[...
+    {
+      accessorKey: "actions",
+      header: "Ações",
+      cell: () => (
+        <span className="flex gap-2">
+          <button
+            className="btn btn-primary tooltip"
+            data-tip="Visualizar"
+            onClick={() =>
+              showAlert({ title: "Visualizar", icon: "info" })
+            }
+          >
+            <FaEye />
+          </button>
+          <button
+            className="btn btn-primary tooltip"
+            data-tip="Editar"
+            onClick={() =>
+              showAlert({ title: "Editar", icon: "success" })
+            }
+          >
+            <FaPencilAlt />
+          </button>
+          <button
+            className="btn btn-error tooltip"
+            data-tip="Excluir"
+            onClick={() =>
+              showAlert({ title: "Excluir", icon: "error" })
+            }
+          >
+            <FaTrashAlt />
+          </button>
+        </span>
+      ),
+    },
+  ]}
+/>`}
+            </pre>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ import SelectsPage from "@/modules/ui/Select/SelectsPage"
 import CheckboxesPage from "@/modules/ui/Checkbox/CheckboxesPage"
 import EtiquetasPage from "@/modules/ui/Etiqueta/EtiquetasPage";
 import RadiosPage from "@/modules/ui/Radio/RadiosPage";
-import TablesPage from "@/modules/ui/TablesPage";
+import TabelasPage from "@/modules/ui/Tabela/TabelasPage";
 import TextareasPage from "@/modules/ui/Textarea/TextareasPage";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -66,7 +66,7 @@ export default function AppRoutes() {
         />
         <Route
           path="/devs/ui/tabelas"
-          element={withPermission(<TablesPage />, "DEV_Teste_User")}
+          element={withPermission(<TabelasPage />, "DEV_Teste_User")}
         />
         <Route
           path="/devs/ui/textareas"
