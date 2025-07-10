@@ -9,6 +9,7 @@ import { MdScreenSearchDesktop } from "react-icons/md";
 import { SiAdblock } from "react-icons/si";
 import { FaTable } from "react-icons/fa";
 import { TbCheckbox } from "react-icons/tb";
+import { GoMultiSelect } from "react-icons/go";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -98,6 +99,11 @@ export default function Sidebar({
                     label: "Inputs",
                     to: "/devs/ui/inputs",
                     icon: <RiInputField />,
+                  },
+                  {
+                    label: "Selects",
+                    to: "/devs/ui/selects",
+                    icon: <GoMultiSelect />,
                   },
                   {
                     label: "Tabelas",

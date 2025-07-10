@@ -171,7 +171,23 @@ export default function InputsPage() {
 
             <div className="p-4 bg-base-300 rounded-lg">
               <pre className="text-sm">
-                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);\n\nconst handleCheckboxChange = (event) => {\n  setIsAnonymousOffer(event.target.checked);\n};\n\n<Checkbox\n  label="Oferta Anônima?"\n  checked={isAnonymousOffer}\n  onChange={handleCheckboxChange}\n/>`}
+                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+
+const handleCheckboxChange = (event) => {
+  setIsAnonymousOffer(event.target.checked);
+};
+
+<Checkbox
+  label="Oferta Anônima?"
+  checked={isAnonymousOffer}
+  onChange={handleCheckboxChange}
+/>
+
+{/*
+  Para o componente começar checkado nós usamos:
+  defaultChecked -> Para componentes estáticos;
+  checked={const = true} -> Para componentes dinâmicos;
+*/}`}
               </pre>
             </div>
           </div>
@@ -189,7 +205,21 @@ export default function InputsPage() {
 
             <div className="p-4 bg-base-300 rounded-lg">
               <pre className="text-sm">
-                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);\n\nconst handleCheckboxChange = (event) => {\n  setIsAnonymousOffer(event.target.checked);\n};\n\n<Checkbox\n  toggle\n  fieldset="Oferta Anônima?"\n  label="Sim"\n  leftLabel="Não"\n  fieldsetCentered\n  checked={isAnonymousOffer}\n  onChange={handleCheckboxChange}\n/>`}
+                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+
+const handleCheckboxChange = (event) => {
+    setIsAnonymousOffer(event.target.checked);
+};
+
+<Checkbox
+  toggle
+  fieldset="Oferta Anônima?"
+  label="Sim"
+  leftLabel="Não"
+  fieldsetCentered
+  checked={isAnonymousOffer}
+  onChange={handleCheckboxChange}
+/>`}
               </pre>
             </div>
           </div>

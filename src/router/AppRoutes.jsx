@@ -8,6 +8,7 @@ import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
 import InputsPage from "@/modules/ui/InputsPage";
 import BotoesPage from "@/modules/ui/Botao/BotoesPage"
+import SelectsPage from "@/modules/ui/Select/SelectsPage"
 import CheckboxesPage from "@/modules/ui/Checkbox/CheckboxesPage"
 import EtiquetasPage from "@/modules/ui/Etiqueta/EtiquetasPage";
 import TablesPage from "@/modules/ui/TablesPage";
@@ -52,6 +53,10 @@ export default function AppRoutes() {
         <Route
           path="/devs/ui/inputs"
           element={withPermission(<InputsPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/ui/selects"
+          element={withPermission(<SelectsPage />, "DEV_Teste_User")}
         />
         <Route
           path="/devs/ui/tabelas"

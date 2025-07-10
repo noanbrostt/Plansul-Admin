@@ -2,7 +2,6 @@ import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 
 import Input from "./components/Input";
-import Checkbox from "./components/Checkbox";
 import RadioGroup from "./components/Radio";
 import Select from "./components/Select";
 import Textarea from "./components/Textarea";
