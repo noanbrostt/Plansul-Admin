@@ -6,7 +6,7 @@ import ForbiddenPage from "../layout/ForbiddenPage";
 
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
-import InputsPage from "@/modules/ui/InputsPage";
+import InputsPage from "@/modules/ui/Input/InputsPage";
 import BotoesPage from "@/modules/ui/Botao/BotoesPage"
 import SelectsPage from "@/modules/ui/Select/SelectsPage"
 import CheckboxesPage from "@/modules/ui/Checkbox/CheckboxesPage"

@@ -108,7 +108,7 @@ export default function Sidebar({
                   {
                     label: "Selects",
                     to: "/devs/ui/selects",
-                    icon: <GoMultiSelect />,
+                    icon: <GoMultiSelect stroke-width="1px" />,
                   },
                   {
                     label: "Tabelas",

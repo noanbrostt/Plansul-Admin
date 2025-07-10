@@ -18,7 +18,7 @@ export default function InputsPage() {
         <h1 className="flex text-3xl font-bold text-base-content">
           Checkboxes
           <FavoriteButton
-            tela={{ nome: "Checkboxes", url: "devs/ui/checkboxes" }}
+            tela={{ nome: "Checkboxes e Toggles", url: "devs/ui/checkboxes" }}
           />
         </h1>
         <div className="text-sm breadcrumbs text-gray-500">

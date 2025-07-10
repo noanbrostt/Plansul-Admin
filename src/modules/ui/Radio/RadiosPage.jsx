@@ -31,7 +31,7 @@ export default function InputsPage() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="flex text-3xl font-bold text-base-content">
           Radios
-          <FavoriteButton tela={{ nome: "Radios", url: "devs/ui/radio" }} />
+          <FavoriteButton tela={{ nome: "Radios", url: "devs/ui/radios" }} />
         </h1>
         <div className="text-sm breadcrumbs text-gray-500">
           <ul>

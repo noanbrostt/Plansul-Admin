@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
-import Input from "./components/Input";
+import Input from "./Input";
 
 import {
   FiMail,
@@ -40,87 +40,92 @@ export default function InputsPage() {
 
       {/* --- Seção de Inputs Padrão, Variações de Cor e Tamanho --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
+
+        <div className="flex flex-wrap items-end gap-4">
+          <Input placeholder="Padrão" autoFocus />
+          <Input variant="primary" placeholder="Primary" />
+          <Input variant="secondary" placeholder="Secondary" />
+          <Input variant="accent" placeholder="Accent" />
+          <Input variant="info" placeholder="Info" />
+          <Input variant="success" placeholder="Success" />
+          <Input variant="warning" placeholder="Warning" />
+          <Input variant="error" placeholder="Error" icon={<FiAlertCircle />} />
+          <Input variant="ghost" placeholder="Ghost Input" />
+        </div>
+      </div>
+
+      {/* --- Seção de Inputs Padrão, Variações de Cor e Tamanho --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Inputs Padrão
+          Tamanhos
+        </h2>
+        <div className="flex items-center gap-4">
+          <Input variant="primary" inputSize="xl" placeholder="Extra Large" />
+          <Input variant="primary" inputSize="lg" placeholder="Large" />
+          <Input variant="primary" placeholder="Medium (Padrâo)" />
+          <Input variant="primary" inputSize="sm" placeholder="Small" />
+          <Input variant="primary" inputSize="xs" placeholder="Extra Small" />
+        </div>
+      </div>
+
+      {/* --- Seção de Inputs Padrão, Variações de Cor e Tamanho --- */}
+      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
+        <h2 className="text-xl font-semibold text-base-content mb-4">
+          Larguras
         </h2>
         <div className="flex flex-col gap-4">
-          <p className="font-medium text-base-content/80">Cores da Borda:</p>
-
-          <div className="flex flex-wrap items-end gap-4">
-            <Input placeholder="Padrão" autoFocus />
-            <Input variant="primary" placeholder="Primary" />
-            <Input variant="secondary" placeholder="Secondary" />
-            <Input variant="accent" placeholder="Accent" />
-            <Input variant="info" placeholder="Info" />
-            <Input variant="success" placeholder="Success" />
-            <Input variant="warning" placeholder="Warning" />
-            <Input
-              variant="error"
-              placeholder="Error"
-              icon={<FiAlertCircle />}
-            />
-            <Input variant="ghost" placeholder="Ghost Input" />
-          </div>
-          <p className="font-medium text-base-content/80 mt-4">
-            Larguras de Inputs:
-          </p>
-          <div className="flex flex-wrap items-end gap-4">
-            <Input placeholder="w-32" largura="w-32" />
-            <Input placeholder="w-48" largura="w-48" />
-            <Input placeholder="Padrão (w-64)" />
-            <Input placeholder="w-80" largura="w-80" />
-            <Input placeholder="w-96" largura="w-96" />
-            <Input placeholder="w-full" largura="w-full" />
-          </div>
-          <p className="font-medium text-base-content/80 mt-4">
-            Tamanhos dos Inputs em si:
-          </p>
-          <div className="flex gap-4">
-            <Input inputSize="xs" placeholder="Extra Pequeno (xs)" />
-            <Input inputSize="sm" placeholder="Pequeno (sm)" />
-            <Input placeholder="Padrão (Médio - md)" />
-            <Input inputSize="lg" placeholder="Grande (lg)" />
-            <Input inputSize="xl" placeholder="Extra Grande (xl)" />
-          </div>
+          <Input variant="primary" placeholder="w-32" largura="w-32" />
+          <Input variant="primary" placeholder="w-48" largura="w-48" />
+          <Input variant="primary" placeholder="w-64 (Padrão)" />
+          <Input variant="primary" placeholder="w-80" largura="w-80" />
+          <Input variant="primary" placeholder="w-96" largura="w-96" />
+          <Input variant="primary" placeholder="w-full" largura="w-full" />
         </div>
       </div>
 
       {/* --- Seção de Inputs com Fieldset --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Inputs com Fieldset
+          Com Fieldset
         </h2>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-end gap-4">
-            <Input
-              fieldset="Nome Completo"
-              placeholder="Extra Pequeno (xs)"
-              inputSize="xs"
-            />
-            <Input
-              fieldset="Nome Completo"
-              placeholder="Pequeno (sm)"
-              inputSize="sm"
-            />
-            <Input fieldset="Nome Completo" placeholder="Padrão (md)" />
-            <Input
-              fieldset="Nome Completo"
-              placeholder="Grande (lg)"
-              inputSize="lg"
-            />
-            <Input
-              fieldset="Nome Completo"
-              placeholder="Extra Grande (xl)"
-              inputSize="xl"
-            />
-          </div>
+        <div className="flex flex-wrap items-center gap-4">
+          <Input
+            variant="primary"
+            fieldset="Fieldset"
+            placeholder="Extra Large"
+            inputSize="xl"
+          />
+          <Input
+            variant="primary"
+            fieldset="Fieldset"
+            placeholder="Large"
+            inputSize="lg"
+          />
+          <Input
+            variant="primary"
+            fieldset="Fieldset"
+            placeholder="Medium (Padrão)"
+          />
+          <Input
+            variant="primary"
+            fieldset="Fieldset"
+            placeholder="Small"
+            inputSize="sm"
+          />
+          <Input
+            variant="primary"
+            fieldset="Fieldset"
+            placeholder="Extra Small"
+            inputSize="xs"
+          />
         </div>
       </div>
 
       {/* --- Seção de Inputs com Máscara --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Inputs com Máscara
+          Com Máscara
         </h2>
         <div className="flex flex-wrap items-baseline gap-4">
           <Input
@@ -161,7 +166,7 @@ export default function InputsPage() {
       {/* --- Seção de Inputs com Validação --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Inputs com Validação
+          Com Validação
         </h2>
         <div className="flex flex-wrap items-baseline gap-4">
           <Input
@@ -227,7 +232,7 @@ export default function InputsPage() {
       {/* --- Seção de Inputs com Ícones --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Inputs com Ícones
+          Com Ícones
         </h2>
         <div className="flex flex-wrap items-end gap-4">
           <Input
@@ -278,7 +283,7 @@ export default function InputsPage() {
       {/* --- Seção de Input com Tag Opcional --- */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold text-base-content mb-4">
-          Input com Tag "Opcional"
+          Com Tag "Opcional"
         </h2>
         <div className="flex flex-wrap items-end gap-4">
           <Input
