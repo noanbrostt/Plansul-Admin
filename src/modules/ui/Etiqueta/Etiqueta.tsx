@@ -3,13 +3,14 @@ import React from "react";
 interface EtiquetaProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?:
     | "primary"
+    | "secondary"
+    | "accent"
     | "success"
-    | "error"
     | "warning"
+    | "error"
     | "info"
-    | "light"
-    | "dark"
-    | "neutral";
+    | "neutral"
+    | "ghost";
   outline?: boolean;
   size?: "xl" | "lg" | "md" | "sm" | "xs";
   icon?: React.ReactElement;

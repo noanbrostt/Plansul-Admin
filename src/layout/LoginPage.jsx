@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { login, reset } from "@/services/authService";
 import { showErrorAlert } from "@/components/alerts";
 import Input from "@/modules/ui/components/Input";
-import Button from "@/modules/ui/components/Button";
+import Botao from "@/modules/ui/Botao/Botao";
 import { FiLock } from "react-icons/fi";
 import logoLonga from "../assets/layout/Topbar/logo_longa.png";
 
@@ -234,7 +234,7 @@ export default function LoginPage() {
               required
             />
 
-            <Button
+            <Botao
               type="button"
               onClick={validateForm}
               className={`${isLoading ? "w-9" : "w-64"} mt-8`}
@@ -243,20 +243,20 @@ export default function LoginPage() {
               loading={isLoading}
             >
               {isReset ? "Cadastrar" : "Login"}
-            </Button>
+            </Botao>
 
             <div className="flex mt-0">
               <small className="flex items-center text-xs">
                 {isReset ? "Já tem senha?" : "Não tem senha?"}
               </small>
-              <Button
+              <Botao
                 variant="link"
                 className="link text-xs px-1"
                 type="button"
                 onClick={toggleScreenSide}
               >
                 {isReset ? "Fazer login" : "Criar/Resetar Senha"}
-              </Button>
+              </Botao>
             </div>
           </div>
         </div>

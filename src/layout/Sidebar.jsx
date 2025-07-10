@@ -85,7 +85,7 @@ export default function Sidebar({
                     icon: <CgPlayButtonR />,
                   },
                   {
-                    label: "Checkboxes",
+                    label: "Checkboxes e Toggles",
                     to: "/devs/ui/checkboxes",
                     icon: <TbCheckbox />,
                   },

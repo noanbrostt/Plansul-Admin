@@ -31,10 +31,14 @@ export default function EtiquetasPage() {
         <div className="flex flex-wrap items-center gap-4">
           <Etiqueta>Padrão</Etiqueta>
           <Etiqueta variant="primary">Primary</Etiqueta>
+          <Etiqueta variant="secondary">Secondary</Etiqueta>
+          <Etiqueta variant="accent">Accent</Etiqueta>
           <Etiqueta variant="success">Success</Etiqueta>
-          <Etiqueta variant="error">Error</Etiqueta>
           <Etiqueta variant="warning">Warning</Etiqueta>
+          <Etiqueta variant="error">Error</Etiqueta>
           <Etiqueta variant="info">Info</Etiqueta>
+          <Etiqueta variant="neutral">Neutral</Etiqueta>
+          <Etiqueta variant="ghost">Ghost</Etiqueta>
         </div>
       </div>
 
@@ -48,17 +52,29 @@ export default function EtiquetasPage() {
           <Etiqueta outline variant="primary">
             Primary
           </Etiqueta>
+          <Etiqueta outline variant="secondary">
+            Secondary
+          </Etiqueta>
+          <Etiqueta outline variant="accent">
+            Accent
+          </Etiqueta>
           <Etiqueta outline variant="success">
             Success
-          </Etiqueta>
-          <Etiqueta outline variant="error">
-            Error
           </Etiqueta>
           <Etiqueta outline variant="warning">
             Warning
           </Etiqueta>
+          <Etiqueta outline variant="error">
+            Error
+          </Etiqueta>
           <Etiqueta outline variant="info">
             Info
+          </Etiqueta>
+          <Etiqueta outline variant="neutral">
+            Neutral
+          </Etiqueta>
+          <Etiqueta outline variant="ghost">
+            Ghost
           </Etiqueta>
         </div>
       </div>
@@ -73,17 +89,29 @@ export default function EtiquetasPage() {
           <Etiqueta variant="primary" icon={<FiPlus />}>
             Primary
           </Etiqueta>
+          <Etiqueta variant="secondary" icon={<FiPlus />}>
+            Secondary
+          </Etiqueta>
+          <Etiqueta variant="accent" icon={<FiPlus />}>
+            Accent
+          </Etiqueta>
           <Etiqueta variant="success" icon={<FiPlus />}>
             Success
-          </Etiqueta>
-          <Etiqueta variant="error" icon={<FiPlus />}>
-            Error
           </Etiqueta>
           <Etiqueta variant="warning" icon={<FiPlus />}>
             Warning
           </Etiqueta>
+          <Etiqueta variant="error" icon={<FiPlus />}>
+            Error
+          </Etiqueta>
           <Etiqueta variant="info" icon={<FiPlus />}>
             Info
+          </Etiqueta>
+          <Etiqueta variant="neutral" icon={<FiPlus />}>
+            Neutral
+          </Etiqueta>
+          <Etiqueta variant="ghost" icon={<FiPlus />}>
+            Ghost
           </Etiqueta>
         </div>
       </div>
@@ -100,17 +128,29 @@ export default function EtiquetasPage() {
           <Etiqueta outline variant="primary" icon={<FiPlus />}>
             Primary
           </Etiqueta>
+          <Etiqueta outline variant="secondary" icon={<FiPlus />}>
+            Secondary
+          </Etiqueta>
+          <Etiqueta outline variant="accent" icon={<FiPlus />}>
+            Accent
+          </Etiqueta>
           <Etiqueta outline variant="success" icon={<FiPlus />}>
             Success
-          </Etiqueta>
-          <Etiqueta outline variant="error" icon={<FiPlus />}>
-            Error
           </Etiqueta>
           <Etiqueta outline variant="warning" icon={<FiPlus />}>
             Warning
           </Etiqueta>
+          <Etiqueta outline variant="error" icon={<FiPlus />}>
+            Error
+          </Etiqueta>
           <Etiqueta outline variant="info" icon={<FiPlus />}>
             Info
+          </Etiqueta>
+          <Etiqueta outline variant="neutral" icon={<FiPlus />}>
+            Neutral
+          </Etiqueta>
+          <Etiqueta outline variant="ghost" icon={<FiPlus />}>
+            Ghost
           </Etiqueta>
         </div>
       </div>
@@ -127,17 +167,29 @@ export default function EtiquetasPage() {
           <Etiqueta variant="primary" icon={<FiPlus />} iconPosition="right">
             Primary
           </Etiqueta>
+          <Etiqueta variant="secondary" icon={<FiPlus />} iconPosition="right">
+            Secondary
+          </Etiqueta>
+          <Etiqueta variant="accent" icon={<FiPlus />} iconPosition="right">
+            Accent
+          </Etiqueta>
           <Etiqueta variant="success" icon={<FiPlus />} iconPosition="right">
             Success
-          </Etiqueta>
-          <Etiqueta variant="error" icon={<FiPlus />} iconPosition="right">
-            Error
           </Etiqueta>
           <Etiqueta variant="warning" icon={<FiPlus />} iconPosition="right">
             Warning
           </Etiqueta>
+          <Etiqueta variant="error" icon={<FiPlus />} iconPosition="right">
+            Error
+          </Etiqueta>
           <Etiqueta variant="info" icon={<FiPlus />} iconPosition="right">
             Info
+          </Etiqueta>
+          <Etiqueta variant="neutral" icon={<FiPlus />} iconPosition="right">
+            Neutral
+          </Etiqueta>
+          <Etiqueta variant="ghost" icon={<FiPlus />} iconPosition="right">
+            Ghost
           </Etiqueta>
         </div>
       </div>
@@ -161,19 +213,27 @@ export default function EtiquetasPage() {
           </Etiqueta>
           <Etiqueta
             outline
+            variant="secondary"
+            icon={<FiPlus />}
+            iconPosition="right"
+          >
+            Secondary
+          </Etiqueta>
+          <Etiqueta
+            outline
+            variant="accent"
+            icon={<FiPlus />}
+            iconPosition="right"
+          >
+            Accent
+          </Etiqueta>
+          <Etiqueta
+            outline
             variant="success"
             icon={<FiPlus />}
             iconPosition="right"
           >
             Success
-          </Etiqueta>
-          <Etiqueta
-            outline
-            variant="error"
-            icon={<FiPlus />}
-            iconPosition="right"
-          >
-            Error
           </Etiqueta>
           <Etiqueta
             outline
@@ -185,11 +245,35 @@ export default function EtiquetasPage() {
           </Etiqueta>
           <Etiqueta
             outline
+            variant="error"
+            icon={<FiPlus />}
+            iconPosition="right"
+          >
+            Error
+          </Etiqueta>
+          <Etiqueta
+            outline
             variant="info"
             icon={<FiPlus />}
             iconPosition="right"
           >
             Info
+          </Etiqueta>
+          <Etiqueta
+            outline
+            variant="neutral"
+            icon={<FiPlus />}
+            iconPosition="right"
+          >
+            Neutral
+          </Etiqueta>
+          <Etiqueta
+            outline
+            variant="ghost"
+            icon={<FiPlus />}
+            iconPosition="right"
+          >
+            Ghost
           </Etiqueta>
         </div>
       </div>
@@ -206,9 +290,7 @@ export default function EtiquetasPage() {
           <Etiqueta variant="primary" size="lg">
             Large
           </Etiqueta>
-          <Etiqueta variant="primary">
-            Medium (Padrão)
-          </Etiqueta>
+          <Etiqueta variant="primary">Medium (Padrão)</Etiqueta>
           <Etiqueta variant="primary" size="sm">
             Small
           </Etiqueta>
@@ -239,11 +321,11 @@ export default function EtiquetasPage() {
           <div className="space-y-4 justify-items-center">
             <Etiqueta
               outline
-              variant="success"
+              variant="secondary"
               icon={<FiPlus />}
               iconPosition="right"
             >
-              Success
+              Secondary
             </Etiqueta>
 
             <div className="p-4 bg-base-300 rounded-lg">
@@ -252,11 +334,11 @@ export default function EtiquetasPage() {
 
 <Etiqueta
   outline
-  variant="success"
+  variant="secondary"
   icon={<FiPlus />}
   iconPosition="right"
 >
-  Success
+  Secondary
 </Etiqueta>`}
               </pre>
             </div>

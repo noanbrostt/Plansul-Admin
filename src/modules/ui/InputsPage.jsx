@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 
 import Input from "./components/Input";
@@ -19,7 +19,6 @@ import {
 
 export default function InputsPage() {
   const [inputValue, setInputValue] = useState("");
-  const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
   const [selectedNivel, setSelectedNivel] = useState("");
   const [selectedTermo, setSelectedTermo] = useState("s");
 
@@ -43,12 +42,6 @@ export default function InputsPage() {
   const [selectedPlan, setSelectedPlan] = useState("free");
 
   const [selectedFruits, setSelectedFruits] = useState([]);
-
-  const handleCheckboxChange = (event) => {
-    const newValue = event.target.checked;
-    setIsAnonymousOffer(newValue);
-    console.log("isAnonymousOffer -> " + newValue);
-  };
 
   const handleNivelChange = (newValue) => {
     setSelectedNivel(newValue);
@@ -737,183 +730,6 @@ export default function InputsPage() {
   }}
   variant="success"
 />`}
-              </pre>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-between items-center mb-6 mt-12">
-        <h1 className="text-3xl font-bold text-base-content">Checkboxes</h1>
-      </div>
-
-      {/* --- Seção de Checkboxes Padrão com Cores --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Checkboxes Padrão
-        </h2>
-        <div className="flex flex-col gap-2">
-          <p className="font-medium text-base-content/80">Cores:</p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Checkbox defaultChecked label="Default" />
-            <Checkbox defaultChecked label="Primary" variant="primary" />
-            <Checkbox defaultChecked label="Secondary" variant="secondary" />
-            <Checkbox defaultChecked label="Accent" variant="accent" />
-            <Checkbox defaultChecked label="Info" variant="info" />
-            <Checkbox defaultChecked label="Success" variant="success" />
-            <Checkbox defaultChecked label="Warning" variant="warning" />
-            <Checkbox defaultChecked label="Error" variant="error" />
-            <Checkbox defaultChecked label="Neutral" variant="neutral" />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
-
-          <div className="flex items-center gap-4">
-            <Checkbox defaultChecked label="XS" checkboxSize="xs" />
-            <Checkbox defaultChecked label="SM" checkboxSize="sm" />
-            <Checkbox defaultChecked label="MD (Padrão)" />
-            <Checkbox defaultChecked label="LG" checkboxSize="lg" />
-            <Checkbox defaultChecked label="XL" checkboxSize="xl" />
-          </div>
-        </div>
-      </div>
-
-      {/* --- Seção de Checkbox com Fieldset --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Checkbox com Label e Fieldset
-        </h2>
-        <div className="flex flex-wrap items-center gap-8">
-          <Checkbox fieldset="Fieldset" label="xs" checkboxSize="xs" />
-          <Checkbox fieldset="Fieldset" label="sm" checkboxSize="sm" />
-          <Checkbox fieldset="Fieldset" label="base" />
-          <Checkbox fieldset="Fieldset" label="lg" checkboxSize="lg" />
-          <Checkbox fieldset="Fieldset" label="xl" checkboxSize="xl" />
-        </div>
-      </div>
-
-      <div className="flex justify-between items-center mb-6 mt-12">
-        <h1 className="text-3xl font-bold text-base-content">Toggles</h1>
-      </div>
-
-      {/* --- Seção de Toggles com Cores --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Toggles Padrão
-        </h2>
-
-        <div className="flex flex-col gap-4">
-          <p className="font-medium text-base-content/80">Cores:</p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Checkbox toggle defaultChecked label="Default" />
-            <Checkbox toggle defaultChecked label="Primary" variant="primary" />
-            <Checkbox toggle defaultChecked label="Accent" variant="accent" />
-            <Checkbox toggle defaultChecked label="Success" variant="success" />
-            <Checkbox toggle defaultChecked label="Error" variant="error" />
-            <Checkbox toggle defaultChecked label="Neutral" variant="neutral" />
-          </div>
-
-          <p className="font-medium text-base-content/80 mt-4">Tamanhos:</p>
-
-          <div className="flex items-center gap-4">
-            <Checkbox toggle defaultChecked label="XS" checkboxSize="xs" />
-            <Checkbox toggle defaultChecked label="SM" checkboxSize="sm" />
-            <Checkbox toggle defaultChecked label="MD" checkboxSize="md" />
-            <Checkbox toggle defaultChecked label="LG" checkboxSize="lg" />
-            <Checkbox toggle defaultChecked label="XL" checkboxSize="xl" />
-          </div>
-        </div>
-      </div>
-
-      {/* --- Seção de Checkbox com Fieldset --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Toggles com Label e Fieldset
-        </h2>
-
-        <div className="flex flex-wrap items-center gap-8">
-          <Checkbox
-            toggle
-            fieldset="xs"
-            leftLabel="leftLabel"
-            checkboxSize="xs"
-          />
-          <Checkbox toggle fieldset="sm" label="label" checkboxSize="sm" />
-          <Checkbox
-            toggle
-            fieldsetCentered
-            legendClassName="ml-3"
-            fieldset="md"
-            label="label"
-            leftLabel="leftLabel"
-          />
-          <Checkbox
-            toggle
-            fieldsetCentered
-            legendClassName="ml-3"
-            fieldset="lg"
-            label="label"
-            leftLabel="leftLabel"
-            checkboxSize="lg"
-          />
-          <Checkbox
-            toggle
-            fieldsetCentered
-            legendClassName="ml-3"
-            fieldset="xl"
-            label="label"
-            leftLabel="leftLabel"
-            checkboxSize="xl"
-          />
-        </div>
-      </div>
-
-      {/* --- Seção de Toggle com Ícones Internos --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Toggle com Ícones
-        </h2>
-        <div className="flex flex-wrap items-center gap-4">
-          <Checkbox toggle iconsToggle />
-        </div>
-      </div>
-
-      {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
-          Demonstração de Uso
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4 justify-items-center mt-11">
-            <Checkbox
-              label="Oferta Anônima?"
-              checked={isAnonymousOffer}
-              onChange={handleCheckboxChange}
-            />
-
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);\n\nconst handleCheckboxChange = (event) => {\n  setIsAnonymousOffer(event.target.checked);\n};\n\n<Checkbox\n  label="Oferta Anônima?"\n  checked={isAnonymousOffer}\n  onChange={handleCheckboxChange}\n/>`}
-              </pre>
-            </div>
-          </div>
-
-          <div className="space-y-4 justify-items-center">
-            <Checkbox
-              toggle
-              fieldset="Oferta Anônima?"
-              label="Sim"
-              leftLabel="Não"
-              fieldsetCentered
-              checked={isAnonymousOffer}
-              onChange={handleCheckboxChange}
-            />
-
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);\n\nconst handleCheckboxChange = (event) => {\n  setIsAnonymousOffer(event.target.checked);\n};\n\n<Checkbox\n  toggle\n  fieldset="Oferta Anônima?"\n  label="Sim"\n  leftLabel="Não"\n  fieldsetCentered\n  checked={isAnonymousOffer}\n  onChange={handleCheckboxChange}\n/>`}
               </pre>
             </div>
           </div>
