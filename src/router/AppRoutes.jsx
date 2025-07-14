@@ -14,6 +14,7 @@ import EtiquetasPage from "@/modules/devs/ui/Etiqueta/EtiquetasPage";
 import RadiosPage from "@/modules/devs/ui/Radio/RadiosPage";
 import TabelasPage from "@/modules/devs/ui/Tabela/TabelasPage";
 import TextareasPage from "@/modules/devs/ui/Textarea/TextareasPage";
+import LinhasPage from "@/modules/devs/graficos/LinhasPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -71,6 +72,10 @@ export default function AppRoutes() {
         <Route
           path="/devs/ui/textareas"
           element={withPermission(<TextareasPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/graficos/linha"
+          element={withPermission(<LinhasPage />, "DEV_Teste_User")}
         />
       </Route>
       {/*  */}

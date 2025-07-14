@@ -131,10 +131,6 @@ aside .simplebar-scrollbar::before {
 }
 /*  */
 
-/* .react-select__menu {
-  background-color: var(--color-base-100) !important;
-
-  & list-items-inside {
-    cursor: pointer;
-  }
-} */
+div:focus, svg {
+  outline: none !important;
+}

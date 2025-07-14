@@ -11,6 +11,7 @@ import { FaTable } from "react-icons/fa";
 import { TbCheckbox } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
+import { VscGraph } from "react-icons/vsc";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -126,7 +127,7 @@ export default function Sidebar({
               />
               <SidebarDropdown
                 label="Gráficos"
-                icon={<IoCubeOutline />}
+                icon={<VscGraph />}
                 subItems={[
                   {
                     label: "De Linha",
