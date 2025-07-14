@@ -12,6 +12,7 @@ import { TbCheckbox } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
 import { VscGraph } from "react-icons/vsc";
+import { FaIcons } from "react-icons/fa";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -76,7 +77,7 @@ export default function Sidebar({
                     icon: <MdScreenSearchDesktop />,
                   },
                   { label: "Forbidden", to: "/negado", icon: <SiAdblock /> },
-                  { label: "Ícones", to: "https://react-icons.github.io/react-icons/search/#q=", icon: <SiAdblock />, targetBlank: true },
+                  { label: "Ícones", to: "https://react-icons.github.io/react-icons/search/#q=", icon: <FaIcons />, targetBlank: true },
                 ]}
               />
               <SidebarDropdown
