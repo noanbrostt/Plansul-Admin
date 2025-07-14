@@ -4,6 +4,7 @@ import { RiInputField } from "react-icons/ri";
 import { CgPlayButtonR } from "react-icons/cg";
 import { MdScreenshotMonitor, MdRadioButtonChecked, MdScreenSearchDesktop } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
+import { LuChartLine } from "react-icons/lu";
 import { RxBadge } from "react-icons/rx";
 import { SiAdblock } from "react-icons/si";
 import { FaTable } from "react-icons/fa";
@@ -74,6 +75,7 @@ export default function Sidebar({
                     icon: <MdScreenSearchDesktop />,
                   },
                   { label: "Forbidden", to: "/negado", icon: <SiAdblock /> },
+                  { label: "Ícones", to: "https://react-icons.github.io/react-icons/search/#q=", icon: <SiAdblock />, targetBlank: true },
                 ]}
               />
               <SidebarDropdown
@@ -119,6 +121,17 @@ export default function Sidebar({
                     label: "Textareas",
                     to: "/devs/ui/textareas",
                     icon: <BsTextareaResize />,
+                  },
+                ]}
+              />
+              <SidebarDropdown
+                label="Gráficos"
+                icon={<IoCubeOutline />}
+                subItems={[
+                  {
+                    label: "De Linha",
+                    to: "/devs/graficos/linha",
+                    icon: <LuChartLine />,
                   },
                 ]}
               />
