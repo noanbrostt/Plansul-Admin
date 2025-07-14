@@ -6,14 +6,14 @@ import ForbiddenPage from "../layout/ForbiddenPage";
 
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
-import InputsPage from "@/modules/ui/Input/InputsPage";
-import BotoesPage from "@/modules/ui/Botao/BotoesPage"
-import SelectsPage from "@/modules/ui/Select/SelectsPage"
-import CheckboxesPage from "@/modules/ui/Checkbox/CheckboxesPage"
-import EtiquetasPage from "@/modules/ui/Etiqueta/EtiquetasPage";
-import RadiosPage from "@/modules/ui/Radio/RadiosPage";
-import TabelasPage from "@/modules/ui/Tabela/TabelasPage";
-import TextareasPage from "@/modules/ui/Textarea/TextareasPage";
+import InputsPage from "@/modules/devs/ui/Input/InputsPage";
+import BotoesPage from "@/modules/devs/ui/Botao/BotoesPage"
+import SelectsPage from "@/modules/devs/ui/Select/SelectsPage"
+import CheckboxesPage from "@/modules/devs/ui/Checkbox/CheckboxesPage"
+import EtiquetasPage from "@/modules/devs/ui/Etiqueta/EtiquetasPage";
+import RadiosPage from "@/modules/devs/ui/Radio/RadiosPage";
+import TabelasPage from "@/modules/devs/ui/Tabela/TabelasPage";
+import TextareasPage from "@/modules/devs/ui/Textarea/TextareasPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Textarea from "@/modules/ui/Textarea/Textarea";
+import Textarea from "@/modules/devs/ui/Textarea/Textarea";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export default function TextareasPage() {

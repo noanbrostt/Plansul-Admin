@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RadioGroup from "@/modules/ui/Radio/Radio";
+import RadioGroup from "@/modules/devs/ui/Radio/Radio";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export default function InputsPage() {

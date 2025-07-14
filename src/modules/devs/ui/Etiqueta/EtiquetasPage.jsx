@@ -1,4 +1,4 @@
-import Etiqueta from "@/modules/ui/Etiqueta/Etiqueta";
+import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
 import FavoriteButton from "@/components/FavoriteButton";
 
 import { FiPlus } from "react-icons/fi";

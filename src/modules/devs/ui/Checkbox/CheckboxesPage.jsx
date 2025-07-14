@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Checkbox from "@/modules/ui/Checkbox/Checkbox";
+import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export default function InputsPage() {

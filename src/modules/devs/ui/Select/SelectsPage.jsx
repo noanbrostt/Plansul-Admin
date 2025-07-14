@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Select from "@/modules/ui/Select/Select";
+import Select from "@/modules/devs/ui/Select/Select";
 import FavoriteButton from "@/components/FavoriteButton";
 
 export default function InputsPage() {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Botao from "@/modules/ui/Botao/Botao";
+import Botao from "@/modules/devs/ui/Botao/Botao";
 import FavoriteButton from "@/components/FavoriteButton";
 
 import {

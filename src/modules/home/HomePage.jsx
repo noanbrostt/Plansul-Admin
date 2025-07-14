@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Etiqueta from "@/modules/ui/Etiqueta/Etiqueta";
+import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
 
 export default function HomePage() {
   const user = useSelector((state) => state.user.data);

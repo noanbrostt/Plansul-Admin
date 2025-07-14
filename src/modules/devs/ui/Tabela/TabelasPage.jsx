@@ -1,5 +1,4 @@
-// src/pages/devs/ui/TablesPage.jsx
-import Tabela from "@/modules/ui/Tabela/Tabela";
+import Tabela from "@/modules/devs/ui/Tabela/Tabela";
 import FavoriteButton from "@/components/FavoriteButton";
 import { FiUser, FiMail, FiPhone, FiDollarSign } from "react-icons/fi";
 import { FaPencilAlt, FaTrashAlt, FaEye } from "react-icons/fa";
