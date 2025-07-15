@@ -135,6 +135,11 @@ export default function Sidebar({
                     to: "/devs/graficos/linha",
                     icon: <LuChartLine />,
                   },
+                  {
+                    label: "De Barra",
+                    to: "/devs/graficos/barra",
+                    icon: <VscGraph />,
+                  },
                 ]}
               />
             </SidebarSection>
