@@ -150,6 +150,9 @@ const initialData =.. // Ta lá no console
         <button className="btn btn-sm my-2" onClick={zoomOut}>
           Zoom Out
         </button>
+        <div className="badge badge-info badge-outline">
+          Arraste no gráfico para dar zoom
+        </div>
         <div
           className="w-full h-64 select-none"
           style={{ userSelect: "none" }}

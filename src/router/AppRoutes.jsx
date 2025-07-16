@@ -18,6 +18,7 @@ import AreasPage from "@/modules/devs/graficos/AreasPage";
 import BarrasPage from "@/modules/devs/graficos/BarrasPage";
 import LinhasPage from "@/modules/devs/graficos/LinhasPage";
 import PizzasPage from "@/modules/devs/graficos/PizzasPage";
+import CompostosPage from "@/modules/devs/graficos/CompostosPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -91,6 +92,10 @@ export default function AppRoutes() {
         <Route
           path="/devs/graficos/pizza"
           element={withPermission(<PizzasPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/graficos/composto"
+          element={withPermission(<CompostosPage />, "DEV_Teste_User")}
         />
       </Route>
       {/*  */}
