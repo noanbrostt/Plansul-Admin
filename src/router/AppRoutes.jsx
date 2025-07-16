@@ -1,19 +1,24 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "@/layout/DashboardLayout";
 import LoginPage from "@/layout/LoginPage";
-import NotFoundPage from "../layout/NotFoundPage";
-import ForbiddenPage from "../layout/ForbiddenPage";
+import NotFoundPage from "@/layout/NotFoundPage";
+import ForbiddenPage from "@/layout/ForbiddenPage";
 
+// Importações de páginas
 import HomePage from "@/modules/home/HomePage";
 import UsersPage from "@/modules/users/UsersPage";
+
+// Páginas de UI
 import InputsPage from "@/modules/devs/ui/Input/InputsPage";
-import BotoesPage from "@/modules/devs/ui/Botao/BotoesPage"
-import SelectsPage from "@/modules/devs/ui/Select/SelectsPage"
-import CheckboxesPage from "@/modules/devs/ui/Checkbox/CheckboxesPage"
+import BotoesPage from "@/modules/devs/ui/Botao/BotoesPage";
+import SelectsPage from "@/modules/devs/ui/Select/SelectsPage";
+import CheckboxesPage from "@/modules/devs/ui/Checkbox/CheckboxesPage";
 import EtiquetasPage from "@/modules/devs/ui/Etiqueta/EtiquetasPage";
 import RadiosPage from "@/modules/devs/ui/Radio/RadiosPage";
 import TabelasPage from "@/modules/devs/ui/Tabela/TabelasPage";
 import TextareasPage from "@/modules/devs/ui/Textarea/TextareasPage";
+
+// Páginas de gráficos
 import AreasPage from "@/modules/devs/graficos/AreasPage";
 import BarrasPage from "@/modules/devs/graficos/BarrasPage";
 import LinhasPage from "@/modules/devs/graficos/LinhasPage";
@@ -21,20 +26,151 @@ import PizzasPage from "@/modules/devs/graficos/PizzasPage";
 import RadarsPage from "@/modules/devs/graficos/RadarsPage";
 import CompostosPage from "@/modules/devs/graficos/CompostosPage";
 
+// Componentes de roteamento
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import PermissionRoute from "./PermissionRoute";
 
-export default function AppRoutes() {
-  const withPermission = (element, requiredPermissao) => (
-    <PermissionRoute requiredPermissao={requiredPermissao}>
-      {element}
-    </PermissionRoute>
-  );
+// Configuração das rotas
+const ROUTE_CONFIG = {
+  // Rotas públicas
+  PUBLIC: [
+    {
+      path: "/login",
+      element: <LoginPage />,
+      wrapper: PublicRoute
+    }
+  ],
+  
+  // Rotas abertas (requerem login)
+  LOGGED: [
+    {
+      path: "/",
+      element: <HomePage />
+    },
+    {
+      path: "/users",
+      element: <UsersPage />
+    }
+  ],
+  
+  // Rotas protegidas (requerem permissão específica)
+  PERMISSION_ROUTES: [
+    {
+      path: "/devs/ui/botoes",
+      element: <BotoesPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/checkboxes",
+      element: <CheckboxesPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/etiquetas",
+      element: <EtiquetasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/inputs",
+      element: <InputsPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/selects",
+      element: <SelectsPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/radios",
+      element: <RadiosPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/tabelas",
+      element: <TabelasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/ui/textareas",
+      element: <TextareasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/graficos/area",
+      element: <AreasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/graficos/barra",
+      element: <BarrasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/graficos/linha",
+      element: <LinhasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/graficos/pizza",
+      element: <PizzasPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/graficos/radar",
+      element: <RadarsPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/graficos/compostos",
+      element: <CompostosPage />,
+      permission: "DEV_Teste_User"
+    }
+  ],
+  
+  // Rotas de erro
+  ERROR: [
+    {
+      path: "*",
+      element: <NotFoundPage />
+    },
+    {
+      path: "/negado",
+      element: <ForbiddenPage />
+    }
+  ]
+};
 
+// Helper para rotas com permissão
+const withPermission = (element, permission) => (
+  <PermissionRoute requiredPermissao={permission}>
+    {element}
+  </PermissionRoute>
+);
+
+// Helper para renderizar rotas com wrappers
+const renderRoute = (route) => {
+  let content = route.element;
+  
+  if (route.permission) {
+    content = withPermission(content, route.permission);
+  }
+  
+  if (route.wrapper) {
+    const Wrapper = route.wrapper;
+    content = <Wrapper>{content}</Wrapper>;
+  }
+  
+  return <Route key={route.path} path={route.path} element={content} />;
+};
+
+export default function AppRoutes() {
   return (
     <Routes>
-      {/* Se não estiver logado, manda pra login */}
+      {/* Rotas Públicas */}
+      {ROUTE_CONFIG.PUBLIC.map(renderRoute)}
+      
+      {/* Rotas Protegidas dentro do DashboardLayout */}
       <Route
         element={
           <ProtectedRoute>
@@ -42,84 +178,12 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route path="/" element={<HomePage />} />
-        <Route path="/users" element={<UsersPage />} />
-
-        {/* Devs */}
-        <Route
-          path="/devs/ui/botoes"
-          element={withPermission(<BotoesPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/checkboxes"
-          element={withPermission(<CheckboxesPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/etiquetas"
-          element={withPermission(<EtiquetasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/inputs"
-          element={withPermission(<InputsPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/selects"
-          element={withPermission(<SelectsPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/radios"
-          element={withPermission(<RadiosPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/tabelas"
-          element={withPermission(<TabelasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/ui/textareas"
-          element={withPermission(<TextareasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/graficos/area"
-          element={withPermission(<AreasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/graficos/barra"
-          element={withPermission(<BarrasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/graficos/linha"
-          element={withPermission(<LinhasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/graficos/pizza"
-          element={withPermission(<PizzasPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/graficos/radar"
-          element={withPermission(<RadarsPage />, "DEV_Teste_User")}
-        />
-        <Route
-          path="/devs/graficos/compostos"
-          element={withPermission(<CompostosPage />, "DEV_Teste_User")}
-        />
+        {ROUTE_CONFIG.LOGGED.map(renderRoute)}
+        {ROUTE_CONFIG.PERMISSION_ROUTES.map(renderRoute)}
       </Route>
-      {/*  */}
-
-      {/* Se já estiver logado, manda pra home */}
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <LoginPage />
-          </PublicRoute>
-        }
-      />
-      {/*  */}
-
-      {/* Telas de erro */}
-      <Route path="*" element={<NotFoundPage />} />
-      <Route path="/negado" element={<ForbiddenPage />} />
-      {/*  */}
+      
+      {/* Rotas de Erro */}
+      {ROUTE_CONFIG.ERROR.map(renderRoute)}
     </Routes>
   );
 }
