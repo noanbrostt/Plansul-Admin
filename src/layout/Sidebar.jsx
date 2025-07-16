@@ -2,7 +2,11 @@ import { useState } from "react";
 import { FiHome, FiUsers, FiLogIn } from "react-icons/fi";
 import { RiInputField } from "react-icons/ri";
 import { CgPlayButtonR } from "react-icons/cg";
-import { MdScreenshotMonitor, MdRadioButtonChecked, MdScreenSearchDesktop } from "react-icons/md";
+import {
+  MdScreenshotMonitor,
+  MdRadioButtonChecked,
+  MdScreenSearchDesktop,
+} from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
 import { LuChartLine } from "react-icons/lu";
 import { RxBadge } from "react-icons/rx";
@@ -16,6 +20,7 @@ import { FaIcons } from "react-icons/fa";
 import { FaChartPie } from "react-icons/fa";
 import { FaChartBar } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa";
+import { CgFileDocument } from "react-icons/cg";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -80,7 +85,18 @@ export default function Sidebar({
                     icon: <MdScreenSearchDesktop />,
                   },
                   { label: "Forbidden", to: "/negado", icon: <SiAdblock /> },
-                  { label: "Ícones", to: "https://react-icons.github.io/react-icons/search/#q=", icon: <FaIcons />, targetBlank: true },
+                  {
+                    label: "Ícones",
+                    to: "https://react-icons.github.io/react-icons/search/#q=",
+                    icon: <FaIcons />,
+                    targetBlank: true,
+                  },
+                  {
+                    label: "Doc. Gráficos",
+                    to: "https://recharts.org/en-US/examples/",
+                    icon: <CgFileDocument />,
+                    targetBlank: true,
+                  },
                 ]}
               />
               <SidebarDropdown
@@ -134,14 +150,14 @@ export default function Sidebar({
                 icon={<FaChartBar />}
                 subItems={[
                   {
-                    label: "De Linha",
-                    to: "/devs/graficos/linha",
-                    icon: <FaChartLine />,
-                  },
-                  {
                     label: "De Barra",
                     to: "/devs/graficos/barra",
                     icon: <FaChartBar />,
+                  },
+                  {
+                    label: "De Linha",
+                    to: "/devs/graficos/linha",
+                    icon: <FaChartLine />,
                   },
                   {
                     label: "De Pizza",

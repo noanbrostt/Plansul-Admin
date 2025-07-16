@@ -14,8 +14,8 @@ import EtiquetasPage from "@/modules/devs/ui/Etiqueta/EtiquetasPage";
 import RadiosPage from "@/modules/devs/ui/Radio/RadiosPage";
 import TabelasPage from "@/modules/devs/ui/Tabela/TabelasPage";
 import TextareasPage from "@/modules/devs/ui/Textarea/TextareasPage";
-import LinhasPage from "@/modules/devs/graficos/LinhasPage";
 import BarrasPage from "@/modules/devs/graficos/BarrasPage";
+import LinhasPage from "@/modules/devs/graficos/LinhasPage";
 import PizzasPage from "@/modules/devs/graficos/PizzasPage";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -76,12 +76,12 @@ export default function AppRoutes() {
           element={withPermission(<TextareasPage />, "DEV_Teste_User")}
         />
         <Route
-          path="/devs/graficos/linha"
-          element={withPermission(<LinhasPage />, "DEV_Teste_User")}
-        />
-        <Route
           path="/devs/graficos/barra"
           element={withPermission(<BarrasPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/graficos/linha"
+          element={withPermission(<LinhasPage />, "DEV_Teste_User")}
         />
         <Route
           path="/devs/graficos/pizza"
