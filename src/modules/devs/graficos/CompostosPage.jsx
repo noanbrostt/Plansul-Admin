@@ -73,9 +73,12 @@ export default function CompostosPage() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="flex text-3xl font-bold h-10">
-          Gráficos Compostos{" "}
+          Gráficos Compostos
           <FavoriteButton
-            tela={{ nome: "Gráficos Compostos", url: "devs/graficos/composto" }}
+            tela={{
+              nome: "Gráficos Compostos",
+              url: "devs/graficos/compostos",
+            }}
           />
         </h1>
         <div className="breadcrumbs text-sm text-gray-500">

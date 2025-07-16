@@ -18,6 +18,7 @@ import AreasPage from "@/modules/devs/graficos/AreasPage";
 import BarrasPage from "@/modules/devs/graficos/BarrasPage";
 import LinhasPage from "@/modules/devs/graficos/LinhasPage";
 import PizzasPage from "@/modules/devs/graficos/PizzasPage";
+import RadarsPage from "@/modules/devs/graficos/RadarsPage";
 import CompostosPage from "@/modules/devs/graficos/CompostosPage";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -94,7 +95,11 @@ export default function AppRoutes() {
           element={withPermission(<PizzasPage />, "DEV_Teste_User")}
         />
         <Route
-          path="/devs/graficos/composto"
+          path="/devs/graficos/radar"
+          element={withPermission(<RadarsPage />, "DEV_Teste_User")}
+        />
+        <Route
+          path="/devs/graficos/compostos"
           element={withPermission(<CompostosPage />, "DEV_Teste_User")}
         />
       </Route>

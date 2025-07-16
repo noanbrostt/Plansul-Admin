@@ -22,6 +22,7 @@ import { FaChartBar } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa";
 import { CgFileDocument } from "react-icons/cg";
 import { LuChartNoAxesCombined } from "react-icons/lu";
+import { AiOutlineRadarChart } from "react-icons/ai";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -177,8 +178,13 @@ export default function Sidebar({
                     icon: <FaChartPie />,
                   },
                   {
+                    label: "De Radar",
+                    to: "/devs/graficos/radar",
+                    icon: <AiOutlineRadarChart />,
+                  },
+                  {
                     label: "Compostos",
-                    to: "/devs/graficos/composto",
+                    to: "/devs/graficos/compostos",
                     icon: <LuChartNoAxesCombined strokeWidth="2.5px" />,
                   },
                 ]}
