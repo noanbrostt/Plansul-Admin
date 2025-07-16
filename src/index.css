@@ -8,30 +8,30 @@
   color-scheme: "light";
 
   /* Cores Base (Preto/Branco com tons de cinza) */
-  --color-base-100: #FFFFFF; /* Fundo principal branco puro */
-  --color-base-200: #F5F5F5; /* Fundo secundário (um cinza muito claro) */
-  --color-base-300: #E0E0E0; /* Bordas/divisórias (um cinza claro) */
+  --color-base-100: #ffffff; /* Fundo principal branco puro */
+  --color-base-200: #f5f5f5; /* Fundo secundário (um cinza muito claro) */
+  --color-base-300: #e0e0e0; /* Bordas/divisórias (um cinza claro) */
   --color-base-content: #333333; /* Texto principal (quase preto) */
 
   /* Cores de Branding */
-  --color-primary: #294D7F; /* Azul principal */
-  --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
+  --color-primary: #294d7f; /* Azul principal */
+  --color-primary-content: #ffffff; /* Texto branco sobre o azul primário */
   --color-secondary: #4974b1; /* Um azul ligeiramente mais escuro (complementar) */
-  --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
-  --color-accent: #DF8A2A; /* Laranja de acento/contraste */
-  --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja (para legibilidade) */
+  --color-secondary-content: #ffffff; /* Texto branco sobre o secundário */
+  --color-accent: #df8a2a; /* Laranja de acento/contraste */
+  --color-accent-content: #ffffff; /* Texto branco sobre o laranja (para legibilidade) */
   --color-neutral: #666666; /* Para elementos neutros como cards, barras */
-  --color-neutral-content: #FFFFFF; /* Texto branco sobre o neutro */
+  --color-neutral-content: #ffffff; /* Texto branco sobre o neutro */
 
   /* Cores de Status */
-  --color-info: #3ABFF8;
-  --color-info-content: #FFFFFF;
-  --color-success: #36D399;
-  --color-success-content: #FFFFFF;
-  --color-warning: #FBBD23;
-  --color-warning-content: #FFFFFF;
-  --color-error: #F87272;
-  --color-error-content: #FFFFFF;
+  --color-info: #3abff8;
+  --color-info-content: #ffffff;
+  --color-success: #36d399;
+  --color-success-content: #ffffff;
+  --color-warning: #fbbd23;
+  --color-warning-content: #ffffff;
+  --color-error: #f87272;
+  --color-error-content: #ffffff;
 
   /* Medidas */
   --radius-selector: 0.5rem;
@@ -49,32 +49,32 @@
   default: true;
   prefersdark: false;
   color-scheme: "dark";
-  
+
   /* Cores Base (Preto/Branco com tons de cinza) */
-  --color-base-100: #1A1A1A; /* Fundo principal preto quase puro */
-  --color-base-200: #2E2E2E; /* Fundo secundário (um cinza escuro) */
+  --color-base-100: #1a1a1a; /* Fundo principal preto quase puro */
+  --color-base-200: #2e2e2e; /* Fundo secundário (um cinza escuro) */
   --color-base-300: #424242; /* Bordas/divisórias (um cinza mais escuro) */
-  --color-base-content: #CCCCCC; /* Texto principal (cinza claro) */
+  --color-base-content: #cccccc; /* Texto principal (cinza claro) */
 
   /*Cores de Branding (ajustadas para tema escuro) */
   --color-primary: #376fbe; /* Azul principal */
-  --color-primary-content: #FFFFFF; /* Texto branco sobre o azul primário */
+  --color-primary-content: #ffffff; /* Texto branco sobre o azul primário */
   --color-secondary: #355889; /* Um azul ligeiramente mais claro (complementar no tema escuro) */
-  --color-secondary-content: #FFFFFF; /* Texto branco sobre o secundário */
-  --color-accent: #DF8A2A; /* Laranja de acento/contraste */
-  --color-accent-content: #FFFFFF; /* Texto branco sobre o laranja */
-  --color-neutral: #4D4D4D; /* Para elementos neutros no tema escuro */
-  --color-neutral-content: #FFFFFF; /* Texto branco sobre o neutro */
+  --color-secondary-content: #ffffff; /* Texto branco sobre o secundário */
+  --color-accent: #df8a2a; /* Laranja de acento/contraste */
+  --color-accent-content: #ffffff; /* Texto branco sobre o laranja */
+  --color-neutral: #4d4d4d; /* Para elementos neutros no tema escuro */
+  --color-neutral-content: #ffffff; /* Texto branco sobre o neutro */
 
   /* Cores de Status */
-  --color-info: #60A5FA;
-  --color-info-content: #FFFFFF;
+  --color-info: #60a5fa;
+  --color-info-content: #ffffff;
   --color-success: #009135;
-  --color-success-content: #FFFFFF;
+  --color-success-content: #ffffff;
   --color-warning: #a28618;
-  --color-warning-content: #FFFFFF;
+  --color-warning-content: #ffffff;
   --color-error: #a90000;
-  --color-error-content: #FFFFFF;
+  --color-error-content: #ffffff;
 
   /* Medidas */
   --radius-selector: 0.5rem;
@@ -111,14 +111,16 @@ aside .simplebar-scrollbar::before {
 
 /* Faz com que o validador não ocupe espaço enquanto estiver oculto */
 .validator {
-    &:user-invalid, &:has(:user-invalid), &[aria-invalid]:not([aria-invalid="false"]) {
-        &~.validator-hint {
-            height: unset;
-        }
+  &:user-invalid,
+  &:has(:user-invalid),
+  &[aria-invalid]:not([aria-invalid="false"]) {
+    & ~ .validator-hint {
+      height: unset;
     }
+  }
 }
 .validator-hint {
-    height: 0px;
+  height: 0px;
 }
 /*  */
 
@@ -131,6 +133,9 @@ aside .simplebar-scrollbar::before {
 }
 /*  */
 
-div:focus, svg {
+div:focus,
+path:focus,
+svg:focus,
+g:focus {
   outline: none !important;
 }

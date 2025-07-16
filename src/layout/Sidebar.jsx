@@ -13,6 +13,9 @@ import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
 import { VscGraph } from "react-icons/vsc";
 import { FaIcons } from "react-icons/fa";
+import { FaChartPie } from "react-icons/fa";
+import { FaChartBar } from "react-icons/fa";
+import { FaChartLine } from "react-icons/fa";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -112,7 +115,7 @@ export default function Sidebar({
                   {
                     label: "Selects",
                     to: "/devs/ui/selects",
-                    icon: <GoMultiSelect stroke-width="1px" />,
+                    icon: <GoMultiSelect strokeWidth="1px" />,
                   },
                   {
                     label: "Tabelas",
@@ -128,17 +131,22 @@ export default function Sidebar({
               />
               <SidebarDropdown
                 label="Gráficos"
-                icon={<VscGraph />}
+                icon={<FaChartBar />}
                 subItems={[
                   {
                     label: "De Linha",
                     to: "/devs/graficos/linha",
-                    icon: <LuChartLine />,
+                    icon: <FaChartLine />,
                   },
                   {
                     label: "De Barra",
                     to: "/devs/graficos/barra",
-                    icon: <VscGraph />,
+                    icon: <FaChartBar />,
+                  },
+                  {
+                    label: "De Pizza",
+                    to: "/devs/graficos/pizza",
+                    icon: <FaChartPie />,
                   },
                 ]}
               />

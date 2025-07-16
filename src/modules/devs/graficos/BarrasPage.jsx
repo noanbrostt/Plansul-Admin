@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FavoriteButton from "@/components/FavoriteButton";
 import {
   BarChart,
   Bar,
@@ -68,7 +69,12 @@ export default function BarrasPage() {
     <div className="bg-base-100 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold h-10">Gráficos de Barras</h1>
+        <h1 className="flex text-3xl font-bold h-10">
+          Gráficos de Barras{" "}
+          <FavoriteButton
+            tela={{ nome: "Gráficos de Barra", url: "devs/graficos/barra" }}
+          />
+        </h1>
         <div className="breadcrumbs text-sm text-gray-500">
           <ul>
             <li>Devs</li>
@@ -90,7 +96,10 @@ export default function BarrasPage() {
               <Bar
                 dataKey="uv"
                 fill="var(--color-primary)"
-                label={{ position: 'insideTop', fill: 'var(--color-primary-content)' }}
+                label={{
+                  position: "insideTop",
+                  fill: "var(--color-primary-content)",
+                }}
               />
             </BarChart>
           </ResponsiveContainer>

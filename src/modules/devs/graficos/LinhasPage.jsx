@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FavoriteButton from "@/components/FavoriteButton";
 import {
   LineChart,
   Line,
@@ -73,7 +74,12 @@ export default function LinhasPage() {
     <div className="bg-base-100 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold h-10">Gráficos de Linhas</h1>
+        <h1 className="flex text-3xl font-bold h-10">
+          Gráficos de Linhas{" "}
+          <FavoriteButton
+            tela={{ nome: "Gráficos de Linha", url: "devs/graficos/linha" }}
+          />
+        </h1>
         <div className="breadcrumbs text-sm text-gray-500">
           <ul>
             <li>Devs</li>
