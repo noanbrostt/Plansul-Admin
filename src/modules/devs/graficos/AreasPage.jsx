@@ -1,8 +1,8 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 import {
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   CartesianGrid,
   Legend,
   ResponsiveContainer,
@@ -25,11 +25,12 @@ const initialData = [
   { name: "Dez", uv: 239, pv: 380, amt: 250 },
 ];
 
-export default function BarrasPage() {
+export default function AreasPage() {
   const [state, setState] = useState({
     data: initialData,
     refAreaLeft: "",
     refAreaRight: "",
+    hoverKey: null,
   });
   const [hoverKey, setHoverKey] = useState(null);
 
@@ -70,61 +71,80 @@ export default function BarrasPage() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="flex text-3xl font-bold h-10">
-          Gráficos de Barras{" "}
+          Gráficos de Área
           <FavoriteButton
-            tela={{ nome: "Gráficos de Barra", url: "devs/graficos/barra" }}
+            tela={{ nome: "Gráficos de Área", url: "devs/graficos/area" }}
           />
         </h1>
         <div className="breadcrumbs text-sm text-gray-500">
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>De Barra</li>
+            <li>De Área</li>
           </ul>
         </div>
       </div>
 
       {/* Básica */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">Gráfico Básico</h2>
+        <h2 className="text-xl font-semibold">
+          Gráfico Básico + Área em Degradê
+        </h2>
         <div className="w-full h-64 select-none">
           <ResponsiveContainer>
-            <BarChart data={data}>
+            <AreaChart data={data}>
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-primary)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-primary)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Bar
+              <Area
+                type="monotone"
                 dataKey="uv"
-                fill="var(--color-primary)"
-                label={{
-                  position: "insideTop",
-                  fill: "var(--color-primary-content)",
-                }}
+                stroke="var(--color-primary)"
+                fill="url(#colorUv)"
               />
-            </BarChart>
+            </AreaChart>
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div className="justify-items-center">
           <div className="p-4 bg-base-300 rounded-lg overflow-auto">
             <pre className="text-sm">
-              {`import { BarChart, Bar, ResponsiveContainer } from "recharts";
+              {`import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
 
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
-    <BarChart data={data}>
+    <AreaChart data={data}>
+      <defs>
+        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0.1} />
+        </linearGradient>
+      </defs>
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Bar
+      <Area
+        type="monotone"
         dataKey="uv"
-        fill="var(--color-primary)"
-
-        // Mostra o valor na própria barra
-        label={{ position: 'insideTop', fill: 'var(--color-primary-content)' }}
+        stroke="var(--color-primary)"
+        fill="url(#colorUv)"
       />
-    </BarChart>
+    </AreaChart>
   </ResponsiveContainer>
 </div>`}
             </pre>
@@ -135,7 +155,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
       {/* 2. Múltiplas Séries + LegendOpacity */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold">
-          Barras Empilhadas + Opacidade de Legenda + Zoom
+          Múltiplas áreas + Opacidade de Legenda + Zoom
         </h2>
         <button className="btn btn-sm my-2" onClick={zoomOut}>
           Zoom Out
@@ -146,7 +166,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
           tabIndex={0}
         >
           <ResponsiveContainer>
-            <BarChart
+            <AreaChart
               data={data}
               onMouseDown={(e) =>
                 setState((s) => ({ ...s, refAreaLeft: e.activeLabel }))
@@ -157,6 +177,32 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
               }
               onMouseUp={zoom}
             >
+              <defs>
+                <linearGradient id="colorPrimary" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-primary)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-primary)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="colorAccent" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-accent)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-accent)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -165,17 +211,19 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
                 onMouseEnter={({ dataKey }) => setHoverKey(dataKey)}
                 onMouseLeave={() => setHoverKey(null)}
               />
-              <Bar
+              <Area
                 dataKey="uv"
-                fill="var(--color-primary)"
-                opacity={hoverKey && hoverKey !== "uv" ? 0.2 : 1}
-                stackId="a"
+                stroke="var(--color-primary)"
+                fill="url(#colorPrimary)"
+                fillOpacity={hoverKey && hoverKey !== "uv" ? 0.1 : 0.5}
+                strokeOpacity={hoverKey && hoverKey !== "uv" ? 0.3 : 1}
               />
-              <Bar
+              <Area
                 dataKey="pv"
-                fill="var(--color-accent)"
-                opacity={hoverKey && hoverKey !== "pv" ? 0.2 : 1}
-                stackId="a"
+                stroke="var(--color-accent)"
+                fill="url(#colorAccent)"
+                fillOpacity={hoverKey && hoverKey !== "pv" ? 0.1 : 0.5}
+                strokeOpacity={hoverKey && hoverKey !== "pv" ? 0.3 : 1}
               />
               {refAreaLeft && refAreaRight && (
                 <ReferenceArea
@@ -185,7 +233,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
                   fillOpacity={0.2}
                 />
               )}
-            </BarChart>
+            </AreaChart>
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
@@ -194,8 +242,8 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
             <pre className="text-sm">
               {`import { useState } from "react";
 import {
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   CartesianGrid,
   Legend,
   ResponsiveContainer,
@@ -207,6 +255,7 @@ const [state, setState] = useState({
   data: initialData,
   refAreaLeft: "",
   refAreaRight: "",
+  hoverKey: null,
 });
 const [hoverKey, setHoverKey] = useState(null);
 
@@ -247,12 +296,22 @@ const { data, refAreaLeft, refAreaRight } = state;
 </button>
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
-    <BarChart
+    <AreaChart
       data={data}
       onMouseDown={(e) => setState(s => ({...s, refAreaLeft: e.activeLabel}))}
       onMouseMove={(e) => state.refAreaLeft && setState(s => ({...s, refAreaRight: e.activeLabel}))}
       onMouseUp={zoom}
     >
+      <defs>
+        <linearGradient id="colorPrimary" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0.1} />
+        </linearGradient>
+        <linearGradient id="colorAccent" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="var(--color-accent)" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="var(--color-accent)" stopOpacity={0.1} />
+        </linearGradient>
+      </defs>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
@@ -261,17 +320,19 @@ const { data, refAreaLeft, refAreaRight } = state;
         onMouseEnter={({dataKey}) => setHoverKey(dataKey)}
         onMouseLeave={() => setHoverKey(null)}
       />
-      <Bar
+      <Area
         dataKey="uv"
-        fill="var(--color-primary)"
-        opacity={hoverKey && hoverKey !== "uv" ? 0.2 : 1}
-        stackId="a" // Essa linha que torna as barras empilhadas
+        stroke="var(--color-primary)"
+        fill="url(#colorPrimary)"
+        fillOpacity={hoverKey && hoverKey !== "uv" ? 0.1 : 0.5}
+        strokeOpacity={hoverKey && hoverKey !== "uv" ? 0.3 : 1}
       />
-      <Bar
+      <Area
         dataKey="pv"
-        fill="var(--color-accent)"
-        opacity={hoverKey && hoverKey !== "pv" ? 0.2 : 1}
-        stackId="a" // Essa linha que torna as barras empilhadas
+        stroke="var(--color-accent)"
+        fill="url(#colorAccent)"
+        fillOpacity={hoverKey && hoverKey !== "pv" ? 0.1 : 0.5}
+        strokeOpacity={hoverKey && hoverKey !== "pv" ? 0.3 : 1}
       />
       {refAreaLeft && refAreaRight && (
         <ReferenceArea
@@ -281,7 +342,7 @@ const { data, refAreaLeft, refAreaRight } = state;
           fillOpacity={0.2}
         />
       )}
-    </BarChart>
+    </AreaChart>
   </ResponsiveContainer>
 </div>`}
             </pre>
@@ -292,7 +353,7 @@ const { data, refAreaLeft, refAreaRight } = state;
       {/* Com Brush */}
       <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-xl font-semibold">
-          Múltiplas barras + Opacidade de Legenda + Brush
+          Múltiplas áreas + Opacidade de Legenda + Brush
         </h2>
         <div
           className="w-full h-64 select-none"
@@ -300,7 +361,45 @@ const { data, refAreaLeft, refAreaRight } = state;
           tabIndex={0}
         >
           <ResponsiveContainer>
-            <BarChart data={initialData}>
+            <AreaChart data={initialData}>
+              <defs>
+                <linearGradient id="colorError" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-error)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-error)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="colorWarning" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-warning)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-warning)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+                <linearGradient id="colorSuccess" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-success)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-success)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -309,31 +408,34 @@ const { data, refAreaLeft, refAreaRight } = state;
                 onMouseEnter={({ dataKey }) => setHoverKey(dataKey)}
                 onMouseLeave={() => setHoverKey(null)}
               />
-              <Bar
+              <Area
                 dataKey="amt"
-                fill="var(--color-error)"
-                opacity={hoverKey && hoverKey !== "amt" ? 0.2 : 1}
+                stroke="var(--color-error)"
+                fill="url(#colorError)"
+                fillOpacity={hoverKey && hoverKey !== "amt" ? 0.1 : 0.5}
               />
-              <Bar
+              <Area
                 dataKey="uv"
-                fill="var(--color-warning)"
-                opacity={hoverKey && hoverKey !== "uv" ? 0.2 : 1}
+                stroke="var(--color-warning)"
+                fill="url(#colorWarning)"
+                fillOpacity={hoverKey && hoverKey !== "uv" ? 0.1 : 0.5}
               />
-              <Bar
+              <Area
                 dataKey="pv"
-                fill="var(--color-success)"
-                opacity={hoverKey && hoverKey !== "pv" ? 0.2 : 1}
+                stroke="var(--color-success)"
+                fill="url(#colorSuccess)"
+                fillOpacity={hoverKey && hoverKey !== "pv" ? 0.1 : 0.5}
               />
               <Brush dataKey="name" />
-            </BarChart>
+            </AreaChart>
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div className="justify-items-center">
           <div className="p-4 bg-base-300 rounded-lg overflow-auto">
             <pre className="text-sm">{`import {
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   CartesianGrid,
   Legend,
   ResponsiveContainer,
@@ -343,7 +445,21 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
 
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
-    <BarChart data={initialData}>
+    <AreaChart data={initialData}>
+      <defs>
+        <linearGradient id="colorError" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="var(--color-error)" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="var(--color-error)" stopOpacity={0.1} />
+        </linearGradient>
+        <linearGradient id="colorWarning" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="var(--color-warning)" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="var(--color-warning)" stopOpacity={0.1} />
+        </linearGradient>
+        <linearGradient id="colorSuccess" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="var(--color-success)" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="var(--color-success)" stopOpacity={0.1} />
+        </linearGradient>
+      </defs>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
@@ -352,23 +468,26 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
         onMouseEnter={({dataKey}) => setHoverKey(dataKey)}
         onMouseLeave={() => setHoverKey(null)}
       />
-      <Bar
+      <Area
         dataKey="amt"
-        fill="var(--color-error)"
-        opacity={hoverKey && hoverKey !== "amt" ? 0.2 : 1}
+        stroke="var(--color-error)"
+        fill="url(#colorError)"
+        fillOpacity={hoverKey && hoverKey !== "amt" ? 0.1 : 0.5}
       />
-      <Bar
+      <Area
         dataKey="uv"
-        fill="var(--color-warning)"
-        opacity={hoverKey && hoverKey !== "uv" ? 0.2 : 1}
+        stroke="var(--color-warning)"
+        fill="url(#colorWarning)"
+        fillOpacity={hoverKey && hoverKey !== "uv" ? 0.1 : 0.5}
       />
-      <Bar
+      <Area
         dataKey="pv"
-        fill="var(--color-success)"
-        opacity={hoverKey && hoverKey !== "pv" ? 0.2 : 1}
+        stroke="var(--color-success)"
+        fill="url(#colorSuccess)"
+        fillOpacity={hoverKey && hoverKey !== "pv" ? 0.1 : 0.5}
       />
       <Brush dataKey="name" />
-    </BarChart>
+    </AreaChart>
   </ResponsiveContainer>
 </div>`}</pre>
           </div>

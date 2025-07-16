@@ -11,7 +11,7 @@ import { IoCubeOutline } from "react-icons/io5";
 import { LuChartLine } from "react-icons/lu";
 import { RxBadge } from "react-icons/rx";
 import { SiAdblock } from "react-icons/si";
-import { FaTable } from "react-icons/fa";
+import { FaTable, FaChartArea } from "react-icons/fa";
 import { TbCheckbox } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
@@ -155,6 +155,11 @@ export default function Sidebar({
                 label="Gráficos"
                 icon={<FaChartBar />}
                 subItems={[
+                  {
+                    label: "De Área",
+                    to: "/devs/graficos/area",
+                    icon: <FaChartArea />,
+                  },
                   {
                     label: "De Barra",
                     to: "/devs/graficos/barra",

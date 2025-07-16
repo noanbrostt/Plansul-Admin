@@ -115,10 +115,7 @@ export default function LinhasPage() {
 import {
   LineChart,
   Line,
-  CartesianGrid,
-  Legend,
   ResponsiveContainer,
-  ReferenceArea,
 } from "recharts";
 // Componentes equivalentes aos originais do "recharts", mas estilizados
 import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
@@ -195,6 +192,7 @@ const initialData =.. // Ta lá no console
                 <ReferenceArea
                   x1={refAreaLeft}
                   x2={refAreaRight}
+                  fill="var(--color-base-content)"
                   strokeOpacity={0.3}
                 />
               )}
@@ -275,6 +273,7 @@ const [hoverKey, setHoverKey] = useState(null);
         <ReferenceArea
           x1={refAreaLeft}
           x2={refAreaRight}
+          fill="var(--color-base-content)"
           strokeOpacity={0.3}
         />
       )}
