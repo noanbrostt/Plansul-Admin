@@ -295,9 +295,6 @@ const COLORS = [
                 innerRadius={60}
                 outerRadius={80}
                 dataKey="value"
-                wrapperStyle={{
-                  marginBottom: "40px",
-                }}
               >
                 {data01.map((entry, index) => (
                   <Cell
@@ -346,9 +343,6 @@ const renderActiveShape =... // Ta lá no console.log
         innerRadius={60}
         outerRadius={80}
         dataKey="value"
-        wrapperStyle={{
-          marginBottom: "40px",
-        }}
       >
         {data01.map((entry, index) => (
           <Cell

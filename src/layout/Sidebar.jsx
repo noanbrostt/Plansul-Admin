@@ -97,6 +97,12 @@ export default function Sidebar({
                     icon: <CgFileDocument />,
                     targetBlank: true,
                   },
+                  {
+                    label: "Doc. DaisyUI",
+                    to: "https://daisyui.com/components/",
+                    icon: <CgFileDocument />,
+                    targetBlank: true,
+                  },
                 ]}
               />
               <SidebarDropdown
