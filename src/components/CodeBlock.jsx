@@ -25,19 +25,51 @@ const CodeBlock = ({ code, language = 'jsx' }) => {
     return () => observer.disconnect();
   }, []);
 
-  // Função para copiar o código com animação
+  // Função para copiar o código com fallback
   const copyToClipboard = () => {
     const textToCopy = code.trim();
     
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset da animação após 2 segundos
-    });
+    // Função de fallback para navegadores sem navigator.clipboard
+    const fallbackCopy = () => {
+      const textArea = document.createElement('textarea');
+      textArea.value = textToCopy;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        console.log('Código copiado (fallback):', textToCopy);
+      } catch (err) {
+        console.error('Erro ao copiar com fallback:', err);
+      } finally {
+        document.body.removeChild(textArea);
+      }
+    };
+
+    // Tenta usar a API moderna primeiro
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          console.log('Código copiado:', textToCopy);
+        })
+        .catch(err => {
+          console.error('Erro na API de clipboard:', err);
+          fallbackCopy();
+        });
+    } else {
+      fallbackCopy();
+    }
+    
+    // Feedback visual
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="rounded-lg overflow-hidden border border-base-300 justify-self-center mt-2">
-      <div className="bg-base-300 px-4 py-2 text-xs flex justify-between items-center">
+    <div className="rounded-md border border-base-300 justify-self-center mt-2 max-h-96 flex flex-col">
+      <div className="rounded-t-md bg-base-300 px-4 py-2 text-xs flex justify-between items-center sticky top-0 z-10">
         <span className="text-base-content/70">
           {language.toUpperCase()}
         </span>
@@ -67,42 +99,45 @@ const CodeBlock = ({ code, language = 'jsx' }) => {
         </button>
       </div>
       
-      <Highlight
-        theme={isDarkMode ? themes.jettwaveDark : themes.jettwaveLight}
-        code={code.trim()}
-        language={language}
-      >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre 
-            className={`${className} flex p-4 text-sm overflow-x-auto !mt-0`} 
-            style={{ 
-              ...style, 
-              margin: 0,
-              fontFamily: 'Consolas, Monaco, "Andale Mono", monospace',
-              borderRadius: 0
-            }}
-          >
-            <code>
-              {tokens.map((line, i) => (
-                <div 
-                  key={i} 
-                  {...getLineProps({ line, key: i })}
-                  className="table-row"
-                >
-                  <span className="table-cell text-right pr-4 opacity-50 select-none">
-                    {i + 1}
-                  </span>
-                  <span className="table-cell">
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </span>
-                </div>
-              ))}
-            </code>
-          </pre>
-        )}
-      </Highlight>
+      {/* Container para o código com scroll */}
+      <div className="overflow-y-auto flex-1">
+        <Highlight
+          theme={isDarkMode ? themes.jettwaveDark : themes.jettwaveLight}
+          code={code.trim()}
+          language={language}
+        >
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre 
+              className={`${className} p-4 text-sm overflow-x-auto !mt-0`} 
+              style={{ 
+                ...style, 
+                margin: 0,
+                fontFamily: 'Consolas, Monaco, "Andale Mono", monospace',
+                borderRadius: 0
+              }}
+            >
+              <code>
+                {tokens.map((line, i) => (
+                  <div 
+                    key={i} 
+                    {...getLineProps({ line, key: i })}
+                    className="table-row"
+                  >
+                    <span className="table-cell text-right pr-4 opacity-50 select-none">
+                      {i + 1}
+                    </span>
+                    <span className="table-cell">
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                      ))}
+                    </span>
+                  </div>
+                ))}
+              </code>
+            </pre>
+          )}
+        </Highlight>
+      </div>
     </div>
   );
 };

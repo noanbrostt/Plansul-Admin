@@ -134,6 +134,7 @@ aside .simplebar-scrollbar::before {
 /*  */
 
 div:focus,
+img:focus,
 path:focus,
 svg:focus,
 g:focus {
