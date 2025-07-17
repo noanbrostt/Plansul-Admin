@@ -5,9 +5,9 @@ import { FiPlus } from "react-icons/fi";
 
 export default function EtiquetasPage() {
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Etiquetas{" "}
           <FavoriteButton
@@ -24,11 +24,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Fundo Sólido --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Fundo Sólido
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta>Padrão</Etiqueta>
           <Etiqueta variant="primary">Primary</Etiqueta>
           <Etiqueta variant="secondary">Secondary</Etiqueta>
@@ -43,11 +43,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Outline --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Outline
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta outline>Padrão</Etiqueta>
           <Etiqueta outline variant="primary">
             Primary
@@ -80,11 +80,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Fundo Sólido com Left Icon --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Fundo Sólido com Left Icon
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta icon={<FiPlus />}>Padrão</Etiqueta>
           <Etiqueta variant="primary" icon={<FiPlus />}>
             Primary
@@ -117,11 +117,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Outline com Left Icon --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Outline com Left Icon
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta outline icon={<FiPlus />}>
             Padrão
           </Etiqueta>
@@ -156,11 +156,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Fundo Sólido com Right Icon --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Fundo Sólido com Right Icon
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta icon={<FiPlus />} iconPosition="right">
             Padrão
           </Etiqueta>
@@ -195,11 +195,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Outline com Right Icon --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Outline com Right Icon
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta outline icon={<FiPlus />} iconPosition="right">
             Padrão
           </Etiqueta>
@@ -279,11 +279,11 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção: Outras Variações de Tamanho (Exemplo) --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Tamanhos
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta variant="primary" size="xl">
             Extra Large
           </Etiqueta>
@@ -301,8 +301,8 @@ export default function EtiquetasPage() {
       </div>
 
       {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

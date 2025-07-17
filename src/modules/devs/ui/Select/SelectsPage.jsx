@@ -73,9 +73,9 @@ export default function InputsPage() {
   ];
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Selects
           <FavoriteButton tela={{ nome: "Selects", url: "devs/ui/selects" }} />
@@ -90,9 +90,9 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Cores */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
-        <div className="flex flex-wrap gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Cores</h2>
+        <div className="flex flex-wrap justify-center gap-4">
           <Select
             options={[
               { value: "1", label: "Opção 1" },
@@ -216,11 +216,9 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Tamanhos */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Tamanhos
-        </h2>
-        <div className="flex flex-wrap gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Select
             variant="primary"
             size="xl"
@@ -290,11 +288,9 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Larguras */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Larguras
-        </h2>
-        <div className="flex flex-col gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Larguras</h2>
+        <div className="flex flex-col items-center gap-4">
           <Select
             variant="primary"
             options={[
@@ -428,11 +424,11 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Multiseleção */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Multiseleção
         </h2>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Select
             variant="primary"
             multiple
@@ -446,8 +442,8 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -522,9 +518,9 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção com Valores Iniciais --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
-          Select com Valores Iniciais
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Demonstração com Valores Iniciais
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

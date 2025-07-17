@@ -69,9 +69,9 @@ export default function CompostosPage() {
   const { data, refAreaLeft, refAreaRight } = state;
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold h-10">
           Gráficos Compostos
           <FavoriteButton
@@ -92,13 +92,13 @@ export default function CompostosPage() {
 
       <div className="grid grid-cols-1 gap-6">
         {/* Gráfico Composto Básico */}
-        <div className="bg-base-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">
-            Gráfico Composto Básico
+        <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+          <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+            Gráfico Composto Básico{" "}
+            <small className="text-base-content/70 mb-4">
+              (Combinação de barras, linha e área em um único gráfico.)
+            </small>
           </h2>
-          <p className="text-base-content/70 mb-4">
-            Combinação de barras, linha e área em um único gráfico
-          </p>
           <div className="w-full h-64 select-none">
             <ResponsiveContainer>
               <ComposedChart data={data}>
@@ -174,15 +174,15 @@ import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
         </div>
 
         {/* Gráfico Composto Interativo */}
-        <div className="bg-base-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">
-            Gráfico Composto Interativo
+        <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+          <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+            Gráfico Composto + Opacidade de Legenda + Zoom
           </h2>
-          <p className="text-base-content/70 mb-4">
-            Com zoom, brush e opacidade de legenda
-          </p>
           <div className="flex justify-between items-center mb-4">
-            <button className="btn btn-sm" onClick={zoomOut}>
+            <button
+              className="btn btn-sm btn-primary my-2 ml-9"
+              onClick={zoomOut}
+            >
               Zoom Out
             </button>
             <div className="badge badge-info badge-outline">
@@ -337,13 +337,10 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
         </div>
 
         {/* Gráfico Composto com Brush */}
-        <div className="bg-base-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">
-            Gráfico Composto com Seleção
+        <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+          <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+            Gráfico Composto + Opacidade de Legenda + Brush
           </h2>
-          <p className="text-base-content/70 mb-4">
-            Usando componente Brush para selecionar intervalos
-          </p>
           <div
             className="w-full h-64 select-none"
             style={{ userSelect: "none" }}

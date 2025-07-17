@@ -12,9 +12,9 @@ export default function InputsPage() {
   };
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Checkboxes
           <FavoriteButton
@@ -31,9 +31,9 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Cores --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Cores</h2>
+        <div className="flex flex-wrap justify-center gap-4">
           <Checkbox defaultChecked label="Padrão" />
           <Checkbox defaultChecked label="Primary" variant="primary" />
           <Checkbox defaultChecked label="Secondary" variant="secondary" />
@@ -47,11 +47,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Checkbox com Fieldset --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Tamanhos
         </h2>
-        <div className="flex flex-wrap items-center gap-8">
+        <div className="flex flex-wrap justify-center items-center gap-8">
           <Checkbox defaultChecked label="Extra Large" checkboxSize="xl" />
           <Checkbox defaultChecked label="Large" checkboxSize="lg" />
           <Checkbox defaultChecked label="Medium (Padrão)" />
@@ -61,11 +61,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Variações --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Variações
         </h2>
-        <div className="flex flex-wrap items-center gap-8">
+        <div className="flex flex-wrap justify-center items-center gap-8">
           <Checkbox defaultChecked fieldset="Fieldset" label="Label" />
           <Checkbox defaultChecked fieldset="Fieldset" />
           <Checkbox
@@ -82,9 +82,10 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Toggles com Cores --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Cores</h2>
+        <div className="flex flex-wrap justify-center gap-4">
           <Checkbox toggle defaultChecked label="Padrão" />
           <Checkbox toggle defaultChecked label="Primary" variant="primary" />
           <Checkbox toggle defaultChecked label="Accent" variant="accent" />
@@ -95,12 +96,12 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Checkbox com Fieldset --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Tamanhos
         </h2>
 
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Checkbox
             toggle
             defaultChecked
@@ -120,12 +121,12 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Variações --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Variações
         </h2>
 
-        <div className="flex flex-wrap items-center gap-8">
+        <div className="flex flex-wrap justify-center items-center gap-8">
           <Checkbox
             toggle
             defaultChecked
@@ -147,18 +148,18 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Toggle com Ícones Internos --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Toggle com Ícones
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Checkbox toggle defaultChecked iconsToggle />
         </div>
       </div>
 
       {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

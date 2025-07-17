@@ -22,9 +22,9 @@ export default function InputsPage() {
   const [cpfNumber, setCpfNumber] = useState("");
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Inputs
           <FavoriteButton tela={{ nome: "Inputs", url: "devs/ui/inputs" }} />
@@ -39,10 +39,10 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs Padrão, Variações de Cor e Tamanho --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Cores</h2>
 
-        <div className="flex flex-wrap items-end gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Input placeholder="Padrão" autoFocus />
           <Input variant="primary" placeholder="Primary" />
           <Input variant="secondary" placeholder="Secondary" />
@@ -56,11 +56,9 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs Padrão, Variações de Cor e Tamanho --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Tamanhos
-        </h2>
-        <div className="flex items-center gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
+        <div className="flex justify-center items-center gap-4">
           <Input variant="primary" inputSize="xl" placeholder="Extra Large" />
           <Input variant="primary" inputSize="lg" placeholder="Large" />
           <Input variant="primary" placeholder="Medium (Padrâo)" />
@@ -70,11 +68,9 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs Padrão, Variações de Cor e Tamanho --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Larguras
-        </h2>
-        <div className="flex flex-col gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Larguras</h2>
+        <div className="flex flex-col justify-center items-center gap-4">
           <Input variant="primary" placeholder="w-32" largura="w-32" />
           <Input variant="primary" placeholder="w-48" largura="w-48" />
           <Input variant="primary" placeholder="w-64 (Padrão)" />
@@ -85,11 +81,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs com Fieldset --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Com Fieldset
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
           <Input
             variant="primary"
             fieldset="Fieldset"
@@ -123,11 +119,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs com Máscara --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Com Máscara
         </h2>
-        <div className="flex flex-wrap items-baseline gap-4">
+        <div className="flex flex-wrap justify-center items-baseline gap-4">
           <Input
             fieldset="Telefone"
             placeholder="(00) 00000-0000"
@@ -164,11 +160,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs com Validação --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Com Validação
         </h2>
-        <div className="flex flex-wrap items-baseline gap-4">
+        <div className="flex flex-wrap justify-center items-baseline gap-4">
           <Input
             type="password"
             placeholder="Sua Senha"
@@ -230,11 +226,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs com Ícones --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Com Ícones
         </h2>
-        <div className="flex flex-wrap items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
           <Input
             type="email"
             placeholder="Seu Email"
@@ -281,11 +277,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Input com Tag Opcional --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Com Tag "Opcional"
         </h2>
-        <div className="flex flex-wrap items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
           <Input
             optionalBadge
             optionalBadgeText="Opcional"
@@ -305,11 +301,11 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Inputs de Tipos Específicos (HTML5) --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Tipos de Inputs HTML5
         </h2>
-        <div className="flex flex-wrap items-end gap-4">
+        <div className="flex flex-wrap justify-center items-end gap-4">
           <Input
             type="number"
             placeholder="Número"
@@ -343,8 +339,8 @@ export default function InputsPage() {
       </div>
 
       {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

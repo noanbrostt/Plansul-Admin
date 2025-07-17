@@ -71,9 +71,9 @@ export default function LinhasPage() {
   const { data, refAreaLeft, refAreaRight } = state;
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold h-10">
           Gráficos de Linhas{" "}
           <FavoriteButton
@@ -90,8 +90,10 @@ export default function LinhasPage() {
       </div>
 
       {/* Básica */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">Gráfico Básico</h2>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Gráfico Básico
+        </h2>
         <div className="w-full h-64 select-none">
           <ResponsiveContainer>
             <LineChart data={data}>
@@ -143,15 +145,20 @@ const initialData =.. // Ta lá no console
       </div>
 
       {/* 2. Múltiplas Séries + LegendOpacity */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Múltiplas linhas + Opacidade de Legenda + Zoom
         </h2>
-        <button className="btn btn-sm my-2" onClick={zoomOut}>
-          Zoom Out
-        </button>
-        <div className="badge badge-info badge-outline">
-          Arraste no gráfico para dar zoom
+        <div className="flex justify-between items-center">
+          <button
+            className="btn btn-sm btn-primary my-2 ml-9"
+            onClick={zoomOut}
+          >
+            Zoom Out
+          </button>
+          <div className="badge badge-info badge-outline">
+            Arraste no gráfico para dar zoom
+          </div>
         </div>
         <div
           className="w-full h-64 select-none"
@@ -231,7 +238,7 @@ const { data, refAreaLeft, refAreaRight } = state;
             
 const [hoverKey, setHoverKey] = useState(null);
 
-<button className="btn btn-sm my-2" onClick={zoomOut}>
+<button className="btn btn-sm btn-primary my-2 ml-9" onClick={zoomOut}>
   Zoom Out
 </button>
 <div
@@ -289,8 +296,8 @@ const [hoverKey, setHoverKey] = useState(null);
       </div>
 
       {/* Com Brush */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Múltiplas linhas + Opacidade de Legenda + Brush
         </h2>
         <div

@@ -134,9 +134,9 @@ export default function PizzasPage() {
   };
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold h-10">
           Gráficos de Pizza{" "}
           <FavoriteButton
@@ -153,8 +153,10 @@ export default function PizzasPage() {
       </div>
 
       {/* Básica */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">Pizza Básica + Label Personalizado</h2>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Pizza Básica + Label Personalizado
+        </h2>
         <div className="w-full h-64 select-none">
           <ResponsiveContainer>
             <PieChart>
@@ -282,8 +284,10 @@ const COLORS = [
       </div>
 
       {/* Donut Chart com interatividade avançada */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">Donut Interativo Avançado</h2>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Donut Interativo Avançado
+        </h2>
         <div className="w-full h-78 select-none bg-base-200 rounded-lg p-4">
           <ResponsiveContainer>
             <PieChart>
@@ -363,8 +367,10 @@ const renderActiveShape =... // Ta lá no console.log
       </div>
 
       {/* Pizza Dupla */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold">Pizza Dupla</h2>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Pizza Dupla
+        </h2>
         <div className="w-full h-64 select-none">
           <ResponsiveContainer>
             <PieChart>

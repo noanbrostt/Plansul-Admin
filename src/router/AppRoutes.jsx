@@ -10,6 +10,7 @@ import UsersPage from "@/modules/users/UsersPage";
 
 // Páginas de UI
 import InputsPage from "@/modules/devs/ui/Input/InputsPage";
+import BlocosPage from "@/modules/devs/ui/BlocosPage";
 import BotoesPage from "@/modules/devs/ui/Botao/BotoesPage";
 import SelectsPage from "@/modules/devs/ui/Select/SelectsPage";
 import CheckboxesPage from "@/modules/devs/ui/Checkbox/CheckboxesPage";
@@ -56,6 +57,11 @@ const ROUTE_CONFIG = {
   
   // Rotas protegidas (requerem permissão específica)
   PERMISSION_ROUTES: [
+    {
+      path: "/devs/ui/blocos",
+      element: <BlocosPage />,
+      permission: "DEV_Teste_User"
+    },
     {
       path: "/devs/ui/botoes",
       element: <BotoesPage />,

@@ -26,9 +26,9 @@ export default function BotoesPage() {
   };
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Botões{" "}
           <FavoriteButton tela={{ nome: "Botões", url: "devs/ui/botoes" }} />
@@ -43,11 +43,11 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Fundo Sólido --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Fundo Sólido
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Botao>Primary Button</Botao> {/* Padrão é variant="primary" */}
           <Botao variant="secondary">Secondary Button</Botao>
           <Botao variant="accent">Accent Button</Botao>
@@ -62,11 +62,9 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Outline --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Outline
-        </h2>
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Outline</h2>
+        <div className="flex flex-wrap justify-center gap-4">
           <Botao outline>Primary Outline</Botao>
           <Botao variant="secondary" outline>
             Secondary Outline
@@ -96,11 +94,9 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Com Ícones --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Com Ícones
-        </h2>
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Com Ícones</h2>
+        <div className="flex flex-wrap justify-center gap-4">
           {/* Ícone à esquerda (default iconPosition) */}
           <Botao icon={<MdAdd />}>Adicionar</Botao>
           <Botao variant="secondary" icon={<MdSettings />}>
@@ -124,11 +120,9 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Tamanhos --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Tamanhos
-        </h2>
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <Botao size="xl">Extra Large</Botao>
           <Botao size="lg">Large</Botao>
           <Botao>Medium (Padrão)</Botao>
@@ -138,12 +132,9 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Larguras --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Larguras
-        </h2>
-        <div className="flex flex-col gap-4">
-          <Botao>Padrão (Ocupa o espaço que tiver)</Botao>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Larguras</h2>
+        <div className="flex flex-col items-center gap-4">
           <Botao largura="w-fit">w-fit (Ocupa o espaço do texto)</Botao>
           <Botao largura="w-16">w-16</Botao>
           <Botao largura="w-24">w-24</Botao>
@@ -156,11 +147,11 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Botões Redondos/Quadrados (com ícones) --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Botões Redondos / Quadrados
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Botao circle icon={<MdAdd />} />
           <Botao variant="secondary" circle icon={<MdSettings />} />
           <Botao variant="accent" square icon={<MdCheck />} />
@@ -169,11 +160,11 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Botões Desativados --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Botões Desativados
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Botao disabled>Primary Disabled</Botao>
           <Botao outline disabled>
             Outline Disabled
@@ -185,14 +176,14 @@ export default function BotoesPage() {
       </div>
 
       {/* --- Seção de Botões com Carregamento --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="flex items-baseline gap-3 text-xl font-semibold text-base-content mb-4">
-          Botões com Carregamento
-          <p className="text-sm text-gray-500 mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Botões com Carregamento{" "}
+          <small className="text-xs text-gray-500 mb-4">
             (Clique para simular um estado de carregamento.)
-          </p>
+          </small>
         </h2>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           {/* 
             Os botões com Loading ficavam invisíveis no tema claro, durante o Loading.
             Para resolver isso é necessário essa condicionar para ficar como "ghost" durante a animação girando
@@ -217,9 +208,10 @@ export default function BotoesPage() {
           <Botao variant="ghost" loading circle />
         </div>
       </div>
+
       {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

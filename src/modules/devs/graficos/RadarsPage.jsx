@@ -45,9 +45,9 @@ export default function RadarsPage() {
   const [hoverKey, setHoverKey] = useState(null);
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold h-10">
           Gráficos de Radar{" "}
           <FavoriteButton
@@ -68,8 +68,10 @@ export default function RadarsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Básico */}
-        <div className="bg-base-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Gráfico Básico</h2>
+        <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+          <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+            Gráfico Básico
+          </h2>
           <div className="w-full h-80 select-none">
             <ResponsiveContainer>
               <RadarChart outerRadius={120} data={productData}>
@@ -130,8 +132,8 @@ const productData = [
         </div>
 
         {/* Múltiplas Séries */}
-        <div className="bg-base-200 p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4">
+        <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+          <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
             Comparação de Habilidades
           </h2>
           <div className="w-full h-80 select-none">
@@ -213,8 +215,10 @@ const [hoverKey, setHoverKey] = useState(null);
       </div>
 
       {/* Comparação de Equipes */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mt-6">
-        <h2 className="text-xl font-semibold mb-4">Comparação de Equipes</h2>
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Comparação de Equipes
+        </h2>
         <div className="w-full h-96 select-none">
           <ResponsiveContainer>
             <RadarChart outerRadius={140} data={teamComparisonData}>

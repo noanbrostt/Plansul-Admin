@@ -26,9 +26,9 @@ export default function InputsPage() {
   };
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Radios
           <FavoriteButton tela={{ nome: "Radios", url: "devs/ui/radios" }} />
@@ -43,9 +43,9 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Cores */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
-        <div className="flex flex-col gap-2">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Cores</h2>
+        <div className="flex flex-col items-center gap-2">
           <RadioGroup
             name="cores"
             orientation="horizontal"
@@ -67,11 +67,9 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Tamanhos */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Tamanhos
-        </h2>
-        <div className="flex flex-wrap items-center gap-12">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
+        <div className="flex flex-wrap justify-center items-center gap-12">
           <RadioGroup
             fieldset="Extra Large"
             name="sizes-xl"
@@ -130,102 +128,103 @@ export default function InputsPage() {
       </div>
 
       {/* Grupo Variações */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Variações
         </h2>
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-wrap items-start gap-8">
-            <RadioGroup
-              fieldset="Centralizado"
-              name="centered"
-              fieldsetCentered
-              options={[
-                { value: "opt1", label: "Opção centralizada 1" },
-                { value: "opt2", label: "Opção centralizada 2" },
-              ]}
-              value={selectedCenteredOption}
-              onValueChange={setSelectedCenteredOption}
-            />
-
-            <RadioGroup
-              fieldset="Apenas Fieldset"
-              name="fieldset-only"
-              fieldsetCentered
-              options={[
-                { value: "opt1", label: "" },
-                { value: "opt2", label: "" },
-              ]}
-              value={selectedFieldsetOnlyOption}
-              onValueChange={setSelectedFieldsetOnlyOption}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Grupo Vertical Simples */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Orientações
-        </h2>
-
-        <p className="font-medium text-base-content/80">Horizontal:</p>
-
-        <RadioGroup
-          fieldset="Status do Pedido"
-          name="order-status"
-          orientation="horizontal"
-          options={[
-            {
-              value: "pending",
-              label: "Pendente",
-              variant: "warning",
-            },
-            {
-              value: "processing",
-              label: "Processando",
-              variant: "info",
-            },
-            {
-              value: "shipped",
-              label: "Enviado",
-              variant: "success",
-            },
-            {
-              value: "delivered",
-              label: "Entregue",
-              variant: "primary",
-            },
-          ]}
-          value={selectedOrderStatus}
-          onValueChange={setSelectedOrderStatus}
-        />
-
-        <p className="font-medium text-base-content/80 mt-4">Vertical:</p>
-
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap justify-center items-start gap-8">
           <RadioGroup
-            fieldset="Escolha seu plano"
-            name="plans"
+            fieldset="Centralizado"
+            name="centered"
+            fieldsetCentered
             options={[
-              { value: "free", label: "Plano Gratuito" },
-              { value: "basic", label: "Plano Básico" },
-              { value: "pro", label: "Plano Profissional" },
-              {
-                value: "enterprise",
-                label: "Plano Enterprise",
-                disabled: true,
-              },
+              { value: "opt1", label: "Opção centralizada 1" },
+              { value: "opt2", label: "Opção centralizada 2" },
             ]}
-            value={selectedPlan}
-            onValueChange={setSelectedPlan}
+            value={selectedCenteredOption}
+            onValueChange={setSelectedCenteredOption}
+          />
+
+          <RadioGroup
+            fieldset="Apenas Fieldset"
+            name="fieldset-only"
+            fieldsetCentered
+            options={[
+              { value: "opt1", label: "" },
+              { value: "opt2", label: "" },
+            ]}
+            value={selectedFieldsetOnlyOption}
+            onValueChange={setSelectedFieldsetOnlyOption}
           />
         </div>
       </div>
 
+      {/* Grupo Vertical Simples */}
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Orientações
+        </h2>
+        <div className="flex flex-wrap justify-center items-start gap-8">
+          <div>
+            <p className="font-medium text-base-content/80">Horizontal:</p>
+            <RadioGroup
+              fieldset="Status do Pedido"
+              name="order-status"
+              orientation="horizontal"
+              options={[
+                {
+                  value: "pending",
+                  label: "Pendente",
+                  variant: "warning",
+                },
+                {
+                  value: "processing",
+                  label: "Processando",
+                  variant: "info",
+                },
+                {
+                  value: "shipped",
+                  label: "Enviado",
+                  variant: "success",
+                },
+                {
+                  value: "delivered",
+                  label: "Entregue",
+                  variant: "primary",
+                },
+              ]}
+              value={selectedOrderStatus}
+              onValueChange={setSelectedOrderStatus}
+            />
+          </div>
+
+          <div>
+            <p className="font-medium text-base-content/80 mt-4">Vertical:</p>
+            <div className="flex flex-col gap-2">
+              <RadioGroup
+                fieldset="Escolha seu plano"
+                name="plans"
+                options={[
+                  { value: "free", label: "Plano Gratuito" },
+                  { value: "basic", label: "Plano Básico" },
+                  { value: "pro", label: "Plano Profissional" },
+                  {
+                    value: "enterprise",
+                    label: "Plano Enterprise",
+                    disabled: true,
+                  },
+                ]}
+                value={selectedPlan}
+                onValueChange={setSelectedPlan}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* --- Seção de Demonstração --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -468,9 +468,9 @@ export default function TabelasPage() {
   console.log("//////////////////");
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Tabelas{" "}
           <FavoriteButton tela={{ nome: "Tabelas", url: "devs/ui/tabelas" }} />
@@ -485,13 +485,13 @@ export default function TabelasPage() {
       </div>
 
       {/* --- Seção: Tabela Básica --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content">
-          Tabela Básica
-          <p className="text-sm text-gray-500">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Tabela Básica{" "}
+          <small className="text-xs text-gray-500">
             (Inclui ordenação e tabela zebrada. Paginação, filtro de pesquisa e
             exportação excel estão recebendo "false".)
-          </p>
+          </small>
         </h2>
         <Tabela
           data={users.slice(0, 4)}
@@ -520,14 +520,14 @@ const userColumns = [...] // Ta lá no console
       </div>
 
       {/* --- Seção: Tabela com Ordenação e Paginação --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
-          Tabela com Todas as Personalizações
-          <p className="text-sm text-gray-500">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Tabela com Todas as Personalizações{" "}
+          <small className="text-xs text-gray-500">
             (Inclui filtro global, filtro por coluna, ocultação de colunas
             persistente, paginação, ordenação inicial e exportação Excel com
             nome de arquivo.)
-          </p>
+          </small>
         </h2>
         <Tabela
           data={users} // Dados da tabela
@@ -579,8 +579,8 @@ const userColumns = [...] // Ta lá no console
       </div>
 
       {/* --- Seção: Tabela com Ordenação e Paginação --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Tabela com Coluna de "Ações"
         </h2>
         <Tabela

@@ -24,7 +24,7 @@ import {
   FaChartBar,
   FaChartLine,
 } from "react-icons/fa";
-import { TbCheckbox } from "react-icons/tb";
+import { TbCheckbox, TbCreditCard } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
 import { AiOutlineRadarChart } from "react-icons/ai";
@@ -94,6 +94,11 @@ const menuConfig = {
         label: "Elementos UI",
         icon: <IoCubeOutline />,
         subItems: [
+          {
+            label: "Blocos",
+            to: "/devs/ui/blocos",
+            icon: <TbCreditCard />
+          },
           {
             label: "Botões",
             to: "/devs/ui/botoes",

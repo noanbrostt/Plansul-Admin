@@ -7,9 +7,9 @@ export default function TextareasPage() {
   const [comment, setComment] = useState("Msg curta");
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-screen space-y-6">
       {/* Breadcrumbs / Título da Página */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           Textareas
           <FavoriteButton
@@ -26,9 +26,10 @@ export default function TextareasPage() {
       </div>
 
       {/* Textareas por Cores */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">Cores</h2>
-        <div className="flex flex-wrap gap-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Cores</h2>
+        <div className="flex flex-wrap justify-center gap-4">
           {[
             "padrão",
             "primary",
@@ -54,11 +55,11 @@ export default function TextareasPage() {
       </div>
 
       {/* Textareas por Tamanhos */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-4">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Tamanhos
         </h2>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap justify-center items-center gap-4">
             <Textarea
               variant="primary"
               size="xl"
@@ -103,8 +104,8 @@ export default function TextareasPage() {
       </div>
 
       {/* --- Seção com Valores Iniciais para Textarea --- */}
-      <div className="bg-base-200 p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold text-base-content mb-6">
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
           Demonstração de Uso
         </h2>
 

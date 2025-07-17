@@ -89,6 +89,28 @@ export default function LoginPage() {
 
       dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
 
+      /*
+        Exemplo de dados do usuário:
+          {
+            "status": "success",
+            "usuario": {
+              "grupos": [
+                  {
+                      "app_desc": "DEV_Teste",
+                      "app_id": 4,
+                      "grupo_desc": "DEV_Teste_User",
+                      "grupo_id": 4
+                  }
+              ],
+              "id": 437,
+              "matricula": "123036",
+              "nome": "NOAN CALIEL BROSTT",
+              "permissoes": [
+                  "DEV_Teste_User"
+              ]
+            }
+          }
+      */
       if (screenSide !== "Login") {
         sessionStorage.setItem("senhaResetada", "1");
       }
