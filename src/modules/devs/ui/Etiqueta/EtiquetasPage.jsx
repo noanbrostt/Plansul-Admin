@@ -1,5 +1,6 @@
 import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 import { FiPlus } from "react-icons/fi";
 
@@ -44,9 +45,7 @@ export default function EtiquetasPage() {
 
       {/* --- Seção: Outline --- */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Outline
-        </h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Outline</h2>
         <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta outline>Padrão</Etiqueta>
           <Etiqueta outline variant="primary">
@@ -280,9 +279,7 @@ export default function EtiquetasPage() {
 
       {/* --- Seção: Outras Variações de Tamanho (Exemplo) --- */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Tamanhos
-        </h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
         <div className="flex flex-wrap justify-center items-center gap-4">
           <Etiqueta variant="primary" size="xl">
             Extra Large
@@ -309,12 +306,12 @@ export default function EtiquetasPage() {
           <div className="space-y-4 justify-items-center">
             <Etiqueta variant="primary">Primary</Etiqueta>
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`<Etiqueta variant="primary">
+            <div>
+              <CodeBlock
+                code={`<Etiqueta variant="primary">
   Primary
 </Etiqueta>`}
-              </pre>
+              />
             </div>
           </div>
 
@@ -328,9 +325,9 @@ export default function EtiquetasPage() {
               Secondary
             </Etiqueta>
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`import { FiPlus } from "react-icons/fi";
+            <div>
+              <CodeBlock
+                code={`import { FiPlus } from "react-icons/fi";
 
 <Etiqueta
   outline
@@ -340,7 +337,7 @@ export default function EtiquetasPage() {
 >
   Secondary
 </Etiqueta>`}
-              </pre>
+              />
             </div>
           </div>
         </div>

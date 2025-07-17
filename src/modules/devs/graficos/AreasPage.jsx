@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 import {
   AreaChart,
   Area,
@@ -120,10 +121,8 @@ export default function AreasPage() {
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { AreaChart, Area, ResponsiveContainer } from "recharts";
+          <div>
+            <CodeBlock code={`import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
 
 <div className="w-full h-64 select-none">
@@ -146,10 +145,8 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
       />
     </AreaChart>
   </ResponsiveContainer>
-</div>`}
-            </pre>
+</div>`} />
           </div>
-        </div>
       </div>
 
       {/* 2. Múltiplas Séries + LegendOpacity */}
@@ -245,10 +242,8 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { useState } from "react";
+          <div>
+            <CodeBlock code={`import { useState } from "react";
 import {
   AreaChart,
   Area,
@@ -352,10 +347,8 @@ const { data, refAreaLeft, refAreaRight } = state;
       )}
     </AreaChart>
   </ResponsiveContainer>
-</div>`}
-            </pre>
+</div>`} />
           </div>
-        </div>
       </div>
 
       {/* Com Brush */}
@@ -439,9 +432,8 @@ const { data, refAreaLeft, refAreaRight } = state;
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">{`import {
+          <div>
+            <CodeBlock code={`import {
   AreaChart,
   Area,
   CartesianGrid,
@@ -497,10 +489,9 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
       <Brush dataKey="name" />
     </AreaChart>
   </ResponsiveContainer>
-</div>`}</pre>
+</div>`} />
           </div>
         </div>
-      </div>
     </div>
   );
 }

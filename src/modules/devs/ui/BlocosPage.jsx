@@ -1,4 +1,5 @@
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 export default function BlocosPage() {
   return (
@@ -115,6 +116,37 @@ export default function BlocosPage() {
               <p>Item {i + 1}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* --- Seção de Demonstração --- */}
+      <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Demonstração de Uso (Bloco Grande)
+        </h2>
+        <div>
+          <CodeBlock
+            code={`<div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
+  <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+    Bloco Grande
+  </h2>
+  <div>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio
+      voluptates repellat iure molestias tempore sequi, laborum cupiditate
+      architecto animi dignissimos illum laudantium eos neque mollitia
+      facere nisi labore iusto commodi. Lorem ipsum dolor sit amet,
+      consectetur adipisicing elit. Quis voluptates inventore accusantium
+      iusto perspiciatis id reiciendis tempora, rem asperiores, animi eum
+      et expedita officia fugit voluptatum debitis nihil repudiandae
+      veniam! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Rerum officiis incidunt consequatur doloremque nihil expedita dicta
+      odio aliquam minus esse laborum libero ipsam, velit dolore
+      consectetur consequuntur accusantium sed natus!
+    </p>
+  </div>
+</div>`}
+          />
         </div>
       </div>
     </div>

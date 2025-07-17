@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Textarea from "@/modules/devs/ui/Textarea/Textarea";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 export default function TextareasPage() {
   const [note, setNote] = useState("Texto inicial...");
@@ -27,8 +28,7 @@ export default function TextareasPage() {
 
       {/* Textareas por Cores */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Cores</h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Cores</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {[
             "padrão",
@@ -45,7 +45,9 @@ export default function TextareasPage() {
             <Textarea
               key={variant}
               variant={variant}
-              placeholder={`${variant.charAt(0).toUpperCase() + variant.slice(1)}`}
+              placeholder={`${
+                variant.charAt(0).toUpperCase() + variant.slice(1)
+              }`}
               value=""
               onChange={() => {}}
               showCounter={false}
@@ -56,50 +58,48 @@ export default function TextareasPage() {
 
       {/* Textareas por Tamanhos */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Tamanhos
-        </h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
         <div className="flex flex-wrap justify-center items-center gap-4">
-            <Textarea
-              variant="primary"
-              size="xl"
-              placeholder="Extra Large"
-              value=""
-              onChange={() => {}}
-              showCounter={false}
-            />
-            <Textarea
-              variant="primary"
-              size="lg"
-              placeholder="Large"
-              value=""
-              onChange={() => {}}
-              showCounter={false}
-            />
-            <Textarea
-              variant="primary"
-              size="md"
-              placeholder="Medium (Padrão)"
-              value=""
-              onChange={() => {}}
-              showCounter={false}
-            />
-            <Textarea
-              variant="primary"
-              size="sm"
-              placeholder="Small"
-              value=""
-              onChange={() => {}}
-              showCounter={false}
-            />
-            <Textarea
-              variant="primary"
-              size="xs"
-              placeholder="Extra Small"
-              value=""
-              onChange={() => {}}
-              showCounter={false}
-            />
+          <Textarea
+            variant="primary"
+            size="xl"
+            placeholder="Extra Large"
+            value=""
+            onChange={() => {}}
+            showCounter={false}
+          />
+          <Textarea
+            variant="primary"
+            size="lg"
+            placeholder="Large"
+            value=""
+            onChange={() => {}}
+            showCounter={false}
+          />
+          <Textarea
+            variant="primary"
+            size="md"
+            placeholder="Medium (Padrão)"
+            value=""
+            onChange={() => {}}
+            showCounter={false}
+          />
+          <Textarea
+            variant="primary"
+            size="sm"
+            placeholder="Small"
+            value=""
+            onChange={() => {}}
+            showCounter={false}
+          />
+          <Textarea
+            variant="primary"
+            size="xs"
+            placeholder="Extra Small"
+            value=""
+            onChange={() => {}}
+            showCounter={false}
+          />
         </div>
       </div>
 
@@ -121,9 +121,9 @@ export default function TextareasPage() {
               }}
               showCounter={true}
             />
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm whitespace-pre-wrap">
-                {`const [note, setNote] = useState('Texto inicial...')
+            <div>
+              <CodeBlock
+                code={`const [note, setNote] = useState('Texto inicial...')
 
 <Textarea
   placeholder="Digite sua nota"
@@ -134,7 +134,7 @@ export default function TextareasPage() {
   }}
   showCounter={true} // Já vem "true" como padrão
 />`}
-              </pre>
+              />
             </div>
           </div>
 
@@ -156,9 +156,9 @@ export default function TextareasPage() {
                   : undefined
               }
             />
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm whitespace-pre-wrap">
-                {`const [comment, setComment] = useState('Msg curta')
+            <div>
+              <CodeBlock
+                code={`const [comment, setComment] = useState('Msg curta')
 
 <Textarea
   placeholder="Sua mensagem"
@@ -174,7 +174,7 @@ export default function TextareasPage() {
     ? 'Mínimo 10 caracteres' 
     : undefined}
 />`}
-              </pre>
+              />
             </div>
           </div>
         </div>

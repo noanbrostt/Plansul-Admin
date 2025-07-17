@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 import {
   ComposedChart,
   Bar,
@@ -132,10 +133,9 @@ export default function CompostosPage() {
             </ResponsiveContainer>
           </div>
           <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div className="justify-items-center">
-            <div className="p-4 bg-base-300 rounded-lg overflow-auto mt-2">
-              <pre className="text-sm">
-                {`import { ComposedChart, Bar, Line, Area, ResponsiveContainer } from "recharts";
+          <div>
+            <CodeBlock
+              code={`import { ComposedChart, Bar, Line, Area, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
 
 <ResponsiveContainer>
@@ -168,8 +168,7 @@ import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
     />
   </ComposedChart>
 </ResponsiveContainer>`}
-              </pre>
-            </div>
+            />
           </div>
         </div>
 
@@ -258,10 +257,9 @@ import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
             </ResponsiveContainer>
           </div>
           <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div className="justify-items-center">
-            <div className="p-4 bg-base-300 rounded-lg overflow-auto mt-2">
-              <pre className="text-sm">
-                {`import { useState } from "react";
+          <div>
+            <CodeBlock
+              code={`import { useState } from "react";
 import {
   ComposedChart,
   Bar,
@@ -331,8 +329,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
     />
   )}
 </ComposedChart>`}
-              </pre>
-            </div>
+            />
           </div>
         </div>
 
@@ -393,10 +390,9 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
             </ResponsiveContainer>
           </div>
           <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div className="justify-items-center">
-            <div className="p-4 bg-base-300 rounded-lg overflow-auto mt-2">
-              <pre className="text-sm">
-                {`import {
+          <div>
+            <CodeBlock
+              code={`import {
   ComposedChart,
   Bar,
   Line,
@@ -451,8 +447,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
   />
   <Brush dataKey="name" height={30} stroke="#8884d8" />
 </ComposedChart>`}
-              </pre>
-            </div>
+            />
           </div>
         </div>
       </div>

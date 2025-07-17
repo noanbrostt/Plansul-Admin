@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 import {
   PieChart,
   Pie,
@@ -208,10 +209,9 @@ export default function PizzasPage() {
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { PieChart, Pie, Cell, Tooltip } from "recharts";
+        <div>
+          <CodeBlock
+            code={`import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const data = [
   { name: "Grupo A", value: 400 },
@@ -278,8 +278,7 @@ const COLORS = [
     </PieChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -314,10 +313,9 @@ const COLORS = [
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { useState } from "react";
+        <div>
+          <CodeBlock
+            code={`import { useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Sector } from "recharts";
 
 const data01 = [
@@ -361,8 +359,7 @@ const renderActiveShape =... // Ta lá no console.log
     </PieChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -417,10 +414,9 @@ const renderActiveShape =... // Ta lá no console.log
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { useState } from "react";
+        <div>
+          <CodeBlock
+            code={`import { useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const [activeIndex, setActiveIndex] = useState(null);
@@ -476,8 +472,7 @@ const onPieLeave = () => {
     </PieChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
     </div>

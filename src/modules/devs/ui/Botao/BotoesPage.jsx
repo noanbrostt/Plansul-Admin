@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Botao from "@/modules/devs/ui/Botao/Botao";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 import {
   MdSettings,
@@ -95,7 +96,9 @@ export default function BotoesPage() {
 
       {/* --- Seção de Com Ícones --- */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Com Ícones</h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
+          Com Ícones
+        </h2>
         <div className="flex flex-wrap justify-center gap-4">
           {/* Ícone à esquerda (default iconPosition) */}
           <Botao icon={<MdAdd />}>Adicionar</Botao>
@@ -218,8 +221,8 @@ export default function BotoesPage() {
           <div className="space-y-4 justify-items-center">
             <Botao>Primary Button</Botao>
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">{`<Botao>Primary Button</Botao>`}</pre>
+            <div>
+              <CodeBlock code={`<Botao>Primary Button</Botao>`} />
             </div>
           </div>
 
@@ -234,9 +237,9 @@ export default function BotoesPage() {
               Salvar
             </Botao>
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`import { MdCheck } from "react-icons/md";
+            <div>
+              <CodeBlock
+                code={`import { MdCheck } from "react-icons/md";
                 
 const [isLoadingPrimary, setIsLoadingPrimary] = useState(false);
 
@@ -259,7 +262,7 @@ const handleLoadingPrimary = () => {
   A variante "ghost" durante o carregamento serve para o 
   circulo ficar visível em ambos os temas claro e escuro.
 */}`}
-              </pre>
+              />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RadioGroup from "@/modules/devs/ui/Radio/Radio";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 export default function InputsPage() {
   const [selectedNivel, setSelectedNivel] = useState("");
@@ -242,9 +243,9 @@ export default function InputsPage() {
               onValueChange={handleTermoChange}
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [selectedTermo, setSelectedTermo] = useState("s");
+            <div>
+              <CodeBlock
+                code={`const [selectedTermo, setSelectedTermo] = useState("s");
 
 const handleTermoChange = (newValue) => {
     setSelectedTermo(newValue);
@@ -262,7 +263,7 @@ const handleTermoChange = (newValue) => {
   value={selectedTermo}
   onValueChange={handleTermoChange}
 />`}
-              </pre>
+              />
             </div>
           </div>
 
@@ -279,9 +280,9 @@ const handleTermoChange = (newValue) => {
               onValueChange={handleNivelChange}
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [selectedNivel, setSelectedNivel] = useState('');
+            <div>
+              <CodeBlock
+                code={`const [selectedNivel, setSelectedNivel] = useState('');
 
 const handleNivelChange = (newValue) => {
     setSelectedNivel(newValue);
@@ -298,7 +299,7 @@ const handleNivelChange = (newValue) => {
   value={selectedNivel}
   onValueChange={handleNivelChange}
 />`}
-              </pre>
+              />
             </div>
           </div>
         </div>

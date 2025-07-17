@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 import {
   BarChart,
   Bar,
@@ -107,10 +108,9 @@ export default function BarrasPage() {
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { BarChart, Bar, ResponsiveContainer } from "recharts";
+        <div>
+          <CodeBlock
+            code={`import { BarChart, Bar, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
 
 <div className="w-full h-64 select-none">
@@ -129,8 +129,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
     </BarChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -199,10 +198,9 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { useState } from "react";
+        <div>
+          <CodeBlock
+            code={`import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -294,8 +292,7 @@ const { data, refAreaLeft, refAreaRight } = state;
     </BarChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -339,9 +336,9 @@ const { data, refAreaLeft, refAreaRight } = state;
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">{`import {
+        <div>
+          <CodeBlock
+            code={`import {
   BarChart,
   Bar,
   CartesianGrid,
@@ -380,8 +377,8 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
       <Brush dataKey="name" />
     </BarChart>
   </ResponsiveContainer>
-</div>`}</pre>
-          </div>
+</div>`}
+          />
         </div>
       </div>
     </div>

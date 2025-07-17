@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 import {
   RadarChart,
   PolarGrid,
@@ -96,9 +97,15 @@ export default function RadarsPage() {
             </ResponsiveContainer>
           </div>
           <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto mt-2">
-            <pre className="text-sm">
-              {`import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
+          <div>
+            <CodeBlock
+              code={`import { 
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar
+} from "recharts";
 import { Tooltip } from "@/components/CustomRecharts";
 
 const productData = [
@@ -113,7 +120,10 @@ const productData = [
 <div className="w-full h-80 select-none">
   <ResponsiveContainer>
     <RadarChart outerRadius={120} data={productData}>
-      <PolarGrid stroke="var(--color-base-content)" strokeOpacity={0.2} />
+      <PolarGrid
+        stroke="var(--color-base-content)"
+        strokeOpacity={0.2}
+      />
       <PolarAngleAxis dataKey="feature" />
       <PolarRadiusAxis angle={30} domain={[0, 100]} />
       <Radar
@@ -127,7 +137,7 @@ const productData = [
     </RadarChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
+            />
           </div>
         </div>
 
@@ -173,10 +183,16 @@ const productData = [
             </ResponsiveContainer>
           </div>
           <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto mt-2">
-            <pre className="text-sm">
-              {`import { useState } from "react";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from "recharts";
+          <div>
+            <CodeBlock
+              code={`import { useState } from "react";
+import { RadarChart,
+PolarGrid,
+PolarAngleAxis,
+PolarRadiusAxis,
+Radar,
+Legend
+} from "recharts";
 import { Tooltip } from "@/components/CustomRecharts";
 
 const [hoverKey, setHoverKey] = useState(null);
@@ -184,7 +200,10 @@ const [hoverKey, setHoverKey] = useState(null);
 <div className="w-full h-80 select-none">
   <ResponsiveContainer>
     <RadarChart outerRadius={120} data={skillsData}>
-      <PolarGrid stroke="var(--color-base-content)" strokeOpacity={0.2} />
+      <PolarGrid
+        stroke="var(--color-base-content)"
+        strokeOpacity={0.2} 
+      />
       <PolarAngleAxis dataKey="subject" />
       <PolarRadiusAxis angle={30} domain={[0, 100]} />
       <Radar
@@ -203,13 +222,15 @@ const [hoverKey, setHoverKey] = useState(null);
       />
       <Tooltip />
       <Legend 
-        onMouseEnter={({ value }) => setHoverKey(value === "Dev Sênior" ? "A" : "B")}
+        onMouseEnter={( { value }) =>
+          setHoverKey(value === "Dev Sênior" ? "A" : "B"
+        )}
         onMouseLeave={() => setHoverKey(null)}
       />
     </RadarChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
+            />
           </div>
         </div>
       </div>
@@ -261,9 +282,9 @@ const [hoverKey, setHoverKey] = useState(null);
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="p-4 bg-base-300 rounded-lg overflow-auto mt-2">
-          <pre className="text-sm">
-            {`import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from "recharts";
+        <div>
+          <CodeBlock
+            code={`import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from "recharts";
 import { Tooltip } from "@/components/CustomRecharts";
 
 const teamComparisonData = [
@@ -303,7 +324,7 @@ const teamComparisonData = [
     </RadarChart>
   </ResponsiveContainer>
 </div>`}
-          </pre>
+          />
         </div>
       </div>
     </div>

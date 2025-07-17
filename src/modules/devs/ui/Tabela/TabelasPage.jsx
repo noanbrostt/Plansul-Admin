@@ -1,8 +1,10 @@
 import Tabela from "@/modules/devs/ui/Tabela/Tabela";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
+import { showAlert } from "@/components/alerts";
+
 import { FiUser, FiMail, FiPhone, FiDollarSign } from "react-icons/fi";
 import { FaPencilAlt, FaTrashAlt, FaEye } from "react-icons/fa";
-import { showAlert } from "@/components/alerts";
 
 export default function TabelasPage() {
   const users = [
@@ -501,10 +503,9 @@ export default function TabelasPage() {
           enableExport={false}
         />
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="space-y-4 justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg">
-            <pre className="text-sm">
-              {`const users = [...] // Ta lá no console
+        <div>
+          <CodeBlock
+            code={`const users = [...] // Ta lá no console
 const userColumns = [...] // Ta lá no console
 
 <Tabela
@@ -514,8 +515,7 @@ const userColumns = [...] // Ta lá no console
   globalFilter={false}
   enableExport={false}
 />`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -550,10 +550,9 @@ const userColumns = [...] // Ta lá no console
         />
 
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="space-y-4 justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg">
-            <pre className="text-sm">
-              {`const users = [...] // Ta lá no console
+        <div>
+          <CodeBlock
+            code={`const users = [...] // Ta lá no console
 const userColumns = [...] // Ta lá no console
 
 <Tabela
@@ -573,8 +572,7 @@ const userColumns = [...] // Ta lá no console
   exportFileName="Exportação da Tabela de Exemplo"
   className="mt-8 gap-2"
 />`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -674,10 +672,9 @@ const userColumns = [...] // Ta lá no console
         />
 
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="space-y-4 justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg">
-            <pre className="text-sm">
-              {`<Tabela
+        <div>
+          <CodeBlock
+            code={`<Tabela
   data={[...]}
   columns={[...
     {
@@ -717,8 +714,7 @@ const userColumns = [...] // Ta lá no console
     },
   ]}
 />`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
     </div>

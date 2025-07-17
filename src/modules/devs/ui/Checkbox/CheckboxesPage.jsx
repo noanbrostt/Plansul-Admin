@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 export default function InputsPage() {
   const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
@@ -48,9 +49,7 @@ export default function InputsPage() {
 
       {/* --- Seção de Checkbox com Fieldset --- */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Tamanhos
-        </h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
         <div className="flex flex-wrap justify-center items-center gap-8">
           <Checkbox defaultChecked label="Extra Large" checkboxSize="xl" />
           <Checkbox defaultChecked label="Large" checkboxSize="lg" />
@@ -83,8 +82,7 @@ export default function InputsPage() {
 
       {/* --- Seção de Toggles com Cores --- */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Cores</h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Cores</h2>
         <div className="flex flex-wrap justify-center gap-4">
           <Checkbox toggle defaultChecked label="Padrão" />
           <Checkbox toggle defaultChecked label="Primary" variant="primary" />
@@ -97,9 +95,7 @@ export default function InputsPage() {
 
       {/* --- Seção de Checkbox com Fieldset --- */}
       <div className="rounded-box bg-base-200 p-6 pt-4.5 w-full shadow-md">
-        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">
-          Tamanhos
-        </h2>
+        <h2 className="text-lg font-semibold border-b pb-3 mb-4.5">Tamanhos</h2>
 
         <div className="flex flex-wrap justify-center items-center gap-4">
           <Checkbox
@@ -170,10 +166,10 @@ export default function InputsPage() {
               onChange={handleCheckboxChange}
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
-
+            <div>
+              <CodeBlock
+                code={`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+              
 const handleCheckboxChange = (event) => {
   setIsAnonymousOffer(event.target.checked);
 };
@@ -189,7 +185,7 @@ const handleCheckboxChange = (event) => {
   defaultChecked -> Para componentes estáticos;
   checked={const = true} -> Para componentes dinâmicos;
 */}`}
-              </pre>
+              />
             </div>
           </div>
 
@@ -204,9 +200,9 @@ const handleCheckboxChange = (event) => {
               onChange={handleCheckboxChange}
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm">
-                {`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+            <div>
+              <CodeBlock
+                code={`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
 
 const handleCheckboxChange = (event) => {
     setIsAnonymousOffer(event.target.checked);
@@ -221,7 +217,7 @@ const handleCheckboxChange = (event) => {
   checked={isAnonymousOffer}
   onChange={handleCheckboxChange}
 />`}
-              </pre>
+              />
             </div>
           </div>
         </div>

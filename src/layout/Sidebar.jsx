@@ -46,11 +46,11 @@ const menuConfig = {
         to: "/",
         icon: <FiHome />
       },
-      {
-        label: "Usuários",
-        to: "/users",
-        icon: <FiUsers />
-      }
+      // {
+      //   label: "Usuários",
+      //   to: "/users",
+      //   icon: <FiUsers />
+      // }
     ]
   },
   devsSection: {

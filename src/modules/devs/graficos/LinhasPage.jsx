@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 import {
   LineChart,
   Line,
@@ -110,10 +111,9 @@ export default function LinhasPage() {
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { useState } from "react";
+        <div>
+          <CodeBlock
+            code={`import { useState } from "react";
 import {
   LineChart,
   Line,
@@ -139,8 +139,7 @@ const initialData =.. // Ta lá no console
     </LineChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -210,10 +209,9 @@ const initialData =.. // Ta lá no console
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">
-              {`import { useState } from "react";
+        <div>
+          <CodeBlock
+            code={`import { useState } from "react";
 import {
   LineChart,
   Line,
@@ -290,8 +288,7 @@ const [hoverKey, setHoverKey] = useState(null);
     </LineChart>
   </ResponsiveContainer>
 </div>`}
-            </pre>
-          </div>
+          />
         </div>
       </div>
 
@@ -338,9 +335,9 @@ const [hoverKey, setHoverKey] = useState(null);
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-        <div className="justify-items-center">
-          <div className="p-4 bg-base-300 rounded-lg overflow-auto">
-            <pre className="text-sm">{`import {
+        <div>
+          <CodeBlock
+            code={`import {
   LineChart,
   Line,
   CartesianGrid,
@@ -390,8 +387,8 @@ const [hoverKey, setHoverKey] = useState(null);
       <Brush dataKey="name" />
     </LineChart>
   </ResponsiveContainer>
-</div>`}</pre>
-          </div>
+</div>`}
+          />
         </div>
       </div>
     </div>

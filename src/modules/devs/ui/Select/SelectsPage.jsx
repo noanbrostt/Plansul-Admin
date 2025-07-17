@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Select from "@/modules/devs/ui/Select/Select";
 import FavoriteButton from "@/components/FavoriteButton";
+import CodeBlock from "@/components/CodeBlock";
 
 export default function InputsPage() {
   const [selectedFruits, setSelectedFruits] = useState([]);
@@ -460,9 +461,9 @@ export default function InputsPage() {
               variant="success"
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm whitespace-pre-wrap">
-                {`const [nivel, setNivel] = useState(null);\n\n<Select
+            <div>
+              <CodeBlock
+                code={`const [nivel, setNivel] = useState(null);\n\n<Select
   options={[
     { value: "junior", label: "Júnior" },
     { value: "pleno", label: "Pleno" },
@@ -473,7 +474,7 @@ export default function InputsPage() {
   onChange={setNivel}
   variant="success"
 />`}
-              </pre>
+              />
             </div>
           </div>
 
@@ -494,9 +495,9 @@ export default function InputsPage() {
               onChange={setDemonMulti}
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm whitespace-pre-wrap">
-                {`const [demonMulti, setDemonMulti] = useState([]);\n\n<Select
+            <div>
+              <CodeBlock
+                code={`const [demonMulti, setDemonMulti] = useState([]);\n\n<Select
   multiple
   showSelectAll
   placeholder="Selecione várias opções"
@@ -511,7 +512,7 @@ export default function InputsPage() {
   value={demonMulti}
   onChange={setDemonMulti}
 />`}
-              </pre>
+              />
             </div>
           </div>
         </div>
@@ -541,9 +542,9 @@ export default function InputsPage() {
               variant="info"
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm whitespace-pre-wrap">
-                {`const [selectedCor, setSelectedCor] = useState({
+            <div>
+              <CodeBlock
+                code={`const [selectedCor, setSelectedCor] = useState({
   value: "azul",
   label: "Azul",
 });
@@ -562,7 +563,7 @@ export default function InputsPage() {
   }}
   variant="info"
 />`}
-              </pre>
+              />
             </div>
           </div>
 
@@ -587,9 +588,9 @@ export default function InputsPage() {
               variant="success"
             />
 
-            <div className="p-4 bg-base-300 rounded-lg">
-              <pre className="text-sm whitespace-pre-wrap">
-                {`const [selectedLinguagens, setSelectedLinguagens] = useState([
+            <div>
+              <CodeBlock
+                code={`const [selectedLinguagens, setSelectedLinguagens] = useState([
   { value: "js", label: "JavaScript" },
   { value: "ts", label: "TypeScript" },
 ]);
@@ -612,7 +613,7 @@ export default function InputsPage() {
   }}
   variant="success"
 />`}
-              </pre>
+              />
             </div>
           </div>
         </div>
