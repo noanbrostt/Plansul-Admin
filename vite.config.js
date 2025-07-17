@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/auth": {
-        target: "http://172.32.1.74:8080",
+        target: "http://172.32.1.75:8080",
         changeOrigin: true,
       },
     },
