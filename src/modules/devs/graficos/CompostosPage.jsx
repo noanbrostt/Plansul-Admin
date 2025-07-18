@@ -11,7 +11,14 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  Brush,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
 
 const initialData = [
   { name: "Jan", receita: 400, despesa: 240, lucro: 160, meta: 350 },
@@ -36,37 +43,6 @@ export default function CompostosPage() {
     hoverKey: null,
   });
   const [hoverKey, setHoverKey] = useState(null);
-
-  const zoom = () => {
-    const { refAreaLeft, refAreaRight } = state;
-    if (refAreaLeft === refAreaRight || !refAreaRight) {
-      setState((s) => ({ ...s, refAreaLeft: "", refAreaRight: "" }));
-      return;
-    }
-
-    const start = initialData.findIndex((d) => d.name === refAreaLeft);
-    const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
-    const zoomedData = initialData.slice(
-      Math.min(start, end - 1),
-      Math.max(start, end)
-    );
-    setState((s) => ({
-      ...s,
-      data: zoomedData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
-  const zoomOut = () => {
-    setState((s) => ({
-      ...s,
-      data: initialData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
   const { data, refAreaLeft, refAreaRight } = state;
 
   return (
@@ -138,8 +114,10 @@ export default function CompostosPage() {
               code={`import { ComposedChart, Bar, Line, Area, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
 
+const initialData = [...]; // Ta lá no console
+
 <ResponsiveContainer>
-  <ComposedChart data={data}>
+  <ComposedChart data={initialData}>
     <defs>
       <linearGradient id="colorLucro" x1="0" y1="0" x2="0" y2="1">
         <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
@@ -180,7 +158,7 @@ import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
           <div className="flex justify-between items-center mb-4">
             <button
               className="btn btn-sm btn-primary my-2 ml-9"
-              onClick={zoomOut}
+              onClick={() => handleZoomOut({ initialData, setState })}
             >
               Zoom Out
             </button>
@@ -203,12 +181,19 @@ import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
                   state.refAreaLeft &&
                   setState((s) => ({ ...s, refAreaRight: e.activeLabel }))
                 }
-                onMouseUp={zoom}
-              >
+              onMouseUp={() =>
+                handleZoom({
+                  refAreaLeft: state.refAreaLeft,
+                  refAreaRight: state.refAreaRight,
+                  initialData,
+                  setState,
+                })
+              }
+            >
                 <defs>
                   <linearGradient id="colorLucro" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0.1} />
+                    <stop offset="5%" stopOpacity={0.8} />
+                    <stop offset="95%" stopOpacity={0.1} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -241,7 +226,6 @@ import { XAxis, YAxis, Tooltip, Legend } from "@/components/CustomRecharts";
                   type="monotone"
                   dataKey="lucro"
                   fill="url(#colorLucro)"
-                  stroke="#10b981"
                   fillOpacity={hoverKey && hoverKey !== "lucro" ? 0.1 : 0.5}
                   strokeOpacity={hoverKey && hoverKey !== "lucro" ? 0.3 : 1}
                 />
@@ -270,65 +254,100 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
+ 
+const initialData = [...]; // Ta lá no console
+ 
+const { data, refAreaLeft, refAreaRight } = state;      
+const [hoverKey, setHoverKey] = useState(null);
 
-// Lógica de estado e zoom mantida igual
-
-<ComposedChart
-  data={data}
-  onMouseDown={(e) => setState(s => ({...s, refAreaLeft: e.activeLabel}))}
-  onMouseMove={(e) => state.refAreaLeft && setState(s => ({...s, refAreaRight: e.activeLabel}))}
-  onMouseUp={zoom}
+<button
+  className="btn btn-sm btn-primary my-2 ml-9"
+  onClick={() => handleZoomOut({ initialData, setState })}
 >
-  <defs>
-    <linearGradient id="colorLucro" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
-      <stop offset="95%" stopColor="#10b981" stopOpacity={0.1} />
-    </linearGradient>
-  </defs>
-  <CartesianGrid strokeDasharray="3 3" />
-  <XAxis dataKey="name" />
-  <YAxis />
-  <Tooltip />
-  <Legend
-    onMouseEnter={({dataKey}) => setHoverKey(dataKey)}
-    onMouseLeave={() => setHoverKey(null)}
-  />
-  <Bar
-    dataKey="receita"
-    fill="var(--color-primary)"
-    opacity={hoverKey && hoverKey !== "receita" ? 0.2 : 1}
-  />
-  <Bar
-    dataKey="despesa"
-    fill="var(--color-error)"
-    opacity={hoverKey && hoverKey !== "despesa" ? 0.2 : 1}
-  />
-  <Line
-    type="monotone"
-    dataKey="meta"
-    stroke="var(--color-warning)"
-    strokeWidth={2}
-    dot={false}
-    strokeOpacity={hoverKey && hoverKey !== "meta" ? 0.2 : 1}
-  />
-  <Area
-    type="monotone"
-    dataKey="lucro"
-    fill="url(#colorLucro)"
-    stroke="#10b981"
-    fillOpacity={hoverKey && hoverKey !== "lucro" ? 0.1 : 0.5}
-    strokeOpacity={hoverKey && hoverKey !== "lucro" ? 0.3 : 1}
-  />
-  {refAreaLeft && refAreaRight && (
-    <ReferenceArea
-      x1={refAreaLeft}
-      x2={refAreaRight}
-      fill="var(--color-base-content)"
-      fillOpacity={0.2}
-    />
-  )}
-</ComposedChart>`}
+  Zoom Out
+</button>
+<div
+  className="w-full h-64 select-none"
+  style={{ userSelect: "none" }}
+  tabIndex={0}
+>
+  <ResponsiveContainer>
+    <ComposedChart
+      data={data}
+      onMouseDown={(e) =>
+        setState((s) => ({ ...s, refAreaLeft: e.activeLabel }))
+      }
+      onMouseMove={(e) =>
+        state.refAreaLeft &&
+        setState((s) => ({ ...s, refAreaRight: e.activeLabel }))
+      }
+      onMouseUp={() =>
+        handleZoom({
+          refAreaLeft: state.refAreaLeft,
+          refAreaRight: state.refAreaRight,
+          initialData,
+          setState,
+        })
+      }
+    >
+      <defs>
+        <linearGradient id="colorLucro" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#10b981" stopOpacity={0.1} />
+        </linearGradient>
+      </defs>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend
+        onMouseEnter={({ dataKey }) => setHoverKey(dataKey)}
+        onMouseLeave={() => setHoverKey(null)}
+      />
+      <Bar
+        dataKey="receita"
+        fill="var(--color-primary)"
+        opacity={hoverKey && hoverKey !== "receita" ? 0.2 : 1}
+      />
+      <Bar
+        dataKey="despesa"
+        fill="var(--color-error)"
+        opacity={hoverKey && hoverKey !== "despesa" ? 0.2 : 1}
+      />
+      <Line
+        type="monotone"
+        dataKey="meta"
+        stroke="var(--color-warning)"
+        strokeWidth={2}
+        dot={false}
+        strokeOpacity={hoverKey && hoverKey !== "meta" ? 0.2 : 1}
+      />
+      <Area
+        type="monotone"
+        dataKey="lucro"
+        fill="url(#colorLucro)"
+        stroke="#10b981"
+        fillOpacity={hoverKey && hoverKey !== "lucro" ? 0.1 : 0.5}
+        strokeOpacity={hoverKey && hoverKey !== "lucro" ? 0.3 : 1}
+      />
+      {refAreaLeft && refAreaRight && (
+        <ReferenceArea
+          x1={refAreaLeft}
+          x2={refAreaRight}
+          fill="var(--color-base-content)"
+          fillOpacity={0.2}
+        />
+      )}
+    </ComposedChart>
+  </ResponsiveContainer>
+</div>`}
             />
           </div>
         </div>
@@ -403,6 +422,10 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
   Brush
 } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+
+const initialData = [...]; // Ta lá no console
+
+const [hoverKey, setHoverKey] = useState(null);
 
 <ComposedChart data={initialData}>
   <defs>

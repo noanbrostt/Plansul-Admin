@@ -9,7 +9,14 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  Brush,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
 
 const initialData = [
   { name: "Jan", uv: 400, pv: 240, amt: 240 },
@@ -25,6 +32,7 @@ const initialData = [
   { name: "Nov", uv: 189, pv: 480, amt: 218 },
   { name: "Dez", uv: 239, pv: 380, amt: 250 },
 ];
+console.log("const initialData = " + JSON.stringify(initialData));
 
 export default function AreasPage() {
   const [state, setState] = useState({
@@ -34,37 +42,6 @@ export default function AreasPage() {
     hoverKey: null,
   });
   const [hoverKey, setHoverKey] = useState(null);
-
-  const zoom = () => {
-    const { refAreaLeft, refAreaRight } = state;
-    if (refAreaLeft === refAreaRight || !refAreaRight) {
-      setState((s) => ({ ...s, refAreaLeft: "", refAreaRight: "" }));
-      return;
-    }
-
-    const start = initialData.findIndex((d) => d.name === refAreaLeft);
-    const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
-    const zoomedData = initialData.slice(
-      Math.min(start, end - 1),
-      Math.max(start, end)
-    );
-    setState((s) => ({
-      ...s,
-      data: zoomedData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
-  const zoomOut = () => {
-    setState((s) => ({
-      ...s,
-      data: initialData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
   const { data, refAreaLeft, refAreaRight } = state;
 
   return (
@@ -121,13 +98,16 @@ export default function AreasPage() {
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div>
-            <CodeBlock code={`import { AreaChart, Area, ResponsiveContainer } from "recharts";
+        <div>
+          <CodeBlock
+            code={`import { AreaChart, Area, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+
+const initialData = [...]; // Ta lá no console
 
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
-    <AreaChart data={data}>
+    <AreaChart data={initialData}>
       <defs>
         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
           <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.8} />
@@ -145,8 +125,9 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
       />
     </AreaChart>
   </ResponsiveContainer>
-</div>`} />
-          </div>
+</div>`}
+          />
+        </div>
       </div>
 
       {/* 2. Múltiplas Séries + LegendOpacity */}
@@ -157,7 +138,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
         <div className="flex justify-between items-center">
           <button
             className="btn btn-sm btn-primary my-2 ml-9"
-            onClick={zoomOut}
+            onClick={() => handleZoomOut({ initialData, setState })}
           >
             Zoom Out
           </button>
@@ -180,7 +161,14 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
                 state.refAreaLeft &&
                 setState((s) => ({ ...s, refAreaRight: e.activeLabel }))
               }
-              onMouseUp={zoom}
+              onMouseUp={() =>
+                handleZoom({
+                  refAreaLeft: state.refAreaLeft,
+                  refAreaRight: state.refAreaRight,
+                  initialData,
+                  setState,
+                })
+              }
             >
               <defs>
                 <linearGradient id="colorPrimary" x1="0" y1="0" x2="0" y2="1">
@@ -242,8 +230,9 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div>
-            <CodeBlock code={`import { useState } from "react";
+        <div>
+          <CodeBlock
+            code={`import { useState } from "react";
 import {
   AreaChart,
   Area,
@@ -252,7 +241,15 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
+
+const initialData = [...]; // Ta lá no console
 
 const [state, setState] = useState({
   data: initialData,
@@ -261,49 +258,26 @@ const [state, setState] = useState({
   hoverKey: null,
 });
 const [hoverKey, setHoverKey] = useState(null);
-
-const zoom = () => {
-  const { refAreaLeft, refAreaRight } = state;
-  if (refAreaLeft === refAreaRight || !refAreaRight) {
-    setState((s) => ({ ...s, refAreaLeft: "", refAreaRight: "" }));
-    return;
-  }
-
-  const start = initialData.findIndex((d) => d.name === refAreaLeft);
-  const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
-  const zoomedData = initialData.slice(
-    Math.min(start, end - 1),
-    Math.max(start, end)
-  );
-  setState((s) => ({
-    ...s,
-    data: zoomedData,
-    refAreaLeft: "",
-    refAreaRight: "",
-  }));
-};
-
-const zoomOut = () => {
-  setState((s) => ({
-    ...s,
-    data: initialData,
-    refAreaLeft: "",
-    refAreaRight: "",
-  }));
-};
-
 const { data, refAreaLeft, refAreaRight } = state;
 
-<button className="btn btn-sm btn-primary my-2 ml-9" onClick={zoomOut}>
+<button
+  className="btn btn-sm btn-primary my-2 ml-9" 
+  onClick={() => handleZoomOut({ initialData, setState })}
+>
   Zoom Out
 </button>
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
     <AreaChart
-      data={data}
+      data={initialData}
       onMouseDown={(e) => setState(s => ({...s, refAreaLeft: e.activeLabel}))}
       onMouseMove={(e) => state.refAreaLeft && setState(s => ({...s, refAreaRight: e.activeLabel}))}
-      onMouseUp={zoom}
+      onMouseUp={() => handleZoom({ 
+        refAreaLeft: state.refAreaLeft, 
+        refAreaRight: state.refAreaRight, 
+        initialData, 
+        setState 
+      })}
     >
       <defs>
         <linearGradient id="colorPrimary" x1="0" y1="0" x2="0" y2="1">
@@ -347,8 +321,9 @@ const { data, refAreaLeft, refAreaRight } = state;
       )}
     </AreaChart>
   </ResponsiveContainer>
-</div>`} />
-          </div>
+</div>`}
+          />
+        </div>
       </div>
 
       {/* Com Brush */}
@@ -432,8 +407,9 @@ const { data, refAreaLeft, refAreaRight } = state;
           </ResponsiveContainer>
         </div>
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
-          <div>
-            <CodeBlock code={`import {
+        <div>
+          <CodeBlock
+            code={`import {
   AreaChart,
   Area,
   CartesianGrid,
@@ -442,6 +418,10 @@ const { data, refAreaLeft, refAreaRight } = state;
   Brush
 } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+
+const initialData = [...]; // Ta lá no console
+
+const [hoverKey, setHoverKey] = useState(null);
 
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
@@ -489,9 +469,10 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
       <Brush dataKey="name" />
     </AreaChart>
   </ResponsiveContainer>
-</div>`} />
-          </div>
+</div>`}
+          />
         </div>
+      </div>
     </div>
   );
 }

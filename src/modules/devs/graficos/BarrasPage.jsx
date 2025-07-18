@@ -9,7 +9,14 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  Brush,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
 
 const initialData = [
   { name: "Jan", uv: 400, pv: 240, amt: 240 },
@@ -25,6 +32,7 @@ const initialData = [
   { name: "Nov", uv: 189, pv: 480, amt: 218 },
   { name: "Dez", uv: 239, pv: 380, amt: 250 },
 ];
+console.log("const initialData = " + JSON.stringify(initialData));
 
 export default function BarrasPage() {
   const [state, setState] = useState({
@@ -33,37 +41,6 @@ export default function BarrasPage() {
     refAreaRight: "",
   });
   const [hoverKey, setHoverKey] = useState(null);
-
-  const zoom = () => {
-    const { refAreaLeft, refAreaRight } = state;
-    if (refAreaLeft === refAreaRight || !refAreaRight) {
-      setState((s) => ({ ...s, refAreaLeft: "", refAreaRight: "" }));
-      return;
-    }
-
-    const start = initialData.findIndex((d) => d.name === refAreaLeft);
-    const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
-    const zoomedData = initialData.slice(
-      Math.min(start, end - 1),
-      Math.max(start, end)
-    );
-    setState((s) => ({
-      ...s,
-      data: zoomedData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
-  const zoomOut = () => {
-    setState((s) => ({
-      ...s,
-      data: initialData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
   const { data, refAreaLeft, refAreaRight } = state;
 
   return (
@@ -113,9 +90,11 @@ export default function BarrasPage() {
             code={`import { BarChart, Bar, ResponsiveContainer } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
 
+const initialData = [...]; // Ta lá no console
+
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
-    <BarChart data={data}>
+    <BarChart data={initialData}>
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
@@ -141,7 +120,7 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
         <div className="flex justify-between items-center">
           <button
             className="btn btn-sm btn-primary my-2 ml-9"
-            onClick={zoomOut}
+            onClick={() => handleZoomOut({ initialData, setState })}
           >
             Zoom Out
           </button>
@@ -164,7 +143,14 @@ import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
                 state.refAreaLeft &&
                 setState((s) => ({ ...s, refAreaRight: e.activeLabel }))
               }
-              onMouseUp={zoom}
+              onMouseUp={() =>
+                handleZoom({
+                  refAreaLeft: state.refAreaLeft,
+                  refAreaRight: state.refAreaRight,
+                  initialData,
+                  setState,
+                })
+              }
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
@@ -209,7 +195,13 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
 
 const [state, setState] = useState({
   data: initialData,
@@ -217,49 +209,30 @@ const [state, setState] = useState({
   refAreaRight: "",
 });
 const [hoverKey, setHoverKey] = useState(null);
-
-const zoom = () => {
-  const { refAreaLeft, refAreaRight } = state;
-  if (refAreaLeft === refAreaRight || !refAreaRight) {
-    setState((s) => ({ ...s, refAreaLeft: "", refAreaRight: "" }));
-    return;
-  }
-
-  const start = initialData.findIndex((d) => d.name === refAreaLeft);
-  const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
-  const zoomedData = initialData.slice(
-    Math.min(start, end - 1),
-    Math.max(start, end)
-  );
-  setState((s) => ({
-    ...s,
-    data: zoomedData,
-    refAreaLeft: "",
-    refAreaRight: "",
-  }));
-};
-
-const zoomOut = () => {
-  setState((s) => ({
-    ...s,
-    data: initialData,
-    refAreaLeft: "",
-    refAreaRight: "",
-  }));
-};
-
 const { data, refAreaLeft, refAreaRight } = state;
 
-<button className="btn btn-sm btn-primary my-2 ml-9" onClick={zoomOut}>
+const initialData = [...]; // Ta lá no console
+
+<button 
+  className="btn btn-sm btn-primary my-2 ml-9" 
+  onClick={() => handleZoomOut({ initialData, setState })}
+>
   Zoom Out
 </button>
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
     <BarChart
-      data={data}
+      data={initialData}
       onMouseDown={(e) => setState(s => ({...s, refAreaLeft: e.activeLabel}))}
       onMouseMove={(e) => state.refAreaLeft && setState(s => ({...s, refAreaRight: e.activeLabel}))}
-      onMouseUp={zoom}
+      onMouseUp={() =>
+        handleZoom({
+          refAreaLeft: state.refAreaLeft,
+          refAreaRight: state.refAreaRight,
+          initialData,
+          setState,
+        })
+      }
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
@@ -347,6 +320,8 @@ const { data, refAreaLeft, refAreaRight } = state;
   Brush
 } from "recharts";
 import { XAxis, YAxis, Tooltip } from "@/components/CustomRecharts";
+
+const initialData = [...]; // Ta lá no console
 
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>

@@ -9,7 +9,14 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  Brush,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
 
 const initialData = [
   { name: "Jan", uv: 400, pv: 240, amt: 240 },
@@ -25,6 +32,7 @@ const initialData = [
   { name: "Nov", uv: 189, pv: 480, amt: 218 },
   { name: "Dez", uv: 239, pv: 380, amt: 250 },
 ];
+console.log("const initialData = " + JSON.stringify(initialData));
 
 export default function LinhasPage() {
   const [state, setState] = useState({
@@ -34,41 +42,6 @@ export default function LinhasPage() {
     hoverKey: null,
   });
   const [hoverKey, setHoverKey] = useState(null);
-
-  const zoom = () => {
-    const { refAreaLeft, refAreaRight } = state;
-    if (refAreaLeft === refAreaRight || !refAreaRight) {
-      setState((s) => ({ ...s, refAreaLeft: "", refAreaRight: "" }));
-      return;
-    }
-
-    const start = initialData.findIndex((d) => d.name === refAreaLeft);
-    const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
-    const zoomedData = initialData.slice(
-      Math.min(start, end - 1),
-      Math.max(start, end)
-    );
-    setState((s) => ({
-      ...s,
-      data: zoomedData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
-  const zoomOut = () => {
-    setState((s) => ({
-      ...s,
-      data: initialData,
-      refAreaLeft: "",
-      refAreaRight: "",
-    }));
-  };
-
-  console.log("const initialData = " + JSON.stringify(initialData));
-  console.log("const zoom = " + zoom);
-  console.log("const zoomOut = " + zoomOut);
-
   const { data, refAreaLeft, refAreaRight } = state;
 
   return (
@@ -119,10 +92,9 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
-// Componentes equivalentes aos originais do "recharts", mas estilizados
 import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
 
-const initialData =.. // Ta lá no console
+const initialData = [...]; // Ta lá no console
 
 <div className="w-full h-64 select-none">
   <ResponsiveContainer>
@@ -151,7 +123,7 @@ const initialData =.. // Ta lá no console
         <div className="flex justify-between items-center">
           <button
             className="btn btn-sm btn-primary my-2 ml-9"
-            onClick={zoomOut}
+            onClick={() => handleZoomOut({ initialData, setState })}
           >
             Zoom Out
           </button>
@@ -174,7 +146,14 @@ const initialData =.. // Ta lá no console
                 state.refAreaLeft &&
                 setState((s) => ({ ...s, refAreaRight: e.activeLabel }))
               }
-              onMouseUp={zoom}
+              onMouseUp={() =>
+                handleZoom({
+                  refAreaLeft: state.refAreaLeft,
+                  refAreaRight: state.refAreaRight,
+                  initialData,
+                  setState,
+                })
+              }
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
@@ -220,23 +199,29 @@ import {
   ResponsiveContainer,
   ReferenceArea,
 } from "recharts";
-// Componentes equivalentes aos originais do "recharts", mas estilizados
-import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  handleZoom,
+  handleZoomOut,
+} from "@/components/CustomRecharts";
 
-const initialData =.. // Ta lá no console
-const zoom =.. // Ta lá no console
-const zoomOut =.. // Ta lá no console
+const initialData = [...]; // Ta lá no console
+
 const [state, setState] = useState({
   data: initialData,
   refAreaLeft: "",
   refAreaRight: "",
   hoverKey: null,
 });
-const { data, refAreaLeft, refAreaRight } = state;
-            
+const { data, refAreaLeft, refAreaRight } = state;      
 const [hoverKey, setHoverKey] = useState(null);
 
-<button className="btn btn-sm btn-primary my-2 ml-9" onClick={zoomOut}>
+<button 
+  className="btn btn-sm btn-primary my-2 ml-9" 
+  onClick={() => handleZoomOut({ initialData, setState })}
+>
   Zoom Out
 </button>
 <div
@@ -254,7 +239,14 @@ const [hoverKey, setHoverKey] = useState(null);
         state.refAreaLeft &&
         setState((s) => ({ ...s, refAreaRight: e.activeLabel }))
       }
-      onMouseUp={zoom}
+      onMouseUp={() =>
+        handleZoom({
+          refAreaLeft: state.refAreaLeft,
+          refAreaRight: state.refAreaRight,
+          initialData,
+          setState,
+        })
+      }
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
@@ -348,7 +340,8 @@ const [hoverKey, setHoverKey] = useState(null);
 // Componentes equivalentes aos originais do "recharts", mas estilizados
 import { XAxis, YAxis, Tooltip, Brush } from "@/components/CustomRecharts";
 
-const initialData =.. // Ta lá no console
+const initialData = [...]; // Ta lá no console
+
 const [hoverKey, setHoverKey] = useState(null);
 
 <div

@@ -1,4 +1,4 @@
-// src/components/CustomRecharts.js
+// src/components/CustomRecharts.jsx
 import {
   XAxis as ReXAxis,
   YAxis as ReYAxis,
@@ -6,6 +6,38 @@ import {
   Brush as ReBrush,
 } from "recharts";
 
+// Funções de zoom
+export function handleZoom({ refAreaLeft, refAreaRight, initialData, setState }) {
+  if (refAreaLeft === refAreaRight || !refAreaRight) {
+    setState((prev) => ({ ...prev, refAreaLeft: "", refAreaRight: "" }));
+    return;
+  }
+
+  const start = initialData.findIndex((d) => d.name === refAreaLeft);
+  const end = initialData.findIndex((d) => d.name === refAreaRight) + 1;
+  const zoomedData = initialData.slice(
+    Math.min(start, end - 1),
+    Math.max(start, end)
+  );
+  
+  setState((prev) => ({
+    ...prev,
+    data: zoomedData,
+    refAreaLeft: "",
+    refAreaRight: "",
+  }));
+}
+
+export function handleZoomOut({ initialData, setState }) {
+  setState((prev) => ({
+    ...prev,
+    data: initialData,
+    refAreaLeft: "",
+    refAreaRight: "",
+  }));
+}
+
+// Componentes customizados
 export function YAxis(
   props,
   varFill = "var(--color-base-content)",
@@ -44,13 +76,9 @@ export function Tooltip(props) {
 export function Brush(props) {
   return (
     <ReBrush
-      height={30}
+      height={20}
       travellerWidth={10}
       stroke="var(--color-primary)"
-      traveller={{
-        stroke: "var(--color-secondary)",
-        fill: "var(--color-secondary)",
-      }}
       {...props}
     />
   );
