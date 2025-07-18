@@ -6,7 +6,13 @@ import ForbiddenPage from "@/layout/ForbiddenPage";
 
 // Importações de páginas
 import HomePage from "@/modules/home/HomePage";
-import UsersPage from "@/modules/users/UsersPage";
+
+// Admin
+import UsuariosPage from "@/modules/admin/usuarios/UsuariosPage";
+
+
+// Telas
+import ExemploPage from "@/modules/devs/telas/ExemploPage";
 
 // Páginas de UI
 import InputsPage from "@/modules/devs/ui/Input/InputsPage";
@@ -49,14 +55,23 @@ const ROUTE_CONFIG = {
       path: "/",
       element: <HomePage />
     },
+  ],
+
+  // Rotas protegidas (requerem permissão específica)
+  ADMIN_ROUTES: [
     {
-      path: "/users",
-      element: <UsersPage />
-    }
+      path: "/admin/usuarios",
+      element: <UsuariosPage />,
+      permission: "DEV_Teste_User"
+    },
   ],
   
-  // Rotas protegidas (requerem permissão específica)
-  PERMISSION_ROUTES: [
+  DEVS_ROUTES: [
+    {
+      path: "/devs/telas/exemplo",
+      element: <ExemploPage />,
+      permission: "DEV_Teste_User"
+    },
     {
       path: "/devs/ui/blocos",
       element: <BlocosPage />,
@@ -131,7 +146,7 @@ const ROUTE_CONFIG = {
       path: "/devs/graficos/compostos",
       element: <CompostosPage />,
       permission: "DEV_Teste_User"
-    }
+    },
   ],
   
   // Rotas de erro
@@ -185,7 +200,8 @@ export default function AppRoutes() {
         }
       >
         {ROUTE_CONFIG.LOGGED.map(renderRoute)}
-        {ROUTE_CONFIG.PERMISSION_ROUTES.map(renderRoute)}
+        {ROUTE_CONFIG.ADMIN_ROUTES.map(renderRoute)}
+        {ROUTE_CONFIG.DEVS_ROUTES.map(renderRoute)}
       </Route>
       
       {/* Rotas de Erro */}

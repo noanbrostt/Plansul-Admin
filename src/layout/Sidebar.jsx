@@ -24,6 +24,7 @@ import {
   FaChartBar,
   FaChartLine,
 } from "react-icons/fa";
+import { FaUserGear } from "react-icons/fa6";
 import { TbCheckbox, TbCreditCard } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
@@ -53,6 +54,16 @@ const menuConfig = {
       // }
     ]
   },
+  adminSection: {
+    title: "Admin",
+    items: [
+      {
+        label: "Gestão de Usuários",
+        to: "/admin/usuarios",
+        icon: <FaUserGear />
+      },
+    ]
+  },
   devsSection: {
     title: "Devs",
     items: [
@@ -60,6 +71,11 @@ const menuConfig = {
         label: "Telas",
         icon: <MdScreenshotMonitor />,
         subItems: [
+          {
+            label: "Tela de Exemplo",
+            to: "/devs/telas/exemplo",
+            icon: <MdScreenshotMonitor />
+          },
           {
             label: "Not Found",
             to: "*",
@@ -231,7 +247,24 @@ export default function Sidebar({
             ))}
           </SidebarSection>
 
-          {/* Seção Devs (condicional) */}
+          {/* Seção Admin */}
+          {user.permissoes?.includes("DEV_Teste_User") && (
+            <SidebarSection 
+              title={memoizedMenuConfig.adminSection.title} 
+              sectionKey="admin"
+            >
+              {memoizedMenuConfig.adminSection.items.map((item) => (
+                <SidebarLink
+                  key={item.label}
+                  label={item.label}
+                  to={item.to}
+                  icon={item.icon}
+                />
+              ))}
+            </SidebarSection>
+          )}
+
+          {/* Seção Devs */}
           {user.permissoes?.includes("DEV_Teste_User") && (
             <SidebarSection 
               title={memoizedMenuConfig.devsSection.title} 
