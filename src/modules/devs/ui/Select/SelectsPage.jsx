@@ -463,7 +463,9 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`const [nivel, setNivel] = useState(null);\n\n<Select
+                code={`import Select from "@/modules/devs/ui/Select/Select";
+
+const [nivel, setNivel] = useState(null);\n\n<Select
   options={[
     { value: "junior", label: "Júnior" },
     { value: "pleno", label: "Pleno" },
@@ -497,7 +499,11 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`const [demonMulti, setDemonMulti] = useState([]);\n\n<Select
+                code={`import Select from "@/modules/devs/ui/Select/Select";
+
+const [demonMulti, setDemonMulti] = useState([]);
+
+<Select
   multiple
   showSelectAll
   placeholder="Selecione várias opções"
@@ -544,7 +550,9 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`const [selectedCor, setSelectedCor] = useState({
+                code={`import Select from "@/modules/devs/ui/Select/Select";
+
+const [selectedCor, setSelectedCor] = useState({
   value: "azul",
   label: "Azul",
 });
@@ -590,7 +598,9 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`const [selectedLinguagens, setSelectedLinguagens] = useState([
+                code={`import Select from "@/modules/devs/ui/Select/Select";
+
+const [selectedLinguagens, setSelectedLinguagens] = useState([
   { value: "js", label: "JavaScript" },
   { value: "ts", label: "TypeScript" },
 ]);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
-import Input from "./Input";
+import Input from "@/modules/devs/ui/Input/Input";
 
 import {
   FiMail,
@@ -354,7 +354,9 @@ export default function InputsPage() {
             />
 
             <div>
-              <CodeBlock code={`const [inputValue, setInputValue] = useState("");\n\n<Input\n  fieldset="Input Padrão"\n  placeholder="Digite.."\n  value={inputValue}\n  onChange={(e) => setInputValue(e.target.value)}\n/>`} />
+              <CodeBlock code={`import Input from "@/modules/devs/ui/Input/Input";
+
+const [inputValue, setInputValue] = useState("");\n\n<Input\n  fieldset="Input Padrão"\n  placeholder="Digite.."\n  value={inputValue}\n  onChange={(e) => setInputValue(e.target.value)}\n/>`} />
             </div>
           </div>
 
@@ -381,7 +383,8 @@ export default function InputsPage() {
             />
 
             <div>
-              <CodeBlock code={`import { FiLock } from "react-icons/fi";\n\nconst [inputValue, setInputValue] = useState("");\n\n<Input\n  type="password"\n  fieldset="Digite sua senha"\n  placeholder="*****"\n  variant="primary"\n  icon={<FiLock />}\n  validMessage={\n    <>\n    Precisa ter ao menos 8 caractéres, incluindo:\n    <br />\n    Número, letra maiúscula e letra minúscula\n    </>\n  }\n  validReqs={{\n    pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",\n  }}\n  required\n  value={inputValue}\n  onChange={(e) => setInputValue(e.target.value)}\n/>`} />
+              <CodeBlock code={`import Input from "@/modules/devs/ui/Input/Input";
+import { FiLock } from "react-icons/fi";\n\nconst [inputValue, setInputValue] = useState("");\n\n<Input\n  type="password"\n  fieldset="Digite sua senha"\n  placeholder="*****"\n  variant="primary"\n  icon={<FiLock />}\n  validMessage={\n    <>\n    Precisa ter ao menos 8 caractéres, incluindo:\n    <br />\n    Número, letra maiúscula e letra minúscula\n    </>\n  }\n  validReqs={{\n    pattern: "(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}",\n  }}\n  required\n  value={inputValue}\n  onChange={(e) => setInputValue(e.target.value)}\n/>`} />
             </div>
           </div>
         </div>

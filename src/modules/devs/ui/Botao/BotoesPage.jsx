@@ -222,7 +222,9 @@ export default function BotoesPage() {
             <Botao>Primary Button</Botao>
 
             <div>
-              <CodeBlock code={`<Botao>Primary Button</Botao>`} />
+              <CodeBlock code={`import Botao from "@/modules/devs/ui/Botao/Botao";
+
+<Botao>Primary Button</Botao>`} />
             </div>
           </div>
 
@@ -239,7 +241,8 @@ export default function BotoesPage() {
 
             <div>
               <CodeBlock
-                code={`import { MdCheck } from "react-icons/md";
+                code={`import Botao from "@/modules/devs/ui/Botao/Botao";
+import { MdCheck } from "react-icons/md";
                 
 const [isLoadingPrimary, setIsLoadingPrimary] = useState(false);
 

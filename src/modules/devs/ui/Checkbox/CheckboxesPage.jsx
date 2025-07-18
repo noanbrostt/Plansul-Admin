@@ -168,7 +168,10 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+                className="!mt-0"
+                code={`import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
+
+const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
               
 const handleCheckboxChange = (event) => {
   setIsAnonymousOffer(event.target.checked);
@@ -202,7 +205,9 @@ const handleCheckboxChange = (event) => {
 
             <div>
               <CodeBlock
-                code={`const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
+                code={`import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
+
+const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
 
 const handleCheckboxChange = (event) => {
     setIsAnonymousOffer(event.target.checked);

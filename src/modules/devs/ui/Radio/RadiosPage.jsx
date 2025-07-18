@@ -245,7 +245,9 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`const [selectedTermo, setSelectedTermo] = useState("s");
+                code={`import RadioGroup from "@/modules/devs/ui/Radio/Radio";
+
+const [selectedTermo, setSelectedTermo] = useState("s");
 
 const handleTermoChange = (newValue) => {
     setSelectedTermo(newValue);
@@ -282,7 +284,9 @@ const handleTermoChange = (newValue) => {
 
             <div>
               <CodeBlock
-                code={`const [selectedNivel, setSelectedNivel] = useState('');
+                code={`import RadioGroup from "@/modules/devs/ui/Radio/Radio";
+                  
+const [selectedNivel, setSelectedNivel] = useState('');
 
 const handleNivelChange = (newValue) => {
     setSelectedNivel(newValue);

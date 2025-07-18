@@ -123,7 +123,9 @@ export default function TextareasPage() {
             />
             <div>
               <CodeBlock
-                code={`const [note, setNote] = useState('Texto inicial...')
+                code={`import Textarea from "@/modules/devs/ui/Textarea/Textarea";
+
+const [note, setNote] = useState('Texto inicial...')
 
 <Textarea
   placeholder="Digite sua nota"
@@ -158,7 +160,9 @@ export default function TextareasPage() {
             />
             <div>
               <CodeBlock
-                code={`const [comment, setComment] = useState('Msg curta')
+                code={`import Textarea from "@/modules/devs/ui/Textarea/Textarea";
+
+const [comment, setComment] = useState('Msg curta')
 
 <Textarea
   placeholder="Sua mensagem"

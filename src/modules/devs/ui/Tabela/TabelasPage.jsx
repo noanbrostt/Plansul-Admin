@@ -505,7 +505,9 @@ export default function TabelasPage() {
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div>
           <CodeBlock
-            code={`const users = [...] // Ta lá no console
+            code={`import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+
+const users = [...] // Ta lá no console
 const userColumns = [...] // Ta lá no console
 
 <Tabela
@@ -552,7 +554,9 @@ const userColumns = [...] // Ta lá no console
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div>
           <CodeBlock
-            code={`const users = [...] // Ta lá no console
+            code={`import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+
+const users = [...] // Ta lá no console
 const userColumns = [...] // Ta lá no console
 
 <Tabela
@@ -674,7 +678,9 @@ const userColumns = [...] // Ta lá no console
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div>
           <CodeBlock
-            code={`<Tabela
+            code={`import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+
+<Tabela
   data={[...]}
   columns={[...
     {

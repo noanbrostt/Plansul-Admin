@@ -308,7 +308,9 @@ export default function EtiquetasPage() {
 
             <div>
               <CodeBlock
-                code={`<Etiqueta variant="primary">
+                code={`import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
+                  
+<Etiqueta variant="primary">
   Primary
 </Etiqueta>`}
               />
@@ -327,7 +329,8 @@ export default function EtiquetasPage() {
 
             <div>
               <CodeBlock
-                code={`import { FiPlus } from "react-icons/fi";
+                code={`import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
+import { FiPlus } from "react-icons/fi";
 
 <Etiqueta
   outline
