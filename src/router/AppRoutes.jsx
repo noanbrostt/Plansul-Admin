@@ -13,6 +13,7 @@ import UsuariosPage from "@/modules/admin/usuarios/UsuariosPage";
 
 // Telas
 import ExemploPage from "@/modules/devs/telas/ExemploPage";
+import CalendarioPage from "@/modules/devs/telas/CalendarioPage/CalendarioPage";
 
 // Páginas de UI
 import InputsPage from "@/modules/devs/ui/Input/InputsPage";
@@ -70,6 +71,11 @@ const ROUTE_CONFIG = {
     {
       path: "/devs/telas/exemplo",
       element: <ExemploPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/devs/telas/calendario",
+      element: <CalendarioPage />,
       permission: "DEV_Teste_User"
     },
     {

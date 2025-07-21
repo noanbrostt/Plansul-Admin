@@ -23,6 +23,7 @@ import {
   FaChartPie,
   FaChartBar,
   FaChartLine,
+  FaRegCalendar,
 } from "react-icons/fa";
 import { FaUserGear } from "react-icons/fa6";
 import { TbCheckbox, TbCreditCard } from "react-icons/tb";
@@ -75,6 +76,11 @@ const menuConfig = {
             label: "Tela de Exemplo",
             to: "/devs/telas/exemplo",
             icon: <MdScreenshotMonitor />
+          },
+          {
+            label: "Calendário",
+            to: "/devs/telas/calendario",
+            icon: <FaRegCalendar />
           },
           {
             label: "Not Found",
