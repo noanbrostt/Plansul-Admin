@@ -100,6 +100,11 @@
   --noise: 1;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Desloca o scrollbar do SimpleBar para a direita */
 .simplebar-scrollbar::before {
   background-color: var(--color-primary);

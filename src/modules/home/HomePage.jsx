@@ -122,7 +122,6 @@ export default function HomePage() {
       className={`space-y-6
         ${isDragging ? "!cursor-grabbing" : ""}
       `}
-      style={{ minHeight: "calc(100vh - 112px)" }}
     >
       {/* cabeçalho */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
@@ -170,7 +169,7 @@ export default function HomePage() {
                     <h2 className="card-title flex items-center gap-2">
                       <FiStar className="text-yellow-500" /> Seus Favoritos
                       <small className="text-xs text-base-content/70 mt-1">
-                        Arraste para reordenar
+                        (Arraste para reordenar)
                       </small>
                     </h2>
                     <span className="badge badge-primary">
@@ -222,7 +221,9 @@ export default function HomePage() {
 
       {/* footer */}
       <div className="text-center text-base-content/50 text-sm">
-        <p>©{new Date().getFullYear()} Plansul. Todos os direitos reservados.</p>
+        <p>
+          ©{new Date().getFullYear()} Plansul. Todos os direitos reservados.
+        </p>
       </div>
     </div>
   );

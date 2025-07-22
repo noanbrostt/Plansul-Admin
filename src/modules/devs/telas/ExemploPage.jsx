@@ -9,7 +9,7 @@ import {
 
 export default function ExemploPage() {
   return (
-    <div className="bg-base-100 min-h-screen space-y-6">
+    <div className="bg-base-100 space-y-6">
       {/* Breadcrumbs / Título da Página */}
       <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">

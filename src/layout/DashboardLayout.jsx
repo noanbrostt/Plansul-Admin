@@ -95,9 +95,9 @@ export default function DashboardLayout() {
           currentTheme={theme}
           user={user}
         />
-        <div className="flex-1 min-h-0">
-          <SimpleBar forceVisible="y" ref={simpleBarRef}>
-            <main className="p-6" style={{ minHeight: "calc(100vh - 64px)" }}>
+        <div className="flex-1">
+          <SimpleBar className="h-[calc(100vh-64px)] overflow-auto" forceVisible="y" ref={simpleBarRef}>
+            <main className="p-6">
               <ScrollToTop simpleBarRef={simpleBarRef} />
               <Outlet />
             </main>
