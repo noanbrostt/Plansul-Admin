@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { FiAlignLeft, FiMenu, FiSun, FiMoon } from "react-icons/fi";
+import { FaShare } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "@/store/userSlice";
 import { Link, useNavigate } from "react-router-dom";
@@ -196,6 +197,7 @@ export default function Topbar({
                     >
                       <span className="text-lg">{icon}</span>
                       <span>{label}</span>
+                      <FaShare className="absolute right-3" />
                     </a>
                   ) : (
                     <Link
