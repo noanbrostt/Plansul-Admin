@@ -1,6 +1,17 @@
 @import "tailwindcss";
 /* @plugin "daisyui"; */
 
+@layer utilities {
+  [data-theme="myDarkTheme"] .shadow,
+  [data-theme="myDarkTheme"] .shadow-sm,
+  [data-theme="myDarkTheme"] .shadow-md,
+  [data-theme="myDarkTheme"] .shadow-lg,
+  [data-theme="myDarkTheme"] .shadow-xl,
+  [data-theme="myDarkTheme"] .shadow-2xl {
+    --tw-shadow-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 @plugin "daisyui/theme" {
   name: "myLightTheme";
   default: false;
@@ -12,6 +23,7 @@
   --color-base-200: #f5f5f5; /* Fundo secundário (um cinza muito claro) */
   --color-base-300: #e0e0e0; /* Bordas/divisórias (um cinza claro) */
   --color-base-content: #333333; /* Texto principal (quase preto) */
+  --tw-shadow-color: #000;
 
   /* Cores de Branding */
   --color-primary: #294d7f; /* Azul principal */
@@ -55,6 +67,7 @@
   --color-base-200: #2e2e2e; /* Fundo secundário (um cinza escuro) */
   --color-base-300: #424242; /* Bordas/divisórias (um cinza mais escuro) */
   --color-base-content: #cccccc; /* Texto principal (cinza claro) */
+  --tw-shadow-color: #ffffff;
 
   /*Cores de Branding (ajustadas para tema escuro) */
   --color-primary: #376fbe; /* Azul principal */

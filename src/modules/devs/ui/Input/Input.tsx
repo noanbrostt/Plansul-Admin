@@ -24,6 +24,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   validMessage?: string;
   validReqs?: object;
   mask?: string;
+  labelClassName?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -40,6 +41,7 @@ const Input: React.FC<InputProps> = ({
   validMessage = "",
   validReqs,
   mask = "",
+  labelClassName = "",
   ...rest
 }) => {
   // Início da lógica para input password mostrar a senha
@@ -118,6 +120,7 @@ const Input: React.FC<InputProps> = ({
         className={`
         ${finalInputClasses}
         ${validMessage && "validator"}
+        ${labelClassName}
         `}
       >
         {/* .. tenha ícone na esquerda */}

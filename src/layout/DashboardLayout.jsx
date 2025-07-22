@@ -96,8 +96,8 @@ export default function DashboardLayout() {
           user={user}
         />
         <div className="flex-1 min-h-0">
-          <SimpleBar className="h-full" forceVisible="y" ref={simpleBarRef}>
-            <main className="p-6">
+          <SimpleBar forceVisible="y" ref={simpleBarRef}>
+            <main className="p-6" style={{ minHeight: "calc(100vh - 64px)" }}>
               <ScrollToTop simpleBarRef={simpleBarRef} />
               <Outlet />
             </main>
