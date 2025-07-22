@@ -10,7 +10,6 @@ import HomePage from "@/modules/home/HomePage";
 // Admin
 import UsuariosPage from "@/modules/admin/usuarios/UsuariosPage";
 
-
 // Telas
 import ExemploPage from "@/modules/devs/telas/ExemploPage";
 import CalendarioPage from "@/modules/devs/telas/CalendarioPage/CalendarioPage";

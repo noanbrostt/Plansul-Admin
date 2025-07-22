@@ -4,29 +4,29 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 
 // Ícones
-import { FiHome, FiUsers } from "react-icons/fi";
-import { RiInputField } from "react-icons/ri";
+import { FiHome } from "react-icons/fi";
+import { RiInputField, RiUserForbidLine } from "react-icons/ri";
 import { CgPlayButtonR, CgFileDocument } from "react-icons/cg";
 import {
   MdScreenshotMonitor,
   MdRadioButtonChecked,
   MdScreenSearchDesktop,
+  MdOutlineDesignServices,
+  MdOutlineFitScreen,
 } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
 import { LuChartNoAxesCombined } from "react-icons/lu";
 import { RxBadge } from "react-icons/rx";
-import { SiAdblock } from "react-icons/si";
 import {
   FaTable,
   FaChartArea,
-  FaIcons,
   FaChartPie,
   FaChartBar,
   FaChartLine,
   FaRegCalendar,
 } from "react-icons/fa";
 import { FaUserGear } from "react-icons/fa6";
-import { TbCheckbox, TbCreditCard } from "react-icons/tb";
+import { TbCheckbox, TbCreditCard, TbIcons } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
 import { AiOutlineRadarChart } from "react-icons/ai";
@@ -48,11 +48,6 @@ const menuConfig = {
         to: "/",
         icon: <FiHome />
       },
-      // {
-      //   label: "Usuários",
-      //   to: "/users",
-      //   icon: <FiUsers />
-      // }
     ]
   },
   adminSection: {
@@ -69,13 +64,37 @@ const menuConfig = {
     title: "Devs",
     items: [
       {
+        label: "Documentação",
+        icon: <CgFileDocument />,
+        subItems: [
+          {
+            label: "Ícones",
+            to: "https://react-icons.github.io/react-icons/search/#q=",
+            icon: <TbIcons />,
+            targetBlank: true
+          },
+          {
+            label: "DaisyUI",
+            to: "https://daisyui.com/components/",
+            icon: <MdOutlineDesignServices />,
+            targetBlank: true
+          },
+          {
+            label: "Recharts",
+            to: "https://recharts.org/en-US/examples/",
+            icon: <FaChartBar />,
+            targetBlank: true
+          },
+        ]
+      },
+      {
         label: "Telas",
         icon: <MdScreenshotMonitor />,
         subItems: [
           {
             label: "Tela de Exemplo",
             to: "/devs/telas/exemplo",
-            icon: <MdScreenshotMonitor />
+            icon: <MdOutlineFitScreen />
           },
           {
             label: "Calendário",
@@ -90,26 +109,8 @@ const menuConfig = {
           {
             label: "Forbidden",
             to: "/negado",
-            icon: <SiAdblock />
+            icon: <RiUserForbidLine />
           },
-          {
-            label: "Ícones",
-            to: "https://react-icons.github.io/react-icons/search/#q=",
-            icon: <FaIcons />,
-            targetBlank: true
-          },
-          {
-            label: "Doc. Gráficos",
-            to: "https://recharts.org/en-US/examples/",
-            icon: <CgFileDocument />,
-            targetBlank: true
-          },
-          {
-            label: "Doc. DaisyUI",
-            to: "https://daisyui.com/components/",
-            icon: <CgFileDocument />,
-            targetBlank: true
-          }
         ]
       },
       {
