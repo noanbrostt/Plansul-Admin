@@ -8,7 +8,7 @@ import ForbiddenPage from "@/layout/ForbiddenPage";
 import HomePage from "@/modules/home/HomePage";
 
 // Admin
-import UsuariosPage from "@/modules/admin/usuarios/UsuariosPage";
+import GestaoAcessosPage from "@/modules/admin/usuarios/GestaoAcessosPage";
 
 // Telas
 import ExemploPage from "@/modules/devs/telas/ExemploPage";
@@ -60,8 +60,8 @@ const ROUTE_CONFIG = {
   // Rotas protegidas (requerem permissão específica)
   ADMIN_ROUTES: [
     {
-      path: "/admin/usuarios",
-      element: <UsuariosPage />,
+      path: "/admin/acessos",
+      element: <GestaoAcessosPage />,
       permission: "DEV_Teste_User"
     },
   ],

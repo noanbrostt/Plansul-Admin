@@ -41,8 +41,8 @@ export const menuConfig = {
     title: "Admin",
     items: [
       {
-        label: "Gestão de Usuários",
-        to: "/admin/usuarios",
+        label: "Gestão de Acessos",
+        to: "/admin/acessos",
         icon: <FaUserGear />
       },
     ]

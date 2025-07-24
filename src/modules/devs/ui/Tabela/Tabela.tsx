@@ -25,8 +25,8 @@ import {
   FiDownload, // Novo ícone para exportação
 } from "react-icons/fi";
 import { rankItem } from "@tanstack/match-sorter-utils";
-import { Workbook } from 'exceljs';
-import { saveAs } from 'file-saver';
+import { Workbook } from "exceljs";
+import { saveAs } from "file-saver";
 
 interface TabelaProps<T> {
   data: T[];
@@ -65,7 +65,7 @@ export default function Tabela<T>({
   storageKey,
   initialHiddenColumns = [],
   enableExport = true, // Default true
-  exportFileName = 'Tabela', // Nome padrão do arquivo
+  exportFileName = "Tabela", // Nome padrão do arquivo
 }: TabelaProps<T>) {
   const [sorting, setSorting] = useState<SortingState>(initialSorting);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -73,7 +73,7 @@ export default function Tabela<T>({
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(
     columns.map((col) => (col as any).accessorKey || col.id!)
   );
-  
+
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
     () => {
       if (storageKey && typeof window !== "undefined") {
@@ -135,77 +135,78 @@ export default function Tabela<T>({
   // Função para exportar para Excel
   const exportToExcel = async () => {
     if (!exportButtonRef.current) return;
-    
+
     try {
       // Ativar estado de carregamento
-      exportButtonRef.current.classList.add('loading');
-      
+      exportButtonRef.current.classList.add("loading");
+
       const workbook = new Workbook();
-      const worksheet = workbook.addWorksheet('Dados');
-      
+      const worksheet = workbook.addWorksheet("Dados");
+
       // Obter colunas visíveis
       // const visibleColumns = table.getAllLeafColumns()
       //   .filter(column => column.getIsVisible());
       const allColumns = table.getAllLeafColumns();
-      
+
       // Preparar cabeçalhos
-      const headers = allColumns.map(column => 
-        typeof column.columnDef.header === 'string' 
-          ? column.columnDef.header 
+      const headers = allColumns.map((column) =>
+        typeof column.columnDef.header === "string"
+          ? column.columnDef.header
           : column.id
       );
-      
+
       // Adicionar cabeçalhos à planilha
       worksheet.addRow(headers);
-      
+
       // Preparar dados
-      const data = table.getFilteredRowModel().rows.map(row => {
+      const data = table.getFilteredRowModel().rows.map((row) => {
         const rowData: any = {};
-        allColumns.forEach(column => {
+        allColumns.forEach((column) => {
           rowData[column.id] = row.getValue(column.id);
         });
         return rowData;
       });
-      
+
       // Adicionar dados à planilha
-      data.forEach(row => {
-        const rowData = allColumns.map(col => row[col.id]);
+      data.forEach((row) => {
+        const rowData = allColumns.map((col) => row[col.id]);
         worksheet.addRow(rowData);
       });
-      
+
       // Formatar cabeçalhos
       worksheet.getRow(1).eachCell((cell) => {
         cell.font = { bold: true };
         cell.fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'FFD9D9D9' }
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FFD9D9D9" },
         };
       });
-      
+
       // Auto ajustar colunas
-      worksheet.columns.forEach(column => {
+      worksheet.columns.forEach((column) => {
         if (!column.values) return;
         const maxLength = Math.max(
-          ...column.values.filter(v => v != null).map(v => v.toString().length),
+          ...column.values
+            .filter((v) => v != null)
+            .map((v) => v.toString().length),
           column.header ? column.header.toString().length : 0
         );
         column.width = Math.min(Math.max(maxLength + 2, 10), 50);
       });
-      
+
       // Gerar buffer e salvar
       const buffer = await workbook.xlsx.writeBuffer();
-      const blob = new Blob([buffer], { 
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
+      const blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });
       saveAs(blob, `${exportFileName}.xlsx`);
-      
     } catch (error) {
-      console.error('Erro ao exportar para Excel:', error);
+      console.error("Erro ao exportar para Excel:", error);
     } finally {
       // Desativar estado de carregamento
       if (exportButtonRef.current) {
-        exportButtonRef.current.classList.remove('loading');
+        exportButtonRef.current.classList.remove("loading");
       }
     }
   };
@@ -213,11 +214,53 @@ export default function Tabela<T>({
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {/* Filtros e Controles */}
-      <div className="flex flex-wrap gap-4 items-center">
+      <div className="flex flex-wrap gap-4 items-center justify-between">
+        <span className="space-x-4">
+          {enableColumnVisibility && (
+            <div className="dropdown">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-outline"
+              >
+                <FiEye className="mr-1" /> Colunas
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                {table.getAllLeafColumns().map((column) => (
+                  <li key={column.id}>
+                    <label className="label cursor-pointer">
+                      <span>{String(column.columnDef.header)}</span>
+                      <input
+                        type="checkbox"
+                        checked={column.getIsVisible()}
+                        onChange={column.getToggleVisibilityHandler()}
+                        className="checkbox checkbox-primary"
+                      />
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Botão de Exportação */}
+          {enableExport && (
+            <button
+              ref={exportButtonRef}
+              className="btn btn-ghost btn-outline"
+              onClick={exportToExcel}
+            >
+              <FiDownload className="mr-1" /> Exportar Excel
+            </button>
+          )}
+        </span>
         {enableGlobalFilter && (
           <div className="join">
             <input
-              type="text"
+              type="search"
               placeholder="Busca global..."
               value={globalFilter}
               onChange={(e) => setGlobalFilter(e.target.value)}
@@ -227,47 +270,6 @@ export default function Tabela<T>({
               <FiSearch />
             </button>
           </div>
-        )}
-
-        {enableColumnVisibility && (
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-outline"
-            >
-              <FiEye className="mr-1" /> Colunas
-            </div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              {table.getAllLeafColumns().map((column) => (
-                <li key={column.id}>
-                  <label className="label cursor-pointer">
-                    <span>{String(column.columnDef.header)}</span>
-                    <input
-                      type="checkbox"
-                      checked={column.getIsVisible()}
-                      onChange={column.getToggleVisibilityHandler()}
-                      className="checkbox checkbox-primary"
-                    />
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Botão de Exportação */}
-        {enableExport && (
-          <button 
-            ref={exportButtonRef}
-            className="btn btn-ghost btn-outline"
-            onClick={exportToExcel}
-          >
-            <FiDownload className="mr-1" /> Exportar Excel
-          </button>
         )}
       </div>
 
