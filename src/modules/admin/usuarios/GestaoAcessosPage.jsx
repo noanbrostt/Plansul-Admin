@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Tabela from "@/modules/devs/ui/Tabela/Tabela";
 import {
   FiUser,
@@ -6,6 +7,8 @@ import {
   FiCalendar,
   FiLock,
   FiX,
+  FiEdit,
+  FiSave,
 } from "react-icons/fi";
 import FavoriteButton from "@/components/FavoriteButton";
 
@@ -19,7 +22,9 @@ const perfis = [
 ];
 
 export default function GestaoAcessosPage() {
-  const users = [
+  // Estado para controle de edição
+  const [editingId, setEditingId] = useState(null);
+  const [users, setUsers] = useState([
     {
       id: 1,
       name: "Ana Silva",
@@ -68,15 +73,36 @@ export default function GestaoAcessosPage() {
       perfilNome: "Desenvolvedor",
       statusTexto: "Ativo",
     },
-  ];
+  ]);
 
-  // Obter nome do perfil pelo ID
-  const getPerfilNome = (co_perfil) => {
-    const perfil = perfis.find((p) => p.co_perfil === co_perfil);
-    return perfil ? perfil.nome : "Desconhecido";
+  // Função para iniciar edição
+  const startEditing = (id) => {
+    setEditingId(id);
   };
 
-  // Colunas para a tabela (com campos virtuais para busca)
+  // Função para salvar alterações
+  const saveProfile = (id, newProfileId) => {
+    const updatedUsers = users.map((user) => {
+      if (user.id === id) {
+        const newProfile = perfis.find((p) => p.co_perfil === newProfileId);
+        return {
+          ...user,
+          co_perfil: newProfileId,
+          perfilNome: newProfile.nome,
+        };
+      }
+      return user;
+    });
+    setUsers(updatedUsers);
+    setEditingId(null);
+  };
+
+  // Função para cancelar edição
+  const cancelEditing = () => {
+    setEditingId(null);
+  };
+
+  // Colunas para a tabela
   const userColumns = [
     {
       accessorKey: "co_matricula",
@@ -92,20 +118,38 @@ export default function GestaoAcessosPage() {
       accessorKey: "perfilNome",
       header: "Perfil",
       cell: ({ row }) => {
-        const perfilNome = getPerfilNome(row.original.co_perfil);
+        const user = row.original;
+
+        if (editingId === user.id) {
+          return (
+            <select
+              className="select select-bordered select-sm w-full max-w-xs"
+              defaultValue={user.co_perfil}
+              onChange={(e) => saveProfile(user.id, parseInt(e.target.value))}
+              autoFocus
+            >
+              {perfis.map((perfil) => (
+                <option key={perfil.co_perfil} value={perfil.co_perfil}>
+                  {perfil.nome}
+                </option>
+              ))}
+            </select>
+          );
+        }
+
         return (
           <span
             className={`badge badge-${
-              perfilNome === "Administrador"
+              user.perfilNome === "Administrador"
                 ? "primary"
-                : perfilNome === "Gestor"
+                : user.perfilNome === "Gestor"
                 ? "secondary"
-                : perfilNome === "Desenvolvedor"
+                : user.perfilNome === "Desenvolvedor"
                 ? "accent"
                 : "outline"
             }`}
           >
-            {perfilNome}
+            {user.perfilNome}
           </span>
         );
       },
@@ -122,6 +166,36 @@ export default function GestaoAcessosPage() {
           {row.original.statusTexto}
         </span>
       ),
+      size: 60,
+    },
+    {
+      header: "Ações",
+      cell: ({ row }) => {
+        const user = row.original;
+
+        if (editingId === user.id) {
+          return (
+            <div className="flex space-x-2">
+              <button
+                className="btn btn-ghost btn-sm text-error p-2"
+                onClick={() => cancelEditing()}
+              >
+                <FiX className="text-xl" />
+              </button>
+            </div>
+          );
+        }
+
+        return (
+          <button
+            className="btn btn-ghost btn-sm text-primary p-2"
+            onClick={() => startEditing(user.id)}
+          >
+            <FiEdit className="text-xl" />
+          </button>
+        );
+      },
+      size: 40,
     },
   ];
 
@@ -153,7 +227,7 @@ export default function GestaoAcessosPage() {
             <div className="stat-title">Total de Usuários</div>
             <div className="stat-value">{users.length}</div>
             <div className="stat-desc">
-              {users.filter((u) => u.ic_situacao_ativo).length} ativos
+              {users.filter((u) => u.statusTexto === "Ativo").length} ativos
             </div>
           </div>
         </div>
@@ -162,25 +236,6 @@ export default function GestaoAcessosPage() {
           <div className="stat">
             <div className="stat-figure text-secondary">
               <FiActivity className="text-2xl" />
-            </div>
-            <div className="stat-title">Acessos Recentes</div>
-            <div className="stat-value">
-              {
-                users.filter(
-                  (u) =>
-                    new Date(u.ultimo_acesso) >
-                    new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-                ).length
-              }
-            </div>
-            <div className="stat-desc">últimos 7 dias</div>
-          </div>
-        </div>
-
-        <div className="stats shadow bg-base-200">
-          <div className="stat">
-            <div className="stat-figure text-accent">
-              <FiShield className="text-2xl" />
             </div>
             <div className="stat-title">Administradores</div>
             <div className="stat-value">
@@ -192,12 +247,25 @@ export default function GestaoAcessosPage() {
 
         <div className="stats shadow bg-base-200">
           <div className="stat">
+            <div className="stat-figure text-accent">
+              <FiShield className="text-2xl" />
+            </div>
+            <div className="stat-title">Desenvolvedores</div>
+            <div className="stat-value">
+              {users.filter((u) => u.co_perfil === 3).length}
+            </div>
+            <div className="stat-desc">Ativos</div>
+          </div>
+        </div>
+
+        <div className="stats shadow bg-base-200">
+          <div className="stat">
             <div className="stat-figure text-info">
               <FiLock className="text-2xl" />
             </div>
             <div className="stat-title">Contas Inativas</div>
             <div className="stat-value">
-              {users.filter((u) => !u.ic_situacao_ativo).length}
+              {users.filter((u) => u.statusTexto === "Inativo").length}
             </div>
             <div className="stat-desc">Sem acesso</div>
           </div>

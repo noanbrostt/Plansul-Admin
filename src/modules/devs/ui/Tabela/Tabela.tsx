@@ -103,6 +103,7 @@ export default function Tabela<T>({
   const table = useReactTable({
     data,
     columns,
+    enableColumnResizing: false,
     state: {
       sorting,
       columnFilters,
@@ -275,12 +276,16 @@ export default function Tabela<T>({
 
       {/* Tabela */}
       <div className="overflow-x-auto">
-        <table className={`table ${zebra ? "table-zebra" : ""}`}>
+        <table className={`table table-fixed ${zebra ? "table-zebra" : ""}`}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <th key={header.id} className="relative">
+                  <th
+                    key={header.id}
+                    style={{ width: header.getSize() }}
+                    className="relative"
+                  >
                     <div
                       className={
                         header.column.getCanSort()
@@ -323,7 +328,7 @@ export default function Tabela<T>({
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
+                  <td key={cell.id} style={{ width: cell.column.getSize() }}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
