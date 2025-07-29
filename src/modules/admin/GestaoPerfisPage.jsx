@@ -7,7 +7,7 @@ import {
   Suspense,
   useTransition,
 } from "react";
-import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+import Tabela from "@/components/Tabela";
 import {
   FiUser,
   FiShield,

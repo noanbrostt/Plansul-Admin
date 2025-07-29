@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { login, reset } from "@/services/authService";
 import { showErrorAlert } from "@/components/alerts";
-import Input from "@/modules/devs/ui/Input/Input";
+import Input from "@/components/Input";
 import Botao from "@/components/Botao";
 import { FiLock } from "react-icons/fi";
 import logoLonga from "../assets/layout/Topbar/logo_longa.png";
