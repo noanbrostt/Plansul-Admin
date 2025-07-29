@@ -16,15 +16,15 @@ import ExemploPage from "@/modules/devs/telas/ExemploPage";
 import CalendarioPage from "@/modules/devs/telas/CalendarioPage/CalendarioPage";
 
 // Páginas de UI
-import InputsPage from "@/modules/devs/ui/Input/InputsPage";
+import InputsPage from "@/modules/devs/ui/InputsPage";
 import BlocosPage from "@/modules/devs/ui/BlocosPage";
 import BotoesPage from "@/modules/devs/ui/BotoesPage";
 import SelectsPage from "@/modules/devs/ui/SelectsPage";
 import CheckboxesPage from "@/modules/devs/ui/CheckboxesPage";
-import EtiquetasPage from "@/modules/devs/ui/Etiqueta/EtiquetasPage";
-import RadiosPage from "@/modules/devs/ui/Radio/RadiosPage";
-import TabelasPage from "@/modules/devs/ui/Tabela/TabelasPage";
-import TextareasPage from "@/modules/devs/ui/Textarea/TextareasPage";
+import EtiquetasPage from "@/modules/devs/ui/EtiquetasPage";
+import RadiosPage from "@/modules/devs/ui/RadiosPage";
+import TabelasPage from "@/modules/devs/ui/TabelasPage";
+import TextareasPage from "@/modules/devs/ui/TextareasPage";
 
 // Páginas de gráficos
 import AreasPage from "@/modules/devs/graficos/AreasPage";

@@ -1,4 +1,4 @@
-import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+import Tabela from "@/components/Tabela";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 import { showAlert } from "@/components/alerts";
@@ -505,7 +505,7 @@ export default function TabelasPage() {
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div>
           <CodeBlock
-            code={`import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+            code={`import Tabela from "@/components/Tabela";
 
 const users = [...] // Ta lá no console
 const userColumns = [...] // Ta lá no console
@@ -554,7 +554,7 @@ const userColumns = [...] // Ta lá no console
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div>
           <CodeBlock
-            code={`import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+            code={`import Tabela from "@/components/Tabela";
 
 const users = [...] // Ta lá no console
 const userColumns = [...] // Ta lá no console
@@ -678,7 +678,7 @@ const userColumns = [...] // Ta lá no console
         <p className="font-medium text-base-content/80 mt-4">Código:</p>
         <div>
           <CodeBlock
-            code={`import Tabela from "@/modules/devs/ui/Tabela/Tabela";
+            code={`import Tabela from "@/components/Tabela";
 
 <Tabela
   data={[...]}

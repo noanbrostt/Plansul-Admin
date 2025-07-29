@@ -1,4 +1,4 @@
-import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
+import Etiqueta from "@/components/Etiqueta";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -308,7 +308,7 @@ export default function EtiquetasPage() {
 
             <div>
               <CodeBlock
-                code={`import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
+                code={`import Etiqueta from "@/components/Etiqueta";
                   
 <Etiqueta variant="primary">
   Primary
@@ -329,7 +329,7 @@ export default function EtiquetasPage() {
 
             <div>
               <CodeBlock
-                code={`import Etiqueta from "@/modules/devs/ui/Etiqueta/Etiqueta";
+                code={`import Etiqueta from "@/components/Etiqueta";
 import { FiPlus } from "react-icons/fi";
 
 <Etiqueta

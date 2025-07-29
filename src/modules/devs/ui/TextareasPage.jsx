@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Textarea from "@/modules/devs/ui/Textarea/Textarea";
+import Textarea from "@/components/Textarea";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -123,7 +123,7 @@ export default function TextareasPage() {
             />
             <div>
               <CodeBlock
-                code={`import Textarea from "@/modules/devs/ui/Textarea/Textarea";
+                code={`import Textarea from "@/components/Textarea";
 
 const [note, setNote] = useState('Texto inicial...')
 
@@ -160,7 +160,7 @@ const [note, setNote] = useState('Texto inicial...')
             />
             <div>
               <CodeBlock
-                code={`import Textarea from "@/modules/devs/ui/Textarea/Textarea";
+                code={`import Textarea from "@/components/Textarea";
 
 const [comment, setComment] = useState('Msg curta')
 

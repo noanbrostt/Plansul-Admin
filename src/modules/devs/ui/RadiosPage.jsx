@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RadioGroup from "@/modules/devs/ui/Radio/Radio";
+import RadioGroup from "@/components/Radio";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -245,7 +245,7 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`import RadioGroup from "@/modules/devs/ui/Radio/Radio";
+                code={`import RadioGroup from "@/components/Radio";
 
 const [selectedTermo, setSelectedTermo] = useState("s");
 
@@ -284,7 +284,7 @@ const handleTermoChange = (newValue) => {
 
             <div>
               <CodeBlock
-                code={`import RadioGroup from "@/modules/devs/ui/Radio/Radio";
+                code={`import RadioGroup from "@/components/Radio";
                   
 const [selectedNivel, setSelectedNivel] = useState('');
 
