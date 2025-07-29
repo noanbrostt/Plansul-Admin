@@ -72,7 +72,7 @@ const CodeBlock = ({ code, language = "jsx", className = "" }) => {
     <div
       className={`rounded-md border border-base-300 justify-self-center mt-2 max-h-96 flex flex-col ${className}`}
     >
-      <div className="rounded-t-md bg-base-300 px-4 py-2 text-xs flex justify-between items-center sticky top-0 z-10">
+      <div className="rounded-t-md bg-base-300 px-4 py-2 text-xs flex justify-between items-center sticky top-0 z-1">
         <span className="text-base-content/70">{language.toUpperCase()}</span>
         <button
           className={`text-primary hover:text-primary-focus cursor-pointer flex items-center gap-1 ${

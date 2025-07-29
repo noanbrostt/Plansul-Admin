@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
+import Checkbox from "@/components/Checkbox";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -169,7 +169,7 @@ export default function InputsPage() {
             <div>
               <CodeBlock
                 className="!mt-0"
-                code={`import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
+                code={`import Checkbox from "@/components/Checkbox";
 
 const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
               
@@ -205,7 +205,7 @@ const handleCheckboxChange = (event) => {
 
             <div>
               <CodeBlock
-                code={`import Checkbox from "@/modules/devs/ui/Checkbox/Checkbox";
+                code={`import Checkbox from "@/components/Checkbox";
 
 const [isAnonymousOffer, setIsAnonymousOffer] = useState(true);
 

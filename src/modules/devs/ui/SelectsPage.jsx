@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Select from "@/modules/devs/ui/Select/Select";
+import Select from "@/components/Select";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -463,7 +463,7 @@ export default function InputsPage() {
 
             <div>
               <CodeBlock
-                code={`import Select from "@/modules/devs/ui/Select/Select";
+                code={`import Select from "@/components/Select";
 
 const [nivel, setNivel] = useState(null);\n\n<Select
   options={[
@@ -499,7 +499,7 @@ const [nivel, setNivel] = useState(null);\n\n<Select
 
             <div>
               <CodeBlock
-                code={`import Select from "@/modules/devs/ui/Select/Select";
+                code={`import Select from "@/components/Select";
 
 const [demonMulti, setDemonMulti] = useState([]);
 
@@ -550,7 +550,7 @@ const [demonMulti, setDemonMulti] = useState([]);
 
             <div>
               <CodeBlock
-                code={`import Select from "@/modules/devs/ui/Select/Select";
+                code={`import Select from "@/components/Select";
 
 const [selectedCor, setSelectedCor] = useState({
   value: "azul",
@@ -598,7 +598,7 @@ const [selectedCor, setSelectedCor] = useState({
 
             <div>
               <CodeBlock
-                code={`import Select from "@/modules/devs/ui/Select/Select";
+                code={`import Select from "@/components/Select";
 
 const [selectedLinguagens, setSelectedLinguagens] = useState([
   { value: "js", label: "JavaScript" },

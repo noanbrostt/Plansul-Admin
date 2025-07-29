@@ -118,7 +118,7 @@ const Select = forwardRef<any, SelectProps>(
           classNames={{
             control: () =>
               `select select-${variant} bg-none h-fit px-2 py-[7.2px] w-full select-${size}`,
-            menu: () => "menu bg-base-100 rounded-box shadow-xl p-0",
+            menu: () => "menu bg-base-100 rounded-box shadow-xl p-0 !z-[1000]",
             option: ({ isFocused }) =>
               `p-3 ${isFocused ? `bg-${variant}/20` : ""}`,
             multiValue: () =>

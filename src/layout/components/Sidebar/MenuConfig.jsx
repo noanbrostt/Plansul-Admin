@@ -19,8 +19,9 @@ import {
   FaChartBar,
   FaChartLine,
   FaRegCalendar,
+  FaUsersCog,
 } from "react-icons/fa";
-import { FaUserGear } from "react-icons/fa6";
+import { FaUserTag } from "react-icons/fa6";
 import { TbCheckbox, TbCreditCard, TbIcons } from "react-icons/tb";
 import { GoMultiSelect } from "react-icons/go";
 import { BsTextareaResize } from "react-icons/bs";
@@ -43,7 +44,12 @@ export const menuConfig = {
       {
         label: "Gestão de Acessos",
         to: "/admin/acessos",
-        icon: <FaUserGear />
+        icon: <FaUserTag />
+      },
+      {
+        label: "Gestão de Perfis",
+        to: "/admin/perfis",
+        icon: <FaUsersCog />
       },
     ]
   },

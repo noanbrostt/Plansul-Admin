@@ -8,7 +8,8 @@ import ForbiddenPage from "@/layout/ForbiddenPage";
 import HomePage from "@/modules/home/HomePage";
 
 // Admin
-import GestaoAcessosPage from "@/modules/admin/usuarios/GestaoAcessosPage";
+import GestaoAcessosPage from "@/modules/admin/GestaoAcessosPage";
+import GestaoPerfisPage from "@/modules/admin/GestaoPerfisPage";
 
 // Telas
 import ExemploPage from "@/modules/devs/telas/ExemploPage";
@@ -17,9 +18,9 @@ import CalendarioPage from "@/modules/devs/telas/CalendarioPage/CalendarioPage";
 // Páginas de UI
 import InputsPage from "@/modules/devs/ui/Input/InputsPage";
 import BlocosPage from "@/modules/devs/ui/BlocosPage";
-import BotoesPage from "@/modules/devs/ui/Botao/BotoesPage";
-import SelectsPage from "@/modules/devs/ui/Select/SelectsPage";
-import CheckboxesPage from "@/modules/devs/ui/Checkbox/CheckboxesPage";
+import BotoesPage from "@/modules/devs/ui/BotoesPage";
+import SelectsPage from "@/modules/devs/ui/SelectsPage";
+import CheckboxesPage from "@/modules/devs/ui/CheckboxesPage";
 import EtiquetasPage from "@/modules/devs/ui/Etiqueta/EtiquetasPage";
 import RadiosPage from "@/modules/devs/ui/Radio/RadiosPage";
 import TabelasPage from "@/modules/devs/ui/Tabela/TabelasPage";
@@ -62,6 +63,11 @@ const ROUTE_CONFIG = {
     {
       path: "/admin/acessos",
       element: <GestaoAcessosPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/admin/perfis",
+      element: <GestaoPerfisPage />,
       permission: "DEV_Teste_User"
     },
   ],

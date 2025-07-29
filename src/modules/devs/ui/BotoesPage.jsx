@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Botao from "@/modules/devs/ui/Botao/Botao";
+import Botao from "@/components/Botao";
 import FavoriteButton from "@/components/FavoriteButton";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -222,7 +222,7 @@ export default function BotoesPage() {
             <Botao>Primary Button</Botao>
 
             <div>
-              <CodeBlock code={`import Botao from "@/modules/devs/ui/Botao/Botao";
+              <CodeBlock code={`import Botao from "@/components/Botao";
 
 <Botao>Primary Button</Botao>`} />
             </div>
@@ -241,7 +241,7 @@ export default function BotoesPage() {
 
             <div>
               <CodeBlock
-                code={`import Botao from "@/modules/devs/ui/Botao/Botao";
+                code={`import Botao from "@/components/Botao";
 import { MdCheck } from "react-icons/md";
                 
 const [isLoadingPrimary, setIsLoadingPrimary] = useState(false);

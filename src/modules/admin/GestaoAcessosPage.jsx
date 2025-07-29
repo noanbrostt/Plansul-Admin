@@ -4,13 +4,12 @@ import {
   FiUser,
   FiShield,
   FiActivity,
-  FiCalendar,
   FiLock,
   FiX,
   FiEdit,
-  FiSave,
 } from "react-icons/fi";
 import FavoriteButton from "@/components/FavoriteButton";
+import Select from "@/components/Select";
 
 // Perfis disponíveis
 const perfis = [
@@ -20,6 +19,73 @@ const perfis = [
   { co_perfil: 4, nome: "Analista" },
   { co_perfil: 5, nome: "Usuário" },
 ];
+const optionsPerfis = perfis.map((perfil) => ({
+  value: perfil.co_perfil,
+  label: perfil.nome,
+}));
+
+const PerfilCell = ({
+  user,
+  editingId,
+  optionsPerfis,
+  saveProfile,
+  cancelEditing,
+  startEditing,
+}) => {
+  if (editingId === user.id) {
+    return (
+      <div className="flex items-center gap-2">
+        <Select
+          variant="primary"
+          className="w-full max-w-xs"
+          options={optionsPerfis}
+          value={optionsPerfis.find((opt) => opt.value === user.co_perfil)}
+          autoFocus
+          onChange={(selectedOption) => {
+            if (selectedOption) {
+              saveProfile(user.id, selectedOption.value);
+            }
+          }}
+        />
+
+        <div className="flex space-x-2">
+          <button
+            className="btn btn-ghost btn-sm text-error p-2"
+            onClick={cancelEditing}
+          >
+            <FiX className="text-xl" />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <span
+        className={`badge badge-${
+          user.perfilNome === "Administrador"
+            ? "primary"
+            : user.perfilNome === "Gestor"
+            ? "secondary"
+            : user.perfilNome === "Desenvolvedor"
+            ? "accent"
+            : "outline"
+        }`}
+      >
+        {user.perfilNome}
+      </span>
+
+      <button
+        className="btn btn-ghost btn-sm text-primary p-2 tooltip tooltip-right"
+        data-tip={"Editar Perfil"}
+        onClick={() => startEditing(user.id)}
+      >
+        <FiEdit className="text-xl" />
+      </button>
+    </div>
+  );
+};
 
 export default function GestaoAcessosPage() {
   // Estado para controle de edição
@@ -31,7 +97,7 @@ export default function GestaoAcessosPage() {
       co_matricula: "123456",
       co_perfil: 1,
       perfilNome: "Administrador",
-      statusTexto: "Ativo",
+      statusTexto: "Habilidato",
     },
     {
       id: 2,
@@ -39,7 +105,7 @@ export default function GestaoAcessosPage() {
       co_matricula: "123463",
       co_perfil: 2,
       perfilNome: "Gestor",
-      statusTexto: "Ativo",
+      statusTexto: "Habilidato",
     },
     {
       id: 3,
@@ -47,7 +113,7 @@ export default function GestaoAcessosPage() {
       co_matricula: "123477",
       co_perfil: 3,
       perfilNome: "Desenvolvedor",
-      statusTexto: "Ativo",
+      statusTexto: "Habilidato",
     },
     {
       id: 4,
@@ -55,7 +121,7 @@ export default function GestaoAcessosPage() {
       co_matricula: "123486",
       co_perfil: 4,
       perfilNome: "Analista",
-      statusTexto: "Inativo",
+      statusTexto: "Desabilitado",
     },
     {
       id: 5,
@@ -63,7 +129,7 @@ export default function GestaoAcessosPage() {
       co_matricula: "123491",
       co_perfil: 5,
       perfilNome: "Usuário",
-      statusTexto: "Ativo",
+      statusTexto: "Habilidato",
     },
     {
       id: 6,
@@ -71,7 +137,7 @@ export default function GestaoAcessosPage() {
       co_matricula: "123504",
       co_perfil: 3,
       perfilNome: "Desenvolvedor",
-      statusTexto: "Ativo",
+      statusTexto: "Habilidato",
     },
   ]);
 
@@ -117,85 +183,32 @@ export default function GestaoAcessosPage() {
     {
       accessorKey: "perfilNome",
       header: "Perfil",
-      cell: ({ row }) => {
-        const user = row.original;
-
-        if (editingId === user.id) {
-          return (
-            <select
-              className="select select-bordered select-sm w-full max-w-xs"
-              defaultValue={user.co_perfil}
-              onChange={(e) => saveProfile(user.id, parseInt(e.target.value))}
-              autoFocus
-            >
-              {perfis.map((perfil) => (
-                <option key={perfil.co_perfil} value={perfil.co_perfil}>
-                  {perfil.nome}
-                </option>
-              ))}
-            </select>
-          );
-        }
-
-        return (
-          <span
-            className={`badge badge-${
-              user.perfilNome === "Administrador"
-                ? "primary"
-                : user.perfilNome === "Gestor"
-                ? "secondary"
-                : user.perfilNome === "Desenvolvedor"
-                ? "accent"
-                : "outline"
-            }`}
-          >
-            {user.perfilNome}
-          </span>
-        );
-      },
+      cell: ({ row }) => (
+        <PerfilCell
+          user={row.original}
+          editingId={editingId}
+          optionsPerfis={optionsPerfis}
+          saveProfile={saveProfile}
+          cancelEditing={cancelEditing}
+          startEditing={startEditing}
+        />
+      ),
     },
     {
       accessorKey: "statusTexto",
-      header: "Status",
+      header: () => <div className="w-full text-center">Status</div>,
       cell: ({ row }) => (
-        <span
-          className={`badge badge-${
-            row.original.statusTexto == "Ativo" ? "success" : "error"
-          }`}
-        >
-          {row.original.statusTexto}
-        </span>
+        <div className="text-center">
+          <span
+            className={`badge badge-${
+              row.original.statusTexto == "Habilidato" ? "success" : "error"
+            }`}
+          >
+            {row.original.statusTexto}
+          </span>
+        </div>
       ),
       size: 60,
-    },
-    {
-      header: "Ações",
-      cell: ({ row }) => {
-        const user = row.original;
-
-        if (editingId === user.id) {
-          return (
-            <div className="flex space-x-2">
-              <button
-                className="btn btn-ghost btn-sm text-error p-2"
-                onClick={() => cancelEditing()}
-              >
-                <FiX className="text-xl" />
-              </button>
-            </div>
-          );
-        }
-
-        return (
-          <button
-            className="btn btn-ghost btn-sm text-primary p-2"
-            onClick={() => startEditing(user.id)}
-          >
-            <FiEdit className="text-xl" />
-          </button>
-        );
-      },
-      size: 40,
     },
   ];
 
@@ -227,7 +240,7 @@ export default function GestaoAcessosPage() {
             <div className="stat-title">Total de Usuários</div>
             <div className="stat-value">{users.length}</div>
             <div className="stat-desc">
-              {users.filter((u) => u.statusTexto === "Ativo").length} ativos
+              {users.filter((u) => u.statusTexto === "Habilidato").length} Habilidatos
             </div>
           </div>
         </div>
@@ -254,7 +267,7 @@ export default function GestaoAcessosPage() {
             <div className="stat-value">
               {users.filter((u) => u.co_perfil === 3).length}
             </div>
-            <div className="stat-desc">Ativos</div>
+            <div className="stat-desc">Habilidatos</div>
           </div>
         </div>
 
@@ -263,9 +276,9 @@ export default function GestaoAcessosPage() {
             <div className="stat-figure text-info">
               <FiLock className="text-2xl" />
             </div>
-            <div className="stat-title">Contas Inativas</div>
+            <div className="stat-title">Contas Desabilitadas</div>
             <div className="stat-value">
-              {users.filter((u) => u.statusTexto === "Inativo").length}
+              {users.filter((u) => u.statusTexto === "Desabilitado").length}
             </div>
             <div className="stat-desc">Sem acesso</div>
           </div>
@@ -277,7 +290,7 @@ export default function GestaoAcessosPage() {
         columns={userColumns}
         exportFileName="gestao_acessos"
         initialSorting={[
-          { id: "statusTexto", desc: false },
+          { id: "statusTexto", desc: true },
           { id: "name", desc: false },
         ]}
       />
