@@ -21,6 +21,7 @@ import {
   FiSquare,
   FiCheckSquare,
 } from "react-icons/fi";
+import { LuLock, LuLockOpen } from "react-icons/lu";
 import FavoriteButton from "@/components/FavoriteButton";
 import { menuConfig } from "@/layout/components/Sidebar/MenuConfig";
 
@@ -231,15 +232,15 @@ export default function GestaoPerfisPage() {
           const p = row.original;
           if (editingId === p.co_perfil) {
             return (
-              <div className="flex space-x-1">
+              <div className="flex items-center gap-1">
                 <input
-                  className="input input-sm"
+                  className="input input-sm text-md mr-1.5"
                   value={tempNome}
                   onChange={(e) => setTempNome(e.target.value)}
                   autoFocus
                 />
                 <button
-                  className="btn btn-xs"
+                  className="btn btn-ghost btn-sm text-success p-2"
                   onClick={() => {
                     setPerfis((ps) =>
                       ps.map((x) =>
@@ -251,28 +252,29 @@ export default function GestaoPerfisPage() {
                     setEditingId(null);
                   }}
                 >
-                  <FiCheck />
+                  <FiCheck className="text-xl" />
                 </button>
                 <button
-                  className="btn btn-xs"
+                  className="btn btn-ghost btn-sm text-error p-2"
                   onClick={() => setEditingId(null)}
                 >
-                  <FiX />
+                  <FiX className="text-xl" />
                 </button>
               </div>
             );
           }
           return (
-            <div className="flex space-x-1">
-              <span>{p.no_perfil}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-md">{p.no_perfil}</span>
               <button
-                className="btn btn-ghost btn-xs"
+                className="btn btn-ghost btn-sm text-primary p-2 tooltip tooltip-right"
+                data-tip={"Editar Perfil"}
                 onClick={() => {
                   setEditingId(p.co_perfil);
                   setTempNome(p.no_perfil);
                 }}
               >
-                <FiEdit />
+                <FiEdit className="text-xl" />
               </button>
             </div>
           );
@@ -282,41 +284,18 @@ export default function GestaoPerfisPage() {
         accessorKey: "ic_situacao_ativo",
         header: () => <div className="w-full text-center">Status</div>,
         cell: ({ row }) => (
-          <div className="text-center">
+          <div className="flex gap-2 items-center justify-center">
             <span
               className={`badge badge-${
                 row.original.ic_situacao_ativo ? "success" : "error"
               }`}
             >
-              {row.original.ic_situacao_ativo ? "Ativo" : "Inativo"}
+              {row.original.ic_situacao_ativo ? "Habilitado" : "Desabilitado"}
             </span>
-          </div>
-        ),
-        size: 100,
-      },
-      {
-        accessorKey: "acoes",
-        header: () => <div className="w-full text-center">Ações</div>,
-        cell: ({ row }) => (
-          <div className="flex space-x-1 justify-center">
+
             <button
-              className="btn btn-xs"
-              onClick={() => openModal(row.original)}
-            >
-              <FiKey />
-            </button>
-            <button
-              className="btn btn-xs btn-error"
-              onClick={() =>
-                setPerfis((ps) =>
-                  ps.filter((x) => x.co_perfil !== row.original.co_perfil)
-                )
-              }
-            >
-              <FiTrash2 />
-            </button>
-            <button
-              className="btn btn-xs"
+              className="btn btn-ghost btn-sm text-primary p-2 tooltip tooltip-right"
+              data-tip={row.original.ic_situacao_ativo ? "Desabilitar" : "Habilitar"}
               onClick={() =>
                 setPerfis((ps) =>
                   ps.map((x) =>
@@ -327,7 +306,32 @@ export default function GestaoPerfisPage() {
                 )
               }
             >
-              {row.original.ic_situacao_ativo ? <FiLock /> : <FiCheck />}
+              {row.original.ic_situacao_ativo ? <LuLock className="text-xl" /> : <LuLockOpen className="text-xl" />}
+            </button>
+          </div>
+        ),
+        size: 100,
+      },
+      {
+        accessorKey: "acoes",
+        header: () => <div className="w-full text-center">Ações</div>,
+        cell: ({ row }) => (
+          <div className="flex space-x-1 justify-center">
+            <button
+              className="btn btn-ghost btn-sm text-primary p-2"
+              onClick={() => openModal(row.original)}
+            >
+              <FiKey className="text-xl" />
+            </button>
+            <button
+              className="btn btn-ghost btn-sm text-error p-2"
+              onClick={() =>
+                setPerfis((ps) =>
+                  ps.filter((x) => x.co_perfil !== row.original.co_perfil)
+                )
+              }
+            >
+              <FiTrash2 className="text-xl" />
             </button>
           </div>
         ),
@@ -338,9 +342,9 @@ export default function GestaoPerfisPage() {
   );
 
   return (
-    <div className="p-4 space-y-6">
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-bold flex items-center">
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="flex text-3xl font-bold text-base-content">
           Gestão de Perfis{" "}
           <FavoriteButton tela={{ nome: "Perfis", url: "/admin/perfis" }} />
         </h1>
@@ -362,25 +366,34 @@ export default function GestaoPerfisPage() {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="stats bg-base-200">
+
+        <div className="stats shadow bg-base-200">
           <div className="stat">
-            <FiUser /> Total<stat-value>{perfis.length}</stat-value>
+            <div className="stat-figure text-primary">
+              <FiUser className="text-3xl" />
+            </div>
+            <div className="stat-title">Total de Perfis</div>
+            <div className="stat-value">{perfis.length}</div>
           </div>
         </div>
-        <div className="stats bg-base-200">
+
+        <div className="stats shadow bg-base-200">
           <div className="stat">
-            <FiShield /> Ativos
-            <stat-value>
-              {perfis.filter((p) => p.ic_situacao_ativo).length}
-            </stat-value>
+            <div className="stat-figure text-primary">
+              <FiShield className="text-3xl" />
+            </div>
+            <div className="stat-title">Habilitados</div>
+            <div className="stat-value">{perfis.filter((p) => p.ic_situacao_ativo).length}</div>
           </div>
         </div>
-        <div className="stats bg-base-200">
+
+        <div className="stats shadow bg-base-200">
           <div className="stat">
-            <FiLock /> Inativos
-            <stat-value>
-              {perfis.filter((p) => !p.ic_situacao_ativo).length}
-            </stat-value>
+            <div className="stat-figure text-primary">
+              <FiLock className="text-3xl" />
+            </div>
+            <div className="stat-title">Desabilitados</div>
+            <div className="stat-value">{perfis.filter((p) => !p.ic_situacao_ativo).length}</div>
           </div>
         </div>
       </div>
@@ -408,7 +421,7 @@ export default function GestaoPerfisPage() {
                     className="collapse collapse-arrow border border-base-300 bg-base-100"
                   >
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="collapse-group"
                       checked={isOpen}
                       onChange={() => setActiveCollapse(isOpen ? null : s.key)}
@@ -464,7 +477,7 @@ export default function GestaoPerfisPage() {
                 );
               })}
             </div>
-            <div className="flex justify-between items-center p-4 bg-base-200">
+            <div className="flex justify-between items-center p-4 bg-base-200 mt-6">
               <div>
                 <span>Selecionadas: {totalPerms}</span>
                 <span className="ml-4">

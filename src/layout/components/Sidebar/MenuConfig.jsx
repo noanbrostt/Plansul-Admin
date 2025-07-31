@@ -44,12 +44,12 @@ export const menuConfig = {
       {
         label: "Gestão de Acessos",
         to: "/admin/acessos",
-        icon: <FaUserTag />
+        icon: <FaUsersCog />
       },
       {
         label: "Gestão de Perfis",
         to: "/admin/perfis",
-        icon: <FaUsersCog />
+        icon: <FaUserTag />
       },
     ]
   },
