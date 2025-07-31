@@ -225,15 +225,15 @@ export default function Topbar({
       </div>
 
       <div className="flex-none gap-3 items-center flex px-2">
-        <label className="swap swap-rotate btn btn-circle h-12 w-12">
+        <label className="swap swap-rotate h-12 w-12 bg-base-content btn btn-circle grid">
           <input
             type="checkbox"
             className="theme-controller"
             onChange={onToggleTheme}
-            checked={currentTheme === "dark"}
+            checked={currentTheme === "myDarkTheme"}
           />
-          <FiSun className="swap-on fill-current text-2xl" />
-          <FiMoon className="swap-off fill-current text-2xl" />
+          <FiSun className="swap-on text-base-100 h-6 w-6" />
+          <FiMoon className="swap-off text-base-100 h-6 w-6" />
         </label>
 
         {/* Info Usuário */}
@@ -244,7 +244,7 @@ export default function Topbar({
             className="btn btn-ghost btn-circle avatar w-full"
           >
             <div className="w-12 h-12 rounded-full flex content-center bg-base-content text-base-100">
-              <span className="text-sm font-semibold">{initials}</span>
+              <span className="text-md font-semibold">{initials}</span>
             </div>
           </div>
           <ul
