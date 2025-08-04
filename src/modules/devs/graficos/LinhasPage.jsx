@@ -58,7 +58,7 @@ export default function LinhasPage() {
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>De Linha</li>
+            <li className="text-primary font-medium">De Linha</li>
           </ul>
         </div>
       </div>

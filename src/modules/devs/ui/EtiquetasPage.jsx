@@ -19,7 +19,7 @@ export default function EtiquetasPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Etiquetas</li>
+            <li className="text-primary font-medium">Etiquetas</li>
           </ul>
         </div>
       </div>

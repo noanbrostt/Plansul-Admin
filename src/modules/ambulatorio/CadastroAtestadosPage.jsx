@@ -134,7 +134,7 @@ const CadastroAtestadosPage = () => {
           <FavoriteButton
             tela={{
               nome: "Cadastro de Atestados",
-              url: "devs/telas/cadastro-atestados",
+              url: "ambulatorio/cadastro-atestados",
             }}
           />
         </h1>

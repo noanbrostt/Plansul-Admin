@@ -38,7 +38,7 @@ export default function InputsPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Radios</li>
+            <li className="text-primary font-medium">Radios</li>
           </ul>
         </div>
       </div>

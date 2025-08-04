@@ -57,7 +57,7 @@ export default function BarrasPage() {
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>De Barra</li>
+            <li className="text-primary font-medium">De Barra</li>
           </ul>
         </div>
       </div>

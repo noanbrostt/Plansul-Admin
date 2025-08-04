@@ -22,7 +22,7 @@ export default function ExemploPage() {
           <ul className="pointer-events-none">
             <li>Devs</li>
             <li>Telas</li>
-            <li>Tela de Exemplo</li>
+            <li className="text-primary font-medium">Tela de Exemplo</li>
           </ul>
         </div>
       </div>

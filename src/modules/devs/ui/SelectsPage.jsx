@@ -85,7 +85,7 @@ export default function InputsPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Selects</li>
+            <li className="text-primary font-medium">Selects</li>
           </ul>
         </div>
       </div>

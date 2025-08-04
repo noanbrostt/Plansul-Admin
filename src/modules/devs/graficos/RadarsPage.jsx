@@ -62,7 +62,7 @@ export default function RadarsPage() {
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>De Radar</li>
+            <li className="text-primary font-medium">De Radar</li>
           </ul>
         </div>
       </div>

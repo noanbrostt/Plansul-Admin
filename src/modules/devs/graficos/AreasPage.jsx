@@ -58,7 +58,7 @@ export default function AreasPage() {
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>De Área</li>
+            <li className="text-primary font-medium">De Área</li>
           </ul>
         </div>
       </div>

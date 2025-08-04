@@ -38,7 +38,7 @@ export default function BotoesPage() {
           <ul className="pointer-events-none">
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Botões</li>
+            <li className="text-primary font-medium">Botões</li>
           </ul>
         </div>
       </div>
@@ -192,14 +192,14 @@ export default function BotoesPage() {
             Para resolver isso é necessário essa condicionar para ficar como "ghost" durante a animação girando
           */}
           <Botao
-            variant={isLoadingPrimary ? "ghost" : "primary"}
+            variant="primary"
             loading={isLoadingPrimary}
             onClick={handleLoadingPrimary}
           >
             Carregando Primary
           </Botao>
           <Botao
-            variant={isLoadingSecondary ? "ghost" : "secondary"}
+            variant="secondary"
             loading={isLoadingSecondary}
             onClick={handleLoadingSecondary}
           >
@@ -230,7 +230,7 @@ export default function BotoesPage() {
 
           <div className="space-y-4 justify-items-center">
             <Botao
-              variant={isLoadingPrimary ? "ghost" : "primary"}
+              variant="primary"
               icon={<MdCheck />}
               iconPosition="right"
               loading={isLoadingPrimary}
@@ -252,19 +252,14 @@ const handleLoadingPrimary = () => {
 };
 
 <Botao
-  variant={isLoadingPrimary ? "ghost" : "primary"}
+  variant="primary"
   icon={<MdCheck />}
   iconPosition="right"
   loading={isLoadingPrimary}
   onClick={handleLoadingPrimary}
 >
   Salvar
-</Botao>
-
-{/*
-  A variante "ghost" durante o carregamento serve para o 
-  circulo ficar visível em ambos os temas claro e escuro.
-*/}`}
+</Botao>`}
               />
             </div>
           </div>

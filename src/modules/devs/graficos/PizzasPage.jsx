@@ -148,7 +148,7 @@ export default function PizzasPage() {
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>De Pizza</li>
+            <li className="text-primary font-medium">De Pizza</li>
           </ul>
         </div>
       </div>

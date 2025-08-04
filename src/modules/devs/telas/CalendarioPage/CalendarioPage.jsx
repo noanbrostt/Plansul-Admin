@@ -179,7 +179,7 @@ export default function CalendarioPage() {
           <ul>
             <li>Devs</li>
             <li>Telas</li>
-            <li>Calendário</li>
+            <li className="text-primary font-medium">Calendário</li>
           </ul>
         </div>
       </div>

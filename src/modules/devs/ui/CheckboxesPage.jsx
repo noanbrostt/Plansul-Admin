@@ -26,7 +26,7 @@ export default function InputsPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Checkboxes e Toggles</li>
+            <li className="text-primary font-medium">Checkboxes e Toggles</li>
           </ul>
         </div>
       </div>

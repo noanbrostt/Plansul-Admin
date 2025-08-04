@@ -62,7 +62,7 @@ export default function CompostosPage() {
           <ul>
             <li>Devs</li>
             <li>Gráficos</li>
-            <li>Compostos</li>
+            <li className="text-primary font-medium">Compostos</li>
           </ul>
         </div>
       </div>

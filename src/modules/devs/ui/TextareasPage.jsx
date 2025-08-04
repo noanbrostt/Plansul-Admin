@@ -21,7 +21,7 @@ export default function TextareasPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Textareas</li>
+            <li className="text-primary font-medium">Textareas</li>
           </ul>
         </div>
       </div>

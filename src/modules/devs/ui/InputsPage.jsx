@@ -34,7 +34,7 @@ export default function InputsPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Inputs</li>
+            <li className="text-primary font-medium">Inputs</li>
           </ul>
         </div>
       </div>

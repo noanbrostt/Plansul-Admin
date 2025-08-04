@@ -481,7 +481,7 @@ export default function TabelasPage() {
           <ul>
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Tabelas</li>
+            <li className="text-primary font-medium">Tabelas</li>
           </ul>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default function BlocosPage() {
           <ul className="pointer-events-none">
             <li>Devs</li>
             <li>Elementos UI</li>
-            <li>Blocos</li>
+            <li className="text-primary font-medium">Blocos</li>
           </ul>
         </div>
       </div>
