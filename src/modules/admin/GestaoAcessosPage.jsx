@@ -225,7 +225,7 @@ export default function GestaoAcessosPage() {
         <div className="text-sm breadcrumbs text-gray-500">
           <ul className="pointer-events-none">
             <li>Admin</li>
-            <li>Gestão de Acessos</li>
+            <li className="text-primary font-medium">Gestão de Acessos</li>
           </ul>
         </div>
       </div>

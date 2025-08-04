@@ -30,6 +30,8 @@ interface BaseProps {
   className?: string;
   showSelectAll?: boolean;
   value?: any;
+  fieldset?: string;
+  asterisk?: boolean;
 }
 
 type SelectProps = BaseProps &
@@ -48,6 +50,8 @@ const Select = forwardRef<any, SelectProps>(
       className = "",
       multiple = false,
       showSelectAll = false,
+      fieldset = false,
+      asterisk = false,
       value,
       onChange,
       ...props
@@ -106,7 +110,7 @@ const Select = forwardRef<any, SelectProps>(
       );
     };
 
-    return (
+    let selectInput = (
       <div className={`text-${size} ${largura} ${className}`} ref={ref}>
         <ReactSelect<Option, boolean>
           options={options}
@@ -116,11 +120,12 @@ const Select = forwardRef<any, SelectProps>(
           classNamePrefix="react-select"
           value={value}
           classNames={{
+            placeholder: () => "text-[#737373]",
             control: () =>
               `select select-${variant} bg-none h-fit px-2 py-[7.2px] w-full select-${size}`,
             menu: () => "menu bg-base-100 rounded-box shadow-xl p-0 !z-[1000]",
             option: ({ isFocused }) =>
-              `p-3 ${isFocused ? `bg-${variant}/20` : ""}`,
+              `p-3 ${isFocused ? variant ? `bg-${variant}/20` : "bg-base-300/40" : ""} !cursor-pointer`,
             multiValue: () =>
               `badge badge-${variant} gap-1.5 pr-0 rounded-[4px]`,
             multiValueLabel: () => "pb-[1px]",
@@ -145,6 +150,24 @@ const Select = forwardRef<any, SelectProps>(
         />
       </div>
     );
+
+    if (fieldset) {
+      selectInput = (
+        <fieldset className="fieldset">
+          <legend
+            className={`fieldset-legend ml-1 ${
+              size && "text-" + size
+            }`}
+          >
+            {fieldset}
+            {asterisk ? <span className="text-error -ml-1">*</span> : null}
+          </legend>
+          {selectInput}
+        </fieldset>
+      );
+    }
+
+    return selectInput;
   }
 );
 

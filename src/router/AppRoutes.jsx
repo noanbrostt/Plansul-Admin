@@ -4,8 +4,12 @@ import LoginPage from "@/layout/LoginPage";
 import NotFoundPage from "@/layout/NotFoundPage";
 import ForbiddenPage from "@/layout/ForbiddenPage";
 
-// Importações de páginas
+// Home
 import HomePage from "@/modules/home/HomePage";
+
+// Ambulatório
+import CadastroAtestadosPage from "@/modules/ambulatorio/CadastroAtestadosPage";
+import GestaoAtestadosPage from "@/modules/ambulatorio/GestaoAtestadosPage";
 
 // Admin
 import GestaoAcessosPage from "@/modules/admin/GestaoAcessosPage";
@@ -59,6 +63,19 @@ const ROUTE_CONFIG = {
   ],
 
   // Rotas protegidas (requerem permissão específica)
+  AMBULATORIO_ROUTES: [
+    {
+      path: "/ambulatorio/cadastro-atestados",
+      element: <CadastroAtestadosPage />,
+      permission: "DEV_Teste_User"
+    },
+    {
+      path: "/ambulatorio/gestao-atestados",
+      element: <GestaoAtestadosPage />,
+      permission: "DEV_Teste_User"
+    },
+  ],
+
   ADMIN_ROUTES: [
     {
       path: "/admin/acessos",
@@ -211,6 +228,7 @@ export default function AppRoutes() {
         }
       >
         {ROUTE_CONFIG.LOGGED.map(renderRoute)}
+        {ROUTE_CONFIG.AMBULATORIO_ROUTES.map(renderRoute)}
         {ROUTE_CONFIG.ADMIN_ROUTES.map(renderRoute)}
         {ROUTE_CONFIG.DEVS_ROUTES.map(renderRoute)}
       </Route>

@@ -22,6 +22,8 @@ export interface TextareaProps {
   error?: string;
   success?: string;
   info?: string;
+  fieldset?: string;
+  asterisk?: boolean;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -39,6 +41,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       error,
       success,
       info,
+      fieldset = false,
+      asterisk = false,
     },
     ref
   ) => {
@@ -55,7 +59,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       setCount(v.length);
     };
 
-    return (
+    let textareaInput = (
       <div className={`form-control ${largura} ${className}`}>
         <textarea
           ref={ref}
@@ -63,6 +67,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             textarea resize
             textarea-${size}
             textarea-${variant}
+            ${largura}
             ${
               error
                 ? "textarea-error"
@@ -105,6 +110,24 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
       </div>
     );
+
+    if (fieldset) {
+      textareaInput = (
+        <fieldset className="fieldset">
+          <legend
+            className={`fieldset-legend ml-1 ${
+              size && "text-" + size
+            }`}
+          >
+            {fieldset}
+            {asterisk ? <span className="text-error -ml-1">*</span> : null}
+          </legend>
+          {textareaInput}
+        </fieldset>
+      );
+    }
+
+    return textareaInput
   }
 );
 

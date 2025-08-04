@@ -1,6 +1,6 @@
 // Ícones
 import { FiHome } from "react-icons/fi";
-import { RiInputField, RiUserForbidLine } from "react-icons/ri";
+import { RiInputField, RiUserForbidLine, RiHealthBookLine } from "react-icons/ri";
 import { CgPlayButtonR, CgFileDocument } from "react-icons/cg";
 import {
   MdScreenshotMonitor,
@@ -8,6 +8,7 @@ import {
   MdScreenSearchDesktop,
   MdOutlineDesignServices,
   MdOutlineFitScreen,
+  MdManageSearch,
 } from "react-icons/md";
 import { IoCubeOutline } from "react-icons/io5";
 import { LuChartNoAxesCombined } from "react-icons/lu";
@@ -35,6 +36,21 @@ export const menuConfig = {
         label: "Home",
         to: "/",
         icon: <FiHome />
+      },
+    ]
+  },
+  ambulatorioSection: {
+    title: "Ambulatório",
+    items: [
+      {
+        label: "Cadastro de Atestados",
+        to: "/ambulatorio/cadastro-atestados",
+        icon: <RiHealthBookLine />
+      },
+      {
+        label: "Gestão de Atestados",
+        to: "/ambulatorio/gestao-atestados",
+        icon: <MdManageSearch />
       },
     ]
   },

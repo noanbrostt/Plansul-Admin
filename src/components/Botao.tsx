@@ -69,7 +69,7 @@ const Botao: React.FC<BotaoProps> = ({
       ? React.cloneElement(icon, {
           className: `
         ${icon.props.className || ""}
-        inline-block w-5 h-5
+        inline-block w-5 h-5 -mb-[1px]
       `,
         })
       : null;

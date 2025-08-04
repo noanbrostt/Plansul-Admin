@@ -63,6 +63,21 @@ export default function Sidebar({
             ))}
           </SidebarSection>
 
+          {/* Seção Ambulatório */}
+          <SidebarSection
+            title={memoizedMenuConfig.ambulatorioSection.title}
+            sectionKey="ambulatorio"
+          >
+            {memoizedMenuConfig.ambulatorioSection.items.map((item) => (
+              <SidebarLink
+                key={item.label}
+                label={item.label}
+                to={item.to}
+                icon={item.icon}
+              />
+            ))}
+          </SidebarSection>
+
           {/* Seção Admin */}
           {user.permissoes?.includes("DEV_Teste_User") && (
             <SidebarSection

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IMaskInput } from "react-imask";
 
@@ -20,11 +20,13 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   optionalBadge?: boolean;
   optionalBadgeText?: string;
   type?: string;
-  fieldset?: string;
+  fieldset?: ReactNode;
+  asterisk?: boolean;
   validMessage?: string;
   validReqs?: object;
   mask?: string;
   labelClassName?: string;
+  forceUppercase?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -38,10 +40,12 @@ const Input: React.FC<InputProps> = ({
   optionalBadgeText = "Opcional",
   type,
   fieldset = "",
+  asterisk = false,
   validMessage = "",
   validReqs,
   mask = "",
   labelClassName = "",
+  forceUppercase = false,
   ...rest
 }) => {
   // Início da lógica para input password mostrar a senha
@@ -92,7 +96,11 @@ const Input: React.FC<InputProps> = ({
           mask={mask}
           value={inputValue}
           onAccept={(value: any) => {
-            setInputValue(value);
+            if (forceUppercase) {
+              setInputValue(value.toUpperCase());
+            } else {
+              setInputValue(value);
+            }
             rest.onChange?.({ target: { value } } as any);
           }}
           overwrite
@@ -162,6 +170,7 @@ const Input: React.FC<InputProps> = ({
           }`}
         >
           {fieldset}
+          {asterisk ? <span className="text-error -ml-1">*</span> : null}
         </legend>
         {labelInput}
       </fieldset>
