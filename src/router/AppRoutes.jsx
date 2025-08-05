@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "@/layout/DashboardLayout";
 import LoginPage from "@/layout/LoginPage";
@@ -5,38 +6,48 @@ import NotFoundPage from "@/layout/NotFoundPage";
 import ForbiddenPage from "@/layout/ForbiddenPage";
 
 // Home
-import HomePage from "@/modules/home/HomePage";
+const HomePage = lazy(() => (import("@/modules/home/HomePage")));
 
 // Ambulatório
-import CadastroAtestadosPage from "@/modules/ambulatorio/CadastroAtestadosPage";
-import GestaoAtestadosPage from "@/modules/ambulatorio/GestaoAtestadosPage";
+const CadastroAtestadosPage = lazy(() =>
+  import("@/modules/ambulatorio/CadastroAtestadosPage")
+);
+const GestaoAtestadosPage = lazy(() =>
+  import("@/modules/ambulatorio/GestaoAtestadosPage")
+);
 
 // Admin
-import GestaoAcessosPage from "@/modules/admin/GestaoAcessosPage";
-import GestaoPerfisPage from "@/modules/admin/GestaoPerfisPage";
+const GestaoAcessosPage = lazy(() =>
+  import("@/modules/admin/GestaoAcessosPage")
+);
+const GestaoPerfisPage = lazy(() => import("@/modules/admin/GestaoPerfisPage"));
 
 // Telas
-import ExemploPage from "@/modules/devs/telas/ExemploPage";
-import CalendarioPage from "@/modules/devs/telas/CalendarioPage/CalendarioPage";
+const ExemploPage = lazy(() => import("@/modules/devs/telas/ExemploPage"));
+const CalendarioPage = lazy(() =>
+  import("@/modules/devs/telas/CalendarioPage/CalendarioPage")
+);
 
 // Páginas de UI
-import InputsPage from "@/modules/devs/ui/InputsPage";
-import BlocosPage from "@/modules/devs/ui/BlocosPage";
-import BotoesPage from "@/modules/devs/ui/BotoesPage";
-import SelectsPage from "@/modules/devs/ui/SelectsPage";
-import CheckboxesPage from "@/modules/devs/ui/CheckboxesPage";
-import EtiquetasPage from "@/modules/devs/ui/EtiquetasPage";
-import RadiosPage from "@/modules/devs/ui/RadiosPage";
-import TabelasPage from "@/modules/devs/ui/TabelasPage";
-import TextareasPage from "@/modules/devs/ui/TextareasPage";
+const InputsPage = lazy(() => import("@/modules/devs/ui/InputsPage"));
+const BlocosPage = lazy(() => import("@/modules/devs/ui/BlocosPage"));
+const BotoesPage = lazy(() => import("@/modules/devs/ui/BotoesPage"));
+const SelectsPage = lazy(() => import("@/modules/devs/ui/SelectsPage"));
+const CheckboxesPage = lazy(() => import("@/modules/devs/ui/CheckboxesPage"));
+const EtiquetasPage = lazy(() => import("@/modules/devs/ui/EtiquetasPage"));
+const RadiosPage = lazy(() => import("@/modules/devs/ui/RadiosPage"));
+const TabelasPage = lazy(() => import("@/modules/devs/ui/TabelasPage"));
+const TextareasPage = lazy(() => import("@/modules/devs/ui/TextareasPage"));
 
 // Páginas de gráficos
-import AreasPage from "@/modules/devs/graficos/AreasPage";
-import BarrasPage from "@/modules/devs/graficos/BarrasPage";
-import LinhasPage from "@/modules/devs/graficos/LinhasPage";
-import PizzasPage from "@/modules/devs/graficos/PizzasPage";
-import RadarsPage from "@/modules/devs/graficos/RadarsPage";
-import CompostosPage from "@/modules/devs/graficos/CompostosPage";
+const AreasPage = lazy(() => import("@/modules/devs/graficos/AreasPage"));
+const BarrasPage = lazy(() => import("@/modules/devs/graficos/BarrasPage"));
+const LinhasPage = lazy(() => import("@/modules/devs/graficos/LinhasPage"));
+const PizzasPage = lazy(() => import("@/modules/devs/graficos/PizzasPage"));
+const RadarsPage = lazy(() => import("@/modules/devs/graficos/RadarsPage"));
+const CompostosPage = lazy(() =>
+  import("@/modules/devs/graficos/CompostosPage")
+);
 
 // Componentes de roteamento
 import ProtectedRoute from "./ProtectedRoute";
@@ -50,15 +61,15 @@ const ROUTE_CONFIG = {
     {
       path: "/login",
       element: <LoginPage />,
-      wrapper: PublicRoute
-    }
+      wrapper: PublicRoute,
+    },
   ],
-  
+
   // Rotas abertas (requerem login)
   LOGGED: [
     {
       path: "/",
-      element: <HomePage />
+      element: <HomePage />,
     },
   ],
 
@@ -67,12 +78,12 @@ const ROUTE_CONFIG = {
     {
       path: "/ambulatorio/cadastro-atestados",
       element: <CadastroAtestadosPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/ambulatorio/gestao-atestados",
       element: <GestaoAtestadosPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
   ],
 
@@ -80,137 +91,141 @@ const ROUTE_CONFIG = {
     {
       path: "/admin/acessos",
       element: <GestaoAcessosPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/admin/perfis",
       element: <GestaoPerfisPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
   ],
-  
+
   DEVS_ROUTES: [
     {
       path: "/devs/telas/exemplo",
       element: <ExemploPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/telas/calendario",
       element: <CalendarioPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/blocos",
       element: <BlocosPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/botoes",
       element: <BotoesPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/checkboxes",
       element: <CheckboxesPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/etiquetas",
       element: <EtiquetasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/inputs",
       element: <InputsPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/selects",
       element: <SelectsPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/radios",
       element: <RadiosPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/tabelas",
       element: <TabelasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/ui/textareas",
       element: <TextareasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/graficos/area",
       element: <AreasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/graficos/barra",
       element: <BarrasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/graficos/linha",
       element: <LinhasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/graficos/pizza",
       element: <PizzasPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/graficos/radar",
       element: <RadarsPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
     {
       path: "/devs/graficos/compostos",
       element: <CompostosPage />,
-      permission: "DEV_Teste_User"
+      permission: "DEV_Teste_User",
     },
   ],
-  
+
   // Rotas de erro
   ERROR: [
     {
       path: "*",
-      element: <NotFoundPage />
+      element: <NotFoundPage />,
     },
     {
       path: "/negado",
-      element: <ForbiddenPage />
-    }
-  ]
+      element: <ForbiddenPage />,
+    },
+  ],
 };
 
 // Helper para rotas com permissão
 const withPermission = (element, permission) => (
-  <PermissionRoute requiredPermissao={permission}>
-    {element}
-  </PermissionRoute>
+  <PermissionRoute requiredPermissao={permission}>{element}</PermissionRoute>
 );
 
 // Helper para renderizar rotas com wrappers
 const renderRoute = (route) => {
   let content = route.element;
-  
+
   if (route.permission) {
     content = withPermission(content, route.permission);
   }
-  
+
   if (route.wrapper) {
     const Wrapper = route.wrapper;
     content = <Wrapper>{content}</Wrapper>;
   }
-  
-  return <Route key={route.path} path={route.path} element={content} />;
+
+  return (
+    <Route
+      key={route.path}
+      path={route.path}
+      element={content}
+    />
+  );
 };
 
 export default function AppRoutes() {
@@ -218,7 +233,7 @@ export default function AppRoutes() {
     <Routes>
       {/* Rotas Públicas */}
       {ROUTE_CONFIG.PUBLIC.map(renderRoute)}
-      
+
       {/* Rotas Protegidas dentro do DashboardLayout */}
       <Route
         element={
@@ -232,7 +247,7 @@ export default function AppRoutes() {
         {ROUTE_CONFIG.ADMIN_ROUTES.map(renderRoute)}
         {ROUTE_CONFIG.DEVS_ROUTES.map(renderRoute)}
       </Route>
-      
+
       {/* Rotas de Erro */}
       {ROUTE_CONFIG.ERROR.map(renderRoute)}
     </Routes>

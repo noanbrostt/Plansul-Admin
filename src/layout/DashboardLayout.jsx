@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import { Outlet } from "react-router-dom";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSelector } from "react-redux";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -7,6 +6,7 @@ import { showSuccessAlert } from "@/components/alerts";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import ScrollToTop from "@/components/ScrollToTop";
+import { Outlet } from "react-router-dom";
 
 const SIDEBAR_COLLAPSED_KEY = "sidebarCollapsed";
 const THEME_KEY = "currentTheme";
@@ -96,7 +96,11 @@ export default function DashboardLayout() {
           user={user}
         />
         <div className="flex-1">
-          <SimpleBar className="h-[calc(100vh-64px)] overflow-auto" forceVisible="y" ref={simpleBarRef}>
+          <SimpleBar
+            className="h-[calc(100vh-64px)] overflow-auto"
+            forceVisible="y"
+            ref={simpleBarRef}
+          >
             <main className="p-6">
               <ScrollToTop simpleBarRef={simpleBarRef} />
               <Outlet />
