@@ -222,9 +222,8 @@ const GestaoAtestadosPage = () => {
         </h1>
         <div className="text-sm breadcrumbs text-base-content/70">
           <ul className="pointer-events-none">
-            <li>Enfermaria</li>
-            <li>Atestados</li>
-            <li className="text-primary font-medium">Gestão</li>
+            <li>Ambulatório</li>
+            <li className="text-primary font-medium">Gestão de Atestados</li>
           </ul>
         </div>
       </div>

@@ -6,7 +6,6 @@ import {
   DndContext,
   closestCenter,
   PointerSensor,
-  // LongPressSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -24,12 +23,12 @@ const buildIconMap = () => {
   const map = {};
   const allItems = [
     ...menuConfig.mainSection.items,
+    ...menuConfig.ambulatorioSection.items,
     ...menuConfig.adminSection.items,
     ...menuConfig.devsSection.items.flatMap((sec) => sec.subItems || []),
   ];
   allItems.forEach((item) => {
     if (item.to) {
-      // sem barra inicial
       const key = item.to.replace(/^\//, "");
       map[key] = item.icon;
     }
