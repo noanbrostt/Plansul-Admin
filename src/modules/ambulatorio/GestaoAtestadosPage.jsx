@@ -1,4 +1,5 @@
 import FavoriteButton from "@/components/FavoriteButton";
+import { useLoaderData } from "react-router-dom";
 import {
   FiFileText,
   FiCalendar,
@@ -8,6 +9,9 @@ import {
 import Tabela from "@/components/Tabela";
 
 const GestaoAtestadosPage = () => {
+  const data = useLoaderData();
+  console.log("Dados da simulação de API: "+JSON.stringify(data));
+  
 
   // Dados fictícios para demonstração (seriam buscados da API)
   const atestados = [
@@ -16,6 +20,7 @@ const GestaoAtestadosPage = () => {
       matricula: "653123",
       nome: "Carlos Silva",
       tipo: "Médico",
+      dataCadastro: "2023-10-13",
       dataInicio: "2023-10-15",
       dataFim: "2023-10-18",
       periodo: "Manhã",
@@ -26,13 +31,13 @@ const GestaoAtestadosPage = () => {
       parentesco: "",
       observacao: "Resfriado comum",
       arquivo: "atestado_123.pdf",
-      status: "aprovado",
     },
     {
       id: 2,
       matricula: "523456",
       nome: "Ana Paula Oliveira",
       tipo: "Acompanhamento",
+      dataCadastro: "2023-10-26",
       dataInicio: "2023-10-20",
       dataFim: "2023-10-22",
       periodo: "Dia Todo",
@@ -43,13 +48,13 @@ const GestaoAtestadosPage = () => {
       parentesco: "Filho",
       observacao: "Consulta pediátrica",
       arquivo: "atestado_456.pdf",
-      status: "pendente",
     },
     {
       id: 3,
       matricula: "123789",
       nome: "Roberto Almeida",
       tipo: "Médico",
+      dataCadastro: "2023-10-07",
       dataInicio: "2023-10-05",
       dataFim: "2023-10-07",
       periodo: "Tarde",
@@ -60,13 +65,13 @@ const GestaoAtestadosPage = () => {
       parentesco: "",
       observacao: "Dor lombar",
       arquivo: "atestado_789.pdf",
-      status: "aprovado",
     },
     {
       id: 4,
       matricula: "409234",
       nome: "Juliana Mendes",
       tipo: "Acompanhamento",
+      dataCadastro: "2023-10-26",
       dataInicio: "2023-10-25",
       dataFim: "2023-10-26",
       periodo: "Manhã",
@@ -77,13 +82,13 @@ const GestaoAtestadosPage = () => {
       parentesco: "Mãe",
       observacao: "Exame de rotina",
       arquivo: "atestado_234.pdf",
-      status: "rejeitado",
     },
     {
       id: 5,
       matricula: "653567",
       nome: "Fernando Costa",
       tipo: "Óbito",
+      dataCadastro: "2023-10-11",
       dataInicio: "2023-10-10",
       dataFim: "2023-10-15",
       periodo: "Dia Todo",
@@ -94,7 +99,6 @@ const GestaoAtestadosPage = () => {
       parentesco: "Pai",
       observacao: "Falecimento do pai",
       arquivo: "atestado_567.pdf",
-      status: "aprovado",
     },
   ];
 
@@ -113,7 +117,8 @@ const GestaoAtestadosPage = () => {
   const atestadoColumns = [
     {
       accessorKey: "matricula",
-      header: "Matrícula",
+      header: () => <div className="w-full text-center">Matrícula</div>,
+      cell: ({ getValue }) => <div className="text-center">{getValue()}</div>,
       size: 120,
     },
     {
@@ -123,34 +128,40 @@ const GestaoAtestadosPage = () => {
     },
     {
       accessorKey: "tipo",
-      header: "Tipo",
+      header: () => <div className="w-full text-center">Tipo</div>,
       size: 120,
       cell: ({ getValue }) => {
-        const tipo = getValue();
+        let tipo = getValue();
         let color = "bg-blue-500";
-        if (tipo === "Acompanhamento") color = "bg-purple-500";
+        if (tipo === "Acompanhamento") {color = "bg-purple-500"; tipo = "Acompan.";}
         if (tipo === "Óbito") color = "bg-gray-500";
 
         return (
-          <span
-            className={`px-2 py-1 rounded-full text-xs text-white ${color}`}
+          <div
+            className={`px-2 py-1 rounded-full text-xs text-white text-center ${color}`}
           >
             {tipo}
-          </span>
+          </div>
         );
       },
     },
     {
-      accessorKey: "dataInicio",
-      header: "Início",
+      accessorKey: "dataCadastro",
+      header: () => <div className="w-full text-center">Cadastrado</div>,
       size: 120,
-      cell: ({ getValue }) => new Date(getValue()).toLocaleDateString(),
+      cell: ({ getValue }) => <div className="text-center">{new Date(getValue()).toLocaleDateString()}</div>,
+    },
+    {
+      accessorKey: "dataInicio",
+      header: () => <div className="w-full text-center">Início</div>,
+      size: 120,
+      cell: ({ getValue }) => <div className="text-center">{new Date(getValue()).toLocaleDateString()}</div>,
     },
     {
       accessorKey: "dataFim",
-      header: "Fim",
+      header: () => <div className="w-full text-center">Fim</div>,
       size: 120,
-      cell: ({ getValue }) => new Date(getValue()).toLocaleDateString(),
+      cell: ({ getValue }) => <div className="text-center">{new Date(getValue()).toLocaleDateString()}</div>,
     },
     {
       accessorKey: "periodo",
@@ -168,33 +179,13 @@ const GestaoAtestadosPage = () => {
       size: 80,
     },
     {
-      accessorKey: "status",
-      header: "Status",
-      size: 120,
-      cell: ({ getValue }) => {
-        const status = getValue();
-        let color = "bg-gray-500";
-        if (status === "aprovado") color = "bg-success";
-        if (status === "pendente") color = "bg-warning";
-        if (status === "rejeitado") color = "bg-error";
-
-        return (
-          <span
-            className={`px-2 py-1 rounded-full text-xs text-white ${color}`}
-          >
-            {status.charAt(0).toUpperCase() + status.slice(1)}
-          </span>
-        );
-      },
-    },
-    {
       accessorKey: "arquivo",
-      header: "Arquivo",
+      header: () => <div className="w-full text-center">Arquivo</div>,
       size: 120,
       cell: ({ getValue }) => (
         <a
           href="#"
-          className="text-primary hover:underline flex items-center"
+          className="text-primary hover:underline flex items-center justify-center"
           onClick={(e) => {
             e.preventDefault();
             // Simulação de download
@@ -282,7 +273,7 @@ const GestaoAtestadosPage = () => {
           columns={atestadoColumns}
           exportFileName="gestao_atestados"
           initialSorting={[
-            { id: "dataInicio", desc: true },
+            { id: "dataCadastro", desc: true },
             { id: "nome", desc: false },
           ]}
           columnVisibility

@@ -1,5 +1,5 @@
 // Ícones
-import { FiHome } from "react-icons/fi";
+import { FiHome, FiLoader } from "react-icons/fi";
 import { RiInputField, RiUserForbidLine, RiHealthBookLine } from "react-icons/ri";
 import { CgPlayButtonR, CgFileDocument } from "react-icons/cg";
 import {
@@ -101,14 +101,19 @@ export const menuConfig = {
         icon: <MdScreenshotMonitor />,
         subItems: [
           {
+            label: "Calendário",
+            to: "/devs/telas/calendario",
+            icon: <FaRegCalendar />
+          },
+          {
             label: "Tela de Exemplo",
             to: "/devs/telas/exemplo",
             icon: <MdOutlineFitScreen />
           },
           {
-            label: "Calendário",
-            to: "/devs/telas/calendario",
-            icon: <FaRegCalendar />
+            label: "Tela de Loading",
+            to: "/devs/telas/loading",
+            icon: <FiLoader />
           },
           {
             label: "Not Found",

@@ -6,12 +6,14 @@ import { showSuccessAlert } from "@/components/alerts";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import ScrollToTop from "@/components/ScrollToTop";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
+import LoadingPage from "@/Layout/LoadingPage";
 
 const SIDEBAR_COLLAPSED_KEY = "sidebarCollapsed";
 const THEME_KEY = "currentTheme";
 
 export default function DashboardLayout() {
+  const navigation = useNavigation();
   const simpleBarRef = useRef(null);
 
   useEffect(() => {
@@ -103,7 +105,7 @@ export default function DashboardLayout() {
           >
             <main className="p-6">
               <ScrollToTop simpleBarRef={simpleBarRef} />
-              <Outlet />
+              {navigation.state === "loading" ? <LoadingPage /> : <Outlet />}
             </main>
           </SimpleBar>
         </div>
