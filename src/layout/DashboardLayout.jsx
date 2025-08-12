@@ -7,7 +7,7 @@ import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Outlet, useNavigation } from "react-router-dom";
-import LoadingPage from "@/Layout/LoadingPage";
+import LoadingPage from "@/layout/LoadingPage";
 
 const SIDEBAR_COLLAPSED_KEY = "sidebarCollapsed";
 const THEME_KEY = "currentTheme";
