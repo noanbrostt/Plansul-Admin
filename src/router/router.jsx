@@ -1,105 +1,63 @@
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
-import PermissionRoute from "./PermissionRoute";
+import FeatureRoute from "./FeatureRoute";
 
 import DashboardLayout from "@/layout/DashboardLayout";
 import LoginPage from "@/layout/LoginPage";
 import NotFoundPage from "@/layout/NotFoundPage";
 import ForbiddenPage from "@/layout/ForbiddenPage";
-
-import { lazy } from "react";
-import { Suspense } from "react";
 import LoadingPage from "@/layout/LoadingPage";
 
-// 👉 Componente para envolver lazy com Suspense
-const LazyWrapper = (Component) => (
-  <Suspense fallback={<LoadingPage />}>
-    <Component />
-  </Suspense>
-);
-
-// 🧱 Páginas lazy carregadas dinamicamente
+// Páginas (lazy)
 const HomePage = lazy(() => import("@/modules/home/HomePage"));
-const CadastroAtestadosPage = lazy(() =>
-  import("@/modules/ambulatorio/CadastroAtestadosPage")
-);
-const GestaoAtestadosPage = lazy(() =>
-  import("@/modules/ambulatorio/GestaoAtestadosPage")
-);
-const gestaoAtestadosLoader = async () => {
-  // Simulando delay de API
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Dados carregados do loader.");
-      resolve({ status: "ok" });
-    }, 2000);
-  });
-};
 
-const GestaoAcessosPage = lazy(() =>
-  import("@/modules/admin/GestaoAcessosPage")
-);
-const GestaoPerfisPage = lazy(() => import("@/modules/admin/GestaoPerfisPage"));
+// Admin
+const GestaoAcessosPage = lazy(() => import("@/modules/admin/GestaoAcessosPage.jsx"));
+const GestaoPerfisPage = lazy(() => import("@/modules/admin/GestaoPerfisPage.jsx"));
 
-const CalendarioPage = lazy(() =>
-  import("@/modules/devs/telas/CalendarioPage/CalendarioPage")
-);
-const ExemploPage = lazy(() => import("@/modules/devs/telas/ExemploPage"));
+// Ambulatório
+const GestaoAtestadosPage = lazy(() => import("@/modules/ambulatorio/GestaoAtestadosPage.jsx"));
+const CadastroAtestadosPage = lazy(() => import("@/modules/ambulatorio/CadastroAtestadosPage.jsx"));
 
-const InputsPage = lazy(() => import("@/modules/devs/ui/InputsPage"));
-const BlocosPage = lazy(() => import("@/modules/devs/ui/BlocosPage"));
-const BotoesPage = lazy(() => import("@/modules/devs/ui/BotoesPage"));
-const SelectsPage = lazy(() => import("@/modules/devs/ui/SelectsPage"));
-const CheckboxesPage = lazy(() => import("@/modules/devs/ui/CheckboxesPage"));
-const EtiquetasPage = lazy(() => import("@/modules/devs/ui/EtiquetasPage"));
-const RadiosPage = lazy(() => import("@/modules/devs/ui/RadiosPage"));
-const TabelasPage = lazy(() => import("@/modules/devs/ui/TabelasPage"));
-const TextareasPage = lazy(() => import("@/modules/devs/ui/TextareasPage"));
+// Devs - Telas
+const CalendarioPage = lazy(() => import("@/modules/devs/telas/CalendarioPage/CalendarioPage.jsx"));
+const ExemploPage = lazy(() => import("@/modules/devs/telas/ExemploPage.jsx"));
+// Para a rota /devs/telas/loading vou reutilizar o LoadingPage do layout
 
-const AreasPage = lazy(() => import("@/modules/devs/graficos/AreasPage"));
-const BarrasPage = lazy(() => import("@/modules/devs/graficos/BarrasPage"));
-const LinhasPage = lazy(() => import("@/modules/devs/graficos/LinhasPage"));
-const PizzasPage = lazy(() => import("@/modules/devs/graficos/PizzasPage"));
-const RadarsPage = lazy(() => import("@/modules/devs/graficos/RadarsPage"));
-const CompostosPage = lazy(() =>
-  import("@/modules/devs/graficos/CompostosPage")
-);
+// Devs - UI
+const BlocosPage = lazy(() => import("@/modules/devs/ui/BlocosPage.jsx"));
+const BotoesPage = lazy(() => import("@/modules/devs/ui/BotoesPage.jsx"));
+const CheckboxesPage = lazy(() => import("@/modules/devs/ui/CheckboxesPage.jsx"));
+const EtiquetasPage = lazy(() => import("@/modules/devs/ui/EtiquetasPage.jsx"));
+const InputsPage = lazy(() => import("@/modules/devs/ui/InputsPage.jsx"));
+const RadiosPage = lazy(() => import("@/modules/devs/ui/RadiosPage.jsx"));
+const SelectsPage = lazy(() => import("@/modules/devs/ui/SelectsPage.jsx"));
+const TabelasPage = lazy(() => import("@/modules/devs/ui/TabelasPage.jsx"));
+const TextareasPage = lazy(() => import("@/modules/devs/ui/TextareasPage.jsx"));
 
-// 🔒 Função para proteger rota com permissão
-const withPermission = (element, permission) => (
-  <PermissionRoute requiredPermissao={permission}>{element}</PermissionRoute>
-);
+// Devs - Gráficos
+const AreasPage = lazy(() => import("@/modules/devs/graficos/AreasPage.jsx"));
+const BarrasPage = lazy(() => import("@/modules/devs/graficos/BarrasPage.jsx"));
+const LinhasPage = lazy(() => import("@/modules/devs/graficos/LinhasPage.jsx"));
+const PizzasPage = lazy(() => import("@/modules/devs/graficos/PizzasPage.jsx"));
+const RadarsPage = lazy(() => import("@/modules/devs/graficos/RadarsPage.jsx"));
+const CompostosPage = lazy(() => import("@/modules/devs/graficos/CompostosPage.jsx"));
 
-// 🎯 Helper para criar rotas com lazy e wrappers
-const createRoute = ({ path, element, permission, wrapper }) => {
-  let content = LazyWrapper(element);
-
-  if (permission) {
-    content = withPermission(content, permission);
-  }
-
-  if (wrapper) {
-    const Wrapper = wrapper;
-    content = <Wrapper>{content}</Wrapper>;
-  }
-
-  return {
-    path,
-    element: content,
-  };
-};
-
-// ✳️ Estrutura de rotas
 export const router = createBrowserRouter([
-  // Rota pública
+  // Login
   {
     path: "/login",
-    element: <PublicRoute>{<LoginPage />}</PublicRoute>,
+    element: (
+      <PublicRoute>
+        <LoginPage />
+      </PublicRoute>
+    ),
   },
 
-  // Rota protegida com layout fixo
+  // Área logada
   {
     path: "/",
     element: (
@@ -108,139 +66,172 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      // Rotas abertas (usuário logado)
-      createRoute({ path: "", element: HomePage }),
-
-      // Ambulatorio
-      createRoute({
-        path: "ambulatorio/cadastro-atestados",
-        element: CadastroAtestadosPage,
-        permission: "DEV_Teste_User",
-      }),
+      // Home (pós-login, sem featureKey)
       {
-        path: "ambulatorio/gestao-atestados",
-        loader: gestaoAtestadosLoader,
-        hydrateFallbackElement: <LoadingPage />,
-        element: withPermission(LazyWrapper(GestaoAtestadosPage), "DEV_Teste_User"),
+        path: "/",
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <HomePage />
+          </Suspense>
+        ),
       },
 
       // Admin
-      createRoute({
-        path: "admin/acessos",
-        element: GestaoAcessosPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "admin/perfis",
-        element: GestaoPerfisPage,
-        permission: "DEV_Teste_User",
-      }),
+      {
+        path: "/admin/acessos",
+        element: (
+          <FeatureRoute featureKey="admin.gestao-acessos">
+            <Suspense fallback={<LoadingPage />}>
+              <GestaoAcessosPage />
+            </Suspense>
+          </FeatureRoute>
+        ),
+      },
+      {
+        path: "/admin/perfis",
+        element: (
+          <FeatureRoute featureKey="admin.gestao-perfis">
+            <Suspense fallback={<LoadingPage />}>
+              <GestaoPerfisPage />
+            </Suspense>
+          </FeatureRoute>
+        ),
+      },
+
+      // Ambulatório
+      {
+        path: "/ambulatorio/gestao-atestados",
+        element: (
+          <FeatureRoute featureKey="ambulatorio.gestao-atestados">
+            <Suspense fallback={<LoadingPage />}>
+              <GestaoAtestadosPage />
+            </Suspense>
+          </FeatureRoute>
+        ),
+      },
+      {
+        path: "/ambulatorio/cadastro-atestados",
+        element: (
+          <FeatureRoute featureKey="ambulatorio.cadastro-atestados">
+            <Suspense fallback={<LoadingPage />}>
+              <CadastroAtestadosPage />
+            </Suspense>
+          </FeatureRoute>
+        ),
+      },
 
       // Devs - Telas
-      createRoute({
-        path: "devs/telas/calendario",
-        element: CalendarioPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/telas/exemplo",
-        element: ExemploPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/telas/loading",
-        element: LoadingPage,
-        permission: "DEV_Teste_User",
-      }),
+      {
+        path: "/devs/telas/calendario",
+        element: (
+          <FeatureRoute featureKey="devs.telas.calendario">
+            <Suspense fallback={<LoadingPage />}>
+              <CalendarioPage />
+            </Suspense>
+          </FeatureRoute>
+        ),
+      },
+      {
+        path: "/devs/telas/exemplo",
+        element: (
+          <FeatureRoute featureKey="devs.telas.exemplo">
+            <Suspense fallback={<LoadingPage />}>
+              <ExemploPage />
+            </Suspense>
+          </FeatureRoute>
+        ),
+      },
+      {
+        path: "/devs/telas/loading",
+        element: (
+          <FeatureRoute featureKey="devs.telas.loading">
+            <LoadingPage />
+          </FeatureRoute>
+        ),
+      },
 
       // Devs - UI
-      createRoute({
-        path: "devs/ui/blocos",
-        element: BlocosPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/botoes",
-        element: BotoesPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/checkboxes",
-        element: CheckboxesPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/etiquetas",
-        element: EtiquetasPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/inputs",
-        element: InputsPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/selects",
-        element: SelectsPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/radios",
-        element: RadiosPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/tabelas",
-        element: TabelasPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/ui/textareas",
-        element: TextareasPage,
-        permission: "DEV_Teste_User",
-      }),
+      { path: "/devs/ui/blocos", element: (
+        <FeatureRoute featureKey="devs.ui.blocos">
+          <Suspense fallback={<LoadingPage />}><BlocosPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/botoes", element: (
+        <FeatureRoute featureKey="devs.ui.botoes">
+          <Suspense fallback={<LoadingPage />}><BotoesPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/checkboxes", element: (
+        <FeatureRoute featureKey="devs.ui.checkboxes">
+          <Suspense fallback={<LoadingPage />}><CheckboxesPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/etiquetas", element: (
+        <FeatureRoute featureKey="devs.ui.etiquetas">
+          <Suspense fallback={<LoadingPage />}><EtiquetasPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/inputs", element: (
+        <FeatureRoute featureKey="devs.ui.inputs">
+          <Suspense fallback={<LoadingPage />}><InputsPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/radios", element: (
+        <FeatureRoute featureKey="devs.ui.radios">
+          <Suspense fallback={<LoadingPage />}><RadiosPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/selects", element: (
+        <FeatureRoute featureKey="devs.ui.selects">
+          <Suspense fallback={<LoadingPage />}><SelectsPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/tabelas", element: (
+        <FeatureRoute featureKey="devs.ui.tabelas">
+          <Suspense fallback={<LoadingPage />}><TabelasPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/ui/textareas", element: (
+        <FeatureRoute featureKey="devs.ui.textareas">
+          <Suspense fallback={<LoadingPage />}><TextareasPage /></Suspense>
+        </FeatureRoute>
+      )},
 
       // Devs - Gráficos
-      createRoute({
-        path: "devs/graficos/area",
-        element: AreasPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/graficos/barra",
-        element: BarrasPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/graficos/linha",
-        element: LinhasPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/graficos/pizza",
-        element: PizzasPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/graficos/radar",
-        element: RadarsPage,
-        permission: "DEV_Teste_User",
-      }),
-      createRoute({
-        path: "devs/graficos/compostos",
-        element: CompostosPage,
-        permission: "DEV_Teste_User",
-      }),
+      { path: "/devs/graficos/area", element: (
+        <FeatureRoute featureKey="devs.graficos.area">
+          <Suspense fallback={<LoadingPage />}><AreasPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/graficos/barra", element: (
+        <FeatureRoute featureKey="devs.graficos.barra">
+          <Suspense fallback={<LoadingPage />}><BarrasPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/graficos/linha", element: (
+        <FeatureRoute featureKey="devs.graficos.linha">
+          <Suspense fallback={<LoadingPage />}><LinhasPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/graficos/pizza", element: (
+        <FeatureRoute featureKey="devs.graficos.pizza">
+          <Suspense fallback={<LoadingPage />}><PizzasPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/graficos/radar", element: (
+        <FeatureRoute featureKey="devs.graficos.radar">
+          <Suspense fallback={<LoadingPage />}><RadarsPage /></Suspense>
+        </FeatureRoute>
+      )},
+      { path: "/devs/graficos/compostos", element: (
+        <FeatureRoute featureKey="devs.graficos.compostos">
+          <Suspense fallback={<LoadingPage />}><CompostosPage /></Suspense>
+        </FeatureRoute>
+      )},
     ],
   },
 
   // Rotas de erro
-  {
-    path: "*",
-    element: <NotFoundPage />,
-  },
-  {
-    path: "/negado",
-    element: <ForbiddenPage />,
-  },
+  { path: "/negado", element: <ForbiddenPage /> },
+  { path: "*", element: <NotFoundPage /> },
 ]);

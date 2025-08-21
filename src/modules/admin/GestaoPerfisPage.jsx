@@ -23,10 +23,11 @@ import {
 } from "react-icons/fi";
 import { LuLock, LuLockOpen } from "react-icons/lu";
 import FavoriteButton from "@/components/FavoriteButton";
-import { menuConfig } from "@/layout/components/Sidebar/MenuConfig";
+import { ROUTES_REGISTRY, SECTIONS } from "@/acl/routeRegistry";
 
 const Modal = lazy(() => import("@/components/Modal"));
 
+/** Ações disponíveis nesta tela (mapeamento local de exemplo) */
 const acoesIniciais = [
   { co_acao: 1, no_acao: "Visualizar" },
   { co_acao: 2, no_acao: "Criar" },
@@ -34,15 +35,17 @@ const acoesIniciais = [
   { co_acao: 4, no_acao: "Excluir" },
 ];
 
+/** Perfis de exemplo */
 const perfisIniciais = [
   { co_perfil: 1, no_perfil: "Administrador", ic_situacao_ativo: true },
   { co_perfil: 2, no_perfil: "Gestor", ic_situacao_ativo: true },
   { co_perfil: 3, no_perfil: "Desenvolvedor", ic_situacao_ativo: true },
 ];
 
+/** Permissões iniciais (agora usando featureKey, ex.: 'admin.gestao-acessos') */
 const permissoesIniciaisArray = [
-  { co_perfil: 1, co_funcionalidade: "admin-acessos", co_acao: 1 },
-  { co_perfil: 1, co_funcionalidade: "admin-acessos", co_acao: 2 },
+  { co_perfil: 1, co_funcionalidade: "admin.gestao-acessos", co_acao: 1 },
+  { co_perfil: 1, co_funcionalidade: "admin.gestao-acessos", co_acao: 2 },
 ];
 
 const criarMapaDePermissoes = (arr) => {
@@ -56,35 +59,27 @@ const criarMapaDePermissoes = (arr) => {
 };
 
 export default function GestaoPerfisPage() {
+  /** -------------------- MONTAGEM via ACL (SECTIONS + ROUTES_REGISTRY) -------------------- */
   const { sistemas, funcionalidades } = useMemo(() => {
-    const sis = [],
-      func = [];
-    for (let key in menuConfig) {
-      const s = menuConfig[key];
-      sis.push({ key, title: s.title });
-      s.items.forEach((item) => {
-        const base = `${key}-${item.label.toLowerCase().replace(/\s+/g, "-")}`;
-        if (item.subItems) {
-          item.subItems.forEach((si) =>
-            func.push({
-              key: `${base}-${si.label.toLowerCase().replace(/\s+/g, "-")}`,
-              name: `${item.label} > ${si.label}`,
-              desc: si.to || "",
-              sistema: key,
-            })
-          );
-        } else {
-          func.push({
-            key: base,
-            name: item.label,
-            desc: item.to || "",
-            sistema: key,
-          });
-        }
-      });
-    }
+    // Seções (sistemas) vindas do registry
+    const sis = Object.values(SECTIONS).map(({ key, title }) => ({
+      key,
+      title,
+    }));
+
+    // Funcionalidades: cada rota com featureKey vira uma funcionalidade
+    // name: "Grupo > Label" quando existir groupLabel (ex.: Telas > Calendário)
+    const func = ROUTES_REGISTRY.filter((r) => !!r.featureKey).map((r) => ({
+      key: r.featureKey,
+      name: r.groupLabel ? `${r.groupLabel} > ${r.label}` : r.label,
+      desc: r.path || "",
+      sistema: r.section, // 'admin' | 'ambulatorio' | 'devs' | ...
+    }));
+
     return { sistemas: sis, funcionalidades: func };
   }, []);
+
+  /** -------------------------------------------------------------------------------------- */
 
   const [perfis, setPerfis] = useState(perfisIniciais);
   const [permissoes, setPermissoes] = useState(() =>
@@ -147,8 +142,9 @@ export default function GestaoPerfisPage() {
   const hasPerm = useCallback((f, a) => !!permTemp[f]?.[a], [permTemp]);
   const hasAll = useCallback(
     (f) => acaoKeys.every((a) => permTemp[f]?.[a]),
-    [permTemp]
+    [permTemp, acaoKeys]
   );
+
   const toggleAll = useCallback((f) => {
     startTransition(() => {
       setPermTemp((pt) => {
@@ -164,7 +160,7 @@ export default function GestaoPerfisPage() {
       });
       setPending(true);
     });
-  }, []);
+  }, [acaoKeys]);
 
   const totalPerms = useMemo(
     () =>
@@ -306,7 +302,11 @@ export default function GestaoPerfisPage() {
                 )
               }
             >
-              {row.original.ic_situacao_ativo ? <LuLock className="text-xl" /> : <LuLockOpen className="text-xl" />}
+              {row.original.ic_situacao_ativo ? (
+                <LuLock className="text-xl" />
+              ) : (
+                <LuLockOpen className="text-xl" />
+              )}
             </button>
           </div>
         ),
@@ -366,7 +366,6 @@ export default function GestaoPerfisPage() {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-
         <div className="stats shadow bg-base-200">
           <div className="stat">
             <div className="stat-figure text-primary">
@@ -383,7 +382,9 @@ export default function GestaoPerfisPage() {
               <FiShield className="text-3xl" />
             </div>
             <div className="stat-title">Habilitados</div>
-            <div className="stat-value">{perfis.filter((p) => p.ic_situacao_ativo).length}</div>
+            <div className="stat-value">
+              {perfis.filter((p) => p.ic_situacao_ativo).length}
+            </div>
           </div>
         </div>
 
@@ -393,7 +394,9 @@ export default function GestaoPerfisPage() {
               <FiLock className="text-3xl" />
             </div>
             <div className="stat-title">Desabilitados</div>
-            <div className="stat-value">{perfis.filter((p) => !p.ic_situacao_ativo).length}</div>
+            <div className="stat-value">
+              {perfis.filter((p) => !p.ic_situacao_ativo).length}
+            </div>
           </div>
         </div>
       </div>
@@ -410,10 +413,10 @@ export default function GestaoPerfisPage() {
           >
             <div className="space-y-2 max-h-[70vh] overflow-auto">
               {sistemas.map((s) => {
-                const items = funcionalidades.filter(
-                  (f) => f.sistema === s.key
-                );
+                // lista funcionalidades desta seção (sistema)
+                const items = funcionalidades.filter((f) => f.sistema === s.key);
                 if (!items.length) return null;
+
                 const isOpen = activeCollapse === s.key;
                 return (
                   <div
@@ -480,9 +483,7 @@ export default function GestaoPerfisPage() {
             <div className="flex justify-between items-center p-4 bg-base-200 mt-6">
               <div>
                 <span>Selecionadas: {totalPerms}</span>
-                <span className="ml-4">
-                  {pending ? "Não salvas" : "Salvas"}
-                </span>
+                <span className="ml-4">{pending ? "Não salvas" : "Salvas"}</span>
               </div>
               <div className="space-x-2">
                 <button
@@ -498,10 +499,7 @@ export default function GestaoPerfisPage() {
                 >
                   Salvar
                 </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setShowModal(false)}
-                >
+                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
                   Fechar
                 </button>
               </div>

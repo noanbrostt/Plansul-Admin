@@ -9,6 +9,8 @@ import logoLonga from "../assets/layout/Topbar/logo_longa.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/store/userSlice";
+import { setPermissionsMap } from "@/store/userSlice";
+import { buildPermissionsMap } from "@/acl/normalizePermissions";
 
 export default function LoginPage() {
   const [screenSide, setScreenSide] = useState("Login");
@@ -88,6 +90,144 @@ export default function LoginPage() {
             );
 
       dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
+
+      // Acesso TOTAL (VISUALIZAR: true) para TODAS as telas do routeRegistry.
+      const perfis = [
+        {
+          co_perfil: 1,
+          no_perfil: "Dev",
+          funcionalidades: [
+            // Ambulatório
+            {
+              co_funcionalidade: 1,
+              no_funcionalidade: "ambulatorio.cadastro-atestados",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 2,
+              no_funcionalidade: "ambulatorio.gestao-atestados",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+
+            // Admin
+            {
+              co_funcionalidade: 3,
+              no_funcionalidade: "admin.gestao-acessos",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 4,
+              no_funcionalidade: "admin.gestao-perfis",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+
+            // Devs - Telas
+            {
+              co_funcionalidade: 5,
+              no_funcionalidade: "devs.telas.calendario",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 6,
+              no_funcionalidade: "devs.telas.exemplo",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 7,
+              no_funcionalidade: "devs.telas.loading",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+
+            // Devs - UI
+            {
+              co_funcionalidade: 8,
+              no_funcionalidade: "devs.ui.blocos",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 9,
+              no_funcionalidade: "devs.ui.botoes",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 10,
+              no_funcionalidade: "devs.ui.checkboxes",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 11,
+              no_funcionalidade: "devs.ui.etiquetas",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 12,
+              no_funcionalidade: "devs.ui.inputs",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 13,
+              no_funcionalidade: "devs.ui.radios",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 14,
+              no_funcionalidade: "devs.ui.selects",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 15,
+              no_funcionalidade: "devs.ui.tabelas",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 16,
+              no_funcionalidade: "devs.ui.textareas",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+
+            // Devs - Gráficos
+            {
+              co_funcionalidade: 17,
+              no_funcionalidade: "devs.graficos.area",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 18,
+              no_funcionalidade: "devs.graficos.barra",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 19,
+              no_funcionalidade: "devs.graficos.linha",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 20,
+              no_funcionalidade: "devs.graficos.pizza",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 21,
+              no_funcionalidade: "devs.graficos.radar",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 22,
+              no_funcionalidade: "devs.graficos.compostos",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+            {
+              co_funcionalidade: 23,
+              no_funcionalidade: "devs.docs",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
+          ],
+        },
+      ];
+
+      // depois:
+      const permsMap = buildPermissionsMap(perfis);
+      dispatch(setPermissionsMap(permsMap));
 
       /*
         Exemplo de dados do usuário:
@@ -214,7 +354,7 @@ export default function LoginPage() {
                 minLength: "6",
                 maxLength: "6",
               }}
-              inputClassName="w-64"
+              className="w-64"
               value={form.matricula}
               onChange={(e) => handleInputChange("matricula", e.target.value)}
               onKeyDown={(e) => handleKeyDown(e, "matricula")}
@@ -234,7 +374,7 @@ export default function LoginPage() {
                   minLength: "14",
                   maxLength: "14",
                 }}
-                inputClassName="w-64"
+                className="w-64"
                 value={form.cpf}
                 onChange={(e) => handleInputChange("cpf", e.target.value)}
                 onKeyDown={(e) => handleKeyDown(e, "cpf")}
@@ -248,7 +388,7 @@ export default function LoginPage() {
               type="password"
               placeholder="******"
               icon={<FiLock />}
-              inputClassName="w-64"
+              className="w-64"
               value={form.senha}
               onChange={(e) => handleInputChange("senha", e.target.value)}
               onKeyDown={(e) => handleKeyDown(e, "senha")}

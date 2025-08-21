@@ -4,7 +4,7 @@ import { FaShare } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "@/store/userSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { menuConfig } from "@/layout/components/Sidebar/MenuConfig";
+import { getSearchableRoutes } from "@/acl/acl";
 
 // helper para remover acentos e normalizar
 function normalizeString(str = "") {
@@ -28,24 +28,12 @@ export default function Topbar({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // lista de páginas
-  const pages = useMemo(() => {
-    const sections = Object.values(menuConfig);
-    return sections.flatMap((section) =>
-      section.items.flatMap((item) => {
-        const self = item.to
-          ? [{ label: item.label, to: item.to, icon: item.icon }]
-          : [];
-        const subs = (item.subItems || []).map((sub) => ({
-          label: sub.label,
-          to: sub.to,
-          icon: sub.icon,
-          targetBlank: sub.targetBlank,
-        }));
-        return [...self, ...subs];
-      })
-    );
-  }, []);
+  // páginas vindas do ACL (apenas o que o usuário pode ver)
+  const user = useSelector((state) => state.user.data);
+  const pages = useMemo(
+    () => getSearchableRoutes(user?.permissionsMap) ?? [],
+    [user?.permissionsMap]
+  );
 
   // resultados filtrados
   const results = useMemo(() => {
@@ -54,7 +42,7 @@ export default function Topbar({
     return pages.filter((p) => normalizeString(p.label).includes(q));
   }, [pages, query]);
 
-  // atalho Ctrl+K
+  // atalhos
   useEffect(() => {
     const handler = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
@@ -82,19 +70,15 @@ export default function Topbar({
       setSelectedIndex((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      // escolhe o item atual ou o primeiro
       const idx = selectedIndex >= 0 ? selectedIndex : 0;
       const target = results[idx];
       if (target) {
         if (target.targetBlank) {
-          // abre nova aba
           window.open(target.to, "_blank", "noopener,noreferrer");
         } else {
-          // rota interna
           navigate(target.to);
         }
       }
-      // limpa e fecha
       setOpen(false);
       setQuery("");
       setSelectedIndex(-1);
@@ -106,43 +90,39 @@ export default function Topbar({
     navigate("/login");
   };
 
-  const user = useSelector((state) => state.user.data);
-
-  const formatInitials = (nome) => {
-    const partes = nome.trim().split(" ");
-    if (partes.length === 0) return "";
+  const formatInitials = (nome = "") => {
+    const partes = nome.trim().split(" ").filter(Boolean);
     const primeira = partes[0]?.[0] || "";
     const ultima = partes.at(-1)?.[0] || "";
     return (primeira + ultima).toUpperCase();
   };
 
-  const formatNome = (nome) => {
-    return nome
+  const formatNome = (nome = "") =>
+    nome
       .toLowerCase()
       .split(" ")
       .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
       .join(" ");
-  };
+
   const userNome = user?.nome || "";
-  const userMatricula = user?.matricula || "";
   const initials = formatInitials(userNome);
   const nomeFormatado = formatNome(userNome);
 
   return (
     <div className="navbar bg-base-100 shadow-md">
       <div className="flex-1">
-        {/*- botão de colapsar/expandir */}
+        {/* Botão colapsar/expandir */}
         <div className="flex items-center">
           <button
             onClick={() => {
               onToggleSidebar();
-              if (!collapsed); // Fecha dropdowns ao colapsar
             }}
             className="btn btn-sm btn-ghost py-5.5"
           >
             {collapsed ? <FiMenu size={24} /> : <FiAlignLeft size={24} />}
           </button>
 
+          {/* Busca */}
           <label className="input w-86 ml-3">
             <svg
               stroke="currentColor"
@@ -156,21 +136,16 @@ export default function Topbar({
             </svg>
             <input
               ref={inputRef}
-              placeholder="Buscar Página..."
-              type="search"
+              type="text"
+              className="grow"
+              placeholder="Buscar telas (Ctrl+K)"
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
-                setOpen(true);
-                setSelectedIndex(-1);
+                if (!open) setOpen(true);
               }}
-              onFocus={() => {
-                setOpen(true);
-                setSelectedIndex(-1);
-              }}
-              onBlur={() => {
-                setTimeout(() => setOpen(false), 150);
-              }}
+              onFocus={() => setOpen(true)}
+              onBlur={() => setTimeout(() => setOpen(false), 150)}
               onKeyDown={onInputKeyDown}
             />
             {query.length == 0 && (
@@ -180,11 +155,12 @@ export default function Topbar({
               </span>
             )}
           </label>
-          {/* Dropdown */}
+
+          {/* Dropdown resultados */}
           {open && results.length > 0 && (
             <ul className="absolute z-50 left-[326px] top-[56px] w-86 bg-base-100 shadow-lg rounded-md overflow-auto">
               {results.map(({ label, to, icon, targetBlank }, idx) => (
-                <li key={to}>
+                <li key={`${to}-${idx}`}>
                   {targetBlank ? (
                     <a
                       href={to}
@@ -195,9 +171,9 @@ export default function Topbar({
                         idx === selectedIndex ? "bg-base-200" : ""
                       }`}
                     >
-                      <span className="text-lg">{icon}</span>
+                      {icon && <span className="text-lg">{icon}</span>}
                       <span>{label}</span>
-                      <FaShare className="absolute right-3" />
+                      <FaShare className="ml-auto opacity-70" />
                     </a>
                   ) : (
                     <Link
@@ -213,7 +189,7 @@ export default function Topbar({
                         idx === selectedIndex ? "bg-base-200" : ""
                       }`}
                     >
-                      <span className="text-lg">{icon}</span>
+                      {icon && <span className="text-lg">{icon}</span>}
                       <span>{label}</span>
                     </Link>
                   )}
@@ -225,6 +201,7 @@ export default function Topbar({
       </div>
 
       <div className="flex-none gap-3 items-center flex px-2">
+        {/* Tema */}
         <label className="swap swap-rotate h-12 w-12 bg-base-content btn btn-circle grid">
           <input
             type="checkbox"
@@ -236,7 +213,7 @@ export default function Topbar({
           <FiMoon className="swap-off text-base-100 h-6 w-6" />
         </label>
 
-        {/* Info Usuário */}
+        {/* Usuário */}
         <div className="dropdown dropdown-end tooltip">
           <div
             tabIndex={0}
@@ -249,23 +226,39 @@ export default function Topbar({
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="mt-3 z-[1001] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a className="text-base pointer-events-none">{nomeFormatado}</a>
-            </li>
-            <li>
-              <a className="text-xs pointer-events-none">{userMatricula}</a>
+            <li className="menu-title px-3 pt-2 pb-1 opacity-60">
+              {nomeFormatado || "Usuário"}
             </li>
             <li>
               <a
-                className="text-error hover:text-error flex items-center gap-1"
-                onClick={logout}
+                className="justify-between"
+                onClick={() => navigator.clipboard.writeText(location.href)}
               >
-                Logout
+                Compartilhar link
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
+                  className="inline-block h-4 w-4 opacity-60"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7h6m0 0v6m0-6L10 16m-4 4h6a2 2 0 002-2v-6"
+                  />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a className="justify-between text-error" onClick={logout}>
+                Sair
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="inline-block h-4 w-4 opacity-60"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
