@@ -1,91 +1,101 @@
+// src/acl/acl.js
 import { ROUTES_REGISTRY } from "./routeRegistry";
-import type { PermissionsMap } from "./normalizePermissions";
 import { canViewFeature } from "./normalizePermissions";
 
-export type MenuItem = { label: string; to: string; icon?: any; targetBlank?: boolean };
-export type DropdownGroup = { label: string; icon?: any; subItems: MenuItem[] };
-export type SectionData = { links: MenuItem[]; groups: DropdownGroup[] };
-export type Sections = Record<string, SectionData>;
+/**
+ * Tipos (anotação via JSDoc só pra referência)
+ * @typedef {{label:string,to:string,icon?:any,targetBlank?:boolean}} MenuItem
+ * @typedef {{label:string,icon?:any,subItems:MenuItem[]}} DropdownGroup
+ * @typedef {{links:MenuItem[],groups:DropdownGroup[],ordered:Array<({kind:"link"} & MenuItem) | ({kind:"group"} & DropdownGroup)>}} SectionData
+ * @typedef {Record<string, SectionData>} Sections
+ */
 
 const DOCS_FEATURE = "devs.docs";
 const DOCS_GROUP_LABEL = "Documentação";
 
+const canSee = (perms, featureKey) =>
+  !featureKey || canViewFeature(perms, featureKey);
+
 /**
- * Constrói o menu por seção:
- * - links diretos (SidebarLink)
- * - grupos (SidebarDropdown) detectados por groupLabel/groupIcon
- * Regra especial para "Documentação" dentro de Devs:
- *   aparece se o usuário tiver permissão "devs.docs" OU se tiver acesso a QUALQUER outra tela de Devs.
+ * Constrói o menu por seção PRESERVANDO a ordem do ROUTES_REGISTRY
+ * - Intercala links e dropdowns conforme definidos no registry
+ * - Aplica ACL via canViewFeature
+ * - Regra especial "Documentação" (devs):
+ *   aparece se o usuário tiver "devs.docs" OU se tiver acesso a qualquer outra tela de Devs
+ * @param {Record<string, any>|undefined} perms
+ * @returns {Sections}
  */
-export function buildMenuForUser(perms: PermissionsMap | undefined): Sections {
-  const sections: Sections = {};
-  const groupMaps: Record<string, Map<string, DropdownGroup>> = {}; // section -> (groupLabel -> group)
+export function buildMenuForUser(perms) {
+  /** @type {Sections} */
+  const sections = {};
+  /** @type {Record<string, Map<string, DropdownGroup>>} */
+  const groupMaps = {};
+  /** @type {Record<string, Set<string>>} */
+  const groupPushedInOrdered = {};
 
-  const canSee = (featureKey: string | null | undefined) =>
-    !featureKey || canViewFeature(perms, featureKey);
-
+  // 1) decidir se "Documentação" deve aparecer
   let hasAnyDevVisible = false;
-  const devDocsItems: Array<{ item: MenuItem; groupLabel: string; groupIcon?: any }> = [];
-
-  const addLink = (section: string, item: MenuItem) => {
-    sections[section] ||= { links: [], groups: [] };
-    sections[section].links.push(item);
-  };
-
-  const addGroupItem = (section: string, label: string, icon: any, item: MenuItem) => {
-    sections[section] ||= { links: [], groups: [] };
-    groupMaps[section] ||= new Map<string, DropdownGroup>();
-    if (!groupMaps[section].has(label)) {
-      groupMaps[section].set(label, { label, icon, subItems: [] });
+  for (const r of ROUTES_REGISTRY) {
+    const isDocs = r.section === "devs" && r.groupLabel === DOCS_GROUP_LABEL;
+    if (isDocs) continue;
+    if (r.section === "devs" && canSee(perms, r.featureKey)) {
+      hasAnyDevVisible = true;
+      break;
     }
-    groupMaps[section].get(label)!.subItems.push(item);
-  };
+  }
+  const docsPermitted = canViewFeature(perms, DOCS_FEATURE);
+  const showDocs = docsPermitted || hasAnyDevVisible;
 
-  // 1ª passada: adiciona tudo EXCETO os itens de "Documentação" (guardamos para decidir depois)
-  for (const r of ROUTES_REGISTRY as any[]) {
-    const item: MenuItem = {
+  // 2) varrer o registry NA ORDEM e preencher
+  for (const r of ROUTES_REGISTRY) {
+    // pula docs se regra especial não permitir
+    if (r.section === "devs" && r.groupLabel === DOCS_GROUP_LABEL && !showDocs) {
+      continue;
+    }
+    // ACL normal
+    if (!canSee(perms, r.featureKey)) continue;
+
+    const sectionKey = r.section;
+    if (!sections[sectionKey]) {
+      sections[sectionKey] = { links: [], groups: [], ordered: [] };
+    }
+    if (!groupMaps[sectionKey]) groupMaps[sectionKey] = new Map();
+    if (!groupPushedInOrdered[sectionKey]) groupPushedInOrdered[sectionKey] = new Set();
+
+    /** @type {MenuItem} */
+    const asItem = {
       label: r.label,
       to: r.path,
       icon: r.icon,
       targetBlank: r.targetBlank === true,
     };
 
-    // Itens de documentação: guardamos para resolver depois da detecção de Devs
-    const isDevDocs = r.section === "devs" && r.groupLabel === DOCS_GROUP_LABEL;
-    if (isDevDocs) {
-      devDocsItems.push({ item, groupLabel: r.groupLabel, groupIcon: r.groupIcon });
-      continue;
-    }
-
-    // Visibilidade padrão
-    if (!canSee(r.featureKey)) continue;
-
     if (r.groupLabel) {
-      addGroupItem(r.section, r.groupLabel, r.groupIcon, item);
+      // subitem de dropdown
+      const glabel = r.groupLabel;
+      const gicon = r.groupIcon;
+      if (!groupMaps[sectionKey].has(glabel)) {
+        groupMaps[sectionKey].set(glabel, { label: glabel, icon: gicon, subItems: [] });
+      }
+      const g = groupMaps[sectionKey].get(glabel);
+      g.subItems.push(asItem);
+
+      // empurra o grupo para "ordered" só na 1ª aparição
+      if (!groupPushedInOrdered[sectionKey].has(glabel)) {
+        sections[sectionKey].ordered.push({ kind: "group", ...g });
+        groupPushedInOrdered[sectionKey].add(glabel);
+      }
     } else {
-      addLink(r.section, item);
-    }
-
-    if (r.section === "devs") {
-      hasAnyDevVisible = true;
+      // link direto
+      sections[sectionKey].links.push(asItem);
+      sections[sectionKey].ordered.push({ kind: "link", ...asItem });
     }
   }
 
-  // 2ª passada: decide se "Documentação" entra
-  const docsPermitted = canViewFeature(perms, DOCS_FEATURE);
-  const showDocs = docsPermitted || hasAnyDevVisible;
-
-  if (showDocs && devDocsItems.length > 0) {
-    for (const d of devDocsItems) {
-      addGroupItem("devs", d.groupLabel, d.groupIcon, d.item);
-    }
-  }
-
-  // materializa os grupos em arrays
+  // 3) materializar "groups" (legado/compat) a partir de groupMaps
   for (const section of Object.keys(groupMaps)) {
     const map = groupMaps[section];
     if (map.size > 0) {
-      sections[section] ||= { links: [], groups: [] };
       sections[section].groups = Array.from(map.values());
     }
   }
@@ -94,31 +104,29 @@ export function buildMenuForUser(perms: PermissionsMap | undefined): Sections {
 }
 
 /**
- * Itens pesquisáveis no Topbar (inclui links externos de Documentação).
- * Mantém a mesma regra de visibilidade do menu:
- * - Documentação aparece na busca se o usuário tiver "devs.docs" OU se ele tiver acesso a qualquer outra tela de Devs.
+ * Itens pesquisáveis no Topbar (inclui Documentação se a regra permitir)
+ * @param {Record<string, any>|undefined} perms
  */
-export function getSearchableRoutes(perms: PermissionsMap | undefined) {
-  const canSee = (featureKey: string | null | undefined) =>
-    !featureKey || canViewFeature(perms, featureKey);
-
-  // Visíveis por permissão (não decide docs ainda)
-  const visible = (ROUTES_REGISTRY as any[]).filter((r) => canSee(r.featureKey));
-
-  const hasAnyDevVisible = visible.some(
-    (r) => r.section === "devs" && r.groupLabel !== DOCS_GROUP_LABEL
-  );
-
+export function getSearchableRoutes(perms) {
+  // mesma lógica de decisão de docs:
+  let hasAnyDevVisible = false;
+  for (const r of ROUTES_REGISTRY) {
+    const isDocs = r.section === "devs" && r.groupLabel === DOCS_GROUP_LABEL;
+    if (isDocs) continue;
+    if (r.section === "devs" && canSee(perms, r.featureKey)) {
+      hasAnyDevVisible = true;
+      break;
+    }
+  }
   const docsPermitted = canViewFeature(perms, DOCS_FEATURE);
   const showDocs = docsPermitted || hasAnyDevVisible;
 
-  return (ROUTES_REGISTRY as any[])
+  return ROUTES_REGISTRY
     .filter((r) => {
-      // regras de visibilidade
       if (r.section === "devs" && r.groupLabel === DOCS_GROUP_LABEL) {
-        return showDocs; // docs entram se a regra especial permitir
+        return showDocs;
       }
-      return canSee(r.featureKey);
+      return canSee(perms, r.featureKey);
     })
     .map((r) => ({
       label: r.label,

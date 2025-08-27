@@ -2,7 +2,7 @@
 import { FiHome, FiLoader } from "react-icons/fi";
 import { RiInputField, RiHealthBookLine } from "react-icons/ri";
 import { CgPlayButtonR, CgFileDocument } from "react-icons/cg";
-import { MdRadioButtonChecked, MdOutlineFitScreen, MdManageSearch, MdOutlineDesignServices } from "react-icons/md";
+import { MdRadioButtonChecked, MdOutlineFitScreen, MdManageSearch, MdOutlineDesignServices, MdSportsEsports } from "react-icons/md";
 import { LuChartNoAxesCombined } from "react-icons/lu";
 import { RxBadge } from "react-icons/rx";
 import { TbCreditCard, TbCheckbox, TbIcons } from "react-icons/tb";
@@ -259,6 +259,15 @@ export const ROUTES_REGISTRY = [
     featureKey: "devs.graficos.compostos",
     groupLabel: "Gráficos",
     groupIcon: <LuChartNoAxesCombined />,
+  },
+  // DEVS - Playground
+  {
+    id: "devs.playground.digitacao",
+    label: "Jogo de Digitação",
+    section: "devs",
+    path: "/devs/digitacao",
+    icon: <MdSportsEsports />,
+    featureKey: "devs.playground.digitacao",
   },
 
   // DEVS — DOCUMENTAÇÃO (links externos; dropdown "Documentação" DENTRO de Devs)

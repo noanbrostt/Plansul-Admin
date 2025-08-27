@@ -46,6 +46,9 @@ const PizzasPage = lazy(() => import("@/modules/devs/graficos/PizzasPage.jsx"));
 const RadarsPage = lazy(() => import("@/modules/devs/graficos/RadarsPage.jsx"));
 const CompostosPage = lazy(() => import("@/modules/devs/graficos/CompostosPage.jsx"));
 
+// Devs - Playground
+const TypingGame = lazy(() => import("@/modules/devs/playground/TypingGame"));
+
 export const router = createBrowserRouter([
   // Login
   {
@@ -226,6 +229,13 @@ export const router = createBrowserRouter([
       { path: "/devs/graficos/compostos", element: (
         <FeatureRoute featureKey="devs.graficos.compostos">
           <Suspense fallback={<LoadingPage />}><CompostosPage /></Suspense>
+        </FeatureRoute>
+      )},
+
+      // Devs - Playground
+      { path: "/devs/digitacao", element: (
+        <FeatureRoute featureKey="devs.playground.digitacao">
+          <Suspense fallback={<LoadingPage />}><TypingGame /></Suspense>
         </FeatureRoute>
       )},
     ],

@@ -18,31 +18,45 @@ export default function Sidebar({
   user,
 }) {
   const [hovering, setHovering] = useState(false);
-  const sections = useMemo(() => buildMenuForUser(user?.permissionsMap), [user?.permissionsMap]);
+  const sections = useMemo(
+    () => buildMenuForUser(user?.permissionsMap),
+    [user?.permissionsMap]
+  );
 
   const renderSection = (title, sectionKey) => {
     const data = sections?.[sectionKey];
-    if (!data || (data.links.length === 0 && data.groups.length === 0)) return null;
+    if (!data) return null;
+
+    const ordered = Array.isArray(data.ordered) ? data.ordered : [];
+    const hasOrdered = ordered.length > 0;
+    // const hasLegacy = (data.links?.length || 0) + (data.groups?.length || 0) > 0;
+
+    if (!hasOrdered) return null;
 
     return (
       <SidebarSection title={title} sectionKey={sectionKey}>
-        {data.links.map((item) => (
-          <SidebarLink
-            key={item.to}
-            label={item.label}
-            to={item.to}
-            icon={item.icon}
-            targetBlank={item.targetBlank}
-          />
-        ))}
-        {data.groups.map((group) => (
-          <SidebarDropdown
-            key={group.label}
-            label={group.label}
-            icon={group.icon}
-            subItems={group.subItems}
-          />
-        ))}
+        {(hasOrdered ? ordered : [
+          // fallback antigo: links depois grupos (apenas para não ficar vazio)
+          ...data.links.map(l => ({ kind: "link", ...l })),
+          ...data.groups.map(g => ({ kind: "group", ...g })),
+        ]).map((it) =>
+          it.kind === "group" ? (
+            <SidebarDropdown
+              key={`grp:${it.label}`}
+              label={it.label}
+              icon={it.icon}
+              subItems={it.subItems}
+            />
+          ) : (
+            <SidebarLink
+              key={`lnk:${it.to}`}
+              label={it.label}
+              to={it.to}
+              icon={it.icon}
+              targetBlank={it.targetBlank}
+            />
+          )
+        )}
       </SidebarSection>
     );
   };

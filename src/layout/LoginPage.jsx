@@ -89,6 +89,29 @@ export default function LoginPage() {
               form.senha
             );
 
+      /*
+        Exemplo de dados do usuário:
+          {
+            "status": "success",
+            "usuario": {
+              "grupos": [
+                  {
+                      "app_desc": "DEV_Teste",
+                      "app_id": 4,
+                      "grupo_desc": "DEV_Teste_User",
+                      "grupo_id": 4
+                  }
+              ],
+              "id": 437,
+              "matricula": "123036",
+              "nome": "NOAN CALIEL BROSTT",
+              "permissoes": [
+                  "DEV_Teste_User"
+              ]
+            }
+          }
+      */
+
       dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
 
       // Acesso TOTAL (VISUALIZAR: true) para TODAS as telas do routeRegistry.
@@ -221,36 +244,18 @@ export default function LoginPage() {
               no_funcionalidade: "devs.docs",
               acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
             },
+            {
+              co_funcionalidade: 24,
+              no_funcionalidade: "devs.playground.digitacao",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
           ],
         },
       ];
 
-      // depois:
       const permsMap = buildPermissionsMap(perfis);
       dispatch(setPermissionsMap(permsMap));
 
-      /*
-        Exemplo de dados do usuário:
-          {
-            "status": "success",
-            "usuario": {
-              "grupos": [
-                  {
-                      "app_desc": "DEV_Teste",
-                      "app_id": 4,
-                      "grupo_desc": "DEV_Teste_User",
-                      "grupo_id": 4
-                  }
-              ],
-              "id": 437,
-              "matricula": "123036",
-              "nome": "NOAN CALIEL BROSTT",
-              "permissoes": [
-                  "DEV_Teste_User"
-              ]
-            }
-          }
-      */
       if (screenSide !== "Login") {
         sessionStorage.setItem("senhaResetada", "1");
       }
@@ -401,7 +406,7 @@ export default function LoginPage() {
               onClick={validateForm}
               className={`${isLoading ? "w-9" : "w-64"} mt-8`}
               ref={submitButtonRef}
-              variant={isLoading ? "ghost" : "primary"}
+              variant="primary"
               loading={isLoading}
             >
               {isReset ? "Cadastrar" : "Login"}
