@@ -38,10 +38,10 @@ export default function DashboardLayout() {
   const [theme, setTheme] = useState(() => {
     try {
       // Use 'myLightTheme' ou 'myDarkTheme' como padrão
-      return localStorage.getItem(THEME_KEY) || "myDarkTheme";
+      return localStorage.getItem(THEME_KEY) || "myLightTheme";
     } catch (error) {
       console.error("Erro ao ler tema do localStorage:", error);
-      return "myDarkTheme";
+      return "myLightTheme";
     }
   });
   const user = useSelector((state) => state.user.data);
