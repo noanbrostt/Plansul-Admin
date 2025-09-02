@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import KeyboardVisualizer from "@/features/typing/KeyboardVisualizer";
 import FavoriteButton from "@/components/FavoriteButton";
 import { useSelector } from "react-redux";
 import {
@@ -70,15 +71,21 @@ function phaseGradient(color) {
 }
 // helpers de estilo por colocação (com brilho p/ Top 3)
 const rankCardClass = (i) => {
-  if (i === 0) return "bg-gradient-to-br from-amber-300/15 to-amber-600/15 border border-amber-400/40 shadow-lg"; // ouro
-  if (i === 1) return "bg-gradient-to-br from-slate-300/15 to-slate-600/15 border border-slate-400/40 shadow-lg"; // prata
-  if (i === 2) return "bg-gradient-to-br from-orange-300/15 to-amber-600/15 border border-amber-500/40 shadow-lg"; // bronze
+  if (i === 0)
+    return "bg-gradient-to-br from-amber-300/15 to-amber-600/15 border border-amber-400/40 shadow-lg"; // ouro
+  if (i === 1)
+    return "bg-gradient-to-br from-slate-300/15 to-slate-600/15 border border-slate-400/40 shadow-lg"; // prata
+  if (i === 2)
+    return "bg-gradient-to-br from-orange-300/15 to-amber-600/15 border border-amber-500/40 shadow-lg"; // bronze
   return "bg-base-100 border border-base-300";
 };
 const rankBadgeClass = (i) => {
-  if (i === 0) return "bg-gradient-to-br from-amber-200 to-amber-500 text-amber-950 ring-1 ring-amber-200/50 ring-offset-1 ring-offset-base-100"; // ouro
-  if (i === 1) return "bg-gradient-to-br from-slate-100 to-slate-400 text-slate-900 ring-1 ring-white/40 ring-offset-1 ring-offset-base-100";        // prata
-  if (i === 2) return "bg-gradient-to-br from-amber-200 to-orange-600 text-amber-950 ring-1 ring-amber-300/50 ring-offset-1 ring-offset-base-100"; // bronze
+  if (i === 0)
+    return "bg-gradient-to-br from-amber-200 to-amber-500 text-amber-950 ring-1 ring-amber-200/50 ring-offset-1 ring-offset-base-100"; // ouro
+  if (i === 1)
+    return "bg-gradient-to-br from-slate-100 to-slate-400 text-slate-900 ring-1 ring-white/40 ring-offset-1 ring-offset-base-100"; // prata
+  if (i === 2)
+    return "bg-gradient-to-br from-amber-200 to-orange-600 text-amber-950 ring-1 ring-amber-300/50 ring-offset-1 ring-offset-base-100"; // bronze
   return "bg-base-300 text-base-content";
 };
 
@@ -90,6 +97,7 @@ export default function TypingGame() {
   const [tab, setTab] = useState("Jogar"); // Jogar | Ranking | Estatísticas
 
   // jogar
+  const [showKeyboard, setShowKeyboard] = useState(true);
   const [phaseId, setPhaseId] = useState(null);
   const [prestart, setPrestart] = useState(false);
   const [startedAt, setStartedAt] = useState(null);
@@ -164,7 +172,7 @@ export default function TypingGame() {
 
   const startPhase = () => {
     setPrestart(false);
-    setStartedAt(Date.now());
+    // setStartedAt(Date.now());
     setTimeout(() => inputRef.current?.focus(), 0);
   };
 
@@ -244,10 +252,10 @@ export default function TypingGame() {
   const Metric = ({ icon, label, value }) => (
     <div className="card bg-base-100">
       <div className="card-body py-3 px-4">
-        <div className="flex items-center gap-2 text-xs opacity-70">
+        <div className="flex items-center gap-1 text-xs opacity-70">
           {icon} {label}
         </div>
-        <div className="text-2xl font-semibold">{value}</div>
+        <div className="text-2xl font-semibold text-center">{value}</div>
       </div>
     </div>
   );
@@ -258,9 +266,7 @@ export default function TypingGame() {
       <div className="flex justify-between items-center">
         <h1 className="flex text-3xl font-bold text-base-content">
           DigitaPro
-          <FavoriteButton
-            tela={{ nome: "DigitaPro", url: "devs/digitacao" }}
-          />
+          <FavoriteButton tela={{ nome: "DigitaPro", url: "devs/digitacao" }} />
         </h1>
 
         <div className="join">
@@ -454,8 +460,36 @@ export default function TypingGame() {
               <div className="card-body space-y-4">
                 {/* topo simplificado (SEM "voltar às fases" aqui) */}
                 <div className="flex items-center flex-wrap gap-2 justify-between">
+                  <div className="flex gap-3 w-1/3">
+                    <div className="flex flex-col justify-around">
+                      {/* AGORA o botão "Voltar às Fases" fica no fim da fase */}
+                      <div className="flex justify-center items-center">
+                        <button
+                          className="btn btn-neutral btn-sm w-full"
+                          onClick={goBackToPhases}
+                        >
+                          <FiChevronLeft /> Voltar às Fases
+                        </button>
+                      </div>
+                      {/* Toggle do teclado */}
+                      <div className="flex justify-center items-center">
+                        <button
+                          className="btn btn-neutral btn-sm w-full"
+                          onClick={() => setShowKeyboard((v) => !v)}
+                        >
+                          {showKeyboard ? "Ocultar Teclado" : "Exibir Teclado"}
+                        </button>
+                      </div>
+                    </div>
+                    <Metric
+                      icon={<FiClock />}
+                      label="Tempo"
+                      value={formatTime(elapsedMs)}
+                    />
+                  </div>
+
                   <div
-                    className="badge text-white"
+                    className="badge text-white text-2xl ml-0.5 p-4"
                     style={{
                       backgroundImage: phaseGradient(
                         activePhase?.color || "#376fbe"
@@ -464,7 +498,8 @@ export default function TypingGame() {
                   >
                     Fase {phaseId}
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 w-full md:w-auto">
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 !w-1/3 md:w-auto">
                     <Metric icon={<FiTrendingUp />} label="PPM" value={wpm} />
                     <Metric
                       icon={<FiTarget />}
@@ -472,11 +507,6 @@ export default function TypingGame() {
                       value={`${accuracy}%`}
                     />
                     <Metric icon={<FiAward />} label="Pontos" value={score} />
-                    <Metric
-                      icon={<FiClock />}
-                      label="Tempo"
-                      value={formatTime(elapsedMs)}
-                    />
                     <Metric icon={<FiZap />} label="Erros" value={errors} />
                   </div>
                 </div>
@@ -527,15 +557,11 @@ export default function TypingGame() {
                     />
                   </div>
 
-                  {/* AGORA o botão "Voltar às Fases" fica no fim da fase */}
-                  <div className="mt-4 flex justify-end">
-                    <button
-                      className="btn btn-ghost btn-sm"
-                      onClick={goBackToPhases}
-                    >
-                      <FiChevronLeft /> Voltar às Fases
-                    </button>
-                  </div>
+                  {/* Visualizador do teclado */}
+                  <KeyboardVisualizer
+                    nextChar={activeText[cursor]}
+                    isVisible={showKeyboard}
+                  />
                 </div>
               </div>
             </div>
