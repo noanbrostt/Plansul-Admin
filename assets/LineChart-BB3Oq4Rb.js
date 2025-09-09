@@ -1,1 +1,0 @@
-import{r as a}from"./index-DDNo2eib.js";import{a as t}from"./CategoricalChart-hXbiXesu.js";import{C as o}from"./CartesianChart-Dem3ObQ4.js";var i=["axis"],m=a.forwardRef((r,e)=>a.createElement(o,{chartName:"LineChart",defaultTooltipEventType:"axis",validateTooltipEventTypes:i,tooltipPayloadSearcher:t,categoricalChartProps:r,ref:e}));export{m as L};
