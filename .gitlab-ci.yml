@@ -1,0 +1,29 @@
+
+
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""        # desliga TLS do DinD
+  DOCKER_DRIVER: overlay2
+  DOCKER_BUILDKIT: "1"
+  IMAGE_TAG: "$CI_COMMIT_SHORT_SHA"
+
+
+image: docker:24
+services:
+  - name: docker:24-dind
+    command:
+      - "--tls=false"
+      - "--insecure-registry=172.32.1.71:5050"
+
+
+
+stages:
+  - build
+
+build_image:
+  stage: build
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker build -t "$CI_REGISTRY_IMAGE:latest" .
+    - docker push "$CI_REGISTRY_IMAGE:latest"
