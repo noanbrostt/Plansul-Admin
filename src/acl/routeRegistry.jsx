@@ -1,5 +1,6 @@
 // Todas as rotas internas atuais, com ícones e metadados de grupo (para dropdowns).
 import { FiHome, FiLoader } from "react-icons/fi";
+import { BiLogIn } from "react-icons/bi";
 import { RiInputField, RiHealthBookLine } from "react-icons/ri";
 import { CgPlayButtonR, CgFileDocument } from "react-icons/cg";
 import { MdRadioButtonChecked, MdOutlineFitScreen, MdManageSearch, MdOutlineDesignServices, MdSportsEsports } from "react-icons/md";
@@ -76,6 +77,16 @@ export const ROUTES_REGISTRY = [
   },
 
   // DEVS — TELAS (grupo: Telas)
+  {
+    id: "devs.telas.login",
+    label: "Tela de Login",
+    section: "devs",
+    path: "/login",
+    icon: <BiLogIn />,
+    featureKey: "devs.telas.login",
+    groupLabel: "Telas",
+    groupIcon: <MdOutlineFitScreen />,
+  },
   {
     id: "devs.telas.calendario",
     label: "Calendário",

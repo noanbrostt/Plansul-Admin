@@ -5,6 +5,6 @@ import { RootState } from "@/store";
 export default function PublicRoute({ children }) {
   const user = useSelector((state: RootState) => state.user.data);
 
-  if (user) return <Navigate to="/" replace />;
+  // if (user) return <Navigate to="/" replace />;
   return children;
 }

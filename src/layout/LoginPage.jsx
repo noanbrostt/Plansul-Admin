@@ -16,9 +16,9 @@ export default function LoginPage() {
   const [screenSide, setScreenSide] = useState("Login");
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
-    matricula: "",
+    matricula: "123456",
     cpf: "",
-    senha: "",
+    senha: "1",
   });
 
   // Refs para os campos de input
@@ -79,15 +79,15 @@ export default function LoginPage() {
   const dispatch = useDispatch();
 
   const submitForm = async () => {
-    try {
-      const res =
-        screenSide === "Login"
-          ? await login(form.matricula, form.senha)
-          : await reset(
-              form.matricula,
-              form.cpf.replace(/\D/g, ""),
-              form.senha
-            );
+    // try {
+    //   const res =
+    //     screenSide === "Login"
+    //       ? await login(form.matricula, form.senha)
+    //       : await reset(
+    //           form.matricula,
+    //           form.cpf.replace(/\D/g, ""),
+    //           form.senha
+    //         );
 
       /*
         Exemplo de dados do usuário:
@@ -103,7 +103,7 @@ export default function LoginPage() {
                   }
               ],
               "id": 437,
-              "matricula": "123036",
+              "matricula": "123456",
               "nome": "NOAN CALIEL BROSTT",
               "permissoes": [
                   "DEV_Teste_User"
@@ -112,7 +112,24 @@ export default function LoginPage() {
           }
       */
 
-      dispatch(setUser(res.data.usuario)); // salva os dados do usuário globalmente
+      let usuario = {
+            "grupos": [
+                {
+                    "app_desc": "DEV_Teste",
+                    "app_id": 4,
+                    "grupo_desc": "DEV_Teste_User",
+                    "grupo_id": 4
+                }
+            ],
+            "id": 437,
+            "matricula": "123456",
+            "nome": "USUÁRIO DESCONHECIDO",
+            "permissoes": [
+                "DEV_Teste_User"
+            ]
+          };
+
+      dispatch(setUser(usuario)); // salva os dados do usuário globalmente
 
       // Acesso TOTAL (VISUALIZAR: true) para TODAS as telas do routeRegistry.
       const perfis = [
@@ -145,6 +162,11 @@ export default function LoginPage() {
             },
 
             // Devs - Telas
+            {
+              co_funcionalidade: 25,
+              no_funcionalidade: "devs.telas.login",
+              acoes: [{ co_acao: 2, no_acao: "VISUALIZAR", vinculada: true }],
+            },
             {
               co_funcionalidade: 5,
               no_funcionalidade: "devs.telas.calendario",
@@ -261,9 +283,9 @@ export default function LoginPage() {
       }
 
       navigate("/");
-    } catch (err) {
-      showErrorAlert(err.response?.data?.message || "Erro ao enviar os dados");
-    }
+    // } catch (err) {
+    //   showErrorAlert(err.response?.data?.message || "Erro ao enviar os dados");
+    // }
     setIsLoading(false);
   };
 
