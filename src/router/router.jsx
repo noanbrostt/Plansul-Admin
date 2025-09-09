@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -49,7 +49,7 @@ const CompostosPage = lazy(() => import("@/modules/devs/graficos/CompostosPage.j
 // Devs - Playground
 const TypingGame = lazy(() => import("@/modules/devs/playground/TypingGame"));
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   // Login
   {
     path: "/login",
