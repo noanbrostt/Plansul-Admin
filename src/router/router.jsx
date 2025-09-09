@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
 
       // Admin
       {
-        path: "/admin/acessos",
+        path: "admin/acessos",
         element: (
           <FeatureRoute featureKey="admin.gestao-acessos">
             <Suspense fallback={<LoadingPage />}>
@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/perfis",
+        path: "admin/perfis",
         element: (
           <FeatureRoute featureKey="admin.gestao-perfis">
             <Suspense fallback={<LoadingPage />}>
@@ -103,7 +103,7 @@ export const router = createBrowserRouter([
 
       // Ambulatório
       {
-        path: "/ambulatorio/gestao-atestados",
+        path: "ambulatorio/gestao-atestados",
         element: (
           <FeatureRoute featureKey="ambulatorio.gestao-atestados">
             <Suspense fallback={<LoadingPage />}>
@@ -113,7 +113,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/ambulatorio/cadastro-atestados",
+        path: "ambulatorio/cadastro-atestados",
         element: (
           <FeatureRoute featureKey="ambulatorio.cadastro-atestados">
             <Suspense fallback={<LoadingPage />}>
@@ -125,7 +125,7 @@ export const router = createBrowserRouter([
 
       // Devs - Telas
       {
-        path: "/devs/telas/calendario",
+        path: "devs/telas/calendario",
         element: (
           <FeatureRoute featureKey="devs.telas.calendario">
             <Suspense fallback={<LoadingPage />}>
@@ -135,7 +135,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/devs/telas/exemplo",
+        path: "devs/telas/exemplo",
         element: (
           <FeatureRoute featureKey="devs.telas.exemplo">
             <Suspense fallback={<LoadingPage />}>
@@ -145,7 +145,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/devs/telas/loading",
+        path: "devs/telas/loading",
         element: (
           <FeatureRoute featureKey="devs.telas.loading">
             <LoadingPage />
@@ -154,86 +154,86 @@ export const router = createBrowserRouter([
       },
 
       // Devs - UI
-      { path: "/devs/ui/blocos", element: (
+      { path: "devs/ui/blocos", element: (
         <FeatureRoute featureKey="devs.ui.blocos">
           <Suspense fallback={<LoadingPage />}><BlocosPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/botoes", element: (
+      { path: "devs/ui/botoes", element: (
         <FeatureRoute featureKey="devs.ui.botoes">
           <Suspense fallback={<LoadingPage />}><BotoesPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/checkboxes", element: (
+      { path: "devs/ui/checkboxes", element: (
         <FeatureRoute featureKey="devs.ui.checkboxes">
           <Suspense fallback={<LoadingPage />}><CheckboxesPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/etiquetas", element: (
+      { path: "devs/ui/etiquetas", element: (
         <FeatureRoute featureKey="devs.ui.etiquetas">
           <Suspense fallback={<LoadingPage />}><EtiquetasPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/inputs", element: (
+      { path: "devs/ui/inputs", element: (
         <FeatureRoute featureKey="devs.ui.inputs">
           <Suspense fallback={<LoadingPage />}><InputsPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/radios", element: (
+      { path: "devs/ui/radios", element: (
         <FeatureRoute featureKey="devs.ui.radios">
           <Suspense fallback={<LoadingPage />}><RadiosPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/selects", element: (
+      { path: "devs/ui/selects", element: (
         <FeatureRoute featureKey="devs.ui.selects">
           <Suspense fallback={<LoadingPage />}><SelectsPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/tabelas", element: (
+      { path: "devs/ui/tabelas", element: (
         <FeatureRoute featureKey="devs.ui.tabelas">
           <Suspense fallback={<LoadingPage />}><TabelasPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/ui/textareas", element: (
+      { path: "devs/ui/textareas", element: (
         <FeatureRoute featureKey="devs.ui.textareas">
           <Suspense fallback={<LoadingPage />}><TextareasPage /></Suspense>
         </FeatureRoute>
       )},
 
       // Devs - Gráficos
-      { path: "/devs/graficos/area", element: (
+      { path: "devs/graficos/area", element: (
         <FeatureRoute featureKey="devs.graficos.area">
           <Suspense fallback={<LoadingPage />}><AreasPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/graficos/barra", element: (
+      { path: "devs/graficos/barra", element: (
         <FeatureRoute featureKey="devs.graficos.barra">
           <Suspense fallback={<LoadingPage />}><BarrasPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/graficos/linha", element: (
+      { path: "devs/graficos/linha", element: (
         <FeatureRoute featureKey="devs.graficos.linha">
           <Suspense fallback={<LoadingPage />}><LinhasPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/graficos/pizza", element: (
+      { path: "devs/graficos/pizza", element: (
         <FeatureRoute featureKey="devs.graficos.pizza">
           <Suspense fallback={<LoadingPage />}><PizzasPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/graficos/radar", element: (
+      { path: "devs/graficos/radar", element: (
         <FeatureRoute featureKey="devs.graficos.radar">
           <Suspense fallback={<LoadingPage />}><RadarsPage /></Suspense>
         </FeatureRoute>
       )},
-      { path: "/devs/graficos/compostos", element: (
+      { path: "devs/graficos/compostos", element: (
         <FeatureRoute featureKey="devs.graficos.compostos">
           <Suspense fallback={<LoadingPage />}><CompostosPage /></Suspense>
         </FeatureRoute>
       )},
 
       // Devs - Playground
-      { path: "/devs/digitacao", element: (
+      { path: "devs/digitacao", element: (
         <FeatureRoute featureKey="devs.playground.digitacao">
           <Suspense fallback={<LoadingPage />}><TypingGame /></Suspense>
         </FeatureRoute>
@@ -242,6 +242,6 @@ export const router = createBrowserRouter([
   },
 
   // Rotas de erro
-  { path: "/negado", element: <ForbiddenPage /> },
+  { path: "negado", element: <ForbiddenPage /> },
   { path: "*", element: <NotFoundPage /> },
 ]);
